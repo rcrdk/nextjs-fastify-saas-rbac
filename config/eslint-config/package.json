@@ -1,0 +1,22 @@
+{
+  "name": "@saas/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "library.js",
+    "next.js",
+    "node.js"
+  ],
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.2.2",
+    "@saas/prettier-config": "workspace:*",
+    "eslint": "8.57.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1"
+  },
+  "prettier": "@saas/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "./library.js"
+    ]
+  }
+}
