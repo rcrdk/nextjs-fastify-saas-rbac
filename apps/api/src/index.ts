@@ -1,9 +1,11 @@
-import { ability } from '@saas/auth'
+// import { defineAbilityFor } from '@saas/auth'
 
-const userCanInviteSomeoneElse = ability.can('invite', 'User')
-const userCanDeleteOtherUsers = ability.can('delete', 'User')
-const userCannotDeleteOtherUsers = ability.cannot('delete', 'User')
+// const ability = defineAbilityFor({ role: 'ADMIN', id: 'user-id' })
 
-console.log(userCanInviteSomeoneElse)
-console.log(userCanDeleteOtherUsers)
-console.log(userCannotDeleteOtherUsers)
+// const userCanInviteSomeoneElse = ability.can('invite', 'User')
+// const userCanDeleteOtherUsers = ability.can('delete', 'User')
+// const userCannotDeleteOtherUsers = ability.cannot('delete', 'User')
+
+// console.log(userCanInviteSomeoneElse)
+// console.log(userCanDeleteOtherUsers)
+// console.log(userCannotDeleteOtherUsers)
