@@ -1,4 +1,4 @@
-# 🔐 Next.js SaaS + RBAC
+# 🔐 Next.js and Fastify SaaS + RBAC
 <!-- Resume of this project -->
 <!-- This project contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js including authentication and RBAC authorization. -->
 *Soon*
