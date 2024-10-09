@@ -2,6 +2,8 @@
 <!-- Sentry -->
 <!-- Password recovery: send e-mail -->
 
+<!-- Create 3 readmes: base, api, app -->
+
 # 🔐 Next.js and Fastify SaaS + RBAC
 <!-- Resume of this project -->
 <!-- This project contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js including authentication and RBAC authorization. -->
@@ -24,6 +26,8 @@
 
 ## 🔗 Routes
 *Soon*
+<!-- Insomnia -->
+<!-- Swagger url: http://localhost:3333/docs/ -->
 
 ## 📋 Business Rules and Requirements
 
