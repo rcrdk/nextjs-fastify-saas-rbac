@@ -6,7 +6,7 @@
 ## 🚀 Techs and Tools
 *Soon*
 <!-- TurboRepo + Monorepo -->
-<!-- API: Fastify + ZOD + Typescriopt + Prisma ORM -->
+<!-- API: Fastify + ZOD + Typescriopt + Prisma ORM + Swagger -->
 <!-- Database: Docker + PostgreSQL -->
 
 ## 🖥️ Project
