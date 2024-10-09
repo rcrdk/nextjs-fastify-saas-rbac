@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: bitnami/postgresql
+    container_name: next-saas-pg
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=next-saas

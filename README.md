@@ -5,12 +5,18 @@
 
 ## 🚀 Techs and Tools
 *Soon*
+<!-- TurboRepo + Monorepo -->
+<!-- API: Fastify + ZOD + Typescriopt + Prisma ORM -->
+<!-- Database: Docker + PostgreSQL -->
 
 ## 🖥️ Project
 *Soon*
 
 ## ⚙️ Get started
 *Soon*
+<!-- pnpm i -->
+<!-- run api... -->
+<!-- docker compose up -d -->
 
 ## 📋 Business Rules and Requirements
 

@@ -5,7 +5,9 @@
 		"dev": "tsx watch src/http/server.ts"
 	},
 	"dependencies": {
+		"@faker-js/faker": "^9.0.3",
 		"@fastify/cors": "^10.0.1",
+		"@prisma/client": "5.20.0",
 		"@saas/auth": "workspace:*",
 		"fastify": "^5.0.0",
 		"fastify-type-provider-zod": "^4.0.2",
@@ -16,6 +18,8 @@
 		"@saas/prettier-config": "workspace:*",
 		"@saas/tsconfig": "workspace:*",
 		"@types/node": "^22.7.5",
+		"prisma": "^5.20.0",
+		"ts-node": "^10.9.2",
 		"tsx": "^4.19.1"
 	},
 	"prettier": "@saas/prettier-config",
