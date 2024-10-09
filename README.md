@@ -18,6 +18,9 @@
 <!-- run api... -->
 <!-- docker compose up -d -->
 
+## 🔗 Routes
+*Soon*
+
 ## 📋 Business Rules and Requirements
 
 **Authentication:**
