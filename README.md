@@ -1,4 +1,6 @@
 <!-- Add project description and tags on GitHub -->
+<!-- Sentry -->
+<!-- Password recovery: send e-mail -->
 
 # 🔐 Next.js and Fastify SaaS + RBAC
 <!-- Resume of this project -->
