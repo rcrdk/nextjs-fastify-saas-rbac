@@ -4,9 +4,11 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+	"test:ts": "tsc --noEmit"
   },
   "devDependencies": {
+    "@types/node": "^22.7.5",
     "eslint": "8.57.0",
     "turbo": "^2.1.3"
   },

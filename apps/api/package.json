@@ -2,7 +2,11 @@
 	"name": "@saas/api",
 	"version": "1.0.0",
 	"scripts": {
-		"dev": "tsx watch src/http/server.ts"
+		"dev": "pnpm env:load tsx watch src/http/server.ts",
+		"db:migrate": "pnpm env:load prisma migrate dev",
+		"db:reset": "pnpm env:load prisma migrate reset",
+		"db:studio": "pnpm env:load prisma studio",
+		"env:load": "dotenv -e ../../.env --"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^9.0.3",
@@ -12,6 +16,7 @@
 		"@fastify/swagger-ui": "^5.0.1",
 		"@prisma/client": "5.20.0",
 		"@saas/auth": "workspace:*",
+		"@saas/env": "workspace:*",
 		"bcryptjs": "^2.4.3",
 		"fastify": "^5.0.0",
 		"fastify-plugin": "^5.0.1",
@@ -23,7 +28,7 @@
 		"@saas/prettier-config": "workspace:*",
 		"@saas/tsconfig": "workspace:*",
 		"@types/bcryptjs": "^2.4.6",
-		"@types/node": "^22.7.5",
+		"dotenv-cli": "^7.4.2",
 		"prisma": "^5.20.0",
 		"ts-node": "^10.9.2",
 		"tsx": "^4.19.1"
