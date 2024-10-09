@@ -1,3 +1,5 @@
+<!-- Add project description and tags on GitHub -->
+
 # 🔐 Next.js and Fastify SaaS + RBAC
 <!-- Resume of this project -->
 <!-- This project contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js including authentication and RBAC authorization. -->
@@ -24,7 +26,7 @@
 ## 📋 Business Rules and Requirements
 
 **Authentication:**
-- [ ] It should be able to authenticate using e-mail & password;
+- [ ] It should be able to authenticate using e-mail and password;
 - [ ] It should be able to authenticate using Github account;
 - [ ] It should be able to recover password using e-mail;
 - [x] It should be able to create an account (e-mail, name and password);

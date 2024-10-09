@@ -7,6 +7,7 @@
 	"dependencies": {
 		"@faker-js/faker": "^9.0.3",
 		"@fastify/cors": "^10.0.1",
+		"@fastify/jwt": "^9.0.1",
 		"@fastify/swagger": "^9.1.0",
 		"@fastify/swagger-ui": "^5.0.1",
 		"@prisma/client": "5.20.0",
