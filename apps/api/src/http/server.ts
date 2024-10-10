@@ -20,6 +20,8 @@ import { requestPasswordRecover } from './routes/auth/request-password-recover'
 import { resetPassword } from './routes/auth/reset-password'
 import { creteOrganization } from './routes/organization/create-organization'
 import { getMemebership } from './routes/organization/get-membership'
+import { getOrganization } from './routes/organization/get-organization'
+import { getOrganizations } from './routes/organization/get-organizations'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -65,6 +67,8 @@ app.register(requestPasswordRecover)
 app.register(resetPassword)
 app.register(creteOrganization)
 app.register(getMemebership)
+app.register(getOrganizations)
+app.register(getOrganization)
 
 app
 	.listen({
