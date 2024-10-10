@@ -22,6 +22,7 @@ import { creteOrganization } from './routes/organization/create-organization'
 import { getMemebership } from './routes/organization/get-membership'
 import { getOrganization } from './routes/organization/get-organization'
 import { getOrganizations } from './routes/organization/get-organizations'
+import { shutdownOrganization } from './routes/organization/shutdown-organization'
 import { updateOrganization } from './routes/organization/update-organization'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -71,6 +72,7 @@ app.register(getMemebership)
 app.register(getOrganizations)
 app.register(getOrganization)
 app.register(updateOrganization)
+app.register(shutdownOrganization)
 
 app
 	.listen({
