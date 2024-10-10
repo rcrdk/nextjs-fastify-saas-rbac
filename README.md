@@ -32,16 +32,16 @@
 ## 📋 Business Rules and Requirements
 
 **Authentication:**
-- [ ] It should be able to authenticate using e-mail and password;
-- [ ] It should be able to authenticate using Github account;
-- [ ] It should be able to recover password using e-mail;
+- [x] It should be able to authenticate using e-mail and password;
+- [x] It should be able to authenticate using Github account;
+- [x] It should be able to recover password using e-mail;
 - [x] It should be able to create an account (e-mail, name and password);
 **Organizations**
-- [ ] It should be able to create a new organization;
-- [ ] It should be able to get organizations to which the user belongs;
-- [ ] It should be able to update an organization;
-- [ ] It should be able to shutdown an organization;
-- [ ] It should be able to transfer organization ownership;
+- [x] It should be able to create a new organization;
+- [x] It should be able to get organizations to which the user belongs;
+- [x] It should be able to update an organization;
+- [x] It should be able to shutdown an organization;
+- [x] It should be able to transfer organization ownership;
 **Invites**
 - [ ] It should be able to invite a new member (e-mail, role);
 - [ ] It should be able to accept an invite;
