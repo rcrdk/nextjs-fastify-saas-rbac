@@ -23,7 +23,7 @@ export async function deleteProject(app: FastifyInstance) {
 					security: [{ bearerAuth: [] }],
 					params: z.object({
 						slug: z.string(),
-						projectId: z.string(),
+						projectId: z.string().uuid(),
 					}),
 					response: {
 						204: z.null(),
@@ -54,7 +54,7 @@ export async function deleteProject(app: FastifyInstance) {
 
 				if (cannot('delete', authProject)) {
 					throw new UnauthorizedError(
-						'You are not allowed to delete a new project.',
+						'You are not allowed to delete a project.',
 					)
 				}
 
