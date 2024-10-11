@@ -31,19 +31,19 @@
 - [x] It should be able to shutdown an organization;
 - [x] It should be able to transfer organization ownership;
 **Invites**
-- [ ] It should be able to invite a new member (e-mail, role);
-- [ ] It should be able to accept an invite;
-- [ ] It should be able to revoke a pending invite;
+- [x] It should be able to invite a new member (e-mail, role);
+- [x] It should be able to accept an invite;
+- [x] It should be able to revoke a pending invite;
 **Members**
-- [ ] It should be able to get organization members;
-- [ ] It should be able to update a member role;
+- [x] It should be able to get organization members;
+- [x] It should be able to update a member role;
 **Projects**
-- [ ] It should be able to get projects within a organization;
-- [ ] It should be able to create a new project (name, url, description);
-- [ ] It should be able to update a project (name, url, description);
-- [ ] It should be able to delete a project;
+- [x] It should be able to get projects within a organization;
+- [x] It should be able to create a new project (name, url, description);
+- [x] It should be able to update a project (name, url, description);
+- [x] It should be able to delete a project;
 **Billing**
-- [ ] It should be able to get billing details for organization ($20 per project / $10 per member excluding billing role);
+- [x] It should be able to get billing details for organization ($20 per project / $10 per member excluding billing role);
 
 ## 🧑🏼‍💻 RBAC: Roles and Permissions
 Owner/Administrator, Member, Billing (one per organization) and Anonymous.
