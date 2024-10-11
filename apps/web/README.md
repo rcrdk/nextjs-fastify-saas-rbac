@@ -4,9 +4,13 @@
 *Soon*
 
 ## 🚀 Techs and Tools
+<!-- React 19 + Next 15 -->
+<!-- Shadcn-ui -->
+<!-- KY (HTTP client) -->
 *Soon*
 
 ## 🖥️ Project
+<!-- Server actions -->
 *Soon*
 
 ## ⚙️ Get started
