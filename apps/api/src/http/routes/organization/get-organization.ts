@@ -19,7 +19,7 @@ export async function getOrganization(app: FastifyInstance) {
 						slug: z.string(),
 					}),
 					response: {
-						201: z.object({
+						200: z.object({
 							organization: z.object({
 								id: z.string().uuid(),
 								slug: z.string(),

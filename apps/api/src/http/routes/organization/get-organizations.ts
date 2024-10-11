@@ -18,7 +18,7 @@ export async function getOrganizations(app: FastifyInstance) {
 					summary: 'Get organizations where user is a member.',
 					security: [{ bearerAuth: [] }],
 					response: {
-						201: z.object({
+						200: z.object({
 							organizations: z.array(
 								z.object({
 									id: z.string().uuid(),
