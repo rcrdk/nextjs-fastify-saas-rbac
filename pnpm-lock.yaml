@@ -96,6 +96,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.1.0(@types/react@18.3.11)(react@19.0.0-rc-f994737d14-20240522)
+      '@tabler/icons-react':
+        specifier: ^3.19.0
+        version: 3.19.0(react@19.0.0-rc-f994737d14-20240522)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -765,6 +768,14 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  '@tabler/icons-react@3.19.0':
+    resolution: {integrity: sha512-AqEWGI0tQWgqo6ZjMO5yJ9sYT8oXLuAM/up0hN9iENS6IdtNZryKrkNSiMgpwweNTpl8wFFG/dAZ959S91A/uQ==}
+    peerDependencies:
+      react: '>= 16'
+
+  '@tabler/icons@3.19.0':
+    resolution: {integrity: sha512-A4WEWqpdbTfnpFEtwXqwAe9qf9sp1yRPvzppqAuwcoF0q5YInqB+JkJtSFToCyBpPVeLxJUxxkapLvt2qQgnag==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -3152,6 +3163,13 @@ snapshots:
       zod: 3.23.8
     optionalDependencies:
       typescript: 5.6.2
+
+  '@tabler/icons-react@3.19.0(react@19.0.0-rc-f994737d14-20240522)':
+    dependencies:
+      '@tabler/icons': 3.19.0
+      react: 19.0.0-rc-f994737d14-20240522
+
+  '@tabler/icons@3.19.0': {}
 
   '@tsconfig/node10@1.0.11': {}
 
