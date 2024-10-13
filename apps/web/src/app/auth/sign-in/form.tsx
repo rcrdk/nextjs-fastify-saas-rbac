@@ -7,6 +7,7 @@ import {
 	IconSettings,
 } from '@tabler/icons-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -18,8 +19,13 @@ import { useFormState } from '@/hooks/use-form-state'
 import { signinWithEmailAndPassword } from './actions'
 
 export function SignInForm() {
+	const router = useRouter()
+
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		signinWithEmailAndPassword,
+		() => {
+			router.push('/')
+		},
 	)
 
 	return (
@@ -63,7 +69,7 @@ export function SignInForm() {
 			<Button className="gap-2" type="submit" disabled={isPending}>
 				{isPending ? (
 					<>
-						<IconSettings size={20} className="duration-2000 animate-spin" />
+						<IconSettings size={20} className="animate-spin duration-2000" />
 						Signing in...
 					</>
 				) : (
