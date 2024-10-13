@@ -14,8 +14,9 @@ export const env = createEnv({
 		GITHUB_OAUTH_CLIENT_ID: z.string(),
 		GITHUB_OAUTH_CLIENT_SECRET: z.string(),
 		GITHUB_OAUTH_CLIENT_REDIRECT_URI: z.string().url(),
+		GITHUB_OAUTH_CLIENT_SCOPE: z.string().default('user'),
 	},
-	
+
 	client: {},
 
 	shared: {
@@ -29,6 +30,7 @@ export const env = createEnv({
 		GITHUB_OAUTH_CLIENT_ID: process.env.GITHUB_OAUTH_CLIENT_ID,
 		GITHUB_OAUTH_CLIENT_SECRET: process.env.GITHUB_OAUTH_CLIENT_SECRET,
 		GITHUB_OAUTH_CLIENT_REDIRECT_URI: process.env.GITHUB_OAUTH_CLIENT_REDIRECT_URI,
+		GITHUB_OAUTH_CLIENT_SCOPE: process.env.GITHUB_OAUTH_CLIENT_SCOPE,
 		NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 	},
 	emptyStringAsUndefined: true,
