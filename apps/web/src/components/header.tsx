@@ -2,11 +2,14 @@ import { IconSlash } from '@tabler/icons-react'
 import Image from 'next/image'
 
 import brandLogo from '@/assets/brand-logo.svg'
+import { ability } from '@/auth'
 
 import { OrganizationSwitcher } from './organization-switcher'
 import { ProfileButton } from './profile-button'
 
-export function Header() {
+export async function Header() {
+	const permissions = await ability()
+
 	return (
 		<header className="mx-auto flex max-w-[1200px] items-center justify-between">
 			<div className="flex items-center gap-3">
@@ -15,8 +18,12 @@ export function Header() {
 					alt=""
 					className="size-10 select-none dark:invert"
 				/>
+
 				<IconSlash className="-rotate-[24deg] text-border" />
+
 				<OrganizationSwitcher />
+
+				{permissions?.can('get', 'Project') && <p>Projects</p>}
 			</div>
 
 			<div className="flex items-center gap-4">

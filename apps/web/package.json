@@ -25,7 +25,8 @@
     "react-dom": "19.0.0-rc-f994737d14-20240522",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+	"@saas/auth": "workspace:*"
   },
   "devDependencies": {
     "@saas/eslint-config": "workspace:*",

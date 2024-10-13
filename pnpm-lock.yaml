@@ -102,6 +102,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.1.0(@types/react@18.3.11)(react@19.0.0-rc-f994737d14-20240522)
+      '@saas/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@tabler/icons-react':
         specifier: ^3.19.0
         version: 3.19.0(react@19.0.0-rc-f994737d14-20240522)

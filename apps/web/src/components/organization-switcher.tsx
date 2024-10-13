@@ -1,7 +1,7 @@
 import { IconBuilding, IconCirclePlus, IconSelector } from '@tabler/icons-react'
-import { cookies } from 'next/headers'
 import Link from 'next/link'
 
+import { getCurrentOrganization } from '@/auth'
 import { getOrganizations } from '@/http/get-organizations'
 
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
@@ -16,7 +16,7 @@ import {
 } from './ui/dropdown-menu'
 
 export async function OrganizationSwitcher() {
-	const currentOrganizationCookie = cookies().get('@SAAS:organization')?.value
+	const currentOrganizationCookie = getCurrentOrganization()
 	const { organizations } = await getOrganizations()
 
 	const currentOrganization = organizations.find(

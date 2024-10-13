@@ -1,3 +1,5 @@
+import { Role } from '@saas/auth'
+
 import { API } from './api-client'
 
 interface GetOrganizationsResponse {
@@ -6,7 +8,7 @@ interface GetOrganizationsResponse {
 		name: string
 		slug: string
 		avatarUrl: string | null
-		role: 'ADMIN' | 'MEMBER' | 'BILLING'
+		role: Role
 	}[]
 }
 
