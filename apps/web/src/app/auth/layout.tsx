@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { isAuthenticated } from '@/auth'
 
-export default async function authLayout({
+export default async function AuthLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode
