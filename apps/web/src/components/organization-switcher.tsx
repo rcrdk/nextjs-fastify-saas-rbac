@@ -28,6 +28,14 @@ export async function OrganizationSwitcher() {
 			<DropdownMenuTrigger className="flex w-[184px] select-none items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary">
 				{currentOrganization ? (
 					<>
+						<Avatar className="mr-1 size-5">
+							{currentOrganization.avatarUrl && (
+								<AvatarImage src={currentOrganization.avatarUrl} />
+							)}
+							<AvatarFallback>
+								<IconBuilding size={12} className="text-muted" />
+							</AvatarFallback>
+						</Avatar>
 						<span className="truncate">{currentOrganization.name}</span>
 						<IconSelector size={16} className="ml-auto shrink-0 text-current" />
 					</>

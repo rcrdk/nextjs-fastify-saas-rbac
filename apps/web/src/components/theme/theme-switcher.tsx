@@ -12,28 +12,37 @@ import {
 } from '../ui/dropdown-menu'
 
 export function ThemeSwitcher() {
-	const { setTheme, resolvedTheme } = useTheme()
+	const { setTheme } = useTheme()
 
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="ghost" size="icon">
-					{resolvedTheme === 'light' && <IconSun />}
-					{resolvedTheme === 'dark' && <IconMoon />}
+					<IconSun className="block dark:hidden" />
+					<IconMoon className="hidden dark:block" />
 					<span className="sr-only">Toggle theme</span>
 				</Button>
 			</DropdownMenuTrigger>
 
-			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => setTheme('light')}>
+			<DropdownMenuContent align="end" className="select-none">
+				<DropdownMenuItem
+					onClick={() => setTheme('light')}
+					className="cursor-pointer"
+				>
 					Light
 				</DropdownMenuItem>
 
-				<DropdownMenuItem onClick={() => setTheme('dark')}>
+				<DropdownMenuItem
+					onClick={() => setTheme('dark')}
+					className="cursor-pointer"
+				>
 					Dark
 				</DropdownMenuItem>
 
-				<DropdownMenuItem onClick={() => setTheme('system')}>
+				<DropdownMenuItem
+					onClick={() => setTheme('system')}
+					className="cursor-pointer"
+				>
 					System
 				</DropdownMenuItem>
 			</DropdownMenuContent>

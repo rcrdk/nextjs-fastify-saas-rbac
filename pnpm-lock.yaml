@@ -105,6 +105,9 @@ importers:
       '@saas/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@saas/env':
+        specifier: workspace:*
+        version: link:../../packages/env
       '@tabler/icons-react':
         specifier: ^3.19.0
         version: 3.19.0(react@19.0.0-rc-f994737d14-20240522)
@@ -163,6 +166,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.0
+      dotenv-cli:
+        specifier: ^7.4.2
+        version: 7.4.2
       postcss:
         specifier: ^8
         version: 8.4.47
