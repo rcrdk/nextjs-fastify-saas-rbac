@@ -25,7 +25,7 @@ export async function OrganizationSwitcher() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className="flex w-[168px] select-none items-center gap-1 rounded-sm p-1 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary">
+			<DropdownMenuTrigger className="flex w-[184px] select-none items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary">
 				{currentOrganization ? (
 					<>
 						<span className="truncate">{currentOrganization.name}</span>
@@ -46,7 +46,7 @@ export async function OrganizationSwitcher() {
 				align="end"
 				alignOffset={-16}
 				sideOffset={12}
-				className="w-[200px] select-none"
+				className="w-[216px] select-none"
 			>
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>Organizations</DropdownMenuLabel>
