@@ -102,7 +102,10 @@ export function ProjectSwitcher() {
 				<DropdownMenuSeparator />
 
 				<DropdownMenuItem asChild>
-					<Link href="/create-project" className="cursor-pointer font-medium">
+					<Link
+						href={`/organization/${organizationSlug}/create-project`}
+						className="cursor-pointer font-medium"
+					>
 						<IconCirclePlus size={20} className="mr-2" />
 						Create a project
 					</Link>

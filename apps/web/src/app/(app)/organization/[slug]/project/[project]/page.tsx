@@ -4,7 +4,7 @@ import { Header } from '@/components/header'
 
 // set metadata title
 export const metadata: Metadata = {
-	title: '[Project]',
+	title: '[Project] | [Organization]',
 }
 
 export default async function Project() {

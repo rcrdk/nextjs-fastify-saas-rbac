@@ -5,25 +5,28 @@ import {
 	IconExclamationCircle,
 	IconSettings,
 } from '@tabler/icons-react'
-import { Metadata } from 'next'
+import { useParams } from 'next/navigation'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 import { useFormState } from '@/hooks/use-form-state'
+import { queryClient } from '@/lib/react-query'
 
-import { createOrganizationAction } from './actions'
+import { createProjectAction } from './actions'
 
-export const metadata: Metadata = {
-	title: 'Create organization',
-}
+export function ProjectForm() {
+	const { slug: organization } = useParams<{ slug: string }>()
 
-export function OrganizationForm() {
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
-		createOrganizationAction,
-		() => {},
+		createProjectAction,
+		() => {
+			queryClient.invalidateQueries({
+				queryKey: [organization, 'projects'],
+			})
+		},
 	)
 
 	return (
@@ -31,7 +34,7 @@ export function OrganizationForm() {
 			{!success && message && (
 				<Alert variant="destructive">
 					<IconExclamationCircle size={20} />
-					<AlertTitle>Save organization has failed:</AlertTitle>
+					<AlertTitle>Save project has failed:</AlertTitle>
 					<AlertDescription>{message}</AlertDescription>
 				</Alert>
 			)}
@@ -45,7 +48,7 @@ export function OrganizationForm() {
 			)}
 
 			<div className="space-y-1">
-				<Label htmlFor="name">Organization name</Label>
+				<Label htmlFor="name">Project name</Label>
 				<Input name="name" type="text" id="name" />
 				{errors?.name && (
 					<p className="text-xs text-red-500 dark:text-red-400">
@@ -55,48 +58,23 @@ export function OrganizationForm() {
 			</div>
 
 			<div className="space-y-1">
-				<Label htmlFor="domain">E-mail domain</Label>
-				<Input
-					name="domain"
-					type="text"
-					id="domain"
-					inputMode="url"
-					placeholder="example.com"
-				/>
-				{errors?.domain && (
+				<Label htmlFor="domain">Project description</Label>
+				<Textarea name="description" id="description" rows={3} />
+				{errors?.description && (
 					<p className="text-xs text-red-500 dark:text-red-400">
-						{errors.domain.at(0)}
+						{errors.description.at(0)}
 					</p>
 				)}
-			</div>
-
-			<div className="space-y-1">
-				<div className="flex select-none items-baseline space-x-2">
-					<Checkbox
-						name="shouldAttachUsersByDomain"
-						id="shouldAttachUsersByDomain"
-						className="translate-y-1"
-					/>
-					<label htmlFor="shouldAttachUsersByDomain" className="space-y-1">
-						<span className="text-sm font-medium leading-none">
-							Auto-join new member
-						</span>
-						<p className="text-balance text-sm text-muted-foreground">
-							This will automatically invite all memebers with same e-mail
-							domain to this organization.
-						</p>
-					</label>
-				</div>
 			</div>
 
 			<Button type="submit" disabled={isPending} className="gap-2">
 				{isPending ? (
 					<>
 						<IconSettings size={20} className="animate-spin duration-2000" />
-						Saving organization...
+						Saving project...
 					</>
 				) : (
-					'Save organization'
+					'Save project'
 				)}
 			</Button>
 		</form>
