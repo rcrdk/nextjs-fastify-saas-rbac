@@ -1,4 +1,4 @@
-import { API } from './api-client'
+import { API } from '../lib/api-client'
 
 interface SignInWithGithubRequest {
 	code: string

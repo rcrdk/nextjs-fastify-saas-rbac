@@ -10,13 +10,12 @@ export const metadata: Metadata = {
 	},
 }
 
-export default function AppLayout({
-	children,
-	sheet,
-}: Readonly<{
+type AppLayoutProps = Readonly<{
 	children: React.ReactNode
-	sheet: React.ReactNode
-}>) {
+	dialog: React.ReactNode
+}>
+
+export default function AppLayout({ children, dialog }: AppLayoutProps) {
 	if (!isAuthenticated()) {
 		redirect('/auth/sign-in')
 	}
@@ -24,7 +23,7 @@ export default function AppLayout({
 	return (
 		<>
 			{children}
-			{sheet}
+			{dialog}
 		</>
 	)
 }

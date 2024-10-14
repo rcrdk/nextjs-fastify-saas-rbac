@@ -25,7 +25,7 @@ export async function OrganizationSwitcher() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className="flex w-[184px] select-none items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary">
+			<DropdownMenuTrigger className="flex max-w-[224px] select-none items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary">
 				{currentOrganization ? (
 					<>
 						<Avatar className="mr-1 size-5">
@@ -33,28 +33,28 @@ export async function OrganizationSwitcher() {
 								<AvatarImage src={currentOrganization.avatarUrl} />
 							)}
 							<AvatarFallback>
-								<IconBuilding size={12} className="text-muted" />
+								<IconBuilding
+									size={12}
+									className="text-foreground opacity-50"
+								/>
 							</AvatarFallback>
 						</Avatar>
 						<span className="truncate">{currentOrganization.name}</span>
-						<IconSelector size={16} className="ml-auto shrink-0 text-current" />
 					</>
 				) : (
 					<>
-						<span className="text-muted-foreground">Select organization</span>
-						<IconSelector
-							size={16}
-							className="ml-auto shrink-0 text-muted-foreground"
-						/>
+						<span className="pr-1 text-muted-foreground">
+							Select organization
+						</span>
 					</>
 				)}
+				<IconSelector size={16} className="ml-auto shrink-0 text-current" />
 			</DropdownMenuTrigger>
 
 			<DropdownMenuContent
-				align="end"
-				alignOffset={-16}
+				align="center"
 				sideOffset={12}
-				className="w-[216px] select-none"
+				className="w-[256px] select-none"
 			>
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>Organizations</DropdownMenuLabel>
@@ -68,7 +68,10 @@ export async function OrganizationSwitcher() {
 								<Avatar className="mr-2 size-5">
 									{item.avatarUrl && <AvatarImage src={item.avatarUrl} />}
 									<AvatarFallback>
-										<IconBuilding size={12} className="text-muted" />
+										<IconBuilding
+											size={12}
+											className="text-foreground opacity-50"
+										/>
 									</AvatarFallback>
 								</Avatar>
 
@@ -81,9 +84,12 @@ export async function OrganizationSwitcher() {
 				<DropdownMenuSeparator />
 
 				<DropdownMenuItem asChild>
-					<Link href="/create-organization" className="cursor-pointer">
+					<Link
+						href="/create-organization"
+						className="cursor-pointer font-medium"
+					>
 						<IconCirclePlus size={20} className="mr-2" />
-						{organizations.length ? 'Create new' : 'Create a first one'}
+						Create a organization
 					</Link>
 				</DropdownMenuItem>
 			</DropdownMenuContent>

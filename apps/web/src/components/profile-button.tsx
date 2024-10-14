@@ -7,6 +7,7 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
+	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 
@@ -23,14 +24,7 @@ export async function ProfileButton() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className="flex select-none items-center outline-none">
-				<div className="flex flex-col items-end">
-					<span className="text-sm font-medium">
-						{user.name ?? 'My Account'}
-					</span>
-					<span className="text-xs text-muted-foreground">{user.email}</span>
-				</div>
-
-				<Avatar className="ml-3 mr-1 size-9">
+				<Avatar className="mr-1 size-9">
 					{user.avatarUrl && <AvatarImage src={user.avatarUrl} />}
 					<AvatarFallback className="text-xs font-medium">
 						{getInitials(user.name ?? 'My Account')}
@@ -41,6 +35,15 @@ export async function ProfileButton() {
 			</DropdownMenuTrigger>
 
 			<DropdownMenuContent align="end" sideOffset={12} className="select-none">
+				<div className="flex flex-col px-3 py-2 text-center">
+					<span className="text-sm font-medium">
+						{user.name ?? 'My Account'}
+					</span>
+					<span className="text-xs text-muted-foreground">{user.email}</span>
+				</div>
+
+				<DropdownMenuSeparator />
+
 				<DropdownMenuItem asChild>
 					<a href="/api/auth/sign-out" className="cursor-pointer">
 						<IconLogout size={20} className="mr-2" />

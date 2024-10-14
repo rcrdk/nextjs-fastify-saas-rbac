@@ -1,7 +1,7 @@
 import { Role } from '@saas/auth'
 import { redirect } from 'next/navigation'
 
-import { API } from './api-client'
+import { API } from '../lib/api-client'
 
 interface GetMembershipResponse {
 	membership: {

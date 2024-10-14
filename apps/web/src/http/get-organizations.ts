@@ -1,6 +1,6 @@
 import { Role } from '@saas/auth'
 
-import { API } from './api-client'
+import { API } from '../lib/api-client'
 
 interface GetOrganizationsResponse {
 	organizations: {

@@ -24,24 +24,24 @@ export function ThemeSwitcher() {
 				</Button>
 			</DropdownMenuTrigger>
 
-			<DropdownMenuContent align="end" className="select-none">
+			<DropdownMenuContent align="center" className="min-w-24 select-none">
 				<DropdownMenuItem
 					onClick={() => setTheme('light')}
-					className="cursor-pointer"
+					className="cursor-pointer justify-center"
 				>
 					Light
 				</DropdownMenuItem>
 
 				<DropdownMenuItem
 					onClick={() => setTheme('dark')}
-					className="cursor-pointer"
+					className="cursor-pointer justify-center"
 				>
 					Dark
 				</DropdownMenuItem>
 
 				<DropdownMenuItem
 					onClick={() => setTheme('system')}
-					className="cursor-pointer"
+					className="cursor-pointer justify-center"
 				>
 					System
 				</DropdownMenuItem>

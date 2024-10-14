@@ -7,6 +7,7 @@ import { ability } from '@/auth'
 
 import { OrganizationSwitcher } from './organization-switcher'
 import { ProfileButton } from './profile-button'
+import { ProjectSwitcher } from './project-switcher'
 import { ThemeSwitcher } from './theme/theme-switcher'
 import { Separator } from './ui/separator'
 
@@ -15,7 +16,7 @@ export async function Header() {
 
 	return (
 		<header className="mx-auto flex w-full max-w-[1200px] items-center justify-between border-b pb-4">
-			<div className="flex items-center gap-3">
+			<div className="flex items-center">
 				<Link
 					href="/"
 					className="rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -27,10 +28,15 @@ export async function Header() {
 					/>
 				</Link>
 
-				<IconSlash className="-rotate-[24deg] text-border" />
+				<IconSlash className="ml-3 -rotate-[24deg] text-border" />
 
 				<OrganizationSwitcher />
-				{permissions?.can('get', 'Project') && <p>Projects</p>}
+				{permissions?.can('get', 'Project') && (
+					<>
+						<IconSlash className="-rotate-[24deg] text-border" />
+						<ProjectSwitcher />
+					</>
+				)}
 			</div>
 
 			<div className="flex items-center gap-4">
