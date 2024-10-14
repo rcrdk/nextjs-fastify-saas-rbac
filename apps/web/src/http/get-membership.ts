@@ -1,4 +1,5 @@
 import { Role } from '@saas/auth'
+import { redirect } from 'next/navigation'
 
 import { API } from './api-client'
 
@@ -12,9 +13,13 @@ interface GetMembershipResponse {
 }
 
 export async function getMembership(organization: string) {
-	const result = await API.get(
-		`organizations/${organization}/membership`,
-	).json<GetMembershipResponse>()
+	try {
+		const result = await API.get(
+			`organizations/${organization}/membership`,
+		).json<GetMembershipResponse>()
 
-	return result
+		return result
+	} catch {}
+
+	redirect('/')
 }

@@ -83,7 +83,7 @@ export async function OrganizationSwitcher() {
 				<DropdownMenuItem asChild>
 					<Link href="/create-organization" className="cursor-pointer">
 						<IconCirclePlus size={20} className="mr-2" />
-						Create new
+						{organizations.length ? 'Create new' : 'Create a first one'}
 					</Link>
 				</DropdownMenuItem>
 			</DropdownMenuContent>

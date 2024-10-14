@@ -33,7 +33,6 @@ export async function ability() {
 	}
 
 	const ability = defineAbilityFor({
-		__typename: 'User',
 		id: memebership.userId,
 		role: memebership.role,
 	})

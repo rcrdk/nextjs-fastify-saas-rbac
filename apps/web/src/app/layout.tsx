@@ -4,7 +4,22 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 
 export const metadata: Metadata = {
-	title: 'Create Next App',
+	title: {
+		template: '%s | Next.js + RBAC',
+		default: 'Dashboard',
+	},
+	icons: [
+		{
+			url: '/favicon-light.svg',
+			media: '(prefers-color-scheme: light)',
+			rel: 'icon',
+		},
+		{
+			url: '/favicon-dark.svg',
+			media: '(prefers-color-scheme: dark)',
+			rel: 'icon',
+		},
+	],
 }
 
 export default function RootLayout({
