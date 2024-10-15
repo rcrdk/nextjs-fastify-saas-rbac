@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/card'
 import { getOrganization } from '@/http/get-organization'
 
+import { Billing } from './billing'
 import { ShutdownOrganizationButton } from './shutdown-organization-button'
 
 export const metadata: Metadata = {
@@ -30,10 +31,10 @@ export default async function Settings() {
 	})
 
 	return (
-		<div className="w-full space-y-4">
+		<div className="w-full space-y-8">
 			<h1 className="text-2xl font-bold">Organization Settings</h1>
 
-			<div className="space-y-4">
+			<div className="space-y-8">
 				{canUpdateOrganization && (
 					<Card>
 						<CardHeader>
@@ -57,16 +58,7 @@ export default async function Settings() {
 					</Card>
 				)}
 
-				{canGetBilling && (
-					<Card>
-						<CardHeader>
-							<CardTitle>Billing</CardTitle>
-							<CardDescription></CardDescription>
-						</CardHeader>
-
-						<CardContent></CardContent>
-					</Card>
-				)}
+				{canGetBilling && <Billing />}
 
 				{canShutdownOrganization && (
 					<Card>
