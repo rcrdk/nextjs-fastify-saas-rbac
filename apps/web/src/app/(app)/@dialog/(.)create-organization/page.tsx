@@ -1,7 +1,7 @@
 import { InterceptedDialogContent } from '@/components/intercepted-dialog-content'
 import { Dialog, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
-import { OrganizationForm } from '../../create-organization/form'
+import { OrganizationForm } from '../../organization/form'
 
 export default function CreateOrganization() {
 	return (
