@@ -7,7 +7,7 @@ import {
 	IconSettings,
 } from '@tabler/icons-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -21,6 +21,7 @@ import { signinWithEmailAndPassword } from './actions'
 
 export function SignInForm() {
 	const router = useRouter()
+	const searchParams = useSearchParams()
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		signinWithEmailAndPassword,
@@ -42,7 +43,12 @@ export function SignInForm() {
 
 				<div className="space-y-1">
 					<Label htmlFor="email">E-mail</Label>
-					<Input name="email" type="email" id="email" />
+					<Input
+						name="email"
+						type="email"
+						id="email"
+						defaultValue={searchParams.get('email') ?? ''}
+					/>
 
 					{errors?.email && (
 						<p className="text-xs text-red-500 dark:text-red-400">

@@ -1,6 +1,7 @@
 import { IconChevronDown, IconLogout } from '@tabler/icons-react'
 
 import { auth } from '@/auth'
+import { getInitials } from '@/utils/get-initials'
 
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import {
@@ -13,13 +14,6 @@ import {
 
 export async function ProfileButton() {
 	const { user } = await auth()
-
-	function getInitials(name: string) {
-		return name
-			.split(' ')
-			.map((word) => word[0].toUpperCase())
-			.join('')
-	}
 
 	return (
 		<DropdownMenu>
