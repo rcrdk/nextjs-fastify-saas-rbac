@@ -37,10 +37,8 @@ export function OrganizationForm({
 		? updateOrganizationAction
 		: createOrganizationAction
 
-	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
-		formAction,
-		() => {},
-	)
+	const [{ success, message, errors }, handleSubmit, isPending] =
+		useFormState(formAction)
 
 	return (
 		<form onSubmit={handleSubmit} className="flex flex-col space-y-4">

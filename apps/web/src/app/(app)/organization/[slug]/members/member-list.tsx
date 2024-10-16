@@ -31,7 +31,7 @@ export async function MemberList() {
 
 	return (
 		<div className="space-y-2">
-			<h2 className="text-lg font-semibold">Active members</h2>
+			<h2 className="text-lg font-semibold">Active members:</h2>
 
 			<div className="rounded border">
 				<Table>

@@ -29,7 +29,7 @@ export default async function Settings() {
 	const { organization } = await getOrganization(currentOrganization!)
 
 	return (
-		<div className="w-full space-y-8">
+		<div className="w-full space-y-8 self-start">
 			<h1 className="text-2xl font-bold">Organization Settings</h1>
 
 			<div className="space-y-8">
