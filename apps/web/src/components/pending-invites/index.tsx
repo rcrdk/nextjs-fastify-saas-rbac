@@ -42,14 +42,14 @@ export function PendingInvites() {
 			<PopoverTrigger asChild>
 				<Button variant="ghost" size="icon">
 					<IconUserPlus />
-					<span className="sr-only">
-						Pending invitations ({data?.invites.length ?? 0})
-					</span>
+					<span className="sr-only">Pending invites</span>
 				</Button>
 			</PopoverTrigger>
 
 			<PopoverContent className="w-80 space-y-4 rounded border bg-white p-4 dark:bg-black">
-				<span className="block text-sm font-medium">Pending invites</span>
+				<span className="block text-sm font-medium">
+					Pending invites ({data?.invites.length ?? 0})
+				</span>
 
 				{data?.invites.map((invite) => (
 					<div key={invite.id} className="space-y-2 border-t pt-2">
@@ -90,7 +90,7 @@ export function PendingInvites() {
 
 				{data?.invites.length === 0 && (
 					<p className="border-t pt-3 text-sm text-muted-foreground">
-						There are not open invitations by now.
+						There are not pending invitations for you.
 					</p>
 				)}
 

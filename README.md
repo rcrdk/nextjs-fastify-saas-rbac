@@ -1,25 +1,73 @@
-<!-- Add project description and tags on GitHub -->
-<!-- Sentry -->
-<!-- Password recovery: send e-mail -->
-
-<!-- Create links to readmes -->
-
 # 🔐 SaaS: Next.js and Fastify + RBAC
-<!-- Resume of this project -->
-<!-- This project contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js including authentication and RBAC authorization. -->
-*Soon*
+This project was developed for learning case at [Rocketseat](https://www.rocketseat.com.br/). It contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js including authentication and RBAC authorization.
+
+<u>ROOT Docs</u> | [API Docs](https://github.com/rcrdk/nextjs-fastify-saas-rbac/tree/main/apps/api#readme) | [WEB Docs](https://github.com/rcrdk/nextjs-fastify-saas-rbac/tree/main/apps/web#readme)
 
 ## 🚀 Techs and Tools
-*Soon*
-<!-- TurboRepo + Monorepo -->
-<!-- API: Fastify + ZOD + Typescriopt + Prisma ORM + Swagger -->
-<!-- Database: Docker + PostgreSQL -->
+- Monorepo: [TurboRepo](https://turbo.build/)
+- Package Manager: [PnPM](https://pnpm.io/)
+- API:
+  - [Node.js](https://nodejs.org/) + [Fastify](https://fastify.dev/) + [Typescript](https://www.typescriptlang.org/) + 
+  - [Prisma ORM](https://www.prisma.io/) + [Docker](https://www.docker.com/) + [PostgreSQL](https://www.postgresql.org/)
+  - [Swagger](https://swagger.io/)
+- Web:
+  - [React 19 RC](https://react.dev/) + [Next 15 RC](https://nextjs.org/) with App Router + 
+  - [Tailwind](https://tailwindcss.com/) with [shadcn-ui](https://ui.shadcn.com/)
+  - [KY](https://github.com/sindresorhus/ky) (HTTP client) + [React Query](https://tanstack.com/query/latest)
+- Packages:
+  - Authorizations RBAC with [CASL](https://casl.js.org/)
+  - Typesafe env with [T3-ENV](https://github.com/t3-oss/t3-env)
+  - Config: ESlint, Prettier, Typescripot
 
 ## 🖥️ Project
 *Soon*
+<!-- Technologies: React 19 RC and Next 15 RC with App Route, server actions -->
+<!-- GitHub OAuth2 -->
+<!-- Tailwind shadcn-ui, prisma, ky -->
+<!-- User roles and permissions with CASL -->
+<!-- Pages and navigation of web project -->
 
 ## ⚙️ Get started
-*Soon*
-<!-- pnpm i -->
-<!-- run api... -->
-<!-- docker compose up -d -->
+
+### 1️⃣ Setup enviroment:
+<details>
+<summary>Display contents</summary>
+	
+- Setup enviroment variables: `cp .env.example .env`
+- Create a [GitHub OAuth](https://docs.github.com/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) app to make social sign-in.
+- Make sure you are running Docker.
+</details>
+
+### 2️⃣ Install dependencies and run services:
+<details>
+<summary>Display contents</summary>
+	
+```shell
+# root:
+pnpm i
+docker compose up -d
+
+# apps/api
+pnpm run db:migrate # seeds will run along
+
+# root:
+pnpm run dev
+```
+
+Other available commands:
+```shell
+# apps/api
+pnpm run db:deploy
+pnpm run db:reset
+pnpm run db:studio
+```
+
+> [!NOTE]
+> The commands starting with `pnpm run db:*` are used for loading environment variables into them.
+
+</details>
+
+## 🔗 Base routes
+- API: http://localhost:3333
+- API Docs: http://localhost:3333/docs
+- WEB: http://localhost:3000/

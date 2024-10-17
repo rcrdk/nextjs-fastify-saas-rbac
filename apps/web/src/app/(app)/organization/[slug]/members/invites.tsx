@@ -15,7 +15,7 @@ export async function Invites() {
 
 	return (
 		<div className="space-y-4">
-			<h2 className="text-lg font-semibold">Invites to organization:</h2>
+			<h2 className="text-lg font-semibold">Pending invites:</h2>
 
 			{permissions?.can('create', 'Invite') && (
 				<Card>
@@ -56,7 +56,7 @@ export async function Invites() {
 
 				{invites.length === 0 && (
 					<div className="p-5 text-sm text-muted-foreground">
-						There are no open invites by now.
+						There are not pending invites for this organization.
 					</div>
 				)}
 			</div>

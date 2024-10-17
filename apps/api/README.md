@@ -1,21 +1,21 @@
 # 🔐 SaaS: Fastify + RBAC
-<!-- Resume of this project -->
-<!-- This project contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js including authentication and RBAC authorization. -->
-*Soon*
+This project was developed for learning case at [Rocketseat](https://www.rocketseat.com.br/). It contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js including authentication and RBAC authorization.
+
+[ROOT Docs](https://github.com/rcrdk/nextjs-fastify-saas-rbac) | <u>API Docs</u> | [WEB Docs](https://github.com/rcrdk/nextjs-fastify-saas-rbac/tree/main/apps/web#readme)
 
 ## 🚀 Techs and Tools
-*Soon*
+- [Node.js](https://nodejs.org/) + [Fastify](https://fastify.dev/) + [Typescript](https://www.typescriptlang.org/)
+- [Prisma ORM](https://www.prisma.io/) + [Docker](https://www.docker.com/) + [PostgreSQL](https://www.postgresql.org/)
+- [Swagger](https://swagger.io/)
+- Authorizations RBAC with [CASL](https://casl.js.org/)
 
 ## 🖥️ Project
-*Soon*
-
-## ⚙️ Get started
-*Soon*
+Checkout details of [this project](https://github.com/rcrdk/nextjs-fastify-saas-rbac).
 
 ## 🔗 Routes
-*Soon*
-<!-- Insomnia -->
-<!-- Swagger url: http://localhost:3333/docs/ -->
+By running the project in your machine you can get all endpoints available at:
+
+[![View in Swagger](https://jessemillar.github.io/view-in-swagger-button/button.svg)](http://localhost:3333/docs/)
 
 ## 📋 Business Rules and Requirements
 

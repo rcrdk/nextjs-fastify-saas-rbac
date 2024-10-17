@@ -1,6 +1,7 @@
 import { IconArrowRight } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import Link from 'next/link'
 
 import { getCurrentOrganization } from '@/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -49,9 +50,18 @@ export async function ProjectsList() {
 							{dayjs(project.createdAt).fromNow()}
 						</span>
 
-						<Button size="xs" variant="outline" className="ml-auto gap-2">
-							View
-							<IconArrowRight size={12} />
+						<Button
+							size="xs"
+							variant="outline"
+							className="ml-auto gap-2"
+							asChild
+						>
+							<Link
+								href={`/organization/${currentOrganization}/project/${project.slug}`}
+							>
+								View
+								<IconArrowRight size={12} />
+							</Link>
 						</Button>
 					</CardFooter>
 				</Card>

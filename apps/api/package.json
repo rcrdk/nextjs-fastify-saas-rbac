@@ -4,6 +4,7 @@
 	"scripts": {
 		"dev": "pnpm env:load tsx watch src/http/server.ts",
 		"db:migrate": "pnpm env:load prisma migrate dev",
+		"db:deploy": "pnpm env:load prisma migrate deploy",
 		"db:reset": "pnpm env:load prisma migrate reset",
 		"db:studio": "pnpm env:load prisma studio",
 		"env:load": "dotenv -e ../../.env --"
