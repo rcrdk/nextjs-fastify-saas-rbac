@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { SignUpForm } from './form'
 
 export const metadata: Metadata = {
-	title: 'Sign up',
+	title: 'Sign Up',
 }
 
 export default function SignUpPage() {

@@ -4,6 +4,10 @@ import { hash } from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
+function capitalizeFirstLetter(value: string) {
+	return value.charAt(0).toUpperCase() + value.slice(1)
+}
+
 async function seed() {
 	await prisma.user.deleteMany()
 	await prisma.organization.deleteMany()
@@ -20,13 +24,13 @@ async function seed() {
 			},
 			{
 				name: faker.person.fullName(),
-				email: faker.internet.email(),
+				email: faker.internet.email().toLowerCase(),
 				avatarUrl: faker.image.avatarGitHub(),
 				passwordHash: passwordHashed,
 			},
 			{
 				name: faker.person.fullName(),
-				email: faker.internet.email(),
+				email: faker.internet.email().toLowerCase(),
 				avatarUrl: faker.image.avatarGitHub(),
 				passwordHash: passwordHashed,
 			},
@@ -45,7 +49,7 @@ async function seed() {
 				createMany: {
 					data: [
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),
@@ -56,7 +60,7 @@ async function seed() {
 							]),
 						},
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),
@@ -67,7 +71,7 @@ async function seed() {
 							]),
 						},
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),
@@ -93,7 +97,7 @@ async function seed() {
 						},
 						{
 							userId: userThree.id,
-							role: 'MEMBER',
+							role: 'BILLING',
 						},
 					],
 				},
@@ -106,12 +110,12 @@ async function seed() {
 			name: 'Acme Inc (member)',
 			slug: 'acme-member',
 			avatarUrl: faker.image.avatarGitHub(),
-			ownerId: userOne.id,
+			ownerId: userTwo.id,
 			projects: {
 				createMany: {
 					data: [
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),
@@ -122,7 +126,7 @@ async function seed() {
 							]),
 						},
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),
@@ -133,7 +137,7 @@ async function seed() {
 							]),
 						},
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),
@@ -159,7 +163,7 @@ async function seed() {
 						},
 						{
 							userId: userThree.id,
-							role: 'MEMBER',
+							role: 'BILLING',
 						},
 					],
 				},
@@ -172,12 +176,12 @@ async function seed() {
 			name: 'Acme Inc (billing)',
 			slug: 'acme-billing',
 			avatarUrl: faker.image.avatarGitHub(),
-			ownerId: userOne.id,
+			ownerId: userTwo.id,
 			projects: {
 				createMany: {
 					data: [
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),
@@ -188,7 +192,7 @@ async function seed() {
 							]),
 						},
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),
@@ -199,7 +203,7 @@ async function seed() {
 							]),
 						},
 						{
-							name: faker.lorem.words(5),
+							name: capitalizeFirstLetter(faker.lorem.words(5)),
 							slug: faker.lorem.slug(5),
 							description: faker.lorem.paragraph(),
 							avatarUrl: faker.image.avatarGitHub(),

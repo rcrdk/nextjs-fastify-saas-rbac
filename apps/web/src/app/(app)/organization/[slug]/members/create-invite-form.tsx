@@ -1,13 +1,10 @@
 'use client'
 
-import {
-	IconExclamationCircle,
-	IconSend,
-	IconSettings,
-} from '@tabler/icons-react'
+import { IconExclamationCircle, IconSend } from '@tabler/icons-react'
 
+import { FormError } from '@/components/form-error'
+import { FormSubmitButton } from '@/components/form-submit-button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
 	Select,
@@ -38,7 +35,7 @@ export function CreateInviteForm() {
 				</Alert>
 			)}
 
-			<div className="flex items-start gap-4">
+			<div className="flex flex-col gap-4 md:flex-row md:items-start">
 				<div className="flex-grow space-y-1">
 					<Input
 						name="email"
@@ -46,11 +43,7 @@ export function CreateInviteForm() {
 						id="email"
 						placeholder="Invite member by e-mail"
 					/>
-					{errors?.email && (
-						<p className="text-xs text-red-500 dark:text-red-400">
-							{errors.email.at(0)}
-						</p>
-					)}
+					<FormError message={errors?.email} />
 				</div>
 
 				<div className="flex-grow space-y-1">
@@ -65,23 +58,14 @@ export function CreateInviteForm() {
 					</Select>
 				</div>
 
-				<Button
-					type="submit"
-					disabled={isPending}
-					className="min-w-48 flex-shrink-0 gap-2"
+				<FormSubmitButton
+					loading={isPending}
+					loadingLabel="Sending invite..."
+					className="min-w-48 flex-shrink-0"
 				>
-					{isPending ? (
-						<>
-							<IconSettings size={20} className="animate-spin duration-2000" />
-							Sending invite...
-						</>
-					) : (
-						<>
-							<IconSend size={20} />
-							Send invite
-						</>
-					)}
-				</Button>
+					<IconSend size={20} />
+					Send invite
+				</FormSubmitButton>
 			</div>
 		</form>
 	)

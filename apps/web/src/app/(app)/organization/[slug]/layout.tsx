@@ -11,7 +11,7 @@ export default function OrganizationLayout({ children }: AppLayoutProps) {
 			<Header />
 			<Tabs />
 
-			<main className="mx-auto flex w-full max-w-[1200px] flex-grow items-center py-8">
+			<main className="mx-auto flex w-full max-w-[1200px] flex-grow items-center py-6 sm:py-8">
 				{children}
 			</main>
 		</div>

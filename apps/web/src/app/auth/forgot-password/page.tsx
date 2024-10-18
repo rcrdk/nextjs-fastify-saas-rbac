@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 export const metadata: Metadata = {
-	title: 'Password recover',
+	title: 'Password Recover',
 }
 
 export default function ForgotPasswordPage() {
@@ -18,7 +18,7 @@ export default function ForgotPasswordPage() {
 			</div>
 
 			<Button className="gap-2" type="submit">
-				Revover password
+				Recover password
 			</Button>
 
 			<Button className="gap-2" variant="link" size="sm" asChild>

@@ -1,6 +1,6 @@
 import { IconSendOff } from '@tabler/icons-react'
 
-import { Button } from '@/components/ui/button'
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 
 import { revokeInviteAction } from './actions'
 
@@ -13,10 +13,15 @@ export async function RevokeInviteButton({
 }: RevokeInviteButtonProps) {
 	return (
 		<form action={revokeInviteAction.bind(null, inviteId)}>
-			<Button className="gap-2" variant="destructive" size="sm">
-				<IconSendOff size={20} />
-				Revoke invite
-			</Button>
+			<DropdownMenuItem asChild>
+				<button
+					type="submit"
+					className="cursor-pointer gap-2 disabled:cursor-default"
+				>
+					<IconSendOff size={20} />
+					Revoke invite
+				</button>
+			</DropdownMenuItem>
 		</form>
 	)
 }

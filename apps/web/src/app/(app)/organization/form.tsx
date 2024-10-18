@@ -1,14 +1,10 @@
 'use client'
 
-import {
-	IconCircleCheck,
-	IconExclamationCircle,
-	IconSettings,
-} from '@tabler/icons-react'
-import { Metadata } from 'next'
+import { IconCircleCheck, IconExclamationCircle } from '@tabler/icons-react'
 
+import { FormError } from '@/components/form-error'
+import { FormSubmitButton } from '@/components/form-submit-button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -25,10 +21,6 @@ interface OrganizationFormProps {
 	initialData?: OrganizationSchema
 }
 
-export const metadata: Metadata = {
-	title: '[Create/Update] organization',
-}
-
 export function OrganizationForm({
 	isUpdating = false,
 	initialData,
@@ -39,6 +31,16 @@ export function OrganizationForm({
 
 	const [{ success, message, errors }, handleSubmit, isPending] =
 		useFormState(formAction)
+
+	const buttonText = isUpdating
+		? {
+				default: 'Save organization',
+				loading: 'Saving organization...',
+			}
+		: {
+				default: 'Create new organization',
+				loading: 'Creating organization...',
+			}
 
 	return (
 		<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
@@ -66,11 +68,7 @@ export function OrganizationForm({
 					id="name"
 					defaultValue={initialData?.name}
 				/>
-				{errors?.name && (
-					<p className="text-xs text-red-500 dark:text-red-400">
-						{errors.name.at(0)}
-					</p>
-				)}
+				<FormError message={errors?.name} />
 			</div>
 
 			<div className="space-y-1">
@@ -83,11 +81,7 @@ export function OrganizationForm({
 					placeholder="example.com"
 					defaultValue={initialData?.domain ?? undefined}
 				/>
-				{errors?.domain && (
-					<p className="text-xs text-red-500 dark:text-red-400">
-						{errors.domain.at(0)}
-					</p>
-				)}
+				<FormError message={errors?.domain} />
 			</div>
 
 			<div className="space-y-1">
@@ -110,16 +104,9 @@ export function OrganizationForm({
 				</div>
 			</div>
 
-			<Button type="submit" disabled={isPending} className="gap-2">
-				{isPending ? (
-					<>
-						<IconSettings size={20} className="animate-spin duration-2000" />
-						Saving organization...
-					</>
-				) : (
-					'Save organization'
-				)}
-			</Button>
+			<FormSubmitButton loading={isPending} loadingLabel={buttonText.loading}>
+				{buttonText.default}
+			</FormSubmitButton>
 		</form>
 	)
 }

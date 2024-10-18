@@ -5,12 +5,12 @@ import Link from 'next/link'
 import brandLogo from '@/assets/brand-logo.svg'
 import { ability } from '@/auth'
 
+import { PendingInvites } from '../pending-invites'
+import { Separator } from '../ui/separator'
 import { OrganizationSwitcher } from './organization-switcher'
-import { PendingInvites } from './pending-invites'
 import { ProfileButton } from './profile-button'
 import { ProjectSwitcher } from './project-switcher'
-import { ThemeSwitcher } from './theme/theme-switcher'
-import { Separator } from './ui/separator'
+import { ThemeSwitcher } from './theme-switcher'
 
 export async function Header() {
 	const permissions = await ability()

@@ -14,8 +14,14 @@ import { getOrganization } from '@/http/get-organization'
 import { Billing } from './billing'
 import { ShutdownOrganizationButton } from './shutdown-organization-button'
 
-export const metadata: Metadata = {
-	title: '[Organization] settings',
+export async function generateMetadata(): Promise<Metadata> {
+	const slug = getCurrentOrganization()
+
+	const { organization } = await getOrganization(slug!)
+
+	return {
+		title: `${organization.name} Settings`,
+	}
 }
 
 export default async function Settings() {
@@ -29,10 +35,10 @@ export default async function Settings() {
 	const { organization } = await getOrganization(currentOrganization!)
 
 	return (
-		<div className="w-full space-y-8 self-start">
+		<div className="w-full space-y-6 self-start sm:space-y-8">
 			<h1 className="text-2xl font-bold">Organization Settings</h1>
 
-			<div className="space-y-8">
+			<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 				{canUpdateOrganization && (
 					<Card>
 						<CardHeader>
@@ -59,16 +65,16 @@ export default async function Settings() {
 				{canGetBilling && <Billing />}
 
 				{canShutdownOrganization && (
-					<Card>
+					<Card className="items-center justify-between md:flex lg:col-span-2">
 						<CardHeader>
 							<CardTitle>Shutdown Organization</CardTitle>
-							<CardDescription>
+							<CardDescription className="text-balance">
 								This will delete all organization data including all projects.
 								You cannot undo this action.
 							</CardDescription>
 						</CardHeader>
 
-						<CardContent>
+						<CardContent className="md:p-6">
 							<ShutdownOrganizationButton />
 						</CardContent>
 					</Card>

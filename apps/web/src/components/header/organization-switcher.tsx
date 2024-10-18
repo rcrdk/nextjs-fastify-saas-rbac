@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { getCurrentOrganization } from '@/auth'
 import { getOrganizations } from '@/http/get-organizations'
 
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -13,7 +13,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from './ui/dropdown-menu'
+} from '../ui/dropdown-menu'
 
 export async function OrganizationSwitcher() {
 	const currentOrganizationCookie = getCurrentOrganization()

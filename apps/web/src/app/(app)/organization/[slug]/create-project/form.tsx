@@ -1,14 +1,11 @@
 'use client'
 
-import {
-	IconCircleCheck,
-	IconExclamationCircle,
-	IconSettings,
-} from '@tabler/icons-react'
+import { IconCircleCheck, IconExclamationCircle } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
 
+import { FormError } from '@/components/form-error'
+import { FormSubmitButton } from '@/components/form-submit-button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -50,33 +47,18 @@ export function ProjectForm() {
 			<div className="space-y-1">
 				<Label htmlFor="name">Project name</Label>
 				<Input name="name" type="text" id="name" />
-				{errors?.name && (
-					<p className="text-xs text-red-500 dark:text-red-400">
-						{errors.name.at(0)}
-					</p>
-				)}
+				<FormError message={errors?.name} />
 			</div>
 
 			<div className="space-y-1">
 				<Label htmlFor="domain">Project description</Label>
 				<Textarea name="description" id="description" rows={3} />
-				{errors?.description && (
-					<p className="text-xs text-red-500 dark:text-red-400">
-						{errors.description.at(0)}
-					</p>
-				)}
+				<FormError message={errors?.description} />
 			</div>
 
-			<Button type="submit" disabled={isPending} className="gap-2">
-				{isPending ? (
-					<>
-						<IconSettings size={20} className="animate-spin duration-2000" />
-						Saving project...
-					</>
-				) : (
-					'Save project'
-				)}
-			</Button>
+			<FormSubmitButton loading={isPending} loadingLabel="Creating project...">
+				Create new project
+			</FormSubmitButton>
 		</form>
 	)
 }

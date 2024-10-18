@@ -4,11 +4,18 @@ import Link from 'next/link'
 
 import { ability, getCurrentOrganization } from '@/auth'
 import { Button } from '@/components/ui/button'
+import { getOrganization } from '@/http/get-organization'
 
 import { ProjectsList } from './projects-list'
 
-export const metadata: Metadata = {
-	title: '[Organization]',
+export async function generateMetadata(): Promise<Metadata> {
+	const slug = getCurrentOrganization()
+
+	const { organization } = await getOrganization(slug!)
+
+	return {
+		title: `${organization.name} Projects`,
+	}
 }
 
 export default async function Projects() {
@@ -16,7 +23,7 @@ export default async function Projects() {
 	const permissions = await ability()
 
 	return (
-		<div className="w-full space-y-8 self-start">
+		<div className="w-full space-y-6 self-start sm:space-y-8">
 			<div className="flex items-center justify-between">
 				<h1 className="text-2xl font-bold">Projects</h1>
 

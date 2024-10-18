@@ -1,13 +1,11 @@
 'use client'
 
-import {
-	IconBrandGithub,
-	IconExclamationCircle,
-	IconSettings,
-} from '@tabler/icons-react'
+import { IconBrandGithub, IconExclamationCircle } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import { FormError } from '@/components/form-error'
+import { FormSubmitButton } from '@/components/form-submit-button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -42,31 +40,19 @@ export function SignUpForm() {
 				<div className="space-y-1">
 					<Label htmlFor="name">Name</Label>
 					<Input name="name" type="text" id="name" />
-					{errors?.name && (
-						<p className="text-xs text-red-500 dark:text-red-400">
-							{errors.name.at(0)}
-						</p>
-					)}
+					<FormError message={errors?.name} />
 				</div>
 
 				<div className="space-y-1">
 					<Label htmlFor="email">E-mail</Label>
 					<Input name="email" type="email" id="email" />
-					{errors?.email && (
-						<p className="text-xs text-red-500 dark:text-red-400">
-							{errors.email.at(0)}
-						</p>
-					)}
+					<FormError message={errors?.email} />
 				</div>
 
 				<div className="space-y-1">
 					<Label htmlFor="password">Password</Label>
 					<Input name="password" type="password" id="password" />
-					{errors?.password && (
-						<p className="text-xs text-red-500 dark:text-red-400">
-							{errors.password.at(0)}
-						</p>
-					)}
+					<FormError message={errors?.password} />
 				</div>
 
 				<div className="space-y-1">
@@ -76,23 +62,15 @@ export function SignUpForm() {
 						type="password"
 						id="password_confirmation"
 					/>
-					{errors?.password_confirmation && (
-						<p className="text-xs text-red-500 dark:text-red-400">
-							{errors.password_confirmation.at(0)}
-						</p>
-					)}
+					<FormError message={errors?.password_confirmation} />
 				</div>
 
-				<Button type="submit" disabled={isPending} className="gap-2">
-					{isPending ? (
-						<>
-							<IconSettings size={20} className="animate-spin duration-2000" />
-							Creating account...
-						</>
-					) : (
-						'Create account'
-					)}
-				</Button>
+				<FormSubmitButton
+					loading={isPending}
+					loadingLabel="Creating account..."
+				>
+					Create account
+				</FormSubmitButton>
 
 				<Button className="gap-2" variant="link" size="sm" asChild>
 					<Link href="/auth/sign-in">I already have an account</Link>

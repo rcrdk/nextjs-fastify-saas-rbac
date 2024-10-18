@@ -3,14 +3,14 @@ import { IconChevronDown, IconLogout } from '@tabler/icons-react'
 import { auth } from '@/auth'
 import { getInitials } from '@/utils/get-initials'
 
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from './ui/dropdown-menu'
+} from '../ui/dropdown-menu'
 
 export async function ProfileButton() {
 	const { user } = await auth()

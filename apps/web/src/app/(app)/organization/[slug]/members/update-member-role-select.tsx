@@ -27,11 +27,11 @@ export function UpdateMemberRoleSelect({
 
 	return (
 		<Select onValueChange={updateMemberRole} {...props}>
-			<SelectTrigger className="h-8 w-32">
+			<SelectTrigger className="h-8 w-28">
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>
-				<SelectItem value="ADMIN">Admin</SelectItem>
+				<SelectItem value="ADMIN">Owner</SelectItem>
 				<SelectItem value="MEMBER">Member</SelectItem>
 				<SelectItem value="BILLING">Billing</SelectItem>
 			</SelectContent>

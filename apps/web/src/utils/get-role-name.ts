@@ -3,7 +3,7 @@ import { Role } from '@saas/auth'
 export function getRoleName(role: Role) {
 	switch (role) {
 		case 'ADMIN':
-			return 'Administrator'
+			return 'Owner'
 		case 'BILLING':
 			return 'Billing'
 		case 'MEMBER':

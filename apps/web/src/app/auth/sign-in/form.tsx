@@ -4,11 +4,12 @@ import {
 	IconBrandGithub,
 	IconExclamationCircle,
 	IconMail,
-	IconSettings,
 } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
+import { FormError } from '@/components/form-error'
+import { FormSubmitButton } from '@/components/form-submit-button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -49,22 +50,13 @@ export function SignInForm() {
 						id="email"
 						defaultValue={searchParams.get('email') ?? ''}
 					/>
-
-					{errors?.email && (
-						<p className="text-xs text-red-500 dark:text-red-400">
-							{errors.email.at(0)}
-						</p>
-					)}
+					<FormError message={errors?.email} />
 				</div>
 
 				<div className="space-y-1">
 					<Label htmlFor="password">Password</Label>
 					<Input name="password" type="password" id="password" />
-					{errors?.password && (
-						<p className="text-xs text-red-500 dark:text-red-400">
-							{errors.password.at(0)}
-						</p>
-					)}
+					<FormError message={errors?.password} />
 				</div>
 
 				<Link
@@ -74,19 +66,10 @@ export function SignInForm() {
 					Forgot your password?
 				</Link>
 
-				<Button type="submit" disabled={isPending} className="gap-2">
-					{isPending ? (
-						<>
-							<IconSettings size={20} className="animate-spin duration-2000" />
-							Signing in...
-						</>
-					) : (
-						<>
-							<IconMail size={20} />
-							Sign-in with e-mail
-						</>
-					)}
-				</Button>
+				<FormSubmitButton loading={isPending} loadingLabel="Signing in...">
+					<IconMail size={20} />
+					Sign-in with e-mail
+				</FormSubmitButton>
 
 				<Button className="gap-2" variant="link" size="sm" asChild>
 					<Link href="/auth/sign-up">Create new account</Link>

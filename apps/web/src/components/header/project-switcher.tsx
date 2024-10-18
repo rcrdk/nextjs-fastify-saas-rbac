@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation'
 
 import { getProjects } from '@/http/get-projects'
 
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -20,8 +20,8 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from './ui/dropdown-menu'
-import { Skeleton } from './ui/skeleton'
+} from '../ui/dropdown-menu'
+import { Skeleton } from '../ui/skeleton'
 
 export function ProjectSwitcher() {
 	const { slug: organizationSlug, project: projectSlug } = useParams<{

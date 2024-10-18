@@ -6,7 +6,7 @@ import { ability } from '@/auth'
 import { ProjectForm } from './form'
 
 export const metadata: Metadata = {
-	title: 'Create a project',
+	title: 'Create a Project',
 }
 
 export default async function CreateProject() {
