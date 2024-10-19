@@ -23,7 +23,10 @@ import { getOrganization } from '@/http/get-organization'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getRoleName } from '@/utils/get-role-name'
 
-import { removeMemberAction } from './actions'
+import {
+	removeMemberAction,
+	transferOrganizationOwnershipAction,
+} from './actions'
 import { UpdateMemberRoleSelect } from './update-member-role-select'
 
 export async function MemberList() {
@@ -121,15 +124,26 @@ export async function MemberList() {
 
 											<DropdownMenuContent align="end">
 												{canTransferOwnership && (
-													<DropdownMenuItem
-														disabled={member.userId === organization.ownerId}
-														asChild
+													<form
+														action={transferOrganizationOwnershipAction.bind(
+															null,
+															member.userId,
+														)}
+														className="w-full"
 													>
-														<button className="cursor-pointer gap-2 disabled:cursor-default">
-															<IconTransitionTop size={20} />
-															Transfer ownership
-														</button>
-													</DropdownMenuItem>
+														<DropdownMenuItem
+															disabled={member.userId === organization.ownerId}
+															asChild
+														>
+															<button
+																type="submit"
+																className="cursor-pointer gap-2 disabled:cursor-default"
+															>
+																<IconTransitionTop size={20} />
+																Transfer ownership
+															</button>
+														</DropdownMenuItem>
+													</form>
 												)}
 
 												{canRemoveMember && (
