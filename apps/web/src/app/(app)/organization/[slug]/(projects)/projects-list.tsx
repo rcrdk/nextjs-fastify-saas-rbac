@@ -1,4 +1,4 @@
-import { IconArrowRight } from '@tabler/icons-react'
+import { IconArrowRight, IconUser } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'next/link'
@@ -14,13 +14,16 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 import { getProjects } from '@/http/get-projects'
+import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 dayjs.extend(relativeTime)
 
 export async function ProjectsList() {
 	const currentOrganization = getCurrentOrganization()
 
-	const { projects } = await getProjects(currentOrganization!)
+	const { projects } = await getProjects({
+		organizationSlug: currentOrganization!,
+	})
 
 	return (
 		<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -37,10 +40,13 @@ export async function ProjectsList() {
 
 					<CardFooter className="flex items-center gap-1.5">
 						<Avatar className="size-5">
-							{project.owner.avatarUrl && (
-								<AvatarImage src={project.owner.avatarUrl} />
-							)}
-							<AvatarFallback />
+							<AvatarImage
+								src={getAvatarUrl(project.owner.avatarUrl, project.owner.email)}
+							/>
+
+							<AvatarFallback>
+								<IconUser size={16} className="text-muted-foreground/50" />
+							</AvatarFallback>
 						</Avatar>
 
 						<span className="text-balance text-xs text-muted-foreground">

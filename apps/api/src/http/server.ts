@@ -115,6 +115,6 @@ app.register(updateProject)
 
 app
 	.listen({
-		port: env.SERVER_PORT,
+		port: env.API_SERVER_PORT,
 	})
 	.then(() => console.log('✅ HTTP server is running.'))

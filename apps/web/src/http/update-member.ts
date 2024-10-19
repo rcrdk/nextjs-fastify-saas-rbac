@@ -3,18 +3,18 @@ import { Role } from '@saas/auth'
 import { API } from '../lib/api-client'
 
 interface UpdateMemberRequest {
-	organization: string
+	organizationSlug: string
 	memberId: string
 	role: Role
 }
 
 export async function updateMember({
-	organization,
+	organizationSlug,
 	memberId,
 	role,
 }: UpdateMemberRequest) {
 	const result = await API.put(
-		`organization/${organization}/members/${memberId}`,
+		`organization/${organizationSlug}/members/${memberId}`,
 		{
 			json: { role },
 		},

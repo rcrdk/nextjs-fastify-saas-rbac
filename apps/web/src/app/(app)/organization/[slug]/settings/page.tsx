@@ -15,9 +15,11 @@ import { Billing } from './billing'
 import { ShutdownOrganizationButton } from './shutdown-organization-button'
 
 export async function generateMetadata(): Promise<Metadata> {
-	const slug = getCurrentOrganization()
+	const currentOrganization = getCurrentOrganization()
 
-	const { organization } = await getOrganization(slug!)
+	const { organization } = await getOrganization({
+		organizationSlug: currentOrganization!,
+	})
 
 	return {
 		title: `${organization.name} Settings`,
@@ -32,7 +34,9 @@ export default async function Settings() {
 	const canShutdownOrganization = permissions?.can('delete', 'Organization')
 	const canGetBilling = permissions?.can('get', 'Billing')
 
-	const { organization } = await getOrganization(currentOrganization!)
+	const { organization } = await getOrganization({
+		organizationSlug: currentOrganization!,
+	})
 
 	return (
 		<div className="w-full space-y-6 self-start sm:space-y-8">

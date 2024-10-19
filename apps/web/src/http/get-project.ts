@@ -1,8 +1,8 @@
 import { API } from '../lib/api-client'
 
 interface GetProjectRequest {
-	organization: string
-	project: string
+	organizationSlug: string
+	projectSlug: string
 }
 
 interface GetProjectResponse {
@@ -19,13 +19,17 @@ interface GetProjectResponse {
 			id: string
 			name: string | null
 			avatarUrl: string | null
+			email: string
 		}
 	}
 }
 
-export async function getProject({ organization, project }: GetProjectRequest) {
+export async function getProject({
+	organizationSlug,
+	projectSlug,
+}: GetProjectRequest) {
 	const result = await API.get(
-		`organization/${organization}/projects/${project}`,
+		`organization/${organizationSlug}/projects/${projectSlug}`,
 	).json<GetProjectResponse>()
 
 	return result

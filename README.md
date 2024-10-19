@@ -10,6 +10,7 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
   - [Node.js](https://nodejs.org/) + [Fastify](https://fastify.dev/) + [Typescript](https://www.typescriptlang.org/) + 
   - [Prisma ORM](https://www.prisma.io/) + [Docker](https://www.docker.com/) + [PostgreSQL](https://www.postgresql.org/)
   - [Swagger](https://swagger.io/)
+  - [Nodemailer](https://nodemailer.com/) + [Gmail](https://nodemailer.com/usage/using-gmail/)
 - Web:
   - [React 19 RC](https://react.dev/) + [Next 15 RC](https://nextjs.org/) with App Router + 
   - [Tailwind](https://tailwindcss.com/) with [shadcn-ui](https://ui.shadcn.com/)
@@ -17,15 +18,17 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 - Packages:
   - Authorizations RBAC with [CASL](https://casl.js.org/)
   - Typesafe env with [T3-ENV](https://github.com/t3-oss/t3-env)
-  - Config: ESlint, Prettier, Typescripot
+  - Config: [ESlint](https://eslint.org/), [Prettier](https://prettier.io/), [Typescript](https://www.typescriptlang.org/)
 
 ## 🖥️ Project
 *Soon*
-<!-- Technologies: React 19 RC and Next 15 RC with App Route, server actions -->
+<!-- Back: API with node  and fastify, nodemailer,  -->
+<!-- Front: React 19 RC and Next 15 RC with App Route, server actions, turborepo, ky client -->
 <!-- GitHub OAuth2 -->
 <!-- Tailwind shadcn-ui, prisma, ky -->
 <!-- User roles and permissions with CASL -->
 <!-- Pages and navigation of web project -->
+<!-- Emails: password recover, create invites -->
 
 ## ⚙️ Get started
 
@@ -35,6 +38,7 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 	
 - Setup enviroment variables: `cp .env.example .env`
 - Create a [GitHub OAuth](https://docs.github.com/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) app to make social sign-in.
+- Make sure your Google Account have [2FA activeted](https://support.google.com/accounts/answer/185833) and then you must [generate an app password](https://myaccount.google.com/apppasswords) to use on env.
 - Make sure you are running Docker.
 </details>
 

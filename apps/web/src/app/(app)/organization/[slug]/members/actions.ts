@@ -20,7 +20,7 @@ export async function removeMemberAction(memberId: string) {
 	const currentOrganization = getCurrentOrganization()
 
 	await removeMember({
-		organization: currentOrganization!,
+		organizationSlug: currentOrganization!,
 		memberId,
 	})
 
@@ -31,7 +31,7 @@ export async function updateMemberAction(memberId: string, role: Role) {
 	const currentOrganization = getCurrentOrganization()
 
 	await updateMember({
-		organization: currentOrganization!,
+		organizationSlug: currentOrganization!,
 		memberId,
 		role,
 	})
@@ -43,7 +43,7 @@ export async function revokeInviteAction(inviteId: string) {
 	const currentOrganization = getCurrentOrganization()
 
 	await revokeInvite({
-		organization: currentOrganization!,
+		organizationSlug: currentOrganization!,
 		inviteId,
 	})
 

@@ -3,6 +3,10 @@ import { redirect } from 'next/navigation'
 
 import { API } from '../lib/api-client'
 
+interface GetMembershipRequest {
+	organizationSlug: string
+}
+
 interface GetMembershipResponse {
 	membership: {
 		id: string
@@ -12,10 +16,12 @@ interface GetMembershipResponse {
 	}
 }
 
-export async function getMembership(organization: string) {
+export async function getMembership({
+	organizationSlug,
+}: GetMembershipRequest) {
 	try {
 		const result = await API.get(
-			`organizations/${organization}/membership`,
+			`organizations/${organizationSlug}/membership`,
 		).json<GetMembershipResponse>()
 
 		return result

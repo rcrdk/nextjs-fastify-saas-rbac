@@ -9,9 +9,11 @@ import { getOrganization } from '@/http/get-organization'
 import { ProjectsList } from './projects-list'
 
 export async function generateMetadata(): Promise<Metadata> {
-	const slug = getCurrentOrganization()
+	const currentOrganization = getCurrentOrganization()
 
-	const { organization } = await getOrganization(slug!)
+	const { organization } = await getOrganization({
+		organizationSlug: currentOrganization!,
+	})
 
 	return {
 		title: `${organization.name} Projects`,

@@ -1,5 +1,9 @@
 import { API } from '../lib/api-client'
 
-export async function acceptInvite(inviteId: string) {
+interface AcceptInviteRequest {
+	inviteId: string
+}
+
+export async function acceptInvite({ inviteId }: AcceptInviteRequest) {
 	await API.post(`invites/${inviteId}/accept`)
 }

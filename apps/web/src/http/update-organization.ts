@@ -1,7 +1,7 @@
 import { API } from '../lib/api-client'
 
 interface UpdateOrganizationRequest {
-	organization: string
+	organizationSlug: string
 	name: string
 	domain?: string | null
 	shouldAttachUsersByDomain: boolean
@@ -10,12 +10,12 @@ interface UpdateOrganizationRequest {
 type UpdateOrganizationResponse = void
 
 export async function updateOrganization({
-	organization,
+	organizationSlug,
 	name,
 	domain,
 	shouldAttachUsersByDomain,
 }: UpdateOrganizationRequest): Promise<UpdateOrganizationResponse> {
-	await API.put(`organizations/${organization}`, {
+	await API.put(`organizations/${organizationSlug}`, {
 		json: { name, domain, shouldAttachUsersByDomain },
 	})
 }

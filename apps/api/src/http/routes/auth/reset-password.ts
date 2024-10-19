@@ -1,4 +1,5 @@
 import { hash } from 'bcryptjs'
+import dayjs from 'dayjs'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
@@ -15,7 +16,8 @@ export async function resetPassword(app: FastifyInstance) {
 				tags: ['Auth'],
 				summary: 'Reset user password.',
 				body: z.object({
-					code: z.string(),
+					code: z.string().uuid(),
+					email: z.string().email(),
 					password: z.string().min(6),
 				}),
 				response: {
@@ -24,14 +26,43 @@ export async function resetPassword(app: FastifyInstance) {
 			},
 		},
 		async (request, reply) => {
-			const { code, password } = request.body
+			const { code, password, email } = request.body
 
-			const tokenFromCode = await prisma.token.findUnique({
-				where: { id: code },
+			const emailFromRequest = await prisma.user.findUnique({
+				where: {
+					email,
+				},
 			})
 
-			if (!tokenFromCode) {
-				throw new UnauthorizedError()
+			const tokenFromCode = await prisma.token.findFirst({
+				where: {
+					id: code,
+					type: 'PASSWORD_RECOVER',
+					userId: emailFromRequest?.id ?? 'undefined',
+				},
+			})
+
+			// eslint-disable-next-line prettier/prettier
+			const errorMessage = 'Unable to reset password. Please ensure your recovery code is valid and try again. Note: The code is valid for 5 minutes.'
+
+			const checkTokenAndUserExistence = !tokenFromCode || !emailFromRequest
+
+			if (checkTokenAndUserExistence) {
+				throw new UnauthorizedError(errorMessage)
+			}
+
+			const tokenWasCreatedAt = dayjs(tokenFromCode.createdAt)
+			const wasTokenCreatedWithin5Minutes =
+				dayjs().diff(tokenWasCreatedAt, 'minutes') <= 5
+
+			if (!wasTokenCreatedWithin5Minutes) {
+				await prisma.token.delete({
+					where: {
+						id: tokenFromCode.id,
+					},
+				})
+
+				throw new UnauthorizedError(errorMessage)
 			}
 
 			const hashedPassword = await hash(password, 8)
@@ -45,9 +76,10 @@ export async function resetPassword(app: FastifyInstance) {
 						passwordHash: hashedPassword,
 					},
 				}),
-				prisma.token.delete({
+				prisma.token.deleteMany({
 					where: {
-						id: code,
+						userId: emailFromRequest.id,
+						type: 'PASSWORD_RECOVER',
 					},
 				}),
 			])

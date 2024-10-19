@@ -30,7 +30,7 @@ export function CreateInviteForm() {
 			{!success && message && (
 				<Alert variant="destructive">
 					<IconExclamationCircle size={20} />
-					<AlertTitle>Send invite has failed:</AlertTitle>
+					<AlertTitle>An error occurred:</AlertTitle>
 					<AlertDescription>{message}</AlertDescription>
 				</Alert>
 			)}

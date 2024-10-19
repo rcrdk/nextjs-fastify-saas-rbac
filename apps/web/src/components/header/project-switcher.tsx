@@ -31,7 +31,7 @@ export function ProjectSwitcher() {
 
 	const { data, isLoading } = useQuery({
 		queryKey: [organizationSlug, 'projects'],
-		queryFn: () => getProjects(organizationSlug),
+		queryFn: () => getProjects({ organizationSlug }),
 		enabled: !!organizationSlug,
 	})
 

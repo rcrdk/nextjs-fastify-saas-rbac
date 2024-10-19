@@ -1,9 +1,11 @@
+import { IconBriefcase, IconUser } from '@tabler/icons-react'
 import { Metadata } from 'next'
 
 import { getCurrentOrganization } from '@/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { getOrganization } from '@/http/get-organization'
 import { getProject } from '@/http/get-project'
+import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 interface ProjectProps {
 	params: {
@@ -17,10 +19,12 @@ export async function generateMetadata({
 	const currentOrganization = getCurrentOrganization()
 
 	const [{ organization }, { project }] = await Promise.all([
-		getOrganization(currentOrganization!),
+		getOrganization({
+			organizationSlug: currentOrganization!,
+		}),
 		getProject({
-			organization: currentOrganization!,
-			project: params.project,
+			organizationSlug: currentOrganization!,
+			projectSlug: params.project,
 		}),
 	])
 
@@ -33,8 +37,8 @@ export default async function Project({ params }: ProjectProps) {
 	const currentOrganization = getCurrentOrganization()
 
 	const { project } = await getProject({
-		organization: currentOrganization!,
-		project: params.project,
+		organizationSlug: currentOrganization!,
+		projectSlug: params.project,
 	})
 
 	return (
@@ -45,7 +49,13 @@ export default async function Project({ params }: ProjectProps) {
 
 				<Avatar className="size-28">
 					{project.avatarUrl && <AvatarImage src={project.avatarUrl} />}
-					<AvatarFallback />
+					<AvatarFallback>
+						<IconBriefcase
+							size={64}
+							stroke={1.25}
+							className="text-muted-foreground opacity-50"
+						/>
+					</AvatarFallback>
 				</Avatar>
 
 				<p>{project.createdAt}</p>
@@ -53,10 +63,13 @@ export default async function Project({ params }: ProjectProps) {
 
 				<div className="flex items-center gap-2">
 					<Avatar className="size-8">
-						{project.owner.avatarUrl && (
-							<AvatarImage src={project.owner.avatarUrl} />
-						)}
-						<AvatarFallback />
+						<AvatarImage
+							src={getAvatarUrl(project.owner.avatarUrl, project.owner.email)}
+						/>
+
+						<AvatarFallback>
+							<IconUser size={20} className="text-muted-foreground/50" />
+						</AvatarFallback>
 					</Avatar>
 					<span>{project.owner.name}</span>
 				</div>

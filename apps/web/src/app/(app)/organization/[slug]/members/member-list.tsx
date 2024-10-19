@@ -6,10 +6,9 @@ import {
 	IconUser,
 	IconUserMinus,
 } from '@tabler/icons-react'
-import Image from 'next/image'
 
 import { ability, getCurrentOrganization } from '@/auth'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
 	DropdownMenu,
@@ -21,6 +20,7 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getMembers } from '@/http/get-members'
 import { getMembership } from '@/http/get-membership'
 import { getOrganization } from '@/http/get-organization'
+import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getRoleName } from '@/utils/get-role-name'
 
 import { removeMemberAction } from './actions'
@@ -31,9 +31,9 @@ export async function MemberList() {
 	const permissions = await ability()
 
 	const [{ membership }, { organization }, { members }] = await Promise.all([
-		getMembership(currentOrganizarion!),
-		getOrganization(currentOrganizarion!),
-		getMembers(currentOrganizarion!),
+		getMembership({ organizationSlug: currentOrganizarion! }),
+		getOrganization({ organizationSlug: currentOrganizarion! }),
+		getMembers({ organizationSlug: currentOrganizarion! }),
 	])
 
 	const authOrganization = organizationSchema.parse(organization)
@@ -56,15 +56,15 @@ export async function MemberList() {
 							<TableRow key={member.userId}>
 								<TableCell className="py-1.5 pr-0">
 									<Avatar className="block h-8 w-8">
-										{member.avatarUrl && (
-											<Image
-												src={member.avatarUrl}
-												width={48}
-												height={48}
-												alt={member.name ?? 'Profile avatar'}
+										<AvatarImage
+											src={getAvatarUrl(member.avatarUrl, member.email)}
+										/>
+										<AvatarFallback className="text-xs font-medium">
+											<IconUser
+												size={20}
+												className="text-muted-foreground/50"
 											/>
-										)}
-										<AvatarFallback />
+										</AvatarFallback>
 									</Avatar>
 								</TableCell>
 

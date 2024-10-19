@@ -117,7 +117,7 @@ export async function updateOrganizationAction(data: FormData) {
 
 	try {
 		await updateOrganization({
-			organization: currentOrganization!,
+			organizationSlug: currentOrganization!,
 			name,
 			domain,
 			shouldAttachUsersByDomain,

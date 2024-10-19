@@ -1,16 +1,16 @@
 import { API } from '../lib/api-client'
 
 interface RevokeInviteRequest {
-	organization: string
+	organizationSlug: string
 	inviteId: string
 }
 
 export async function revokeInvite({
-	organization,
+	organizationSlug,
 	inviteId,
 }: RevokeInviteRequest) {
 	const result = await API.delete(
-		`organization/${organization}/invites/${inviteId}`,
+		`organization/${organizationSlug}/invites/${inviteId}`,
 	)
 
 	return result

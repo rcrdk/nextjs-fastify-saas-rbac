@@ -47,7 +47,7 @@ export function OrganizationForm({
 			{!success && message && (
 				<Alert variant="destructive">
 					<IconExclamationCircle size={20} />
-					<AlertTitle>Save organization has failed:</AlertTitle>
+					<AlertTitle>An error occurred:</AlertTitle>
 					<AlertDescription>{message}</AlertDescription>
 				</Alert>
 			)}

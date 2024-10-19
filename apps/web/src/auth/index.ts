@@ -14,13 +14,15 @@ export function getCurrentOrganization() {
 }
 
 export async function getCurrentMembership() {
-	const organization = getCurrentOrganization()
+	const currentOrganization = getCurrentOrganization()
 
-	if (!organization) {
+	if (!currentOrganization) {
 		return null
 	}
 
-	const { membership } = await getMembership(organization)
+	const { membership } = await getMembership({
+		organizationSlug: currentOrganization,
+	})
 
 	return membership
 }

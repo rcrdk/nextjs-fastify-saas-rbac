@@ -2,6 +2,7 @@
 
 import {
 	IconBrandGithub,
+	IconCircleCheck,
 	IconExclamationCircle,
 	IconMail,
 } from '@tabler/icons-react'
@@ -24,6 +25,8 @@ export function SignInForm() {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 
+	const passwordRecoveredSuccess = searchParams.get('password')
+
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		signinWithEmailAndPassword,
 		() => {
@@ -34,10 +37,20 @@ export function SignInForm() {
 	return (
 		<div className="space-y-4">
 			<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+				{passwordRecoveredSuccess && !message && (
+					<Alert variant="success">
+						<IconCircleCheck size={20} />
+						<AlertTitle>Success:</AlertTitle>
+						<AlertDescription>
+							Your password was recovered, now you can authenticate again:
+						</AlertDescription>
+					</Alert>
+				)}
+
 				{!success && message && (
 					<Alert variant="destructive">
 						<IconExclamationCircle size={20} />
-						<AlertTitle>Sign in has failed:</AlertTitle>
+						<AlertTitle>An error occurred:</AlertTitle>
 						<AlertDescription>{message}</AlertDescription>
 					</Alert>
 				)}

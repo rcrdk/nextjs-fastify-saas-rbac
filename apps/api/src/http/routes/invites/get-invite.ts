@@ -28,6 +28,7 @@ export async function getInvite(app: FastifyInstance) {
 								.object({
 									id: z.string().uuid(),
 									name: z.string().nullable(),
+									email: z.string().email(),
 									avatarUrl: z.string().url().nullable(),
 								})
 								.nullable(),
@@ -54,6 +55,7 @@ export async function getInvite(app: FastifyInstance) {
 							id: true,
 							name: true,
 							avatarUrl: true,
+							email: true,
 						},
 					},
 					organization: {

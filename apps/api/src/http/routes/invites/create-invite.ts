@@ -3,6 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { createInviteEmail } from '@/http/emails/create-invite'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
@@ -93,7 +94,7 @@ export async function createInvite(app: FastifyInstance) {
 					)
 				}
 
-				const invite = await prisma.invite.create({
+				const { id } = await prisma.invite.create({
 					data: {
 						organizationId: organization.id,
 						authorId: userId,
@@ -101,6 +102,32 @@ export async function createInvite(app: FastifyInstance) {
 						role,
 					},
 				})
+
+				const invite = await prisma.invite.findUnique({
+					where: { id },
+					include: {
+						author: true,
+						organization: true,
+					},
+				})
+
+				if (!invite) {
+					throw new BadRequestError(`Invite not found.`)
+				}
+
+				try {
+					await createInviteEmail({
+						inviteId: invite.id,
+						authorName: invite.author?.name ?? '',
+						organizationName: invite.organization.name,
+						role: invite.role,
+						targetEmail: email,
+					})
+				} catch {
+					throw new BadRequestError(
+						'An error occured while trying to send e-mail with invitation.',
+					)
+				}
 
 				return reply.status(201).send({
 					inviteId: invite.id,

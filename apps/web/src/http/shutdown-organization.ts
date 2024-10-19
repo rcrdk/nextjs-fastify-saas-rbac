@@ -1,13 +1,13 @@
 import { API } from '../lib/api-client'
 
 interface ShutdownOrganizationRequest {
-	organization: string
+	organizationSlug: string
 }
 
 export async function shutdownOrganization({
-	organization,
+	organizationSlug,
 }: ShutdownOrganizationRequest) {
-	const result = await API.delete(`organizations/${organization}`)
+	const result = await API.delete(`organizations/${organizationSlug}`)
 
 	return result
 }

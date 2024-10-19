@@ -1,8 +1,10 @@
 import {
 	IconCircleCheck,
+	IconCircleX,
 	IconHome,
 	IconLogin,
 	IconLogout,
+	IconUser,
 } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -16,7 +18,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { acceptInvite } from '@/http/accept-invite'
 import { getInvite } from '@/http/get-invite'
-import { getInitials } from '@/utils/get-initials'
+import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 dayjs.extend(relativeTime)
 
@@ -26,10 +28,12 @@ interface InvitePageProps {
 	}
 }
 
+// METADARA
+
 export default async function InvitePage({ params }: InvitePageProps) {
 	const inviteId = params.id
 
-	const { invite } = await getInvite(inviteId)
+	const { invite } = await getInvite({ inviteId })
 
 	const isUserAuthenticated = isAuthenticated()
 
@@ -53,7 +57,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
 	async function acceptInviteAction() {
 		'use server'
 
-		await acceptInvite(inviteId)
+		await acceptInvite({ inviteId })
 
 		redirect('/')
 	}
@@ -63,11 +67,13 @@ export default async function InvitePage({ params }: InvitePageProps) {
 			<div className="flex w-full max-w-sm flex-col space-y-6">
 				<div className="flex flex-col items-center space-y-4">
 					<Avatar className="size-16">
-						{invite.author?.avatarUrl && (
-							<AvatarImage src={invite.author.avatarUrl} />
+						{invite.author && (
+							<AvatarImage
+								src={getAvatarUrl(invite.author.avatarUrl, invite.author.email)}
+							/>
 						)}
 						<AvatarFallback className="text-md font-medium">
-							{getInitials(invite.author?.name ?? 'My Account')}
+							<IconUser size={32} className="text-muted-foreground/50" />
 						</AvatarFallback>
 					</Avatar>
 
@@ -95,12 +101,20 @@ export default async function InvitePage({ params }: InvitePageProps) {
 				)}
 
 				{isUserAuthenticatedWithInviteEmail && (
-					<form action={acceptInviteAction}>
-						<Button type="submit" variant="secondary" className="w-full gap-2">
-							<IconCircleCheck size={20} />
-							Join {invite.organization.name}
+					<div className="space-y-2">
+						<form action={acceptInviteAction}>
+							<Button type="submit" className="w-full gap-2">
+								<IconCircleCheck size={20} />
+								Join {invite.organization.name}
+							</Button>
+						</form>
+
+						<Button variant="outline" className="w-full gap-2" asChild>
+							<Link href={`/invite/${inviteId}/decline`}>
+								<IconCircleX size={20} />I want to decline the invite
+							</Link>
 						</Button>
-					</form>
+					</div>
 				)}
 
 				{isUserAuthenticated && !isUserAuthenticatedWithInviteEmail && (

@@ -19,9 +19,11 @@
 		"@saas/auth": "workspace:*",
 		"@saas/env": "workspace:*",
 		"bcryptjs": "^2.4.3",
+		"dayjs": "^1.11.13",
 		"fastify": "^5.0.0",
 		"fastify-plugin": "^5.0.1",
 		"fastify-type-provider-zod": "^4.0.2",
+		"nodemailer": "^6.9.15",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
@@ -29,6 +31,7 @@
 		"@saas/prettier-config": "workspace:*",
 		"@saas/tsconfig": "workspace:*",
 		"@types/bcryptjs": "^2.4.6",
+		"@types/nodemailer": "^6.4.16",
 		"dotenv-cli": "^7.4.2",
 		"prisma": "^5.20.0",
 		"ts-node": "^10.9.2",

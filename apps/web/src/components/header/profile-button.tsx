@@ -1,6 +1,7 @@
 import { IconChevronDown, IconLogout } from '@tabler/icons-react'
 
 import { auth } from '@/auth'
+import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getInitials } from '@/utils/get-initials'
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
@@ -19,7 +20,7 @@ export async function ProfileButton() {
 		<DropdownMenu>
 			<DropdownMenuTrigger className="flex select-none items-center outline-none">
 				<Avatar className="mr-1 size-9">
-					{user.avatarUrl && <AvatarImage src={user.avatarUrl} />}
+					<AvatarImage src={getAvatarUrl(user.avatarUrl, user.email)} />
 					<AvatarFallback className="text-xs font-medium">
 						{getInitials(user.name ?? 'My Account')}
 					</AvatarFallback>

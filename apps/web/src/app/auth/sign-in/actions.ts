@@ -42,7 +42,7 @@ export async function signinWithEmailAndPassword(data: FormData) {
 
 		if (inviteId) {
 			try {
-				await acceptInvite(inviteId)
+				await acceptInvite({ inviteId })
 				cookies().delete('@SAAS:inviteId')
 			} catch {}
 		}
