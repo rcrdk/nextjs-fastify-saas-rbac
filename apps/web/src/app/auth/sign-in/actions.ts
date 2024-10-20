@@ -28,10 +28,18 @@ export async function signinWithEmailAndPassword(data: FormData) {
 	const { email, password } = result.data
 
 	try {
-		const { token } = await signInWithPassword({
+		const { token, emailValidatedAt } = await signInWithPassword({
 			email,
 			password,
 		})
+
+		if (!emailValidatedAt) {
+			return {
+				success: false,
+				message: 'You must have a verified e-mail to access your account.',
+				errors: null,
+			}
+		}
 
 		cookies().set('@SAAS:token', token, {
 			maxAge: 60 * 60 * 24 * 7, // 7d

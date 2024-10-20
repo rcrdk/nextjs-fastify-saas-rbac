@@ -4,7 +4,7 @@ import Mail from 'nodemailer/lib/mailer'
 
 import { emailService } from '@/lib/mail'
 
-import { createInviteEmailTemplate } from './template/create-invite'
+import { createInviteEmailTemplate } from './template/create-invite-email.template'
 
 interface CreateEmailParams {
 	inviteId: string

@@ -1,28 +1,29 @@
 'use client'
 
-import { IconBrandGithub, IconExclamationCircle } from '@tabler/icons-react'
-import Link from 'next/link'
+import { IconExclamationCircle } from '@tabler/icons-react'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 import { FormError } from '@/components/form-error'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { useFormState } from '@/hooks/use-form-state'
 
-import { signInWithGitHub } from '../actions'
-import { signUpAction } from './actions'
+import { verifyEmailAndAuthenticateAction } from './actions'
+import { ResendEmailValidationCode } from './resend-email-validation-code'
 
-export function SignUpForm() {
+export function VerifyEmailForm() {
+	const [email, setEmail] = useState('')
+
 	const router = useRouter()
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
-		signUpAction,
+		verifyEmailAndAuthenticateAction,
 		() => {
-			router.push('/auth/verify-email')
+			router.push('/')
 		},
 	)
 
@@ -37,15 +38,25 @@ export function SignUpForm() {
 					</Alert>
 				)}
 
-				<div className="space-y-1">
-					<Label htmlFor="name">Name</Label>
-					<Input name="name" type="text" id="name" />
-					<FormError message={errors?.name} />
+				<div className="space-y-2">
+					<h1 className="text-lg font-semibold">Verify your e-mail:</h1>
+					<p className="text-balance text-sm text-muted-foreground">
+						An e-mail was sent when you signed up with the validation code that
+						is valid for 5 minutes. Check out your inbox to proceed.
+					</p>
 				</div>
+
+				<Separator />
 
 				<div className="space-y-1">
 					<Label htmlFor="email">E-mail</Label>
-					<Input name="email" type="email" id="email" />
+					<Input
+						name="email"
+						type="email"
+						id="email"
+						onChange={(e) => setEmail(e.target.value)}
+						value={email}
+					/>
 					<FormError message={errors?.email} />
 				</div>
 
@@ -56,35 +67,20 @@ export function SignUpForm() {
 				</div>
 
 				<div className="space-y-1">
-					<Label htmlFor="password_confirmation">Confirm your password</Label>
-					<Input
-						name="password_confirmation"
-						type="password"
-						id="password_confirmation"
-					/>
-					<FormError message={errors?.password_confirmation} />
+					<Label htmlFor="code">Validation code</Label>
+					<Input name="code" type="text" id="code" spellCheck="false" />
+					<FormError message={errors?.code} />
 				</div>
 
 				<FormSubmitButton
 					loading={isPending}
-					loadingLabel="Creating account..."
+					loadingLabel="Verifying account..."
 				>
-					Create account
+					Verify and access my account
 				</FormSubmitButton>
-
-				<Button className="gap-2" variant="link" size="sm" asChild>
-					<Link href="/auth/sign-in">I already have an account</Link>
-				</Button>
 			</form>
 
-			<form action={signInWithGitHub}>
-				<Separator />
-
-				<Button type="submit" variant="outline" className="w-full gap-2">
-					<IconBrandGithub size={20} />
-					Sign-up with GitHub
-				</Button>
-			</form>
+			<ResendEmailValidationCode email={email} />
 		</div>
 	)
 }

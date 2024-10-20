@@ -17,7 +17,9 @@ import { authenticateWithPassword } from './routes/auth/authenticate-with-passwo
 import { createAccount } from './routes/auth/create-account'
 import { getProfile } from './routes/auth/get-profile'
 import { requestPasswordRecover } from './routes/auth/request-password-recover'
+import { resendEmailValidationCode } from './routes/auth/resend-email-validation-code'
 import { resetPassword } from './routes/auth/reset-password'
+import { verifyEmailAndAuthenticate } from './routes/auth/verify-email-and-authenticate'
 import { getOrganizationBilling } from './routes/billing/get-organization-billing'
 import { acceptInvite } from './routes/invites/accept-invite'
 import { createInvite } from './routes/invites/create-invite'
@@ -86,6 +88,8 @@ app.register(authenticateWithGitHub)
 app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(resetPassword)
+app.register(verifyEmailAndAuthenticate)
+app.register(resendEmailValidationCode)
 
 app.register(creteOrganization)
 app.register(getMemebership)

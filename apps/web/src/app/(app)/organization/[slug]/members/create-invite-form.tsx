@@ -1,10 +1,10 @@
 'use client'
 
-import { IconExclamationCircle, IconSend } from '@tabler/icons-react'
+import { IconSend } from '@tabler/icons-react'
+import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
 import { FormSubmitButton } from '@/components/form-submit-button'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import {
 	Select,
@@ -20,21 +20,19 @@ import { createInviteAction } from './actions'
 export function CreateInviteForm() {
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		createInviteAction,
-		() => {},
+		() => {
+			toast.success('Your invite was sent')
+		},
 		undefined,
 		true,
 	)
 
+	if (!success && message) {
+		toast.error(message, { id: 'error' })
+	}
+
 	return (
 		<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-			{!success && message && (
-				<Alert variant="destructive">
-					<IconExclamationCircle size={20} />
-					<AlertTitle>An error occurred:</AlertTitle>
-					<AlertDescription>{message}</AlertDescription>
-				</Alert>
-			)}
-
 			<div className="flex flex-col gap-4 md:flex-row md:items-start">
 				<div className="flex-grow space-y-1">
 					<Input

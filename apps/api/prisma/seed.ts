@@ -19,18 +19,21 @@ async function seed() {
 			{
 				name: 'John Doe',
 				email: 'johndoe@example.com',
-				avatarUrl: 'https://github.com/rcrdk.png',
-				passwordHash: passwordHashed,
-			},
-			{
-				name: faker.person.fullName(),
-				email: faker.internet.email().toLowerCase(),
+				emailValidatedAt: new Date(),
 				avatarUrl: faker.image.avatarGitHub(),
 				passwordHash: passwordHashed,
 			},
 			{
 				name: faker.person.fullName(),
 				email: faker.internet.email().toLowerCase(),
+				emailValidatedAt: new Date(),
+				avatarUrl: faker.image.avatarGitHub(),
+				passwordHash: passwordHashed,
+			},
+			{
+				name: faker.person.fullName(),
+				email: faker.internet.email().toLowerCase(),
+				emailValidatedAt: new Date(),
 				avatarUrl: faker.image.avatarGitHub(),
 				passwordHash: passwordHashed,
 			},

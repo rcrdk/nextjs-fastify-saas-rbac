@@ -3,7 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
-import { createInviteEmail } from '@/http/emails/create-invite'
+import { createInviteEmail } from '@/http/emails/create-invite-email-email'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
@@ -125,7 +125,7 @@ export async function createInvite(app: FastifyInstance) {
 					})
 				} catch {
 					throw new BadRequestError(
-						'An error occured while trying to send e-mail with invitation.',
+						'An error occurred while trying to send e-mail with invitation.',
 					)
 				}
 

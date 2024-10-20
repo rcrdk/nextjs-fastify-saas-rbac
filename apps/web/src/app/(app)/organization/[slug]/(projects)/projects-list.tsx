@@ -74,7 +74,7 @@ export async function ProjectsList() {
 			))}
 
 			{projects.length === 0 && (
-				<div className="rounded border p-4 text-sm text-muted-foreground">
+				<div className="rounded border p-4 text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">
 					There are no projects in this organization.
 				</div>
 			)}

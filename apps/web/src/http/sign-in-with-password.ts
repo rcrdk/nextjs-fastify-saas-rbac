@@ -7,6 +7,7 @@ interface SignInWithPasswordRequest {
 
 interface SignInWithPasswordResponse {
 	token: string
+	emailValidatedAt: string | null
 }
 
 export async function signInWithPassword({

@@ -29,10 +29,13 @@ export function SignInForm() {
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		signinWithEmailAndPassword,
-		() => {
-			router.push('/')
-		},
 	)
+
+	if (!success && message && message.includes('verified e-mail')) {
+		router.push('/auth/verify-email')
+	}
+
+	if (success) router.push('/')
 
 	return (
 		<div className="space-y-4">
@@ -47,7 +50,7 @@ export function SignInForm() {
 					</Alert>
 				)}
 
-				{!success && message && (
+				{!success && message && !message.includes('verified e-mail') && (
 					<Alert variant="destructive">
 						<IconExclamationCircle size={20} />
 						<AlertTitle>An error occurred:</AlertTitle>

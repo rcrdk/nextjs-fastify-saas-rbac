@@ -31,7 +31,9 @@ export function UpdateMemberRoleSelect({
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>
-				<SelectItem value="ADMIN">Owner</SelectItem>
+				<SelectItem value="ADMIN" disabled>
+					Owner
+				</SelectItem>
 				<SelectItem value="MEMBER">Member</SelectItem>
 				<SelectItem value="BILLING">Billing</SelectItem>
 			</SelectContent>

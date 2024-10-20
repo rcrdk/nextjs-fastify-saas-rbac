@@ -88,6 +88,7 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 					data: {
 						name,
 						email,
+						emailValidatedAt: new Date(),
 						avatarUrl,
 					},
 				})

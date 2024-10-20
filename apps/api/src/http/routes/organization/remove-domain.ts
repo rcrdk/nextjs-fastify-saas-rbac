@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto'
+
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -46,6 +48,7 @@ export async function removeDomain(app: FastifyInstance) {
 					data: {
 						domain: null,
 						domainValidatedAt: null,
+						domainValidationId: randomUUID(),
 					},
 				})
 

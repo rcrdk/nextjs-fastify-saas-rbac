@@ -21,6 +21,7 @@ export async function authenticateWithPassword(app: FastifyInstance) {
 				response: {
 					201: z.object({
 						token: z.string(),
+						emailValidatedAt: z.date().nullable(),
 					}),
 				},
 			},
@@ -60,7 +61,10 @@ export async function authenticateWithPassword(app: FastifyInstance) {
 				},
 			)
 
-			return reply.status(201).send({ token })
+			return reply.status(201).send({
+				token,
+				emailValidatedAt: userFromEmail.emailValidatedAt,
+			})
 		},
 	)
 }

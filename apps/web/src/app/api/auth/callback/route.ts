@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 
 	if (inviteId) {
 		try {
-			await acceptInvite(inviteId)
+			await acceptInvite({ inviteId })
 			cookies().delete('@SAAS:inviteId')
 		} catch {}
 	}

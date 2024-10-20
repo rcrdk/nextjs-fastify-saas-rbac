@@ -1,6 +1,7 @@
 'use server'
 
 import { HTTPError } from 'ky'
+import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
@@ -27,11 +28,15 @@ export async function createProjectAction(data: FormData) {
 	const { name, description } = result.data
 
 	try {
+		const currentOrganization = getCurrentOrganization()!
+
 		await createProject({
-			organization: getCurrentOrganization()!,
+			organization: currentOrganization,
 			name,
 			description,
 		})
+
+		revalidateTag(`${currentOrganization}/projects`)
 	} catch (error) {
 		if (error instanceof HTTPError) {
 			const { message } = await error.response.json()

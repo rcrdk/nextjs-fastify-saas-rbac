@@ -26,6 +26,9 @@ export async function resetPassword(app: FastifyInstance) {
 			},
 		},
 		async (request, reply) => {
+			// eslint-disable-next-line prettier/prettier
+			const errorMessage = 'Unable to reset password. Please ensure your recovery code is valid and try again. Note: The code is valid for 5 minutes.'
+
 			const { code, password, email } = request.body
 
 			const emailFromRequest = await prisma.user.findUnique({
@@ -34,20 +37,19 @@ export async function resetPassword(app: FastifyInstance) {
 				},
 			})
 
+			if (!emailFromRequest) {
+				throw new UnauthorizedError(errorMessage)
+			}
+
 			const tokenFromCode = await prisma.token.findFirst({
 				where: {
 					id: code,
 					type: 'PASSWORD_RECOVER',
-					userId: emailFromRequest?.id ?? 'undefined',
+					userId: emailFromRequest.id,
 				},
 			})
 
-			// eslint-disable-next-line prettier/prettier
-			const errorMessage = 'Unable to reset password. Please ensure your recovery code is valid and try again. Note: The code is valid for 5 minutes.'
-
-			const checkTokenAndUserExistence = !tokenFromCode || !emailFromRequest
-
-			if (checkTokenAndUserExistence) {
+			if (!tokenFromCode) {
 				throw new UnauthorizedError(errorMessage)
 			}
 

@@ -4,6 +4,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { verifyAccountEmail } from '@/http/emails/verify-account-email'
 import { prisma } from '@/lib/prisma'
 
 import { BadRequestError } from '../_errors/bad-request-error'
@@ -46,7 +47,7 @@ export async function createAccount(app: FastifyInstance) {
 
 			const hashedPassword = await hash(password, 8)
 
-			await prisma.user.create({
+			const { id: userId } = await prisma.user.create({
 				data: {
 					name,
 					email,
@@ -58,6 +59,25 @@ export async function createAccount(app: FastifyInstance) {
 					} : undefined,
 				},
 			})
+
+			const { id: verificationCode } = await prisma.token.create({
+				data: {
+					userId,
+					type: 'EMAIL_VALIDATION',
+				}
+			})
+
+			try {
+				await verifyAccountEmail({
+					name,
+					email,
+					code: verificationCode,
+				})
+			} catch {
+				throw new BadRequestError(
+					'An error occurred while trying to send e-mail with e-mail validation.',
+				)
+			}
 
 			reply.status(201).send()
 		},
