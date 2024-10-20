@@ -25,7 +25,7 @@ export async function Billing() {
 	})
 
 	return (
-		<Card className="lg:only:col-span-2">
+		<Card>
 			<CardHeader>
 				<CardTitle>Billing</CardTitle>
 				<CardDescription>

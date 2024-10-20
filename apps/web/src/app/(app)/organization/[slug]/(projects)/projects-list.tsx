@@ -72,6 +72,12 @@ export async function ProjectsList() {
 					</CardFooter>
 				</Card>
 			))}
+
+			{projects.length === 0 && (
+				<div className="rounded border p-4 text-sm text-muted-foreground">
+					There are no projects in this organization.
+				</div>
+			)}
 		</div>
 	)
 }

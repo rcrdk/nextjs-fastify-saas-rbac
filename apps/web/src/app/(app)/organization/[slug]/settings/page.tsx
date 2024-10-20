@@ -12,7 +12,8 @@ import {
 import { getOrganization } from '@/http/get-organization'
 
 import { Billing } from './billing'
-import { ShutdownOrganizationButton } from './shutdown-organization-button'
+import { DomainSettings } from './domain'
+import { ShutdownOrganization } from './shutdown-organization'
 
 export async function generateMetadata(): Promise<Metadata> {
 	const currentOrganization = getCurrentOrganization()
@@ -42,34 +43,46 @@ export default async function Settings() {
 		<div className="w-full space-y-6 self-start sm:space-y-8">
 			<h1 className="text-2xl font-bold">Organization Settings</h1>
 
-			<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+			<div className="space-y-8">
 				{canUpdateOrganization && (
-					<Card>
-						<CardHeader>
-							<CardTitle>Organization Details</CardTitle>
-							<CardDescription>
-								Update details and settings of your organization.
-							</CardDescription>
-						</CardHeader>
+					<>
+						<Card>
+							<CardHeader>
+								<CardTitle>Information</CardTitle>
+								<CardDescription>
+									Update details and settings of your organization.
+								</CardDescription>
+							</CardHeader>
 
-						<CardContent>
-							<OrganizationForm
-								isUpdating
-								initialData={{
-									name: organization.name,
-									domain: organization.domain,
-									shouldAttachUsersByDomain:
-										organization.shouldAttachUsersByDomain,
-								}}
-							/>
-						</CardContent>
-					</Card>
+							<CardContent>
+								<OrganizationForm
+									isUpdating
+									initialData={{
+										name: organization.name,
+									}}
+								/>
+							</CardContent>
+						</Card>
+
+						<Card>
+							<CardHeader>
+								<CardTitle>Domain</CardTitle>
+								<CardDescription>
+									Set up your organization domain.
+								</CardDescription>
+							</CardHeader>
+
+							<CardContent>
+								<DomainSettings organization={organization} />
+							</CardContent>
+						</Card>
+					</>
 				)}
 
 				{canGetBilling && <Billing />}
 
 				{canShutdownOrganization && (
-					<Card className="items-center justify-between md:flex lg:col-span-2">
+					<Card className="items-center justify-between md:flex">
 						<CardHeader>
 							<CardTitle>Shutdown Organization</CardTitle>
 							<CardDescription className="text-balance">
@@ -79,7 +92,7 @@ export default async function Settings() {
 						</CardHeader>
 
 						<CardContent className="md:p-6">
-							<ShutdownOrganizationButton />
+							<ShutdownOrganization />
 						</CardContent>
 					</Card>
 				)}

@@ -21,8 +21,6 @@ export async function creteOrganization(app: FastifyInstance) {
 					security: [{ bearerAuth: [] }],
 					body: z.object({
 						name: z.string(),
-						domain: z.string().nullish(),
-						shouldAttachUsersByDomain: z.boolean().optional(),
 					}),
 					response: {
 						201: z.object({
@@ -34,26 +32,27 @@ export async function creteOrganization(app: FastifyInstance) {
 			async (request, reply) => {
 				const userId = await request.getCurrentUserId()
 
-				const { name, domain, shouldAttachUsersByDomain } = request.body
+				const { name } = request.body
 
-				if (domain) {
-					const organizationByDomain = await prisma.organization.findUnique({
-						where: { domain },
+				const newSlug = generateSlug(name)
+
+				const organizationNameAlreadyExists =
+					await prisma.organization.findFirst({
+						where: {
+							slug: newSlug,
+						},
 					})
 
-					if (organizationByDomain) {
-						throw new BadRequestError(
-							'Another organization with same domain already exists.',
-						)
-					}
+				if (organizationNameAlreadyExists) {
+					throw new BadRequestError(
+						'There is another organization using the same name. Please, choose another one.',
+					)
 				}
 
 				const organization = await prisma.organization.create({
 					data: {
 						name,
-						slug: generateSlug(name),
-						domain,
-						shouldAttachUsersByDomain,
+						slug: newSlug,
 						ownerId: userId,
 						members: {
 							create: {

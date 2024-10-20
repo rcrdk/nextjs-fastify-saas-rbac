@@ -5,6 +5,7 @@ import z from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
+import { generateSlug } from '@/utils/generate-slug'
 import { getUserPermissions } from '@/utils/get-user-permissions'
 
 import { BadRequestError } from '../_errors/bad-request-error'
@@ -26,8 +27,6 @@ export async function updateOrganization(app: FastifyInstance) {
 					}),
 					body: z.object({
 						name: z.string(),
-						domain: z.string().nullish(),
-						shouldAttachUsersByDomain: z.boolean().optional(),
 					}),
 					response: {
 						204: z.null(),
@@ -36,11 +35,11 @@ export async function updateOrganization(app: FastifyInstance) {
 			},
 			async (request, reply) => {
 				const { slug } = request.params
-				const { name, domain, shouldAttachUsersByDomain } = request.body
+				const { name } = request.body
 
 				const userId = await request.getCurrentUserId()
-				// eslint-disable-next-line prettier/prettier
-				const { membership, organization } = await request.getCurrentUserMembership(slug)				
+				const { membership, organization } =
+					await request.getCurrentUserMembership(slug)
 
 				const authOrganization = organizationSchema.parse({
 					id: organization.id,
@@ -55,21 +54,22 @@ export async function updateOrganization(app: FastifyInstance) {
 					)
 				}
 
-				if (domain) {
-					const organizationByDomain = await prisma.organization.findFirst({
+				const newSlug = generateSlug(name)
+
+				const organizationNameAlreadyExists =
+					await prisma.organization.findFirst({
 						where: {
-							domain,
+							slug: newSlug,
 							id: {
 								not: organization.id,
 							},
 						},
 					})
 
-					if (organizationByDomain) {
-						throw new BadRequestError(
-							'Another organization with same domain already exists.',
-						)
-					}
+				if (organizationNameAlreadyExists) {
+					throw new BadRequestError(
+						'There is another organization using the same name. Please, choose another one.',
+					)
 				}
 
 				await prisma.organization.update({
@@ -78,8 +78,7 @@ export async function updateOrganization(app: FastifyInstance) {
 					},
 					data: {
 						name,
-						domain,
-						shouldAttachUsersByDomain,
+						slug: generateSlug(name),
 					},
 				})
 

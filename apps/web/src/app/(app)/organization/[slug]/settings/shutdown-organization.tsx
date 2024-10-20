@@ -5,7 +5,7 @@ import { getCurrentOrganization } from '@/auth'
 import { Button } from '@/components/ui/button'
 import { shutdownOrganization } from '@/http/shutdown-organization'
 
-export function ShutdownOrganizationButton() {
+export function ShutdownOrganization() {
 	async function shutdownOrganizationAction() {
 		'use server'
 

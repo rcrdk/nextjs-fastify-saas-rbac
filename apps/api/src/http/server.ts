@@ -29,10 +29,12 @@ import { revokeInvite } from './routes/invites/revoke-invite'
 import { getMembers } from './routes/members/get-members'
 import { removeMember } from './routes/members/remove-member'
 import { updateMember } from './routes/members/update-member'
+import { authorizeDomain } from './routes/organization/authorize-domain'
 import { creteOrganization } from './routes/organization/create-organization'
 import { getMemebership } from './routes/organization/get-membership'
 import { getOrganization } from './routes/organization/get-organization'
 import { getOrganizations } from './routes/organization/get-organizations'
+import { removeDomain } from './routes/organization/remove-domain'
 import { shutdownOrganization } from './routes/organization/shutdown-organization'
 import { transferOrganization } from './routes/organization/transfer-organization'
 import { updateOrganization } from './routes/organization/update-organization'
@@ -51,7 +53,7 @@ app.setErrorHandler(errorHandler)
 app.register(fastifySwagger, {
 	openapi: {
 		info: {
-			title: 'Next.js Saas ',
+			title: 'Next.js Fastify Saas RBAC',
 			description: 'Full-stack SaaS app with multi-tenant and RBAC.',
 			version: '1.0.0',
 		},
@@ -92,6 +94,8 @@ app.register(getOrganization)
 app.register(updateOrganization)
 app.register(shutdownOrganization)
 app.register(transferOrganization)
+app.register(authorizeDomain)
+app.register(removeDomain)
 
 app.register(getMembers)
 app.register(updateMember)

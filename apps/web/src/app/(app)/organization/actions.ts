@@ -8,44 +8,9 @@ import { getCurrentOrganization } from '@/auth'
 import { createOrganization } from '@/http/create-organization'
 import { updateOrganization } from '@/http/update-organization'
 
-const organizationSchema = z
-	.object({
-		name: z.string().min(4, 'Enter at least 4 characters.'),
-		domain: z
-			.string()
-			.nullish()
-			.transform((value) => (value === '' ? null : value))
-			.refine(
-				(value) => {
-					if (value) {
-						const domainRegex = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-						return domainRegex.test(value)
-					}
-
-					return true
-				},
-				{
-					message: 'Enter a valid domain.',
-				},
-			),
-		shouldAttachUsersByDomain: z
-			.union([z.literal('on'), z.literal('off'), z.boolean()])
-			.transform((value) => value === true || value === 'on')
-			.default(false),
-	})
-	.refine(
-		(data) => {
-			if (data.shouldAttachUsersByDomain === true && !data.domain) {
-				return false
-			}
-
-			return true
-		},
-		{
-			message: 'A domain is required when auto-join is enabled.',
-			path: ['domain'],
-		},
-	)
+const organizationSchema = z.object({
+	name: z.string().min(4, 'Enter at least 4 characters.'),
+})
 
 export type OrganizationSchema = z.infer<typeof organizationSchema>
 
@@ -62,13 +27,11 @@ export async function createOrganizationAction(data: FormData) {
 		}
 	}
 
-	const { name, domain, shouldAttachUsersByDomain } = result.data
+	const { name } = result.data
 
 	try {
 		await createOrganization({
 			name,
-			domain,
-			shouldAttachUsersByDomain,
 		})
 
 		revalidateTag('organizations')
@@ -113,14 +76,12 @@ export async function updateOrganizationAction(data: FormData) {
 		}
 	}
 
-	const { name, domain, shouldAttachUsersByDomain } = result.data
+	const { name } = result.data
 
 	try {
 		await updateOrganization({
 			organizationSlug: currentOrganization!,
 			name,
-			domain,
-			shouldAttachUsersByDomain,
 		})
 
 		revalidateTag('organizations')

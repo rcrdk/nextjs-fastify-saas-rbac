@@ -2,6 +2,7 @@
 
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from 'next-themes'
+import { Toaster } from 'react-hot-toast'
 
 import { queryClient } from '@/lib/react-query'
 
@@ -18,6 +19,8 @@ export function Providers({ children }: ProvidersProps) {
 				disableTransitionOnChange
 			>
 				{children}
+
+				<Toaster position="bottom-center" containerClassName="text-center" />
 			</ThemeProvider>
 		</QueryClientProvider>
 	)

@@ -5,7 +5,6 @@ import { IconCircleCheck, IconExclamationCircle } from '@tabler/icons-react'
 import { FormError } from '@/components/form-error'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState } from '@/hooks/use-form-state'
@@ -66,42 +65,10 @@ export function OrganizationForm({
 					name="name"
 					type="text"
 					id="name"
+					spellCheck="false"
 					defaultValue={initialData?.name}
 				/>
 				<FormError message={errors?.name} />
-			</div>
-
-			<div className="space-y-1">
-				<Label htmlFor="domain">Domain</Label>
-				<Input
-					name="domain"
-					type="text"
-					id="domain"
-					inputMode="url"
-					placeholder="example.com"
-					defaultValue={initialData?.domain ?? undefined}
-				/>
-				<FormError message={errors?.domain} />
-			</div>
-
-			<div className="space-y-1">
-				<div className="flex select-none items-baseline space-x-2">
-					<Checkbox
-						name="shouldAttachUsersByDomain"
-						id="shouldAttachUsersByDomain"
-						className="translate-y-1"
-						defaultChecked={initialData?.shouldAttachUsersByDomain}
-					/>
-					<label htmlFor="shouldAttachUsersByDomain" className="space-y-1">
-						<span className="text-sm font-medium leading-none">
-							Auto-join new member
-						</span>
-						<p className="text-balance text-sm text-muted-foreground">
-							This will automatically invite all memebers with same e-mail
-							domain to this organization.
-						</p>
-					</label>
-				</div>
 			</div>
 
 			<FormSubmitButton loading={isPending} loadingLabel={buttonText.loading}>

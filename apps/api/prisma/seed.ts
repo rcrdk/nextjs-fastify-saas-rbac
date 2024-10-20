@@ -42,7 +42,8 @@ async function seed() {
 			name: 'Acme Inc (admin)',
 			domain: 'acme.com',
 			shouldAttachUsersByDomain: true,
-			slug: 'acme-admin',
+			domainValidatedAt: new Date(),
+			slug: 'acme-inc-admin',
 			avatarUrl: faker.image.avatarGitHub(),
 			ownerId: userOne.id,
 			projects: {
@@ -108,7 +109,7 @@ async function seed() {
 	await prisma.organization.create({
 		data: {
 			name: 'Acme Inc (member)',
-			slug: 'acme-member',
+			slug: 'acme-inc-member',
 			avatarUrl: faker.image.avatarGitHub(),
 			ownerId: userTwo.id,
 			projects: {
@@ -174,7 +175,7 @@ async function seed() {
 	await prisma.organization.create({
 		data: {
 			name: 'Acme Inc (billing)',
-			slug: 'acme-billing',
+			slug: 'acme-inc-billing',
 			avatarUrl: faker.image.avatarGitHub(),
 			ownerId: userTwo.id,
 			projects: {

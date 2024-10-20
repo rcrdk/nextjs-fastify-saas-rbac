@@ -1,6 +1,7 @@
 import { IconCircleCheck, IconCircleX, IconUser } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -19,7 +20,9 @@ interface RejectInvitePageProps {
 	}
 }
 
-// METADARA
+export const metadata: Metadata = {
+	title: 'Decline Invite',
+}
 
 export default async function RejectInvitePage({
 	params,
