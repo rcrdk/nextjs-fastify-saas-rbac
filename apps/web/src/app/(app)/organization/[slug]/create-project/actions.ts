@@ -28,10 +28,10 @@ export async function createProjectAction(data: FormData) {
 	const { name, description } = result.data
 
 	try {
-		const currentOrganization = getCurrentOrganization()!
+		const currentOrganization = await getCurrentOrganization()
 
 		await createProject({
-			organization: currentOrganization,
+			organization: currentOrganization!,
 			name,
 			description,
 		})

@@ -3,7 +3,7 @@ import { ability, getCurrentOrganization } from '@/auth'
 import { NavLink } from './nav-link'
 
 export async function Tabs() {
-	const organization = getCurrentOrganization()
+	const organization = await getCurrentOrganization()
 
 	const permissions = await ability()
 

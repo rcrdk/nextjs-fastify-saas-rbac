@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { use } from 'react'
 
 import { isAuthenticated } from '@/auth'
 
@@ -7,7 +8,9 @@ type AuthLayoutProps = Readonly<{
 }>
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-	if (isAuthenticated()) {
+	const isAlreadyAuthenticated = use(isAuthenticated())
+
+	if (isAlreadyAuthenticated) {
 		redirect('/')
 	}
 

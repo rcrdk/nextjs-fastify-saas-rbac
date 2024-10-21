@@ -30,13 +30,13 @@ import {
 import { UpdateMemberRoleSelect } from './update-member-role-select'
 
 export async function MemberList() {
-	const currentOrganizarion = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 	const permissions = await ability()
 
 	const [{ membership }, { organization }, { members }] = await Promise.all([
-		getMembership({ organizationSlug: currentOrganizarion! }),
-		getOrganization({ organizationSlug: currentOrganizarion! }),
-		getMembers({ organizationSlug: currentOrganizarion! }),
+		getMembership({ organizationSlug: currentOrganization! }),
+		getOrganization({ organizationSlug: currentOrganization! }),
+		getMembers({ organizationSlug: currentOrganization! }),
 	])
 
 	const authOrganization = organizationSchema.parse(organization)

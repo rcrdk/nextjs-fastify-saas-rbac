@@ -7,7 +7,7 @@ import { Invites } from './invites'
 import { MemberList } from './member-list'
 
 export async function generateMetadata(): Promise<Metadata> {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	const { organization } = await getOrganization({
 		organizationSlug: currentOrganization!,

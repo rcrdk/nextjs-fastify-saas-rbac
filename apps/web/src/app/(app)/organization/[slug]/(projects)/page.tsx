@@ -9,7 +9,7 @@ import { getOrganization } from '@/http/get-organization'
 import { ProjectsList } from './projects-list'
 
 export async function generateMetadata(): Promise<Metadata> {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	const { organization } = await getOrganization({
 		organizationSlug: currentOrganization!,
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Projects() {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 	const permissions = await ability()
 
 	return (

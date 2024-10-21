@@ -5,7 +5,9 @@ export async function GET(request: NextRequest) {
 	const redirectURL = request.nextUrl.clone()
 	redirectURL.pathname = '/auth/sign-in'
 
-	cookies().delete('@SAAS:token')
+	const cookieStore = await cookies()
+
+	cookieStore.delete('@SAAS:token')
 
 	return NextResponse.redirect(redirectURL)
 }

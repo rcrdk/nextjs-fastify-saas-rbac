@@ -3,7 +3,7 @@ import { Role } from '@saas/auth'
 import { API } from '../lib/api-client'
 
 interface CreateInviteRequest {
-	organization: string
+	organizationSlug: string
 	email: string
 	role: Role
 }
@@ -11,11 +11,11 @@ interface CreateInviteRequest {
 type CreateInviteResponse = void
 
 export async function createInvite({
-	organization,
+	organizationSlug,
 	email,
 	role,
 }: CreateInviteRequest): Promise<CreateInviteResponse> {
-	await API.post(`organization/${organization}/invites`, {
+	await API.post(`organization/${organizationSlug}/invites`, {
 		json: { email, role },
 	})
 }

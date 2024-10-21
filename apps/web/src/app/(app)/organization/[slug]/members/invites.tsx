@@ -16,11 +16,11 @@ import { CreateInviteForm } from './create-invite-form'
 import { RevokeInviteButton } from './revoke-invite-button'
 
 export async function Invites() {
-	const currentOrganizarion = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 	const permissions = await ability()
 
 	const { invites } = await getInvites({
-		organizationSlug: currentOrganizarion!,
+		organizationSlug: currentOrganization!,
 	})
 
 	return (

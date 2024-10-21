@@ -63,7 +63,7 @@ export async function createOrganizationAction(data: FormData) {
 }
 
 export async function updateOrganizationAction(data: FormData) {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 	const result = organizationSchema.safeParse(Object.fromEntries(data))
 
 	if (!result.success) {

@@ -40,17 +40,19 @@ export async function verifyEmailAndAuthenticateAction(data: FormData) {
 			code,
 		})
 
-		cookies().set('@SAAS:token', token, {
+		const cookieStore = await cookies()
+
+		cookieStore.set('@SAAS:token', token, {
 			maxAge: 60 * 60 * 24 * 7, // 7d
 			path: '/',
 		})
 
-		const inviteId = cookies().get('@SAAS:inviteId')?.value
+		const inviteId = cookieStore.get('@SAAS:inviteId')?.value
 
 		if (inviteId) {
 			try {
 				await acceptInvite({ inviteId })
-				cookies().delete('@SAAS:inviteId')
+				cookieStore.delete('@SAAS:inviteId')
 			} catch {}
 		}
 	} catch (error) {

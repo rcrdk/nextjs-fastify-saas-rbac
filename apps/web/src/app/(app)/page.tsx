@@ -1,6 +1,6 @@
 import { Header } from '@/components/header'
 
-export default async function Home() {
+export default function Home() {
 	return (
 		<div className="flex min-h-screen flex-col px-5 py-4 md:px-8">
 			<Header />

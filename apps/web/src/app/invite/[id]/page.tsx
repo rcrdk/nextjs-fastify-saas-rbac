@@ -23,22 +23,18 @@ import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 dayjs.extend(relativeTime)
 
-interface InvitePageProps {
-	params: {
-		id: string
-	}
-}
+type Params = Promise<{ id: string }>
 
 export const metadata: Metadata = {
 	title: 'Accept Invite',
 }
 
-export default async function InvitePage({ params }: InvitePageProps) {
-	const inviteId = params.id
+export default async function InvitePage({ params }: { params: Params }) {
+	const { id: inviteId } = await params
 
 	const { invite } = await getInvite({ inviteId })
 
-	const isUserAuthenticated = isAuthenticated()
+	const isUserAuthenticated = await isAuthenticated()
 
 	let currentUserEmail = null
 
@@ -52,7 +48,9 @@ export default async function InvitePage({ params }: InvitePageProps) {
 	async function signInFromInvite() {
 		'use server'
 
-		cookies().set('@SAAS:inviteId', inviteId)
+		const cookieStore = await cookies()
+
+		cookieStore.set('@SAAS:inviteId', inviteId)
 
 		redirect(`/auth/sign-in?email=${invite.email}`)
 	}

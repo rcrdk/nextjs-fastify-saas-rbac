@@ -19,7 +19,7 @@ import { getAvatarUrl } from '@/utils/get-avatar-url'
 dayjs.extend(relativeTime)
 
 export async function ProjectsList() {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	const { projects } = await getProjects({
 		organizationSlug: currentOrganization!,

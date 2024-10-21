@@ -26,6 +26,7 @@ export async function Header() {
 						src={brandLogo}
 						alt=""
 						className="size-10 select-none dark:invert"
+						priority
 					/>
 				</Link>
 

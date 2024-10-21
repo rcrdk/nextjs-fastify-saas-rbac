@@ -43,7 +43,7 @@ const organizationDomainSchema = z
 export type OrganizationDomainSchema = z.infer<typeof organizationDomainSchema>
 
 export async function authorizeOrganizationDomainAction(data: FormData) {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 	const result = organizationDomainSchema.safeParse(Object.fromEntries(data))
 
 	if (!result.success) {
@@ -88,7 +88,7 @@ export async function authorizeOrganizationDomainAction(data: FormData) {
 }
 
 export async function removeOrganizationDomainAction() {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	try {
 		await removeOrganizationDomain({

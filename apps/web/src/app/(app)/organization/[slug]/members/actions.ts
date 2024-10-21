@@ -19,7 +19,7 @@ const inviteSchema = z.object({
 })
 
 export async function removeMemberAction(memberId: string) {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	await removeMember({
 		organizationSlug: currentOrganization!,
@@ -30,7 +30,7 @@ export async function removeMemberAction(memberId: string) {
 }
 
 export async function transferOrganizationOwnershipAction(userId: string) {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	await transfererOrganizationOwnership({
 		organizationSlug: currentOrganization!,
@@ -41,7 +41,7 @@ export async function transferOrganizationOwnershipAction(userId: string) {
 }
 
 export async function updateMemberAction(memberId: string, role: Role) {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	await updateMember({
 		organizationSlug: currentOrganization!,
@@ -53,7 +53,7 @@ export async function updateMemberAction(memberId: string, role: Role) {
 }
 
 export async function revokeInviteAction(inviteId: string) {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	await revokeInvite({
 		organizationSlug: currentOrganization!,
@@ -77,11 +77,11 @@ export async function createInviteAction(data: FormData) {
 	}
 
 	const { email, role } = result.data
-	const organization = getCurrentOrganization()!
+	const organization = await getCurrentOrganization()
 
 	try {
 		await createInvite({
-			organization,
+			organizationSlug: organization!,
 			email,
 			role,
 		})

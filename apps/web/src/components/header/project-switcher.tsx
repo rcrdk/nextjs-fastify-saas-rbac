@@ -45,25 +45,30 @@ export function ProjectSwitcher() {
 				className="flex max-w-[224px] select-none items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none"
 				disabled={isLoading}
 			>
-				{isLoading && <Skeleton className="h-3 w-28" />}
+				<Avatar
+					className={!currentProject || isLoading ? 'hidden' : 'mr-1 size-5'}
+				>
+					{currentProject?.avatarUrl && (
+						<AvatarImage src={currentProject.avatarUrl} />
+					)}
+					<AvatarFallback>
+						<IconBriefcase size={12} className="text-foreground opacity-50" />
+					</AvatarFallback>
+				</Avatar>
+
+				{isLoading && (
+					<>
+						<Skeleton className="mr-1 size-5 rounded-full" />
+						<Skeleton className="h-3 w-28" />
+					</>
+				)}
+
 				{!isLoading && !currentProject && (
 					<span className="pr-1 text-muted-foreground">Select project</span>
 				)}
+
 				{!isLoading && currentProject && (
-					<>
-						<Avatar className="mr-1 size-5">
-							{currentProject.avatarUrl && (
-								<AvatarImage src={currentProject.avatarUrl} />
-							)}
-							<AvatarFallback>
-								<IconBriefcase
-									size={12}
-									className="text-foreground opacity-50"
-								/>
-							</AvatarFallback>
-						</Avatar>
-						<span className="truncate">{currentProject.name}</span>
-					</>
+					<span className="truncate">{currentProject.name}</span>
 				)}
 
 				<IconSelector size={16} className="ml-auto shrink-0 text-current" />

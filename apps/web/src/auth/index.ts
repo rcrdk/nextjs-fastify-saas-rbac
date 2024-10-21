@@ -5,16 +5,20 @@ import { redirect } from 'next/navigation'
 import { getMembership } from '@/http/get-membership'
 import { getProfile } from '@/http/get-profile'
 
-export function isAuthenticated() {
-	return !!cookies().get('@SAAS:token')?.value
+export async function isAuthenticated() {
+	const cookieStore = await cookies()
+
+	return !!cookieStore.get('@SAAS:token')?.value
 }
 
-export function getCurrentOrganization() {
-	return cookies().get('@SAAS:organization')?.value ?? null
+export async function getCurrentOrganization() {
+	const cookieStore = await cookies()
+
+	return cookieStore.get('@SAAS:organization')?.value ?? null
 }
 
 export async function getCurrentMembership() {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	if (!currentOrganization) {
 		return null
@@ -43,7 +47,9 @@ export async function ability() {
 }
 
 export async function auth() {
-	const token = cookies().get('@SAAS:token')?.value
+	const cookieStore = await cookies()
+
+	const token = cookieStore.get('@SAAS:token')?.value
 
 	if (!token) {
 		redirect('/api/auth/sign-out')

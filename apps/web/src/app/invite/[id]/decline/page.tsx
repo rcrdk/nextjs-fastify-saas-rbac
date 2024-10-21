@@ -14,20 +14,14 @@ import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 dayjs.extend(relativeTime)
 
-interface RejectInvitePageProps {
-	params: {
-		id: string
-	}
-}
+type Params = Promise<{ id: string }>
 
 export const metadata: Metadata = {
 	title: 'Decline Invite',
 }
 
-export default async function RejectInvitePage({
-	params,
-}: RejectInvitePageProps) {
-	const inviteId = params.id
+export default async function RejectInvitePage({ params }: { params: Params }) {
+	const { id: inviteId } = await params
 
 	const { invite } = await getInvite({ inviteId })
 

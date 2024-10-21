@@ -16,7 +16,7 @@ import { DomainSettings } from './domain'
 import { ShutdownOrganization } from './shutdown-organization'
 
 export async function generateMetadata(): Promise<Metadata> {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 
 	const { organization } = await getOrganization({
 		organizationSlug: currentOrganization!,
@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Settings() {
-	const currentOrganization = getCurrentOrganization()
+	const currentOrganization = await getCurrentOrganization()
 	const permissions = await ability()
 
 	const canUpdateOrganization = permissions?.can('update', 'Organization')

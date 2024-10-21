@@ -8,6 +8,7 @@ import {
 } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 
 import { FormError } from '@/components/form-error'
 import { FormSubmitButton } from '@/components/form-submit-button'
@@ -31,11 +32,13 @@ export function SignInForm() {
 		signinWithEmailAndPassword,
 	)
 
-	if (!success && message && message.includes('verified e-mail')) {
-		router.push('/auth/verify-email')
-	}
+	useEffect(() => {
+		if (success) router.push('/')
 
-	if (success) router.push('/')
+		if (!success && message && message.includes('verified e-mail')) {
+			router.push('/auth/verify-email')
+		}
+	}, [success, message])
 
 	return (
 		<div className="space-y-4">

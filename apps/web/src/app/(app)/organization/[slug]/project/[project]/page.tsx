@@ -7,16 +7,15 @@ import { getOrganization } from '@/http/get-organization'
 import { getProject } from '@/http/get-project'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 
-interface ProjectProps {
-	params: {
-		project: string
-	}
-}
+type Params = Promise<{ project: string }>
 
 export async function generateMetadata({
 	params,
-}: ProjectProps): Promise<Metadata> {
-	const currentOrganization = getCurrentOrganization()
+}: {
+	params: Params
+}): Promise<Metadata> {
+	const currentOrganization = await getCurrentOrganization()
+	const { project: projectSlug } = await params
 
 	const [{ organization }, { project }] = await Promise.all([
 		getOrganization({
@@ -24,7 +23,7 @@ export async function generateMetadata({
 		}),
 		getProject({
 			organizationSlug: currentOrganization!,
-			projectSlug: params.project,
+			projectSlug,
 		}),
 	])
 
@@ -33,12 +32,13 @@ export async function generateMetadata({
 	}
 }
 
-export default async function Project({ params }: ProjectProps) {
-	const currentOrganization = getCurrentOrganization()
+export default async function Project({ params }: { params: Params }) {
+	const currentOrganization = await getCurrentOrganization()
+	const { project: projectSlug } = await params
 
 	const { project } = await getProject({
 		organizationSlug: currentOrganization!,
-		projectSlug: params.project,
+		projectSlug,
 	})
 
 	return (
