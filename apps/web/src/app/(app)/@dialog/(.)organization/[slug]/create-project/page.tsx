@@ -4,7 +4,7 @@ import { Dialog, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
 export default function CreateProject() {
 	return (
-		<Dialog>
+		<Dialog defaultOpen>
 			<InterceptedDialogContent>
 				<DialogHeader className="flex flex-row items-center justify-between">
 					<DialogTitle>Create a project</DialogTitle>

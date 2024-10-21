@@ -28,7 +28,7 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 <!-- Tailwind shadcn-ui, prisma, ky -->
 <!-- User roles and permissions with CASL -->
 <!-- Pages and navigation of web project -->
-<!-- Emails: password recover, create invites -->
+<!-- Emails: password recover, create invites, account e-mail validation -->
 
 ## ⚙️ Get started
 
@@ -38,7 +38,7 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 	
 - Setup enviroment variables: `cp .env.example .env`
 - Create a [GitHub OAuth](https://docs.github.com/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) app to make social sign-in.
-- Make sure your Google Account have [2FA activeted](https://support.google.com/accounts/answer/185833) and then you must [generate an app password](https://myaccount.google.com/apppasswords) to use on env.
+- Make sure your Google Account have [2FA activeted](https://support.google.com/accounts/answer/185833) and then you must [generate an app password](https://myaccount.google.com/apppasswords) to send e-mails.
 - Make sure you are running Docker.
 </details>
 

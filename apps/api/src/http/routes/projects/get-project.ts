@@ -61,8 +61,10 @@ export async function getProject(app: FastifyInstance) {
 
 				const project = await prisma.project.findUnique({
 					where: {
-						slug: projectSlug,
-						organizationId: organization.id,
+						organizationId_slug: {
+							slug: projectSlug,
+							organizationId: organization.id,
+						},
 					},
 					select: {
 						id: true,

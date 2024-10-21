@@ -1,11 +1,11 @@
 'use client'
 
+import { IconCircleCheck, IconExclamationCircle } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
-import { useEffect } from 'react'
-import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
 import { FormSubmitButton } from '@/components/form-submit-button'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -26,18 +26,24 @@ export function ProjectForm() {
 		},
 	)
 
-	useEffect(() => {
-		if (success && message) {
-			toast.success(message, { id: 'success' })
-		}
-
-		if (!success && message) {
-			toast.error(message, { id: 'error' })
-		}
-	}, [success, message])
-
 	return (
 		<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+			{!success && message && (
+				<Alert variant="destructive">
+					<IconExclamationCircle size={20} />
+					<AlertTitle>An error occurred:</AlertTitle>
+					<AlertDescription>{message}</AlertDescription>
+				</Alert>
+			)}
+
+			{success && message && (
+				<Alert variant="success">
+					<IconCircleCheck size={20} />
+					<AlertTitle>Success:</AlertTitle>
+					<AlertDescription>{message}</AlertDescription>
+				</Alert>
+			)}
+
 			<div className="space-y-1">
 				<Label htmlFor="name">Project name</Label>
 				<Input name="name" type="text" id="name" />

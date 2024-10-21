@@ -5,6 +5,7 @@ import z from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
+import { generateSlug } from '@/utils/generate-slug'
 import { getUserPermissions } from '@/utils/get-user-permissions'
 
 import { BadRequestError } from '../_errors/bad-request-error'
@@ -63,6 +64,27 @@ export async function updateProject(app: FastifyInstance) {
 				}
 
 				const { name, description } = request.body
+
+				const newSlug = generateSlug(name)
+
+				const existsAnotherProjectWithSameSlug =
+					await prisma.project.findUnique({
+						where: {
+							organizationId_slug: {
+								organizationId: organization.id,
+								slug: newSlug,
+							},
+						},
+					})
+
+				if (
+					existsAnotherProjectWithSameSlug &&
+					existsAnotherProjectWithSameSlug.id !== project.id
+				) {
+					throw new BadRequestError(
+						'There is another project in this organization using the same project name. Please, choose another one.',
+					)
+				}
 
 				await prisma.project.update({
 					where: {
