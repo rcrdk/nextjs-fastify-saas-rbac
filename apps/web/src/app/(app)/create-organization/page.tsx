@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 
+import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 
 import { OrganizationForm } from '../organization/form'
@@ -20,6 +21,8 @@ export default function CreateOrganization() {
 					<OrganizationForm />
 				</div>
 			</main>
+
+			<Footer />
 		</div>
 	)
 }

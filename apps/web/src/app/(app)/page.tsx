@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { cookies } from 'next/headers'
 
+import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { TriggerToastLoad } from '@/components/trigger-toast-load'
 
@@ -35,6 +36,8 @@ export default async function Home() {
 					</h1>
 				</div>
 			</main>
+
+			<Footer />
 		</div>
 	)
 }

@@ -1,3 +1,4 @@
+import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { Tabs } from '@/components/tabs'
 
@@ -14,6 +15,8 @@ export default function OrganizationLayout({ children }: AppLayoutProps) {
 			<main className="mx-auto flex w-full max-w-[1200px] flex-grow items-center py-6 sm:py-8">
 				{children}
 			</main>
+
+			<Footer />
 		</div>
 	)
 }
