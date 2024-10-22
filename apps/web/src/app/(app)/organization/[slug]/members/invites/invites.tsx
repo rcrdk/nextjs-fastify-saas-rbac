@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getInvites } from '@/http/get-invites'
 import { getRoleName } from '@/utils/get-role-name'
 
-import { CreateInviteForm } from './create-invite-form'
+import { CreateInviteForm } from './form'
 import { RevokeInviteButton } from './revoke-invite-button'
 
 export async function Invites() {

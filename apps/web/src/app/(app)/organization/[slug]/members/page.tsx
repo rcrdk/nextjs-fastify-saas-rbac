@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 import { ability, getCurrentOrganization } from '@/auth'
 import { getOrganization } from '@/http/get-organization'
 
-import { Invites } from './invites'
-import { MemberList } from './member-list'
+import { Invites } from './invites/invites'
+import { MemberList } from './list/members'
 
 export async function generateMetadata(): Promise<Metadata> {
 	const currentOrganization = await getCurrentOrganization()

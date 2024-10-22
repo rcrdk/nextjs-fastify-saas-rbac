@@ -5,6 +5,7 @@ import {
 	IconTransitionTop,
 	IconUser,
 	IconUserMinus,
+	IconUserShield,
 } from '@tabler/icons-react'
 
 import { ability, getCurrentOrganization } from '@/auth'
@@ -14,6 +15,7 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
+	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
@@ -27,7 +29,6 @@ import {
 	removeMemberAction,
 	transferOrganizationOwnershipAction,
 } from './actions'
-import { UpdateMemberRoleSelect } from './update-member-role-select'
 
 export async function MemberList() {
 	const currentOrganization = await getCurrentOrganization()
@@ -47,6 +48,8 @@ export async function MemberList() {
 	)
 
 	const canRemoveMember = permissions?.can('delete', 'User')
+
+	const canChangeRole = permissions?.can('update', 'User')
 
 	return (
 		<div className="space-y-2">
@@ -99,81 +102,92 @@ export async function MemberList() {
 								</TableCell>
 
 								<TableCell className="py-2.5">
-									<div className="flex items-center justify-end gap-2">
-										<UpdateMemberRoleSelect
+									{/* <UpdateMemberRoleSelect
 											memberId={member.memberId}
 											value={member.role}
 											disabled={
-												member.userId === organization.ownerId ||
-												member.userId === membership.userId ||
-												permissions?.cannot('update', 'User')
+												member.userId === organization.ownerId || !canChangeRole
 											}
-										/>
+										/> */}
 
-										<DropdownMenu>
-											<DropdownMenuTrigger asChild>
-												<Button
-													variant="outline"
-													size="icon"
-													className="size-8"
-													disabled={!canTransferOwnership && !canRemoveMember}
+									<DropdownMenu>
+										<DropdownMenuTrigger asChild>
+											<Button
+												variant="outline"
+												size="icon"
+												className="size-8"
+												disabled={member.userId === organization.ownerId}
+											>
+												<IconDotsVertical size={20} />
+											</Button>
+										</DropdownMenuTrigger>
+
+										<DropdownMenuContent align="end">
+											{canTransferOwnership && (
+												<form
+													action={transferOrganizationOwnershipAction.bind(
+														null,
+														member.userId,
+													)}
+													className="w-full"
 												>
-													<IconDotsVertical size={20} />
-												</Button>
-											</DropdownMenuTrigger>
-
-											<DropdownMenuContent align="end">
-												{canTransferOwnership && (
-													<form
-														action={transferOrganizationOwnershipAction.bind(
-															null,
-															member.userId,
-														)}
-														className="w-full"
+													<DropdownMenuItem
+														disabled={member.userId === organization.ownerId}
+														asChild
 													>
-														<DropdownMenuItem
-															disabled={member.userId === organization.ownerId}
-															asChild
+														<button
+															type="submit"
+															className="cursor-pointer gap-2 disabled:cursor-default"
 														>
-															<button
-																type="submit"
-																className="cursor-pointer gap-2 disabled:cursor-default"
-															>
-																<IconTransitionTop size={20} />
-																Transfer ownership
-															</button>
-														</DropdownMenuItem>
-													</form>
+															<IconTransitionTop size={20} />
+															Transfer ownership
+														</button>
+													</DropdownMenuItem>
+												</form>
+											)}
+
+											{member.userId !== organization.ownerId &&
+												canChangeRole && (
+													<DropdownMenuItem asChild>
+														<button
+															type="submit"
+															className="cursor-pointer gap-2 disabled:cursor-default"
+														>
+															<IconUserShield size={20} />
+															Change role
+														</button>
+													</DropdownMenuItem>
 												)}
 
-												{canRemoveMember && (
-													<form
-														action={removeMemberAction.bind(
-															null,
-															member.memberId,
-														)}
-														className="w-full"
+											{canRemoveMember && (
+												<form
+													action={removeMemberAction.bind(
+														null,
+														member.memberId,
+													)}
+													className="w-full"
+												>
+													<DropdownMenuSeparator />
+
+													<DropdownMenuItem
+														disabled={
+															member.userId === organization.ownerId ||
+															member.userId === membership.userId
+														}
+														asChild
 													>
-														<DropdownMenuItem
-															disabled={
-																member.userId === organization.ownerId ||
-																member.userId === membership.userId
-															}
-															asChild
+														<button
+															type="submit"
+															className="w-full cursor-pointer gap-2 disabled:cursor-default"
 														>
-															<button
-																type="submit"
-																className="w-full cursor-pointer gap-2 disabled:cursor-default"
-															>
-																<IconUserMinus size={20} />
-																Remove
-															</button>
-														</DropdownMenuItem>
-													</form>
-												)}
-											</DropdownMenuContent>
-										</DropdownMenu>
-									</div>
+															<IconUserMinus size={20} />
+															Remove
+														</button>
+													</DropdownMenuItem>
+												</form>
+											)}
+										</DropdownMenuContent>
+									</DropdownMenu>
 								</TableCell>
 							</TableRow>
 						))}
