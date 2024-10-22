@@ -6,15 +6,17 @@ interface GetMembersRequest {
 	organizationSlug: string
 }
 
+export interface GetMembersItemResponse {
+	memberId: string
+	userId: string
+	role: Role
+	name: string | null
+	email: string
+	avatarUrl: string | null
+}
+
 interface GetMembersResponse {
-	members: {
-		memberId: string
-		userId: string
-		role: Role
-		name: string | null
-		email: string
-		avatarUrl: string | null
-	}[]
+	members: GetMembersItemResponse[]
 }
 
 export async function getMembers({ organizationSlug }: GetMembersRequest) {

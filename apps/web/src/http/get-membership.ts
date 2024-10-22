@@ -7,13 +7,15 @@ interface GetMembershipRequest {
 	organizationSlug: string
 }
 
+export interface GetMembershipItemResponse {
+	id: string
+	role: Role
+	organizationId: string
+	userId: string
+}
+
 interface GetMembershipResponse {
-	membership: {
-		id: string
-		role: Role
-		organizationId: string
-		userId: string
-	}
+	membership: GetMembershipItemResponse
 }
 
 export async function getMembership({

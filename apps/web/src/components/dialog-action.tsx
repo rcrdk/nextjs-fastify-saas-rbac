@@ -18,7 +18,7 @@ interface DialogActionProps {
 	title: string
 	description: string
 	children?: ReactNode
-	triggerButton: JSX.Element
+	triggerButton?: JSX.Element
 	actionForm: JSX.Element
 	open: boolean
 	onOpenChange: () => void
@@ -35,7 +35,7 @@ export function DialogAction({
 }: DialogActionProps) {
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogTrigger asChild>{triggerButton}</DialogTrigger>
+			{triggerButton && <DialogTrigger asChild>{triggerButton}</DialogTrigger>}
 
 			<DialogPortal>
 				<DialogContent className="max-w-[91vw] rounded-lg sm:max-w-96">

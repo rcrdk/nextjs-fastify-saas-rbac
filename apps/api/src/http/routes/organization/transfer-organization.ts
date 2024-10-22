@@ -26,6 +26,7 @@ export async function transferOrganization(app: FastifyInstance) {
 					}),
 					body: z.object({
 						transferToUserId: z.string().uuid(),
+						action: z.enum(['UPDATE_ROLE', 'LEAVE']),
 					}),
 					response: {
 						204: z.null(),
@@ -34,7 +35,7 @@ export async function transferOrganization(app: FastifyInstance) {
 			},
 			async (request, reply) => {
 				const { slug } = request.params
-				const { transferToUserId } = request.body
+				const { transferToUserId, action } = request.body
 
 				const userId = await request.getCurrentUserId()
 				// eslint-disable-next-line prettier/prettier
@@ -80,17 +81,6 @@ export async function transferOrganization(app: FastifyInstance) {
 							role: 'ADMIN',
 						},
 					}),
-					prisma.member.update({
-						where: {
-							organizationId_userId: {
-								organizationId: organization.id,
-								userId,
-							},
-						},
-						data: {
-							role: 'MEMBER',
-						},
-					}),
 					prisma.organization.update({
 						where: {
 							id: organization.id,
@@ -99,6 +89,27 @@ export async function transferOrganization(app: FastifyInstance) {
 							ownerId: transferToUserId,
 						},
 					}),
+
+					action === 'UPDATE_ROLE'
+						? prisma.member.update({
+								where: {
+									organizationId_userId: {
+										organizationId: organization.id,
+										userId,
+									},
+								},
+								data: {
+									role: 'MEMBER',
+								},
+							})
+						: prisma.member.delete({
+								where: {
+									organizationId_userId: {
+										organizationId: organization.id,
+										userId,
+									},
+								},
+							}),
 				])
 
 				return reply.status(204).send()

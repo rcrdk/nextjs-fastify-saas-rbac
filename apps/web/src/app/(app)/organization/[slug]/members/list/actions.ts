@@ -6,7 +6,10 @@ import { redirect } from 'next/navigation'
 
 import { getCurrentOrganization } from '@/auth'
 import { removeMember } from '@/http/remove-member'
-import { transfererOrganizationOwnership } from '@/http/transfer-organization-ownership'
+import {
+	transfererOrganizationOwnership,
+	TransferOwnershipActions,
+} from '@/http/transfer-organization-ownership'
 import { updateMember } from '@/http/update-member'
 
 export async function removeMemberAction(memberId: string) {
@@ -20,15 +23,21 @@ export async function removeMemberAction(memberId: string) {
 	revalidateTag(`${currentOrganization}/members`)
 }
 
-export async function transferOrganizationOwnershipAction(userId: string) {
+export async function transferOrganizationOwnershipAction(
+	userId: string,
+	action: TransferOwnershipActions,
+) {
 	const currentOrganization = await getCurrentOrganization()
 
 	await transfererOrganizationOwnership({
 		organizationSlug: currentOrganization!,
 		transferToUserId: userId,
+		action,
 	})
 
-	redirect('/')
+	if (action === 'LEAVE') {
+		redirect('/')
+	}
 }
 
 export async function updateMemberAction(memberId: string, role: Role) {
