@@ -26,6 +26,8 @@ export function useFormState(
 		const data = new FormData(form)
 
 		startTransition(async () => {
+			if (resetForm) requestFormReset(form)
+
 			const state = await action(data)
 
 			if (!!state.success && onSuccess) {
@@ -34,8 +36,6 @@ export function useFormState(
 
 			setFormState(state)
 		})
-
-		if (resetForm) requestFormReset(form)
 	}
 
 	return [formState, handleSubmit, isPending] as const

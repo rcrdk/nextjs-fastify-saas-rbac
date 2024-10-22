@@ -15,7 +15,7 @@
 		"@fastify/jwt": "^9.0.1",
 		"@fastify/swagger": "^9.1.0",
 		"@fastify/swagger-ui": "^5.0.1",
-		"@prisma/client": "5.20.0",
+		"@prisma/client": "5.21.1",
 		"@saas/auth": "workspace:*",
 		"@saas/env": "workspace:*",
 		"bcryptjs": "^2.4.3",
@@ -33,7 +33,7 @@
 		"@types/bcryptjs": "^2.4.6",
 		"@types/nodemailer": "^6.4.16",
 		"dotenv-cli": "^7.4.2",
-		"prisma": "^5.20.0",
+		"prisma": "^5.21.1",
 		"ts-node": "^10.9.2",
 		"tsx": "^4.19.1"
 	},

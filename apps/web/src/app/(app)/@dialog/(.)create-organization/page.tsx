@@ -1,5 +1,10 @@
 import { InterceptedDialogContent } from '@/components/intercepted-dialog-content'
-import { Dialog, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import {
+	Dialog,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+} from '@/components/ui/dialog'
 
 import { OrganizationForm } from '../../organization/form'
 
@@ -7,8 +12,11 @@ export default function CreateOrganization() {
 	return (
 		<Dialog defaultOpen>
 			<InterceptedDialogContent>
-				<DialogHeader className="flex flex-row items-center justify-between">
+				<DialogHeader>
 					<DialogTitle>Create organization</DialogTitle>
+					<DialogDescription>
+						Enter your new organization data.
+					</DialogDescription>
 				</DialogHeader>
 
 				<OrganizationForm />

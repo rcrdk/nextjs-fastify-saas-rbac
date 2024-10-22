@@ -4,6 +4,7 @@ import { HTTPError } from 'ky'
 import { z } from 'zod'
 
 import { signUp } from '@/http/sign-up'
+import { validateStrongPasswordSchema } from '@/schema/helpers/strong-password'
 
 const signUpSchema = z
 	.object({
@@ -11,15 +12,14 @@ const signUpSchema = z
 			.string()
 			.refine((value) => value.split(' ').length > 1, 'Enter your full name.'),
 		email: z.string().email('Enter a valid e-mail.'),
-		password: z.string().min(6, 'Enter a password with at least 6 characters.'),
-		password_confirmation: z
-			.string()
-			.min(6, 'Enter a password with at least 6 characters.'),
+		password: z.string(),
+		password_confirmation: z.string(),
 	})
 	.refine((data) => data.password === data.password_confirmation, {
 		message: 'Password confirmation does not match.',
 		path: ['password_confirmation'],
 	})
+	.superRefine(validateStrongPasswordSchema)
 
 export async function signUpAction(data: FormData) {
 	const result = signUpSchema.safeParse(Object.fromEntries(data))

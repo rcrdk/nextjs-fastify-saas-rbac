@@ -1,21 +1,25 @@
 import { env } from '@saas/env'
 import { getCookie } from 'cookies-next'
-import type { CookiesFn } from 'cookies-next/lib/types'
+import type { CookieValueTypes } from 'cookies-next/lib/types'
 import ky from 'ky'
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 
 export const API = ky.create({
 	prefixUrl: env.NEXT_PUBLIC_API_URL,
 	hooks: {
 		beforeRequest: [
 			async (request) => {
-				let cookieStore: CookiesFn | undefined
+				let token: RequestCookie | CookieValueTypes
 
 				if (typeof window === 'undefined') {
-					const { cookies: serverCookies } = await import('next/headers')
-					cookieStore = serverCookies
+					const { cookies } = await import('next/headers')
+					const cookiesFromServer = await cookies()
+					token = cookiesFromServer.get('@SAAS:token')?.value
 				}
 
-				const token = getCookie('@SAAS:token', { cookies: cookieStore })
+				if (typeof window !== 'undefined') {
+					token = getCookie('@SAAS:token')
+				}
 
 				if (token) {
 					request.headers.set('Authorization', `Bearer ${token}`)

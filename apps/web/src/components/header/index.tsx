@@ -20,7 +20,7 @@ export async function Header() {
 			<div className="flex items-center">
 				<Link
 					href="/"
-					className="rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
+					className="shrink-0 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
 				>
 					<Image
 						src={brandLogo}
@@ -30,12 +30,18 @@ export async function Header() {
 					/>
 				</Link>
 
-				<IconSlash className="ml-3 -rotate-[24deg] text-border" />
+				<IconSlash
+					className="ml-3 -rotate-[24deg] text-border"
+					strokeWidth={1}
+				/>
 
 				<OrganizationSwitcher />
 				{permissions?.can('get', 'Project') && (
 					<>
-						<IconSlash className="-rotate-[24deg] text-border" />
+						<IconSlash
+							className="-rotate-[24deg] text-border"
+							strokeWidth={1}
+						/>
 						<ProjectSwitcher />
 					</>
 				)}

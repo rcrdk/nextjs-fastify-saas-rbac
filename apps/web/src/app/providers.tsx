@@ -24,17 +24,20 @@ export function Providers({ children }: ProvidersProps) {
 				<Toaster
 					position="top-center"
 					containerStyle={{ top: '32px' }}
-					containerClassName="font-medium text-sm antialiased rounded text-balance"
+					containerClassName="font-medium text-sm antialiased rounded text-balance text-center"
 					toastOptions={{
 						success: {
+							style: { padding: '8px 24px', gap: '12px', maxWidth: '290px' },
 							duration: 5000,
 							icon: (
-								<IconCircleCheck className="flex-shrink-0 text-green-500" />
+								<IconCircleCheck className="size-7 flex-shrink-0 text-green-500" />
 							),
 						},
 						error: {
 							duration: 5000,
-							icon: <IconCircleX className="flex-shrink-0 text-red-500" />,
+							icon: (
+								<IconCircleX className="size-7 flex-shrink-0 text-red-500" />
+							),
 						},
 					}}
 				/>

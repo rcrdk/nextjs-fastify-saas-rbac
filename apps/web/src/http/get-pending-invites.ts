@@ -20,6 +20,8 @@ interface GetPendingInvitesResponse {
 }
 
 export async function getPendingInvites() {
+	await new Promise((resolve) => setTimeout(resolve, 1000))
+
 	const result = await API.get(`pending-invites`, {
 		next: {
 			tags: ['pending-invites'],

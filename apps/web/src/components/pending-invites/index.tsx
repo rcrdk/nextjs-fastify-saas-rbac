@@ -94,20 +94,19 @@ export function PendingInvites() {
 					</p>
 				)}
 
-				{isLoading &&
-					Array.from({ length: 3 }).map((_, i) => (
-						<div key={i} className="space-y-2 border-t pt-2">
-							<p className="space-y-1">
-								<Skeleton className="h-3 w-full" />
-								<Skeleton className="h-3 w-3/5" />
-							</p>
-
-							<div className="flex gap-2">
-								<Skeleton className="h-6 w-20" />
-								<Skeleton className="h-6 w-20" />
-							</div>
+				{isLoading && (
+					<div className="space-y-2 border-t pt-2">
+						<div className="space-y-1">
+							<Skeleton className="h-3 w-full" />
+							<Skeleton className="h-3 w-3/5" />
 						</div>
-					))}
+
+						<div className="flex gap-2">
+							<Skeleton className="h-6 w-20" />
+							<Skeleton className="h-6 w-20" />
+						</div>
+					</div>
+				)}
 			</PopoverContent>
 		</Popover>
 	)

@@ -4,20 +4,20 @@ import { HTTPError } from 'ky'
 import { z } from 'zod'
 
 import { recoverPassword } from '@/http/recover-password'
+import { validateStrongPasswordSchema } from '@/schema/helpers/strong-password'
 
 const recoverPasswordSchema = z
 	.object({
 		email: z.string().email('Enter a valid e-mail.'),
 		code: z.string().uuid('Enter a valid validation code.'),
-		password: z.string().min(6, 'Enter a password with at least 6 characters.'),
-		password_confirmation: z
-			.string()
-			.min(6, 'Enter a password with at least 6 characters.'),
+		password: z.string(),
+		password_confirmation: z.string(),
 	})
 	.refine((data) => data.password === data.password_confirmation, {
 		message: 'Password confirmation does not match.',
 		path: ['password_confirmation'],
 	})
+	.superRefine(validateStrongPasswordSchema)
 
 export async function recoverPasswordAction(data: FormData) {
 	const result = recoverPasswordSchema.safeParse(Object.fromEntries(data))

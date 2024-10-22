@@ -1,10 +1,17 @@
 'use client'
 
-import { IconCircleCheck, IconExclamationCircle } from '@tabler/icons-react'
+import {
+	IconCircleCheck,
+	IconExclamationCircle,
+	IconEye,
+	IconEyeOff,
+} from '@tabler/icons-react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 
 import { FormError } from '@/components/form-error'
+import { FormErrorPassword } from '@/components/form-error-password'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -15,6 +22,8 @@ import { useFormState } from '@/hooks/use-form-state'
 import { recoverPasswordAction } from './actions'
 
 export function RecoverPasswordForm() {
+	const [showPassword, setShowPassword] = useState(false)
+
 	const searchParams = useSearchParams()
 	const alertRequested = searchParams.get('requested')
 	const email = searchParams.get('email')
@@ -68,8 +77,23 @@ export function RecoverPasswordForm() {
 
 			<div className="space-y-1">
 				<Label htmlFor="password">Password</Label>
-				<Input name="password" type="password" id="password" />
-				<FormError message={errors?.password} />
+				<div className="relative">
+					<Input
+						name="password"
+						type={showPassword ? 'text' : 'password'}
+						id="password"
+					/>
+					<Button
+						type="button"
+						size="iconInput"
+						variant="ghost"
+						title="Copy attribute"
+						onClick={() => setShowPassword((prev) => !prev)}
+					>
+						{showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+					</Button>
+				</div>
+				<FormErrorPassword list={errors?.password} />
 			</div>
 
 			<div className="space-y-1">

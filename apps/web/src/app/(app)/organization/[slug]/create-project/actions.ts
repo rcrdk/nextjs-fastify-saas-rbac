@@ -12,6 +12,8 @@ const projectSchema = z.object({
 	description: z.string().min(1, 'Enter a description.'),
 })
 
+export type ProjectSchema = z.infer<typeof projectSchema>
+
 export async function createProjectAction(data: FormData) {
 	const result = projectSchema.safeParse(Object.fromEntries(data))
 

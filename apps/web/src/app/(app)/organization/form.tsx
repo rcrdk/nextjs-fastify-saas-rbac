@@ -1,10 +1,11 @@
 'use client'
 
-import { IconCircleCheck, IconExclamationCircle } from '@tabler/icons-react'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
 import { FormSubmitButton } from '@/components/form-submit-button'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState } from '@/hooks/use-form-state'
@@ -24,12 +25,29 @@ export function OrganizationForm({
 	isUpdating = false,
 	initialData,
 }: OrganizationFormProps) {
+	const router = useRouter()
+
 	const formAction = isUpdating
 		? updateOrganizationAction
 		: createOrganizationAction
 
-	const [{ success, message, errors }, handleSubmit, isPending] =
-		useFormState(formAction)
+	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
+		formAction,
+		() => {
+			if (!isUpdating) {
+				setTimeout(() => router.back(), 300)
+			}
+		},
+	)
+
+	useEffect(() => {
+		if (!success && message) {
+			toast.error(message, { id: 'organization-form' })
+		}
+		if (success && message) {
+			toast.success(message, { id: 'organization-form' })
+		}
+	}, [success, message, isPending])
 
 	const buttonText = isUpdating
 		? {
@@ -43,22 +61,6 @@ export function OrganizationForm({
 
 	return (
 		<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-			{!success && message && (
-				<Alert variant="destructive">
-					<IconExclamationCircle size={20} />
-					<AlertTitle>An error occurred:</AlertTitle>
-					<AlertDescription>{message}</AlertDescription>
-				</Alert>
-			)}
-
-			{success && message && (
-				<Alert variant="success">
-					<IconCircleCheck size={20} />
-					<AlertTitle>Success:</AlertTitle>
-					<AlertDescription>{message}</AlertDescription>
-				</Alert>
-			)}
-
 			<div className="space-y-1">
 				<Label htmlFor="name">Organization name</Label>
 				<Input

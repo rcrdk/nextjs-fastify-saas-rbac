@@ -17,7 +17,7 @@ export function FormSubmitButton({
 		<Button
 			{...props}
 			type="submit"
-			disabled={loading}
+			disabled={loading || props.disabled}
 			className={`gap-2 ${props.className}`}
 		>
 			{loading ? (

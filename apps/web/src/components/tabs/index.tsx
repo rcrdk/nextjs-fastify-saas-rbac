@@ -18,7 +18,10 @@ export async function Tabs() {
 				{canGetProjects && (
 					<NavLink
 						href={`/organization/${organization}`}
-						includes={`/organization/${organization}/project/`}
+						current={[
+							`/organization/${organization}/project/`,
+							`/organization/${organization}/create-project`,
+						]}
 						className="text-balance"
 					>
 						Projects

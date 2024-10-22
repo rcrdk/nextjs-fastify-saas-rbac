@@ -1,27 +1,29 @@
-import { IconCircleX } from '@tabler/icons-react'
-import { redirect } from 'next/navigation'
+'use client'
 
-import { getCurrentOrganization } from '@/auth'
-import { Button } from '@/components/ui/button'
-import { shutdownOrganization } from '@/http/shutdown-organization'
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card'
+
+import { ShutdownOrganizationButton } from './shutdown-organization-button'
 
 export function ShutdownOrganization() {
-	async function shutdownOrganizationAction() {
-		'use server'
-
-		const currentOrganization = await getCurrentOrganization()
-
-		await shutdownOrganization({ organizationSlug: currentOrganization! })
-
-		redirect('/')
-	}
-
 	return (
-		<form action={shutdownOrganizationAction}>
-			<Button type="submit" variant="destructive" className="w-56">
-				<IconCircleX className="mr-2" stroke={1.5} />
-				Shutdown organization
-			</Button>
-		</form>
+		<Card className="items-center justify-between md:flex">
+			<CardHeader>
+				<CardTitle>Shutdown Organization</CardTitle>
+				<CardDescription className="text-balance">
+					This will delete all organization data including all projects. You
+					cannot undo this action.
+				</CardDescription>
+			</CardHeader>
+
+			<CardContent className="md:p-6">
+				<ShutdownOrganizationButton />
+			</CardContent>
+		</Card>
 	)
 }

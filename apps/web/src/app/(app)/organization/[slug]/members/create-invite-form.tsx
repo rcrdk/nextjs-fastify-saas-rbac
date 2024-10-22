@@ -1,6 +1,7 @@
 'use client'
 
 import { IconSend } from '@tabler/icons-react'
+import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
@@ -20,16 +21,19 @@ import { createInviteAction } from './actions'
 export function CreateInviteForm() {
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		createInviteAction,
-		() => {
-			toast.success('Your invite was sent')
-		},
+		undefined,
 		undefined,
 		true,
 	)
 
-	if (!success && message) {
-		toast.error(message, { id: 'error' })
-	}
+	useEffect(() => {
+		if (!success && message) {
+			toast.error(message, { id: 'invite' })
+		}
+		if (success && message) {
+			toast.success(message, { id: 'invite' })
+		}
+	}, [success, message, isPending])
 
 	return (
 		<form onSubmit={handleSubmit} className="flex flex-col space-y-4">

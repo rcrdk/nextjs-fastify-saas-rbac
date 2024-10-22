@@ -12,7 +12,7 @@ import {
 import { getOrganization } from '@/http/get-organization'
 
 import { Billing } from './billing'
-import { DomainSettings } from './domain'
+import { Domain } from './domain'
 import { ShutdownOrganization } from './shutdown-organization'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -45,57 +45,28 @@ export default async function Settings() {
 
 			<div className="space-y-8">
 				{canUpdateOrganization && (
-					<>
-						<Card>
-							<CardHeader>
-								<CardTitle>Information</CardTitle>
-								<CardDescription>
-									Update details and settings of your organization.
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent>
-								<OrganizationForm
-									isUpdating
-									initialData={{
-										name: organization.name,
-									}}
-								/>
-							</CardContent>
-						</Card>
-
-						<Card>
-							<CardHeader>
-								<CardTitle>Domain</CardTitle>
-								<CardDescription>
-									Set up your organization domain.
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent>
-								<DomainSettings organization={organization} />
-							</CardContent>
-						</Card>
-					</>
-				)}
-
-				{canGetBilling && <Billing />}
-
-				{canShutdownOrganization && (
-					<Card className="items-center justify-between md:flex">
+					<Card>
 						<CardHeader>
-							<CardTitle>Shutdown Organization</CardTitle>
-							<CardDescription className="text-balance">
-								This will delete all organization data including all projects.
-								You cannot undo this action.
+							<CardTitle>Information</CardTitle>
+							<CardDescription>
+								Update details and settings of your organization.
 							</CardDescription>
 						</CardHeader>
 
-						<CardContent className="md:p-6">
-							<ShutdownOrganization />
+						<CardContent>
+							<OrganizationForm
+								isUpdating
+								initialData={{
+									name: organization.name,
+								}}
+							/>
 						</CardContent>
 					</Card>
 				)}
+
+				{canUpdateOrganization && <Domain organization={organization} />}
+				{canGetBilling && <Billing />}
+				{canShutdownOrganization && <ShutdownOrganization />}
 			</div>
 		</div>
 	)
