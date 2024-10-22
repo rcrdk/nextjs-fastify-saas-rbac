@@ -56,7 +56,7 @@ export async function getProject(app: FastifyInstance) {
 				const { cannot } = getUserPermissions(userId, membership.role)
 
 				if (cannot('get', 'Project')) {
-					throw new UnauthorizedError('You are not allowed to get a project.')
+					throw new UnauthorizedError('You are not allowed to get a project')
 				}
 
 				const project = await prisma.project.findUnique({
@@ -87,7 +87,7 @@ export async function getProject(app: FastifyInstance) {
 				})
 
 				if (!project) {
-					throw new BadRequestError('Project not found.')
+					throw new BadRequestError('Project not found')
 				}
 
 				return reply.status(200).send({

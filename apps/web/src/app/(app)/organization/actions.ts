@@ -50,14 +50,14 @@ export async function createOrganizationAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes.',
+			message: 'Unexpected error, try again in a few minutes',
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully saved the organization data.',
+		message: 'Successfully saved the organization data',
 		errors: null,
 	}
 }
@@ -100,14 +100,14 @@ export async function updateOrganizationAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes.',
+			message: 'Unexpected error, try again in a few minutes',
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully saved the organization data.',
+		message: 'Successfully saved the organization data',
 		errors: null,
 	}
 }

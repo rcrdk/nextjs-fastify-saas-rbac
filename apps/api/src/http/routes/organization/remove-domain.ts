@@ -38,7 +38,7 @@ export async function removeDomain(app: FastifyInstance) {
 				})
 
 				if (!organization) {
-					throw new BadRequestError('Organization not found.')
+					throw new BadRequestError('Organization not found')
 				}
 
 				await prisma.organization.update({

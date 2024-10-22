@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { DialogAction } from '@/components/dialog-action'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { useFormState } from '@/hooks/use-form-state'
 import { TransferOwnershipActions } from '@/http/transfer-organization-ownership'
 
 import { transferOrganizationOwnershipAction } from './actions'
@@ -27,10 +29,24 @@ export function TransferOwnershipDialog({
 	const [action, setAction] = useState<TransferOwnershipActions>('UPDATE_ROLE')
 	const [transferInput, setTransferInput] = useState('')
 
+	const [{ success, message }, handleTransfer, isPending] = useFormState(
+		transferOrganizationOwnershipAction.bind(null, memberId, action),
+		() => {
+			onOpenChange()
+		},
+	)
+
+	useEffect(() => {
+		if (!success && message) {
+			toast.error(message, { id: 'change-member-role' })
+		}
+		if (success && message) {
+			toast.success(message, { id: 'change-member-role' })
+		}
+	}, [success, message, isPending])
+
 	const actionForm = (
-		<form
-			action={transferOrganizationOwnershipAction.bind(null, memberId, action)}
-		>
+		<form onSubmit={handleTransfer}>
 			<FormSubmitButton
 				className="w-full gap-2"
 				loadingLabel="Tranfering..."

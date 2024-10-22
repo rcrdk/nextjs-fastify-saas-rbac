@@ -45,7 +45,7 @@ export async function creteOrganization(app: FastifyInstance) {
 
 				if (organizationNameAlreadyExists) {
 					throw new BadRequestError(
-						'There is another organization using the same name. Please, choose another one.',
+						'There is another organization using the same name. Please, choose another one',
 					)
 				}
 

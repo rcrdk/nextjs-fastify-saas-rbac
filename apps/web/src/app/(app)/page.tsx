@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { cookies } from 'next/headers'
 
 import { Header } from '@/components/header'
@@ -6,9 +7,8 @@ import { TriggerToastLoad } from '@/components/trigger-toast-load'
 export default async function Home() {
 	const cookieStore = await cookies()
 
-	const deletedOrganizationMessage = cookieStore.get(
-		'@SAAS:deletedOrganization',
-	)
+	const transferedOrganizationMessage = cookieStore.get('@SAAS:transferedOrganization')
+	const deletedOrganizationMessage = cookieStore.get('@SAAS:deletedOrganization')
 
 	return (
 		<div className="flex min-h-screen flex-col px-5 py-4 md:px-8">
@@ -17,6 +17,13 @@ export default async function Home() {
 			{deletedOrganizationMessage && (
 				<TriggerToastLoad
 					message={deletedOrganizationMessage.value}
+					type="success"
+				/>
+			)}
+
+			{transferedOrganizationMessage && (
+				<TriggerToastLoad
+					message={transferedOrganizationMessage.value}
 					type="success"
 				/>
 			)}

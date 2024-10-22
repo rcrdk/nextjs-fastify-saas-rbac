@@ -9,7 +9,7 @@ type FastifyErrorHandler = FastifyInstance['errorHandler']
 export const errorHandler: FastifyErrorHandler = (error, _, reply) => {
 	if (hasZodFastifySchemaValidationErrors(error)) {
 		return reply.status(400).send({
-			message: 'Validation error.',
+			message: 'Validation error',
 			errors: error.validation,
 		})
 	}
@@ -30,6 +30,6 @@ export const errorHandler: FastifyErrorHandler = (error, _, reply) => {
 	// send error to some observability plattform`
 
 	return reply.status(500).send({
-		message: 'Internal server error.',
+		message: 'Internal server error',
 	})
 }

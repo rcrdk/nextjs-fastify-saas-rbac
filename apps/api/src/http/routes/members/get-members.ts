@@ -50,7 +50,7 @@ export async function getMembers(app: FastifyInstance) {
 
 				if (cannot('get', 'User')) {
 					throw new UnauthorizedError(
-						'You are not allowed to get organization members.',
+						'You are not allowed to get organization members',
 					)
 				}
 

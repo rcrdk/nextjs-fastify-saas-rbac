@@ -64,14 +64,14 @@ export async function createInviteAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes.',
+			message: 'Unexpected error, try again in a few minutes',
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Your invite was sent.',
+		message: 'Your invite was sent',
 		errors: null,
 	}
 }

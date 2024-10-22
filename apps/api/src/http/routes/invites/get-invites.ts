@@ -54,7 +54,7 @@ export async function getInvites(app: FastifyInstance) {
 
 				if (cannot('get', 'Invite')) {
 					throw new UnauthorizedError(
-						'You are not allowed to get organization invites.',
+						'You are not allowed to get organization invites',
 					)
 				}
 

@@ -45,7 +45,7 @@ export async function deleteProject(app: FastifyInstance) {
 				})
 
 				if (!project) {
-					throw new BadRequestError('Project not found.')
+					throw new BadRequestError('Project not found')
 				}
 
 				const authProject = projectSchema.parse(project)
@@ -54,7 +54,7 @@ export async function deleteProject(app: FastifyInstance) {
 
 				if (cannot('delete', authProject)) {
 					throw new UnauthorizedError(
-						'You are not allowed to delete this project.',
+						'You are not allowed to delete this project',
 					)
 				}
 

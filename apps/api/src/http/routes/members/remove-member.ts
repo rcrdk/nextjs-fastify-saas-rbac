@@ -39,7 +39,7 @@ export async function removeMember(app: FastifyInstance) {
 
 				if (cannot('delete', 'User')) {
 					throw new UnauthorizedError(
-						'You are not allowed to delete this organization member.',
+						'You are not allowed to delete this organization member',
 					)
 				}
 

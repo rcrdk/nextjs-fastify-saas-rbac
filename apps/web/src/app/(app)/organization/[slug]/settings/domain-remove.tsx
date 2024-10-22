@@ -61,7 +61,7 @@ export function RemoveDomain({ domain }: RemoveDomainProps) {
 	)
 
 	return (
-		<Card className="flex flex-col items-start justify-between gap-4 p-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:gap-6">
+		<Card className="flex flex-col justify-between gap-4 p-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:gap-6">
 			<div className="space-y-1">
 				<Label className="text-foreground">Domain {domain}:</Label>
 				<p className="text-balance">

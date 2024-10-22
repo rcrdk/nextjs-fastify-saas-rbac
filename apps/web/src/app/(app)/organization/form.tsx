@@ -19,11 +19,13 @@ import {
 interface OrganizationFormProps {
 	isUpdating?: boolean
 	initialData?: OrganizationSchema
+	submitButtonClass?: string
 }
 
 export function OrganizationForm({
 	isUpdating = false,
 	initialData,
+	submitButtonClass,
 }: OrganizationFormProps) {
 	const router = useRouter()
 
@@ -73,7 +75,11 @@ export function OrganizationForm({
 				<FormError message={errors?.name} />
 			</div>
 
-			<FormSubmitButton loading={isPending} loadingLabel={buttonText.loading}>
+			<FormSubmitButton
+				loading={isPending}
+				loadingLabel={buttonText.loading}
+				className={submitButtonClass}
+			>
 				{buttonText.default}
 			</FormSubmitButton>
 		</form>

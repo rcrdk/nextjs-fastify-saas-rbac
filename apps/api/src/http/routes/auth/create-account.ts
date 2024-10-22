@@ -34,7 +34,7 @@ export async function createAccount(app: FastifyInstance) {
 
 			if (userWithSameEmail) {
 				throw new BadRequestError(
-					'User with same e-mail already exists.',
+					'User with same e-mail already exists',
 				)
 			}
 
@@ -75,7 +75,7 @@ export async function createAccount(app: FastifyInstance) {
 				})
 			} catch {
 				throw new BadRequestError(
-					'An error occurred while trying to send e-mail with e-mail validation.',
+					'An error occurred while trying to send e-mail with e-mail validation',
 				)
 			}
 

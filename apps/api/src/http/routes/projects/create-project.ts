@@ -46,7 +46,7 @@ export async function createProject(app: FastifyInstance) {
 
 				if (cannot('create', 'Project')) {
 					throw new UnauthorizedError(
-						'You are not allowed to create a new project.',
+						'You are not allowed to create a new project',
 					)
 				}
 
@@ -66,7 +66,7 @@ export async function createProject(app: FastifyInstance) {
 
 				if (existsAnotherProjectWithSameSlug) {
 					throw new BadRequestError(
-						'There is another project in this organization using the same project name. Please, choose another one.',
+						'There is another project in this organization using the same project name. Please, choose another one',
 					)
 				}
 

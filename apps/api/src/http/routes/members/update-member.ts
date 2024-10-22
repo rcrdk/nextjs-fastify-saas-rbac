@@ -43,7 +43,7 @@ export async function updateMember(app: FastifyInstance) {
 
 				if (cannot('update', 'User')) {
 					throw new UnauthorizedError(
-						'You are not allowed to update this organization member.',
+						'You are not allowed to update this organization member',
 					)
 				}
 

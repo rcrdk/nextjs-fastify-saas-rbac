@@ -47,7 +47,7 @@ export async function createInvite(app: FastifyInstance) {
 
 				if (cannot('create', 'Invite')) {
 					throw new UnauthorizedError(
-						'You are not allowed to create a new invite.',
+						'You are not allowed to create a new invite',
 					)
 				}
 
@@ -60,7 +60,7 @@ export async function createInvite(app: FastifyInstance) {
 					organization.domain === domain
 				) {
 					throw new BadRequestError(
-						`Users with ${domain} domain will join your organization automatically on sign in.`,
+						`Users with ${domain} domain will join your organization automatically on sign in`,
 					)
 				}
 
@@ -75,7 +75,7 @@ export async function createInvite(app: FastifyInstance) {
 
 				if (inviteWithSameEmail) {
 					throw new BadRequestError(
-						`Another invite with same e-mail already exists.`,
+						`Another invite with same e-mail already exists`,
 					)
 				}
 
@@ -90,7 +90,7 @@ export async function createInvite(app: FastifyInstance) {
 
 				if (memberWithSameEmail) {
 					throw new BadRequestError(
-						`A member with this e-mail already belongs to your organization.`,
+						`A member with this e-mail already belongs to your organization`,
 					)
 				}
 
@@ -112,7 +112,7 @@ export async function createInvite(app: FastifyInstance) {
 				})
 
 				if (!invite) {
-					throw new BadRequestError(`Invite not found.`)
+					throw new BadRequestError(`Invite not found`)
 				}
 
 				try {
@@ -125,7 +125,7 @@ export async function createInvite(app: FastifyInstance) {
 					})
 				} catch {
 					throw new BadRequestError(
-						'An error occurred while trying to send e-mail with invitation.',
+						'An error occurred while trying to send e-mail with invitation',
 					)
 				}
 

@@ -43,7 +43,7 @@ export async function forgotPasswordAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes.',
+			message: 'Unexpected error, try again in a few minutes',
 			errors: null,
 		}
 	}

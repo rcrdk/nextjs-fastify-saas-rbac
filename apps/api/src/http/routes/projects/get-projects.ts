@@ -56,7 +56,7 @@ export async function getProjects(app: FastifyInstance) {
 				const { cannot } = getUserPermissions(userId, membership.role)
 
 				if (cannot('get', 'Project')) {
-					throw new UnauthorizedError('You are not allowed to get projects.')
+					throw new UnauthorizedError('You are not allowed to get projects')
 				}
 
 				const projects = await prisma.project.findMany({

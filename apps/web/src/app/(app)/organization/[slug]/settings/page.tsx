@@ -59,6 +59,7 @@ export default async function Settings() {
 								initialData={{
 									name: organization.name,
 								}}
+								submitButtonClass="sm:min-w-80 sm:self-center"
 							/>
 						</CardContent>
 					</Card>

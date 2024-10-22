@@ -78,14 +78,14 @@ export async function authorizeOrganizationDomainAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes.',
+			message: 'Unexpected error, try again in a few minutes',
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully saved the organization data.',
+		message: 'Successfully saved the organization data',
 		errors: null,
 	}
 }
@@ -109,14 +109,14 @@ export async function removeOrganizationDomainAction() {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes.',
+			message: 'Unexpected error, try again in a few minutes',
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully removed organization domain.',
+		message: 'Successfully removed organization domain',
 		errors: null,
 	}
 }

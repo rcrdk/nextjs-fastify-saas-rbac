@@ -50,7 +50,7 @@ export async function transferOrganization(app: FastifyInstance) {
 
 				if (cannot('transfer_ownership', authOrganization)) {
 					throw new UnauthorizedError(
-						'You are not allowed to transfer ownership of this organization.',
+						'You are not allowed to transfer ownership of this organization',
 					)
 				}
 
@@ -65,7 +65,7 @@ export async function transferOrganization(app: FastifyInstance) {
 
 				if (!transferToMembership) {
 					throw new BadRequestError(
-						'Target user is not a member of this organization.',
+						'Target user is not a member of this organization',
 					)
 				}
 

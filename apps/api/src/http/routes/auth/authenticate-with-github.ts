@@ -76,7 +76,7 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 				.parse(githubUserData)
 
 			if (email === null) {
-				throw new BadRequestError('Your GitHub account does not have an e-mail to authenticate.')
+				throw new BadRequestError('Your GitHub account does not have an e-mail to authenticate')
 			}
 
 			let user = await prisma.user.findUnique({

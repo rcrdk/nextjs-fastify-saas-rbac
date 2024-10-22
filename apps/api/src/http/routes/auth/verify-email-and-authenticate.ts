@@ -35,12 +35,12 @@ export async function verifyEmailAndAuthenticate(app: FastifyInstance) {
 			})
 
 			if (!userFromEmail) {
-				throw new BadRequestError('Invalid credentials.')
+				throw new BadRequestError('Invalid credentials')
 			}
 
 			if (userFromEmail.passwordHash === null) {
 				throw new BadRequestError(
-					'User does not have a password, use social sign-in.',
+					'User does not have a password, use social sign-in',
 				)
 			}
 
@@ -50,11 +50,11 @@ export async function verifyEmailAndAuthenticate(app: FastifyInstance) {
 			)
 
 			if (!isPasswordValid) {
-				throw new BadRequestError('Invalid credentials.')
+				throw new BadRequestError('Invalid credentials')
 			}
 
 			// eslint-disable-next-line prettier/prettier
-			const tokenErrorMessage = 'The token provied is not valid. Note: The code is valid for 5 minutes.'
+			const tokenErrorMessage = 'The token provied is not valid. Note: The code is valid for 5 minutes'
 
 			const validationToken = await prisma.token.findFirst({
 				where: {

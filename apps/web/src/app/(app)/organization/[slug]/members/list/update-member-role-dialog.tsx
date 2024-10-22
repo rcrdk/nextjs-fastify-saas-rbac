@@ -1,12 +1,14 @@
 'use client'
 
 import { Role } from '@saas/auth'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { DialogAction } from '@/components/dialog-action'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { useFormState } from '@/hooks/use-form-state'
 
 import { updateMemberAction } from './actions'
 
@@ -27,11 +29,28 @@ export function UpdateMemberRoleDialog({
 }: UpdateMemberRoleDialogProps) {
 	const [currentRole, setCurrentRole] = useState<Role>(role)
 
+	const [{ success, message }, handleUpdate, isPending] = useFormState(
+		updateMemberAction.bind(null, memberId, currentRole),
+		() => {
+			onOpenChange()
+		},
+	)
+
+	useEffect(() => {
+		if (!success && message) {
+			toast.error(message, { id: 'change-member-role' })
+		}
+		if (success && message) {
+			toast.success(message, { id: 'change-member-role' })
+		}
+	}, [success, message, isPending])
+
 	const actionForm = (
-		<form action={updateMemberAction.bind(null, memberId, currentRole)}>
+		<form onClick={handleUpdate}>
 			<FormSubmitButton
 				className="w-full gap-2"
 				loadingLabel="Updating role..."
+				loading={isPending}
 			>
 				Set new role
 			</FormSubmitButton>

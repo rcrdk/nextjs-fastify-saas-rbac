@@ -35,7 +35,7 @@ export async function acceptInvite(app: FastifyInstance) {
 				})
 
 				if (!invite) {
-					throw new BadRequestError('Invite not found or expired.')
+					throw new BadRequestError('Invite not found or expired')
 				}
 
 				const user = await prisma.user.findUnique({
@@ -45,11 +45,11 @@ export async function acceptInvite(app: FastifyInstance) {
 				})
 
 				if (!user) {
-					throw new BadRequestError('User not found.')
+					throw new BadRequestError('User not found')
 				}
 
 				if (invite.email !== user.email) {
-					throw new BadRequestError('This invite belongs to another user.')
+					throw new BadRequestError('This invite belongs to another user')
 				}
 
 				await prisma.$transaction([

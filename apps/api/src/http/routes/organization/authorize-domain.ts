@@ -45,7 +45,7 @@ export async function authorizeDomain(app: FastifyInstance) {
 				})
 
 				if (!organization) {
-					throw new BadRequestError('Organization not found.')
+					throw new BadRequestError('Organization not found')
 				}
 
 				const formatedDomain = `_saas.${domain}`
@@ -56,7 +56,7 @@ export async function authorizeDomain(app: FastifyInstance) {
 					checkForDomainTxtRecords =
 						await dnsPromisses.resolveTxt(formatedDomain)
 				} catch (error) {
-					throw new BadRequestError('Error checking DNS information.')
+					throw new BadRequestError('Error checking DNS information')
 				}
 
 				const checkForValidValue = checkForDomainTxtRecords
@@ -68,7 +68,7 @@ export async function authorizeDomain(app: FastifyInstance) {
 
 				if (!checkForValidValue) {
 					throw new BadRequestError(
-						'A valid TXT record was not found in the DNS records.',
+						'A valid TXT record was not found in the DNS records',
 					)
 				}
 
@@ -76,7 +76,7 @@ export async function authorizeDomain(app: FastifyInstance) {
 
 				if (organization.domainValidationId !== validationIdFromDomain) {
 					throw new BadRequestError(
-						'A valid TXT record does not match in the DNS records.',
+						'A valid TXT record does not match in the DNS records',
 					)
 				}
 
@@ -92,7 +92,7 @@ export async function authorizeDomain(app: FastifyInstance) {
 
 					if (organizationByDomain) {
 						throw new BadRequestError(
-							'Another organization with same domain already exists.',
+							'Another organization with same domain already exists',
 						)
 					}
 				}

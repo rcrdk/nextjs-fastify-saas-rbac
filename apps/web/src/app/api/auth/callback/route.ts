@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
 
 	if (!code) {
 		return NextResponse.json(
-			{ message: 'GitHub OAuth code was not found.' },
+			{ message: 'GitHub OAuth code was not found' },
 			{ status: 400 },
 		)
 	}

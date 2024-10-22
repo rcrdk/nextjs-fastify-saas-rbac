@@ -50,7 +50,7 @@ export async function updateProject(app: FastifyInstance) {
 				})
 
 				if (!project) {
-					throw new BadRequestError('Project not found.')
+					throw new BadRequestError('Project not found')
 				}
 
 				const authProject = projectSchema.parse(project)
@@ -59,7 +59,7 @@ export async function updateProject(app: FastifyInstance) {
 
 				if (cannot('update', authProject)) {
 					throw new UnauthorizedError(
-						'You are not allowed to uptate this project.',
+						'You are not allowed to uptate this project',
 					)
 				}
 
@@ -82,7 +82,7 @@ export async function updateProject(app: FastifyInstance) {
 					existsAnotherProjectWithSameSlug.id !== project.id
 				) {
 					throw new BadRequestError(
-						'There is another project in this organization using the same project name. Please, choose another one.',
+						'There is another project in this organization using the same project name. Please, choose another one',
 					)
 				}
 

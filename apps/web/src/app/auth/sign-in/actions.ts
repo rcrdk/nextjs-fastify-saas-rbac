@@ -36,7 +36,7 @@ export async function signinWithEmailAndPassword(data: FormData) {
 		if (!emailValidatedAt) {
 			return {
 				success: false,
-				message: 'You must have a verified e-mail to access your account.',
+				message: 'You must have a verified e-mail to access your account',
 				errors: null,
 			}
 		}
@@ -71,7 +71,7 @@ export async function signinWithEmailAndPassword(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes.',
+			message: 'Unexpected error, try again in a few minutes',
 			errors: null,
 		}
 	}

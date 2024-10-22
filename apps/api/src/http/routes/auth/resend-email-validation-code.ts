@@ -35,7 +35,7 @@ export async function resendEmailValidationCode(app: FastifyInstance) {
 			})
 
 			if (!userFromEmail) {
-				throw new BadRequestError('Invalid credentials.')
+				throw new BadRequestError('Invalid credentials')
 			}
 
 			const { id: validationCode } = await prisma.token.create({
@@ -53,7 +53,7 @@ export async function resendEmailValidationCode(app: FastifyInstance) {
 				})
 			} catch {
 				throw new BadRequestError(
-					'An error occurred while trying to send e-mail with e-mail validation.',
+					'An error occurred while trying to send e-mail with e-mail validation',
 				)
 			}
 

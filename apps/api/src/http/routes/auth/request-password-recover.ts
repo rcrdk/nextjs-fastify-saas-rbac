@@ -48,7 +48,7 @@ export async function requestPasswordRecover(app: FastifyInstance) {
 				})
 			} catch {
 				throw new BadRequestError(
-					'An error occurred while trying to send e-mail.',
+					'An error occurred while trying to send e-mail',
 				)
 			}
 
