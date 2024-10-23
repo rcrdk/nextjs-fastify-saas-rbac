@@ -79,12 +79,13 @@ export function RecoverPasswordForm() {
 							name="password"
 							type={showPassword ? 'text' : 'password'}
 							id="password"
+							autoComplete="off"
 						/>
 						<Button
 							type="button"
 							size="iconInput"
 							variant="ghost"
-							title="Copy attribute"
+							title={showPassword ? 'Hide password' : 'Show password'}
 							onClick={() => setShowPassword((prev) => !prev)}
 						>
 							{showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
@@ -99,6 +100,7 @@ export function RecoverPasswordForm() {
 						name="password_confirmation"
 						type="password"
 						id="password_confirmation"
+						autoComplete="off"
 					/>
 					<FormError message={errors?.password_confirmation} />
 				</div>

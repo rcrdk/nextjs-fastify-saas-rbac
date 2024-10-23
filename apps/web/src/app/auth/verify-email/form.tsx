@@ -61,7 +61,12 @@ export function VerifyEmailForm() {
 
 				<div className="space-y-1">
 					<Label htmlFor="password">Password</Label>
-					<Input name="password" type="password" id="password" />
+					<Input
+						name="password"
+						type="password"
+						id="password"
+						autoComplete="off"
+					/>
 					<FormError message={errors?.password} />
 				</div>
 
@@ -72,6 +77,7 @@ export function VerifyEmailForm() {
 						type="text"
 						id="code"
 						spellCheck="false"
+						autoComplete="off"
 						defaultValue={code ?? undefined}
 					/>
 					<FormError message={errors?.code} />

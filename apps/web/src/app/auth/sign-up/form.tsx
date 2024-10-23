@@ -68,12 +68,13 @@ export function SignUpForm() {
 							name="password"
 							type={showPassword ? 'text' : 'password'}
 							id="password"
+							autoComplete="off"
 						/>
 						<Button
 							type="button"
 							size="iconInput"
 							variant="ghost"
-							title="Copy attribute"
+							title={showPassword ? 'Hide password' : 'Show password'}
 							onClick={() => setShowPassword((prev) => !prev)}
 						>
 							{showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}

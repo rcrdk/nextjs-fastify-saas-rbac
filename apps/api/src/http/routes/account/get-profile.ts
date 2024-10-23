@@ -25,6 +25,13 @@ export async function getProfile(app: FastifyInstance) {
 								name: z.string().nullable(),
 								email: z.string().email(),
 								avatarUrl: z.string().url().nullable(),
+								passwordHash: z.boolean(),
+								accounts: z.array(
+									z.object({
+										id: z.string().uuid(),
+										provider: z.enum(['GITHUB']),
+									}),
+								),
 							}),
 						}),
 					},
@@ -34,20 +41,32 @@ export async function getProfile(app: FastifyInstance) {
 				const userId = await request.getCurrentUserId()
 
 				const user = await prisma.user.findUnique({
+					where: { id: userId },
 					select: {
 						id: true,
 						name: true,
 						email: true,
 						avatarUrl: true,
+						passwordHash: true,
+						accounts: {
+							select: {
+								id: true,
+								provider: true,
+							},
+						},
 					},
-					where: { id: userId },
 				})
 
 				if (!user) {
 					throw new BadRequestError('User not found')
 				}
 
-				return reply.status(200).send({ user })
+				return reply.status(200).send({
+					user: {
+						...user,
+						passwordHash: !!user.passwordHash,
+					},
+				})
 			},
 		)
 }

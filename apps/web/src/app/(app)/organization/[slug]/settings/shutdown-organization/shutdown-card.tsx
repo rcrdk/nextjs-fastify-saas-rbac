@@ -21,7 +21,7 @@ export function ShutdownOrganization() {
 				</CardDescription>
 			</CardHeader>
 
-			<CardContent className="md:p-6">
+			<CardContent className="md:p-5">
 				<ShutdownOrganizationButton />
 			</CardContent>
 		</Card>

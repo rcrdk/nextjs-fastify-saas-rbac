@@ -12,10 +12,10 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'
+import { getProfile } from './routes/account/get-profile'
 import { authenticateWithGitHub } from './routes/auth/authenticate-with-github'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 import { createAccount } from './routes/auth/create-account'
-import { getProfile } from './routes/auth/get-profile'
 import { requestPasswordRecover } from './routes/auth/request-password-recover'
 import { resendEmailValidationCode } from './routes/auth/resend-email-validation-code'
 import { resetPassword } from './routes/auth/reset-password'
@@ -85,11 +85,12 @@ app.register(fastifyJwt, {
 app.register(createAccount)
 app.register(authenticateWithPassword)
 app.register(authenticateWithGitHub)
-app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(resetPassword)
 app.register(verifyEmailAndAuthenticate)
 app.register(resendEmailValidationCode)
+
+app.register(getProfile)
 
 app.register(creteOrganization)
 app.register(getMemebership)
