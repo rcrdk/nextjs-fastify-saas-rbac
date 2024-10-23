@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState } from '@/hooks/use-form-state'
 
-import { removeOrganizationDomainAction } from './actions'
+import { removeOrganizationDomainAction } from '../actions'
 
 interface RemoveDomainProps {
 	domain: string | null

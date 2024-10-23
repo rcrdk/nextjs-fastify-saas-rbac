@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
-import { shutdownOrganizationAction } from './actions'
+import { shutdownOrganizationAction } from '../actions'
 
 export function ShutdownOrganizationButton() {
 	const [deleteInput, setDeleteInput] = useState('')

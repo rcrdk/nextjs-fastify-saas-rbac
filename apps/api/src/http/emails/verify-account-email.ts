@@ -19,7 +19,7 @@ export async function verifyAccountEmail({
 	const htmlTemplate = verifyAccountEmailTemplate({
 		name,
 		code,
-		link: `${env.NEXT_PUBLIC_URL}/auth/verify-email`,
+		link: `${env.NEXT_PUBLIC_URL}/auth/verify-email?email=${email}&code=${code}`,
 	})
 
 	const emailOptions: Mail.Options = {

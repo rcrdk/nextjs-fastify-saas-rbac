@@ -11,9 +11,9 @@ import {
 } from '@/components/ui/card'
 import { getOrganization } from '@/http/get-organization'
 
-import { Billing } from './billing'
-import { Domain } from './domain'
-import { ShutdownOrganization } from './shutdown-organization'
+import { Billing } from './billing/billing'
+import { Domain } from './domain/domain'
+import { ShutdownOrganization } from './shutdown-organization/shutdown-card'
 
 export async function generateMetadata(): Promise<Metadata> {
 	const currentOrganization = await getCurrentOrganization()
@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 	}
 }
 
-export default async function Settings() {
+export default async function OrganizationSettingsPage() {
 	const currentOrganization = await getCurrentOrganization()
 	const permissions = await ability()
 

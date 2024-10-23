@@ -21,8 +21,8 @@ import { useFormState } from '@/hooks/use-form-state'
 import { GetOrganizationItemRequest } from '@/http/get-organization'
 import { copyTextToClipboard } from '@/utils/copy-to-clipboard'
 
-import { authorizeOrganizationDomainAction } from './actions'
-import { RemoveDomain } from './domain-remove'
+import { authorizeOrganizationDomainAction } from '../actions'
+import { RemoveDomain } from './domain-remove-button'
 
 interface DomainProps {
 	organization: GetOrganizationItemRequest

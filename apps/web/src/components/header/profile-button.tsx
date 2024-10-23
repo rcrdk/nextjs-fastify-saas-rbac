@@ -1,4 +1,5 @@
-import { IconChevronDown, IconLogout } from '@tabler/icons-react'
+import { IconChevronDown, IconLogout, IconSettings } from '@tabler/icons-react'
+import Link from 'next/link'
 
 import { auth } from '@/auth'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
@@ -39,6 +40,15 @@ export async function ProfileButton() {
 					</span>
 					<span className="text-xs text-muted-foreground">{user.email}</span>
 				</div>
+
+				<DropdownMenuSeparator />
+
+				<DropdownMenuItem asChild>
+					<Link href="account/settings">
+						<IconSettings size={20} className="mr-2" />
+						Accout settings
+					</Link>
+				</DropdownMenuItem>
 
 				<DropdownMenuSeparator />
 

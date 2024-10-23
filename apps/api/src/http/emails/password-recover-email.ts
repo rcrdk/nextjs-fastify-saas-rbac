@@ -19,7 +19,7 @@ export async function passwordRecoverEmail({
 	const htmlTemplate = passwordRecoverEmailTemplate({
 		name,
 		code,
-		link: `${env.NEXT_PUBLIC_URL}/auth/recover-password?email=${email}`,
+		link: `${env.NEXT_PUBLIC_URL}/auth/recover-password?email=${email}&code=${code}`,
 	})
 
 	const emailOptions: Mail.Options = {

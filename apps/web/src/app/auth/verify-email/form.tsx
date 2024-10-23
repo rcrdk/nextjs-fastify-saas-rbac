@@ -1,22 +1,26 @@
 'use client'
 
 import { IconExclamationCircle } from '@tabler/icons-react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import { FormError } from '@/components/form-error'
 import { FormSubmitButton } from '@/components/form-submit-button'
+import { HeaderAuth } from '@/components/header/header-auth'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
 import { useFormState } from '@/hooks/use-form-state'
 
 import { verifyEmailAndAuthenticateAction } from './actions'
 import { ResendEmailValidationCode } from './resend-email-validation-code'
 
 export function VerifyEmailForm() {
-	const [email, setEmail] = useState('')
+	const searchParams = useSearchParams()
+	const emailParam = searchParams.get('email')
+	const code = searchParams.get('code')
+
+	const [email, setEmail] = useState(emailParam ?? '')
 
 	const router = useRouter()
 
@@ -29,6 +33,11 @@ export function VerifyEmailForm() {
 
 	return (
 		<div className="space-y-4">
+			<HeaderAuth
+				title="Verify your e-mail"
+				description="An e-mail was sent when you signed up with the validation code that is valid for 5 minutes. Check out your inbox to proceed or try to send a new validation code below."
+			/>
+
 			<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
 				{!success && message && (
 					<Alert variant="destructive">
@@ -38,16 +47,6 @@ export function VerifyEmailForm() {
 					</Alert>
 				)}
 
-				<div className="space-y-2">
-					<h1 className="text-lg font-semibold">Verify your e-mail:</h1>
-					<p className="text-balance text-sm text-muted-foreground">
-						An e-mail was sent when you signed up with the validation code that
-						is valid for 5 minutes. Check out your inbox to proceed.
-					</p>
-				</div>
-
-				<Separator />
-
 				<div className="space-y-1">
 					<Label htmlFor="email">E-mail</Label>
 					<Input
@@ -55,7 +54,7 @@ export function VerifyEmailForm() {
 						type="email"
 						id="email"
 						onChange={(e) => setEmail(e.target.value)}
-						value={email}
+						defaultValue={email}
 					/>
 					<FormError message={errors?.email} />
 				</div>
@@ -68,7 +67,13 @@ export function VerifyEmailForm() {
 
 				<div className="space-y-1">
 					<Label htmlFor="code">Validation code</Label>
-					<Input name="code" type="text" id="code" spellCheck="false" />
+					<Input
+						name="code"
+						type="text"
+						id="code"
+						spellCheck="false"
+						defaultValue={code ?? undefined}
+					/>
 					<FormError message={errors?.code} />
 				</div>
 

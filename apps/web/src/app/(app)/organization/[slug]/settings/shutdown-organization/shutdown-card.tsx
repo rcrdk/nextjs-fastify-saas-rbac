@@ -8,7 +8,7 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 
-import { ShutdownOrganizationButton } from './shutdown-organization-button'
+import { ShutdownOrganizationButton } from './shutdown-button'
 
 export function ShutdownOrganization() {
 	return (

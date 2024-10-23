@@ -4,6 +4,20 @@ export const validateStrongPasswordSchema = (
 	{ password }: Record<'password', string>,
 	checkPassComplexity: z.RefinementCtx,
 ) => {
+	if (!password.length) {
+		checkPassComplexity.addIssue({
+			code: 'custom',
+			path: ['password'],
+			message: JSON.stringify({
+				minLength: {
+					valid: false,
+					message: 'Enter a password.',
+					showIcon: false,
+				},
+			}),
+		})
+	}
+
 	const hasUppercase = (ch: string) => /[A-Z]/.test(ch)
 	const hasLowercase = (ch: string) => /[a-z]/.test(ch)
 	// eslint-disable-next-line prettier/prettier
@@ -23,11 +37,31 @@ export const validateStrongPasswordSchema = (
 	}
 
 	let errors = {
-		totalNumber: { valid: true, message: 'Enter one number.' },
-		upperCase: { valid: true, message: 'Enter one upper case letter.' },
-		lowerCase: { valid: true, message: 'Enter one lower case letter.' },
-		specialCh: { valid: true, message: 'Enter one special character.' },
-		minLength: { valid: true, message: 'Enter at least 6 characters.' },
+		totalNumber: {
+			valid: true,
+			message: 'Enter one number.',
+			showIcon: true,
+		},
+		upperCase: {
+			valid: true,
+			message: 'Enter one upper case letter.',
+			showIcon: true,
+		},
+		lowerCase: {
+			valid: true,
+			message: 'Enter one lower case letter.',
+			showIcon: true,
+		},
+		specialCh: {
+			valid: true,
+			message: 'Enter one special character.',
+			showIcon: true,
+		},
+		minLength: {
+			valid: true,
+			message: 'Enter at least 6 characters.',
+			showIcon: true,
+		},
 	}
 
 	if (countNumbers < 1) {

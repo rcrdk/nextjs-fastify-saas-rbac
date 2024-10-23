@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 
 import { FormError } from '@/components/form-error'
 import { FormSubmitButton } from '@/components/form-submit-button'
+import { HeaderAuth } from '@/components/header/header-auth'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -42,6 +43,8 @@ export function SignInForm() {
 
 	return (
 		<div className="space-y-4">
+			<HeaderAuth title="Sign in to your account" />
+
 			<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
 				{passwordRecoveredSuccess && !message && (
 					<Alert variant="success">

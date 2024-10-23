@@ -9,6 +9,7 @@ interface FormErrorProps {
 interface PasswordError {
 	valid: boolean
 	message: string
+	showIcon: boolean
 }
 
 export function FormErrorPassword({ list }: FormErrorProps) {
@@ -42,11 +43,8 @@ export function FormErrorPassword({ list }: FormErrorProps) {
 							: 'text-red-500 dark:text-red-400'
 					}`}
 				>
-					{error.valid ? (
-						<IconCircleCheck size={16} />
-					) : (
-						<IconCircleX size={16} />
-					)}
+					{error.showIcon && error.valid && <IconCircleCheck size={16} />}
+					{error.showIcon && !error.valid && <IconCircleX size={16} />}
 					<p className="text-xs">{error.message}</p>
 				</div>
 			))}
