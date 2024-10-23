@@ -17,7 +17,7 @@ export function ThemeSwitcher() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" size="icon">
+				<Button variant="ghost" size="icon" className="size-9">
 					<IconSun className="block dark:hidden" />
 					<IconMoon className="hidden dark:block" />
 					<span className="sr-only">Toggle theme</span>

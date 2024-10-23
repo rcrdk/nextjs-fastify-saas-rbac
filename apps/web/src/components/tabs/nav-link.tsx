@@ -26,7 +26,7 @@ export function NavLink(props: NavLinkProps) {
 		<Link
 			{...props}
 			data-current={isCurrentRoute}
-			className={['data-[current=true]:before:inset-b-0 relative rounded py-5 text-sm text-muted-foreground outline-none transition-colors before:absolute before:inset-x-0 before:bottom-0 before:hidden before:border-b-[3px] before:border-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary data-[current=true]:text-foreground data-[current=true]:before:block', props.className].join(' ')}
+			className={['data-[current=true]:before:inset-b-0 relative rounded pt-4 pb-5 sm:py-5 text-sm text-muted-foreground outline-none transition-colors before:absolute before:inset-x-0 before:bottom-0 before:hidden before:border-b-[3px] before:border-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary data-[current=true]:text-foreground data-[current=true]:before:block', props.className].join(' ')}
 		/>
 	)
 }

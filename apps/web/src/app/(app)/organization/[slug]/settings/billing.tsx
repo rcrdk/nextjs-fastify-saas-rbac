@@ -33,19 +33,28 @@ export async function Billing() {
 				</CardDescription>
 			</CardHeader>
 
-			<CardContent>
-				<div className="overflow-hidden rounded-sm border">
+			<CardContent className="p-0">
+				<div className="overflow-hidden">
 					<Table>
 						<TableHeader>
 							<TableRow>
-								<TableHead>Cost type</TableHead>
-								<TableHead className="text-right" style={{ width: 100 }}>
+								<TableHead className="pl-5">Cost type</TableHead>
+								<TableHead
+									className="pb-2 pl-0 pt-0 text-center"
+									style={{ width: 50 }}
+								>
 									Quantity
 								</TableHead>
-								<TableHead className="text-right" style={{ width: 100 }}>
+								<TableHead
+									className="pb-2 pl-0 pt-0 text-right"
+									style={{ width: 85 }}
+								>
 									Unit
 								</TableHead>
-								<TableHead className="text-right" style={{ width: 100 }}>
+								<TableHead
+									className="pb-2 pe-5 pl-0 pt-0 text-right"
+									style={{ width: 85 }}
+								>
 									Subtotal
 								</TableHead>
 							</TableRow>
@@ -53,17 +62,17 @@ export async function Billing() {
 
 						<TableBody>
 							<TableRow>
-								<TableCell>Amount of projects</TableCell>
-								<TableCell className="text-right">
+								<TableCell className="pl-5">Amount of projects</TableCell>
+								<TableCell className="pl-0 text-center">
 									{billing.projects.amount}
 								</TableCell>
-								<TableCell className="text-right">
+								<TableCell className="pl-0 text-right">
 									{billing.projects.unit.toLocaleString('en-us', {
 										style: 'currency',
 										currency: 'USD',
 									})}
 								</TableCell>
-								<TableCell className="text-right">
+								<TableCell className="pl-0 pr-5 text-right">
 									{billing.projects.price.toLocaleString('en-us', {
 										style: 'currency',
 										currency: 'USD',
@@ -72,17 +81,17 @@ export async function Billing() {
 							</TableRow>
 
 							<TableRow>
-								<TableCell>Amount of seats</TableCell>
-								<TableCell className="text-right">
+								<TableCell className="pl-5">Amount of seats</TableCell>
+								<TableCell className="pl-0 text-center">
 									{billing.seats.amount}
 								</TableCell>
-								<TableCell className="text-right">
+								<TableCell className="pl-0 text-right">
 									{billing.seats.unit.toLocaleString('en-us', {
 										style: 'currency',
 										currency: 'USD',
 									})}
 								</TableCell>
-								<TableCell className="text-right">
+								<TableCell className="pe-5 pl-0 text-right">
 									{billing.seats.price.toLocaleString('en-us', {
 										style: 'currency',
 										currency: 'USD',
@@ -93,10 +102,10 @@ export async function Billing() {
 
 						<TableFooter>
 							<TableRow>
-								<TableCell />
-								<TableCell />
-								<TableCell className="text-right">Total</TableCell>
-								<TableCell className="text-right">
+								<TableCell className="p-0" />
+								<TableCell className="p-0" />
+								<TableCell className="pl-0 text-right">Total</TableCell>
+								<TableCell className="pl-0 pr-5 text-right">
 									{billing.total.toLocaleString('en-us', {
 										style: 'currency',
 										currency: 'USD',

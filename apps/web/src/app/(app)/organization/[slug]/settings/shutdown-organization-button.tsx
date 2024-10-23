@@ -20,7 +20,7 @@ export function ShutdownOrganizationButton() {
 	}
 
 	const RemoveTriggerButton = (
-		<Button variant="destructive" className="gap-2">
+		<Button variant="destructive" className="w-full gap-2">
 			<IconCircleX className="mr-2" stroke={1.5} />
 			Shutdown organization
 		</Button>
@@ -34,7 +34,7 @@ export function ShutdownOrganizationButton() {
 				disabled={deleteInput !== 'DELETE'}
 				loadingLabel="Shutting down..."
 			>
-				Shutdown organization
+				Shutdown organizations
 			</FormSubmitButton>
 		</form>
 	)
@@ -48,11 +48,14 @@ export function ShutdownOrganizationButton() {
 			triggerButton={RemoveTriggerButton}
 			actionForm={actionForm}
 		>
-			<div className="space-y-1">
-				{/* eslint-disable-next-line prettier/prettier */}
-				<Label>Enter <span className="font-semibold text-red-500">DELETE</span> to confirm:</Label>
+			<div className="space-y-2">
+				<Label className="block text-center sm:text-left">
+					Enter <span className="font-semibold text-red-500">DELETE</span> to
+					confirm:
+				</Label>
 				<Input
 					defaultValue={deleteInput}
+					className="text-center sm:text-left"
 					onChange={(e) => setDeleteInput(e.target.value)}
 				/>
 			</div>

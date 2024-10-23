@@ -43,7 +43,7 @@ export default async function Settings() {
 		<div className="w-full space-y-6 self-start sm:space-y-8">
 			<h1 className="text-2xl font-bold">Organization Settings</h1>
 
-			<div className="space-y-8">
+			<div className="space-y-5 md:space-y-8">
 				{canUpdateOrganization && (
 					<Card>
 						<CardHeader>

@@ -40,7 +40,7 @@ export function PendingInvites() {
 	return (
 		<Popover open={isOpen} onOpenChange={setIsOpen}>
 			<PopoverTrigger asChild>
-				<Button variant="ghost" size="icon">
+				<Button variant="ghost" size="icon" className="size-9">
 					<IconUserPlus />
 					<span className="sr-only">Pending invites</span>
 				</Button>

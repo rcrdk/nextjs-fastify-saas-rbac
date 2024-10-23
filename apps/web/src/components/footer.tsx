@@ -3,7 +3,7 @@ import { IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react'
 export function Footer() {
 	return (
 		<footer className="mx-auto w-full max-w-[1200px] border-t pt-4">
-			<div className="flex items-center justify-between text-xs text-muted-foreground">
+			<div className="flex flex-col items-center justify-between gap-2 text-xs text-muted-foreground sm:flex-row">
 				<p>
 					<a
 						href="https://github.com/rcrdk/nextjs-fastify-saas-rbac"

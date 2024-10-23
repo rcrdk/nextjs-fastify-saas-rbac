@@ -12,7 +12,7 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
   - [Swagger](https://swagger.io/)
   - [Nodemailer](https://nodemailer.com/) + [Gmail](https://nodemailer.com/usage/using-gmail/)
 - Web:
-  - [React 19 RC](https://react.dev/) + [Next 15 RC](https://nextjs.org/) with App Router + 
+  - [React 19 RC](https://react.dev/) + [Next 15](https://nextjs.org/) with App Router + 
   - [Tailwind](https://tailwindcss.com/) with [shadcn-ui](https://ui.shadcn.com/)
   - [KY](https://github.com/sindresorhus/ky) (HTTP client) + [React Query](https://tanstack.com/query/latest)
 - Packages:

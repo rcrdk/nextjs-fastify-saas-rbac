@@ -26,7 +26,10 @@ export async function ProfileButton() {
 					</AvatarFallback>
 				</Avatar>
 
-				<IconChevronDown size={20} className="text-muted-foreground" />
+				<IconChevronDown
+					size={20}
+					className="hidden text-muted-foreground sm:block"
+				/>
 			</DropdownMenuTrigger>
 
 			<DropdownMenuContent align="end" sideOffset={12} className="select-none">

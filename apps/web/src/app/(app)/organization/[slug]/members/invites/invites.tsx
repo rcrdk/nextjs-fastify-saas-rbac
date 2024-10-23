@@ -32,8 +32,9 @@ export async function Invites() {
 					<>
 						<Card className="border-0">
 							<CardHeader className="sr-only">
-								<CardTitle className="text-md">Invite a new member</CardTitle>
+								<CardTitle>Invite a new member</CardTitle>
 							</CardHeader>
+
 							<CardContent className="p-4">
 								<CreateInviteForm />
 							</CardContent>

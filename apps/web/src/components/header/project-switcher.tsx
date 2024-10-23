@@ -42,7 +42,7 @@ export function ProjectSwitcher() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger
-				className="flex max-w-[224px] select-none items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none"
+				className="flex w-full select-none items-center gap-1 rounded-sm bg-foreground/5 px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none sm:w-auto sm:max-w-[288px] sm:bg-transparent md:max-w-[204px] lg:max-w-[264px]"
 				disabled={isLoading}
 			>
 				<Avatar
@@ -64,7 +64,9 @@ export function ProjectSwitcher() {
 				)}
 
 				{!isLoading && !currentProject && (
-					<span className="pr-1 text-muted-foreground">Select project</span>
+					<span className="whitespace-nowrap pr-1 text-muted-foreground">
+						Select project
+					</span>
 				)}
 
 				{!isLoading && currentProject && (
@@ -76,8 +78,9 @@ export function ProjectSwitcher() {
 
 			<DropdownMenuContent
 				align="center"
-				sideOffset={12}
-				className="w-[256px] select-none"
+				sideOffset={8}
+				collisionPadding={20}
+				className="w-[calc(100vw-40px)] select-none sm:w-auto sm:max-w-[328px] md:max-w-[264px] lg:max-w-[304px]"
 			>
 				<DropdownMenuGroup>
 					<DropdownMenuLabel>Projects</DropdownMenuLabel>

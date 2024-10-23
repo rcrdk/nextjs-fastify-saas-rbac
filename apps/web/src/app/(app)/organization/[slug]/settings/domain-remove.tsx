@@ -78,9 +78,11 @@ export function RemoveDomain({ domain }: RemoveDomainProps) {
 				triggerButton={RemoveTriggerButton}
 				actionForm={actionForm}
 			>
-				<div className="space-y-1">
-					{/* eslint-disable-next-line prettier/prettier */}
-					<Label>Enter <span className="font-semibold text-red-500">DELETE</span> to confirm:</Label>
+				<div className="space-y-2">
+					<Label className="block text-center sm:text-left">
+						Enter <span className="font-semibold text-red-500">DELETE</span> to
+						confirm:
+					</Label>
 					<Input
 						defaultValue={deleteInput}
 						onChange={(e) => setDeleteInput(e.target.value)}

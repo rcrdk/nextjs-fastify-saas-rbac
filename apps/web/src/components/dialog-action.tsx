@@ -38,16 +38,18 @@ export function DialogAction({
 			{triggerButton && <DialogTrigger asChild>{triggerButton}</DialogTrigger>}
 
 			<DialogPortal>
-				<DialogContent className="max-w-[91vw] rounded-lg sm:max-w-96">
+				<DialogContent className="bottom-2 top-auto translate-y-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%] sm:bottom-auto sm:top-[50%] sm:w-[410px] sm:translate-y-[-50%] sm:data-[state=closed]:slide-out-to-top-[48%] sm:data-[state=open]:slide-in-from-top-[48%]">
 					<DialogHeader>
-						<DialogTitle>{title}</DialogTitle>
-						<DialogDescription>{description}</DialogDescription>
+						<DialogTitle className="text-balance">{title}</DialogTitle>
+						<DialogDescription className="text-balance">
+							{description}
+						</DialogDescription>
 					</DialogHeader>
 
 					{children}
 
 					<DialogFooter>
-						<Button type="button" onClick={onOpenChange} variant="ghost">
+						<Button type="button" onClick={onOpenChange} variant="outline">
 							Cancel
 						</Button>
 
