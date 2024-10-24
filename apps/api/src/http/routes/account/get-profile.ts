@@ -15,7 +15,7 @@ export async function getProfile(app: FastifyInstance) {
 			'/profile',
 			{
 				schema: {
-					tags: ['Auth'],
+					tags: ['Account'],
 					summary: 'Get authenticated user profile.',
 					security: [{ bearerAuth: [] }],
 					response: {

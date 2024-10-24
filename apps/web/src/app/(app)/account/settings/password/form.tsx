@@ -27,7 +27,7 @@ export function AccountPasswordForm({ hasPassword }: AccountPasswordFormProps) {
 			)}
 
 			<div
-				className={`grid auto-cols-auto grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 ${hasPassword ? 'lg:grid-cols-3' : 'lg:grid-cols-2'}`}
+				className={`grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 ${hasPassword ? 'lg:grid-cols-3' : 'lg:grid-cols-2'}`}
 			>
 				{hasPassword && (
 					<div className="space-y-1 sm:col-span-2 lg:col-span-1">
