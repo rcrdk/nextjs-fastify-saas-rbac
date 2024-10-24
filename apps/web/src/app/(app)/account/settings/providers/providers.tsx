@@ -20,9 +20,7 @@ export async function AccountProviders() {
 		(!user.passwordHash && user.accounts.length === 1) || !user.passwordHash
 
 	return (
-		<Card
-			className={gitHubProvider ? 'items-center justify-between md:flex' : ''}
-		>
+		<Card className="flex-wrap items-center justify-between md:flex">
 			<CardHeader>
 				<CardTitle>Providers</CardTitle>
 				<CardDescription>
@@ -30,7 +28,11 @@ export async function AccountProviders() {
 				</CardDescription>
 			</CardHeader>
 
-			<CardContent className={gitHubProvider ? 'md:p-5' : ''}>
+			<CardContent className="md:p-5">
+				<DisconnectGitHubButton disabled={!gitHubProvider || isDisabled} />
+			</CardContent>
+
+			<CardContent className="w-full empty:hidden">
 				{!user.accounts.length && (
 					<div className="rounded border p-4 text-sm text-muted-foreground">
 						You don't have any provider linked to your account. You can sign out
@@ -39,14 +41,12 @@ export async function AccountProviders() {
 					</div>
 				)}
 
-				{isDisabled && (
-					<div className="mb-4 rounded border p-4 text-sm text-muted-foreground">
-						You cannot disconnect from providers if you dont have a password
-						configured in your account.
+				{gitHubProvider && isDisabled && (
+					<div className="rounded border p-4 text-sm text-muted-foreground">
+						You cannot disconnect from providers if you dont have a password or
+						another provider configured in your account.
 					</div>
 				)}
-
-				{gitHubProvider && <DisconnectGitHubButton disabled={isDisabled} />}
 			</CardContent>
 		</Card>
 	)

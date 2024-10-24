@@ -27,6 +27,23 @@ export async function removeAccountProvider(app: FastifyInstance) {
 				const userId = await request.getCurrentUserId()
 				const { provider } = request.params
 
+				const userWithoutPassword = await prisma.user.findFirst({
+					where: {
+						id: userId,
+						passwordHash: null,
+					},
+				})
+
+				const countAccountsAvailable = await prisma.account.count({
+					where: { userId },
+				})
+
+				if (userWithoutPassword && countAccountsAvailable < 2) {
+					throw new BadRequestError(
+						'This provider is the only access method available. Set a password or connect with another provider first.',
+					)
+				}
+
 				const accountExists = await prisma.account.findFirst({
 					where: {
 						userId,
