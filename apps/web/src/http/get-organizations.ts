@@ -2,14 +2,16 @@ import { Role } from '@saas/auth'
 
 import { API } from '../lib/api-client'
 
+export interface GetOrganizationsItemResponse {
+	id: string
+	name: string
+	slug: string
+	avatarUrl: string | null
+	role: Role
+}
+
 interface GetOrganizationsResponse {
-	organizations: {
-		id: string
-		name: string
-		slug: string
-		avatarUrl: string | null
-		role: Role
-	}[]
+	organizations: GetOrganizationsItemResponse[]
 }
 
 export async function getOrganizations() {

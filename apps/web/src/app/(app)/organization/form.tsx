@@ -20,12 +20,14 @@ interface OrganizationFormProps {
 	isUpdating?: boolean
 	initialData?: OrganizationSchema
 	submitButtonClass?: string
+	submitButtonVariant?: 'default' | 'secondary'
 }
 
 export function OrganizationForm({
 	isUpdating = false,
 	initialData,
 	submitButtonClass,
+	submitButtonVariant = 'default',
 }: OrganizationFormProps) {
 	const router = useRouter()
 
@@ -79,6 +81,7 @@ export function OrganizationForm({
 				loading={isPending}
 				loadingLabel={buttonText.loading}
 				className={submitButtonClass}
+				variant={submitButtonVariant}
 			>
 				{buttonText.default}
 			</FormSubmitButton>

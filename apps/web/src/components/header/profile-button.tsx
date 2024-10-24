@@ -44,7 +44,7 @@ export async function ProfileButton() {
 				<DropdownMenuSeparator />
 
 				<DropdownMenuItem asChild>
-					<Link href="account/settings">
+					<Link href="/account/settings">
 						<IconSettings size={20} className="mr-2" />
 						Accout settings
 					</Link>

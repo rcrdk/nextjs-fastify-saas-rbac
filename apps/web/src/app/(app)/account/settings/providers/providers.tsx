@@ -16,8 +16,13 @@ export async function AccountProviders() {
 	// eslint-disable-next-line prettier/prettier
 	const gitHubProvider = user.accounts.find((item) => item.provider === 'GITHUB')
 
+	const isDisabled =
+		(!user.passwordHash && user.accounts.length === 1) || !user.passwordHash
+
 	return (
-		<Card>
+		<Card
+			className={gitHubProvider ? 'items-center justify-between md:flex' : ''}
+		>
 			<CardHeader>
 				<CardTitle>Providers</CardTitle>
 				<CardDescription>
@@ -25,7 +30,7 @@ export async function AccountProviders() {
 				</CardDescription>
 			</CardHeader>
 
-			<CardContent>
+			<CardContent className={gitHubProvider ? 'md:p-5' : ''}>
 				{!user.accounts.length && (
 					<div className="rounded border p-4 text-sm text-muted-foreground">
 						You don't have any provider linked to your account. You can sign out
@@ -34,7 +39,7 @@ export async function AccountProviders() {
 					</div>
 				)}
 
-				{!!user.accounts.length && !user.passwordHash && (
+				{isDisabled && (
 					<div className="mb-4 rounded border p-4 text-sm text-muted-foreground">
 						You cannot disconnect from providers if you dont have a password
 						configured in your account.
@@ -44,8 +49,8 @@ export async function AccountProviders() {
 				{gitHubProvider && (
 					<Button
 						variant="secondary"
-						disabled={!user.passwordHash}
-						className="gap-2"
+						disabled={isDisabled}
+						className="w-full gap-2"
 					>
 						<IconBrandGithub size={20} />
 						Disconnect from GitHub

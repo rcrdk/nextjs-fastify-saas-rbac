@@ -60,6 +60,7 @@ export default async function OrganizationSettingsPage() {
 									name: organization.name,
 								}}
 								submitButtonClass="sm:min-w-80 sm:self-center"
+								submitButtonVariant="secondary"
 							/>
 						</CardContent>
 					</Card>

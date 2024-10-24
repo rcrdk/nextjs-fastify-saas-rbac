@@ -37,6 +37,7 @@ export function AccountInformationForm({
 				className="sm:min-w-80 sm:self-center"
 				loading={false}
 				loadingLabel="Updating profile..."
+				variant="secondary"
 			>
 				Update profile
 			</FormSubmitButton>

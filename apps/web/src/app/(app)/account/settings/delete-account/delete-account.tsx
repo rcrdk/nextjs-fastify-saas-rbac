@@ -1,4 +1,4 @@
-import { IconCircleX } from '@tabler/icons-react'
+import { IconUserMinus } from '@tabler/icons-react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -22,7 +22,7 @@ export async function AccountDelete() {
 
 			<CardContent className="md:p-5">
 				<Button variant="destructive" className="w-full gap-2">
-					<IconCircleX className="mr-2" stroke={1.5} />
+					<IconUserMinus className="mr-2" stroke={1.5} />
 					Delete my account
 				</Button>
 			</CardContent>

@@ -80,6 +80,7 @@ export function AccountPasswordForm({ hasPassword }: AccountPasswordFormProps) {
 				className="sm:min-w-80 sm:self-center"
 				loading={false}
 				loadingLabel="Updating password..."
+				variant="secondary"
 			>
 				Change password
 			</FormSubmitButton>

@@ -1,6 +1,6 @@
 'use client'
 
-import { IconCircleX } from '@tabler/icons-react'
+import { IconSquareRoundedMinus } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -40,8 +40,8 @@ export function RemoveDomain({ domain }: RemoveDomainProps) {
 	}, [success, message, isPending])
 
 	const RemoveTriggerButton = (
-		<Button variant="destructive" className="gap-2">
-			<IconCircleX size={20} />
+		<Button variant="secondary" className="gap-2">
+			<IconSquareRoundedMinus size={20} />
 			Remove Organization Domain
 		</Button>
 	)

@@ -175,6 +175,7 @@ export function Domain({ organization }: DomainProps) {
 							loading={isPending}
 							loadingLabel={submitButtonLabel.loading}
 							className="sm:min-w-80 sm:self-center"
+							variant="secondary"
 						>
 							{submitButtonLabel.default}
 						</FormSubmitButton>

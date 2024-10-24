@@ -1,6 +1,6 @@
 'use client'
 
-import { IconCircleX } from '@tabler/icons-react'
+import { IconPower } from '@tabler/icons-react'
 import { useState } from 'react'
 
 import { DialogAction } from '@/components/dialog-action'
@@ -21,7 +21,7 @@ export function ShutdownOrganizationButton() {
 
 	const RemoveTriggerButton = (
 		<Button variant="destructive" className="w-full gap-2">
-			<IconCircleX className="mr-2" stroke={1.5} />
+			<IconPower className="mr-2" stroke={1.5} />
 			Shutdown organization
 		</Button>
 	)
