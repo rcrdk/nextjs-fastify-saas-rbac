@@ -1,6 +1,3 @@
-import { IconUserMinus } from '@tabler/icons-react'
-
-import { Button } from '@/components/ui/button'
 import {
 	Card,
 	CardContent,
@@ -8,6 +5,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
+
+import { DeleteAccountDialog } from './dialog'
 
 export async function AccountDelete() {
 	return (
@@ -21,10 +20,7 @@ export async function AccountDelete() {
 			</CardHeader>
 
 			<CardContent className="md:p-5">
-				<Button variant="destructive" className="w-full gap-2">
-					<IconUserMinus className="mr-2" stroke={1.5} />
-					Delete my account
-				</Button>
+				<DeleteAccountDialog />
 			</CardContent>
 		</Card>
 	)

@@ -1,4 +1,4 @@
-import { IconArrowRight, IconUser } from '@tabler/icons-react'
+import { IconArrowRight, IconBriefcaseOff, IconUser } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'next/link'
@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/card'
 import { getProjects } from '@/http/get-projects'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
+import { getFirstName } from '@/utils/get-first-name'
 
 dayjs.extend(relativeTime)
 
@@ -40,9 +41,14 @@ export async function ProjectsList() {
 
 					<CardFooter className="flex items-center gap-1.5">
 						<Avatar className="size-5">
-							<AvatarImage
-								src={getAvatarUrl(project.owner.avatarUrl, project.owner.email)}
-							/>
+							{project.owner && (
+								<AvatarImage
+									src={getAvatarUrl(
+										project.owner.avatarUrl,
+										project.owner.email,
+									)}
+								/>
+							)}
 
 							<AvatarFallback>
 								<IconUser size={16} className="text-muted-foreground/50" />
@@ -51,7 +57,7 @@ export async function ProjectsList() {
 
 						<span className="text-balance text-xs text-muted-foreground">
 							<span className="font-medium text-foreground">
-								{project.owner.name}
+								{getFirstName(project.owner?.name, 'Someone')}
 							</span>{' '}
 							{dayjs(project.createdAt).fromNow()}
 						</span>
@@ -74,7 +80,8 @@ export async function ProjectsList() {
 			))}
 
 			{projects.length === 0 && (
-				<div className="rounded border p-4 text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">
+				<div className="flex flex-col items-center justify-center gap-2 text-balance rounded border px-4 py-6 text-center text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">
+					<IconBriefcaseOff strokeWidth={1} className="size-10" />
 					There are no projects in this organization.
 				</div>
 			)}

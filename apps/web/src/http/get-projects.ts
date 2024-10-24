@@ -19,7 +19,7 @@ interface GetProjectsResponse {
 			name: string | null
 			avatarUrl: string | null
 			email: string
-		}
+		} | null
 	}[]
 }
 

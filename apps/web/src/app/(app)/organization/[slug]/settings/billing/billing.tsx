@@ -1,3 +1,5 @@
+import { IconBriefcase, IconUsers } from '@tabler/icons-react'
+
 import { getCurrentOrganization } from '@/auth'
 import {
 	Card,
@@ -38,9 +40,11 @@ export async function Billing() {
 					<Table>
 						<TableHeader>
 							<TableRow>
-								<TableHead className="pl-5">Cost type</TableHead>
+								<TableHead className="pl-5" colSpan={2}>
+									Cost type
+								</TableHead>
 								<TableHead
-									className="pb-2 pl-0 pt-0 text-center"
+									className="px-0 pb-2 pt-0 text-center"
 									style={{ width: 50 }}
 								>
 									Quantity
@@ -62,7 +66,10 @@ export async function Billing() {
 
 						<TableBody>
 							<TableRow>
-								<TableCell className="pl-5">Amount of projects</TableCell>
+								<TableCell className="pe-2 pl-5" style={{ width: 20 }}>
+									<IconBriefcase size={20} className="text-muted-foreground" />
+								</TableCell>
+								<TableCell className="pl-0">Amount of projects</TableCell>
 								<TableCell className="pl-0 text-center">
 									{billing.projects.amount}
 								</TableCell>
@@ -81,7 +88,10 @@ export async function Billing() {
 							</TableRow>
 
 							<TableRow>
-								<TableCell className="pl-5">Amount of seats</TableCell>
+								<TableCell className="pe-2 pl-5" style={{ width: 20 }}>
+									<IconUsers size={20} className="text-muted-foreground" />
+								</TableCell>
+								<TableCell className="pl-0">Amount of seats</TableCell>
 								<TableCell className="pl-0 text-center">
 									{billing.seats.amount}
 								</TableCell>
@@ -102,8 +112,7 @@ export async function Billing() {
 
 						<TableFooter>
 							<TableRow>
-								<TableCell className="p-0" />
-								<TableCell className="p-0" />
+								<TableCell className="p-0" colSpan={3} />
 								<TableCell className="pl-0 text-right">Total</TableCell>
 								<TableCell className="pl-0 pr-5 text-right">
 									{billing.total.toLocaleString('en-us', {

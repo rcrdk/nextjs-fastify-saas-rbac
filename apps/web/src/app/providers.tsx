@@ -34,6 +34,7 @@ export function Providers({ children }: ProvidersProps) {
 							),
 						},
 						error: {
+							style: { padding: '8px 24px', gap: '12px', maxWidth: '290px' },
 							duration: 5000,
 							icon: (
 								<IconCircleX className="size-7 flex-shrink-0 text-red-500" />

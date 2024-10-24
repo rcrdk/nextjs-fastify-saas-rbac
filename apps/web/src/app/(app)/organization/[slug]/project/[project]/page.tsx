@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { getOrganization } from '@/http/get-organization'
 import { getProject } from '@/http/get-project'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
+import { getFirstName } from '@/utils/get-first-name'
 
 type Params = Promise<{ project: string }>
 
@@ -63,15 +64,17 @@ export default async function Project({ params }: { params: Params }) {
 
 				<div className="flex items-center gap-2">
 					<Avatar className="size-8">
-						<AvatarImage
-							src={getAvatarUrl(project.owner.avatarUrl, project.owner.email)}
-						/>
+						{project.owner && (
+							<AvatarImage
+								src={getAvatarUrl(project.owner.avatarUrl, project.owner.email)}
+							/>
+						)}
 
 						<AvatarFallback>
 							<IconUser size={20} className="text-muted-foreground/50" />
 						</AvatarFallback>
 					</Avatar>
-					<span>{project.owner.name}</span>
+					<span>{getFirstName(project.owner?.name, 'Someone')}</span>
 				</div>
 			</div>
 		</div>

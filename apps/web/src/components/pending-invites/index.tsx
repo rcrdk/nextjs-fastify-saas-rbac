@@ -1,13 +1,22 @@
 'use client'
 
 import { PopoverContent } from '@radix-ui/react-popover'
-import { IconCircleCheck, IconCircleX, IconUserPlus } from '@tabler/icons-react'
+import {
+	IconCircleCheck,
+	IconCircleX,
+	IconMailPlus,
+	IconThumbDown,
+	IconThumbUp,
+	IconUserPlus,
+} from '@tabler/icons-react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { getPendingInvites } from '@/http/get-pending-invites'
+import { getRoleName } from '@/utils/get-role-name'
 
 import { Button } from '../ui/button'
 import { Popover, PopoverTrigger } from '../ui/popover'
@@ -27,26 +36,53 @@ export function PendingInvites() {
 		enabled: isOpen,
 	})
 
-	async function handleAcceptInvite(inviteId: string) {
-		await acceptInviteAction(inviteId)
-		queryClient.invalidateQueries({ queryKey: ['pending-invites'] })
-	}
+	async function handleInvite(action: 'accept' | 'reject', inviteId: string) {
+		const isAcceped = action === 'accept'
 
-	async function handleRejectInvite(inviteId: string) {
-		await rejectInviteAction(inviteId)
-		queryClient.invalidateQueries({ queryKey: ['pending-invites'] })
+		if (isAcceped) {
+			await acceptInviteAction(inviteId)
+		} else {
+			await rejectInviteAction(inviteId)
+		}
+
+		const toastMessage = `You ${isAcceped ? 'accepted' : 'declined'} the invitation to join organization`
+		const toastIcon = isAcceped ? (
+			<IconThumbUp className="size-7 flex-shrink-0 text-green-500" />
+		) : (
+			<IconThumbDown className="size-7 flex-shrink-0 text-red-500" />
+		)
+
+		toast(toastMessage, {
+			id: `invite-acceped-${inviteId}`,
+			icon: toastIcon,
+			style: { padding: '8px 24px', gap: '12px', maxWidth: '290px' },
+		})
+
+		setIsOpen(false)
+		queryClient.resetQueries({ queryKey: ['pending-invites'] })
 	}
 
 	return (
 		<Popover open={isOpen} onOpenChange={setIsOpen}>
 			<PopoverTrigger asChild>
-				<Button variant="ghost" size="icon" className="size-9">
+				<Button
+					variant="ghost"
+					size="icon"
+					className="size-9"
+					title="Pending invites"
+				>
 					<IconUserPlus />
 					<span className="sr-only">Pending invites</span>
 				</Button>
 			</PopoverTrigger>
 
-			<PopoverContent className="w-80 space-y-4 rounded border bg-white p-4 dark:bg-black">
+			<PopoverContent
+				sideOffset={8}
+				collisionPadding={20}
+				data-loading={isLoading}
+				data-count={data?.invites.length ?? 0}
+				className="h-[16.5rem] max-h-[80vh] w-screen max-w-[calc(100vw-40px)] flex-col space-y-4 overflow-auto rounded-lg border bg-white p-4 data-[count=0]:flex data-[loading=true]:overflow-hidden dark:bg-black sm:w-96 sm:max-w-none"
+			>
 				<span className="block text-sm font-medium">
 					Pending invites ({data?.invites.length ?? 0})
 				</span>
@@ -61,6 +97,10 @@ export function PendingInvites() {
 							<span className="font-medium text-foreground">
 								{invite.organization.name}
 							</span>{' '}
+							as{' '}
+							<span className="font-medium lowercase text-foreground">
+								{getRoleName(invite.role)}
+							</span>{' '}
 							about {dayjs(invite.createdAt).fromNow()}.
 						</p>
 
@@ -69,7 +109,7 @@ export function PendingInvites() {
 								size="xs"
 								variant="secondary"
 								className="gap-2"
-								onClick={() => handleAcceptInvite(invite.id)}
+								onClick={() => handleInvite('accept', invite.id)}
 							>
 								<IconCircleCheck size={16} />
 								Accept
@@ -79,7 +119,7 @@ export function PendingInvites() {
 								size="xs"
 								variant="outline"
 								className="gap-2"
-								onClick={() => handleRejectInvite(invite.id)}
+								onClick={() => handleInvite('reject', invite.id)}
 							>
 								<IconCircleX size={16} />
 								Reject
@@ -89,24 +129,26 @@ export function PendingInvites() {
 				))}
 
 				{data?.invites.length === 0 && (
-					<p className="border-t pt-3 text-sm text-muted-foreground">
-						There are not pending invitations for you.
+					<p className="flex flex-grow flex-col items-center justify-center gap-2 text-balance border-t pt-3 text-center text-sm text-muted-foreground">
+						<IconMailPlus className="size-16" strokeWidth={1} />
+						There are not pending invitations to join organizations for you.
 					</p>
 				)}
 
-				{isLoading && (
-					<div className="space-y-2 border-t pt-2">
-						<div className="space-y-1">
-							<Skeleton className="h-3 w-full" />
-							<Skeleton className="h-3 w-3/5" />
-						</div>
+				{isLoading &&
+					Array.from({ length: 3 }).map((_, index) => (
+						<div key={index} className="space-y-2 border-t pt-3">
+							<div className="space-y-1">
+								<Skeleton className="h-3 w-full" />
+								<Skeleton className="h-3 w-3/5" />
+							</div>
 
-						<div className="flex gap-2">
-							<Skeleton className="h-6 w-20" />
-							<Skeleton className="h-6 w-20" />
+							<div className="flex gap-2">
+								<Skeleton className="h-6 w-20" />
+								<Skeleton className="h-6 w-20" />
+							</div>
 						</div>
-					</div>
-				)}
+					))}
 			</PopoverContent>
 		</Popover>
 	)

@@ -23,7 +23,11 @@ import { useFormState } from '@/hooks/use-form-state'
 import { signInWithGitHub } from '../actions'
 import { signinWithEmailAndPassword } from './actions'
 
-export function SignInForm() {
+interface SignInFormProps {
+	accountDeleted?: string | null
+}
+
+export function SignInForm({ accountDeleted }: SignInFormProps) {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 
@@ -46,6 +50,14 @@ export function SignInForm() {
 			<HeaderAuth title="Sign in to your account" />
 
 			<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+				{accountDeleted && (
+					<Alert variant="success">
+						<IconCircleCheck size={20} />
+						<AlertTitle>We are sorry to know that.</AlertTitle>
+						<AlertDescription>{accountDeleted}</AlertDescription>
+					</Alert>
+				)}
+
 				{passwordRecoveredSuccess && !message && (
 					<Alert variant="success">
 						<IconCircleCheck size={20} />

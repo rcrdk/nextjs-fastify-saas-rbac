@@ -12,6 +12,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'
+import { deleteAccount } from './routes/account/delete-account'
 import { getProfile } from './routes/account/get-profile'
 import { leaveOrganization } from './routes/account/leave-organization'
 import { removeAccountProvider } from './routes/account/remove-provider'
@@ -99,6 +100,7 @@ app.register(updateAccount)
 app.register(updatePassword)
 app.register(removeAccountProvider)
 app.register(leaveOrganization)
+app.register(deleteAccount)
 
 app.register(creteOrganization)
 app.register(getMemebership)
