@@ -21,9 +21,10 @@ import { createInviteAction } from './actions'
 export function CreateInviteForm() {
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		createInviteAction,
-		undefined,
-		undefined,
-		true,
+		{
+			resetFormOnSuccess: true,
+			resetStateMessage: true,
+		},
 	)
 
 	useEffect(() => {

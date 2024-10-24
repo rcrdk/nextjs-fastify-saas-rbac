@@ -28,8 +28,10 @@ export function RecoverPasswordForm() {
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		recoverPasswordAction,
-		() => {
-			router.push('/auth/sign-in?password=recovered')
+		{
+			onSuccess() {
+				router.push('/auth/sign-in?password=recovered')
+			},
 		},
 	)
 

@@ -1,7 +1,8 @@
 'use client'
 
 import { IconEye, IconEyeOff } from '@tabler/icons-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
 import { FormErrorPassword } from '@/components/form-error-password'
@@ -9,6 +10,9 @@ import { FormSubmitButton } from '@/components/form-submit-button'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useFormState } from '@/hooks/use-form-state'
+
+import { updateAccountPasswordAction } from './actions'
 
 interface AccountPasswordFormProps {
 	hasPassword: boolean
@@ -17,8 +21,25 @@ interface AccountPasswordFormProps {
 export function AccountPasswordForm({ hasPassword }: AccountPasswordFormProps) {
 	const [showPassword, setShowPassword] = useState(false)
 
+	const [{ success, message, errors }, handleUpdate, isPending] = useFormState(
+		updateAccountPasswordAction,
+		{
+			resetFormOnSuccess: true,
+			resetStateMessage: true,
+		},
+	)
+
+	useEffect(() => {
+		if (!success && message) {
+			toast.error(message, { id: 'update-password' })
+		}
+		if (success && message) {
+			toast.success(message, { id: 'update-password' })
+		}
+	}, [success, message, isPending])
+
 	return (
-		<form className="flex flex-col space-y-4">
+		<form onSubmit={handleUpdate} className="flex flex-col space-y-4">
 			{!hasPassword && (
 				<div className="rounded border p-4 text-sm text-muted-foreground">
 					You signed in using a provider, you can set a password for your
@@ -38,7 +59,7 @@ export function AccountPasswordForm({ hasPassword }: AccountPasswordFormProps) {
 							id="current_password"
 							autoComplete="off"
 						/>
-						{/* <FormError message={errors?.current_password} /> */}
+						<FormError message={errors?.current_password} />
 					</div>
 				)}
 
@@ -61,7 +82,7 @@ export function AccountPasswordForm({ hasPassword }: AccountPasswordFormProps) {
 							{showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
 						</Button>
 					</div>
-					{/* <FormErrorPassword list={errors?.password} /> */}
+					<FormErrorPassword list={errors?.password} />
 				</div>
 
 				<div className="space-y-1">
@@ -72,7 +93,7 @@ export function AccountPasswordForm({ hasPassword }: AccountPasswordFormProps) {
 						id="password_confirmation"
 						autoComplete="off"
 					/>
-					{/* <FormError message={errors?.password_confirmation} /> */}
+					<FormError message={errors?.password_confirmation} />
 				</div>
 			</div>
 

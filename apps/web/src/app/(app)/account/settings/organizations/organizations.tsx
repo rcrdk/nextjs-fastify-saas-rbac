@@ -1,7 +1,6 @@
-import { AvatarFallback } from '@radix-ui/react-avatar'
 import { IconBriefcase, IconCrown, IconUser } from '@tabler/icons-react'
 
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
 	Card,
 	CardContent,
@@ -44,7 +43,7 @@ export async function AccountOrganizations() {
 										<AvatarFallback className="text-xs font-medium">
 											<IconBriefcase
 												size={20}
-												className="text-muted-foreground/50"
+												className="text-muted-foreground opacity-50"
 											/>
 										</AvatarFallback>
 									</Avatar>

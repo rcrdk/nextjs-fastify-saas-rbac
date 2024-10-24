@@ -31,8 +31,11 @@ export function TransferOwnershipDialog({
 
 	const [{ success, message }, handleTransfer, isPending] = useFormState(
 		transferOrganizationOwnershipAction.bind(null, memberId, action),
-		() => {
-			onOpenChange()
+		{
+			onSuccess() {
+				onOpenChange()
+			},
+			resetStateMessage: true,
 		},
 	)
 

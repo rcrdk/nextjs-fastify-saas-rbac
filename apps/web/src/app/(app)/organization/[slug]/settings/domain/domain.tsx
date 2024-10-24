@@ -31,14 +31,17 @@ interface DomainProps {
 export function Domain({ organization }: DomainProps) {
 	const [{ success, message, errors }, handleUpdate, isPending] = useFormState(
 		authorizeOrganizationDomainAction,
+		{
+			resetStateMessage: true,
+		},
 	)
 
 	useEffect(() => {
 		if (!success && message) {
-			toast.error(message, { id: 'invite' })
+			toast.error(message, { id: 'update-domain' })
 		}
 		if (success && message) {
-			toast.success(message, { id: 'invite' })
+			toast.success(message, { id: 'update-domain' })
 		}
 	}, [success, message, isPending])
 

@@ -13,8 +13,6 @@ const updateAccountSchema = z.object({
 	email: z.string().email('Enter a valid e-mail.'),
 })
 
-export type AupdateAccountSchema = z.infer<typeof updateAccountSchema>
-
 export async function saveAccountInformationsAction(data: FormData) {
 	const result = updateAccountSchema.safeParse(Object.fromEntries(data))
 

@@ -37,10 +37,13 @@ export function OrganizationForm({
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		formAction,
-		() => {
-			if (!isUpdating) {
-				setTimeout(() => router.back(), 300)
-			}
+		{
+			onSuccess() {
+				if (!isUpdating) {
+					setTimeout(() => router.back(), 300)
+				}
+			},
+			resetStateMessage: true,
 		},
 	)
 

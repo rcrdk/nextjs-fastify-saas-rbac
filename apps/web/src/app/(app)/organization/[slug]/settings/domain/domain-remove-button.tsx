@@ -28,6 +28,9 @@ export function RemoveDomain({ domain }: RemoveDomainProps) {
 
 	const [{ success, message }, handleRemove, isPending] = useFormState(
 		removeOrganizationDomainAction,
+		{
+			resetStateMessage: true,
+		},
 	)
 
 	useEffect(() => {

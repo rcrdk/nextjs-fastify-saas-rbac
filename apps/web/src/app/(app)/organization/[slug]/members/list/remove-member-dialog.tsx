@@ -24,8 +24,11 @@ export function RemoveMemberDialog({
 }: RemoveMemberDialogProps) {
 	const [{ success, message }, handleRemove, isPending] = useFormState(
 		removeMemberAction.bind(null, memberId),
-		() => {
-			onOpenChange()
+		{
+			onSuccess() {
+				onOpenChange()
+			},
+			resetStateMessage: true,
 		},
 	)
 

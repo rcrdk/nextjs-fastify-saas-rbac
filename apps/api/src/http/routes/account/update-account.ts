@@ -27,16 +27,6 @@ export async function updateAccount(app: FastifyInstance) {
 				const userId = await request.getCurrentUserId()
 				const { email, name } = request.body
 
-				const user = await prisma.user.findUnique({
-					where: {
-						id: userId,
-					},
-				})
-
-				if (!user) {
-					throw new BadRequestError('User does not exists')
-				}
-
 				const userWithSameEmail = await prisma.user.findFirst({
 					where: {
 						email,

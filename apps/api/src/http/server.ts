@@ -14,6 +14,7 @@ import {
 import { errorHandler } from './error-handler'
 import { getProfile } from './routes/account/get-profile'
 import { updateAccount } from './routes/account/update-account'
+import { updatePassword } from './routes/account/update-password'
 import { authenticateWithGitHub } from './routes/auth/authenticate-with-github'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 import { createAccount } from './routes/auth/create-account'
@@ -93,6 +94,7 @@ app.register(resendEmailValidationCode)
 
 app.register(getProfile)
 app.register(updateAccount)
+app.register(updatePassword)
 
 app.register(creteOrganization)
 app.register(getMemebership)

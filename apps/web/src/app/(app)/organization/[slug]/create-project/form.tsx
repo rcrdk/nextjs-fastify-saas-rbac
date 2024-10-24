@@ -24,19 +24,22 @@ export function ProjectForm({ isUpdating, initialData }: ProjectFormProps) {
 	const router = useRouter()
 
 	const formAction = isUpdating
-		? createProjectAction // updateOrganizationAction
+		? createProjectAction // updateProjectAction
 		: createProjectAction
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		formAction,
-		() => {
-			queryClient.invalidateQueries({
-				queryKey: [organization, 'projects'],
-			})
+		{
+			onSuccess() {
+				queryClient.invalidateQueries({
+					queryKey: [organization, 'projects'],
+				})
 
-			if (!isUpdating) {
-				setTimeout(() => router.back(), 300)
-			}
+				if (!isUpdating) {
+					setTimeout(() => router.back(), 300)
+				}
+			},
+			resetStateMessage: true,
 		},
 	)
 

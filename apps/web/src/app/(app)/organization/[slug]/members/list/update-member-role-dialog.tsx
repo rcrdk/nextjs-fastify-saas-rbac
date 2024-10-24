@@ -31,8 +31,11 @@ export function UpdateMemberRoleDialog({
 
 	const [{ success, message }, handleUpdate, isPending] = useFormState(
 		updateMemberAction.bind(null, memberId, currentRole),
-		() => {
-			onOpenChange()
+		{
+			onSuccess() {
+				onOpenChange()
+			},
+			resetStateMessage: true,
 		},
 	)
 

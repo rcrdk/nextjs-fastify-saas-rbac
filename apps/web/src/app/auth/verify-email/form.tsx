@@ -26,8 +26,10 @@ export function VerifyEmailForm() {
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		verifyEmailAndAuthenticateAction,
-		() => {
-			router.push('/')
+		{
+			onSuccess() {
+				router.push('/')
+			},
 		},
 	)
 

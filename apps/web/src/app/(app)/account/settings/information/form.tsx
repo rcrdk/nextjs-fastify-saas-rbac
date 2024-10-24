@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState } from '@/hooks/use-form-state'
 
-import { saveAccountInformationsAction } from '../actions'
+import { saveAccountInformationsAction } from './actions'
 
 interface AccountInformationFormProps {
 	initialData: {
@@ -23,14 +23,17 @@ export function AccountInformationForm({
 }: AccountInformationFormProps) {
 	const [{ success, message, errors }, handleUpdate, isPending] = useFormState(
 		saveAccountInformationsAction,
+		{
+			resetStateMessage: true,
+		},
 	)
 
 	useEffect(() => {
 		if (!success && message) {
-			toast.error(message, { id: 'invite' })
+			toast.error(message, { id: 'save-account' })
 		}
 		if (success && message) {
-			toast.success(message, { id: 'invite' })
+			toast.success(message, { id: 'save-account' })
 		}
 	}, [success, message, isPending])
 

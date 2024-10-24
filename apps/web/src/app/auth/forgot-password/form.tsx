@@ -20,8 +20,10 @@ export function ForgotPasswordForm() {
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		forgotPasswordAction,
-		() => {
-			router.push(`/auth/recover-password`)
+		{
+			onSuccess() {
+				router.push(`/auth/recover-password`)
+			},
 		},
 	)
 

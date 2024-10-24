@@ -7,16 +7,25 @@ interface FormState {
 	errors: Record<string, string[]> | null
 }
 
+/**
+ *
+ * @param action Set a action for the form
+ * @param options
+ * @returns
+ */
 export function useFormState(
 	action: (data: FormData) => Promise<FormState>,
-	onSuccess?: () => Promise<void> | void,
-	initialState?: FormState,
-	resetForm?: boolean,
+	options?: {
+		initialState?: FormState
+		onSuccess?: () => Promise<void> | void
+		resetFormOnSuccess?: boolean
+		resetStateMessage?: boolean
+	},
 ) {
 	const [isPending, startTransition] = useTransition()
 
 	const [formState, setFormState] = useState(
-		initialState ?? { success: false, message: null, errors: null },
+		options?.initialState ?? { success: false, message: null, errors: null },
 	)
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -26,15 +35,28 @@ export function useFormState(
 		const data = new FormData(form)
 
 		startTransition(async () => {
-			if (resetForm) requestFormReset(form)
-
 			const state = await action(data)
 
-			if (!!state.success && onSuccess) {
-				await onSuccess()
+			if (!!state.success && options?.onSuccess) {
+				await options.onSuccess()
+			}
+
+			if (!!state.success && options?.resetFormOnSuccess) {
+				requestFormReset(form)
 			}
 
 			setFormState(state)
+
+			if (options?.resetStateMessage) {
+				setTimeout(() => {
+					setFormState((prev) => {
+						return {
+							...prev,
+							message: null,
+						}
+					})
+				}, 500)
+			}
 		})
 	}
 
