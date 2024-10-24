@@ -17,6 +17,7 @@ export async function updateAccount(app: FastifyInstance) {
 				schema: {
 					tags: ['Account'],
 					summary: 'Update account informations.',
+					security: [{ bearerAuth: [] }],
 					body: z.object({
 						name: z.string(),
 						email: z.string().email(),

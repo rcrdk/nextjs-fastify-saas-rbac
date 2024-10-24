@@ -18,6 +18,7 @@ export async function removeAccountProvider(app: FastifyInstance) {
 				schema: {
 					tags: ['Account'],
 					summary: 'Delete a authentication provider from your account.',
+					security: [{ bearerAuth: [] }],
 					params: z.object({
 						provider: accountProvidersSchema,
 					}),

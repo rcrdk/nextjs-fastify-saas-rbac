@@ -18,6 +18,7 @@ export async function updatePassword(app: FastifyInstance) {
 				schema: {
 					tags: ['Account'],
 					summary: 'Update or create account password.',
+					security: [{ bearerAuth: [] }],
 					body: z.object({
 						currentPassword: z.string().nullish(),
 						newPassword: z.string().min(6),

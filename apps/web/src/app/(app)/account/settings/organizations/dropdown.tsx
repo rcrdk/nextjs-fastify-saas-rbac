@@ -9,6 +9,7 @@ import {
 	IconUsers,
 } from '@tabler/icons-react'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -20,6 +21,8 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { GetOrganizationsItemResponse } from '@/http/get-organizations'
 
+import { LeaveOrganizationDialog } from './leave-dialog'
+
 interface AccountOrganizationsDropdownActionsProps {
 	organization: GetOrganizationsItemResponse
 }
@@ -27,11 +30,11 @@ interface AccountOrganizationsDropdownActionsProps {
 export function AccountOrganizationsDropdownActions({
 	organization,
 }: AccountOrganizationsDropdownActionsProps) {
-	// const [dialogRemovalVisible, setDialogRemovalVisible] = useState(false)
+	const [dialogLeaveVisible, setDialogLeaveVisible] = useState(false)
 
-	// function handleToggleRemoveVisibility() {
-	// 	setDialogRemovalVisible((prev) => !prev)
-	// }
+	function handleToggleLeaveVisibility() {
+		setDialogLeaveVisible((prev) => !prev)
+	}
 
 	const isOwner = organization.role === 'ADMIN'
 
@@ -95,23 +98,22 @@ export function AccountOrganizationsDropdownActions({
 
 							<DropdownMenuItem
 								className="cursor-pointer gap-2 disabled:cursor-default"
-								// onClick={handleToggleTransferVisibility}
-								// disabled={isOwner || !canTransferOwnership}
+								onClick={handleToggleLeaveVisibility}
 							>
 								<IconDoorExit size={20} />
-								leave organization
+								Leave organization
 							</DropdownMenuItem>
 						</>
 					)}
 				</DropdownMenuContent>
 			</DropdownMenu>
 
-			{/* <RemoveMemberDialog
-				name={member.name}
-				memberId={member.memberId}
-				open={dialogRemovalVisible}
-				onOpenChange={handleToggleRemoveVisibility}
-			/> */}
+			<LeaveOrganizationDialog
+				name={organization.name}
+				organizationSlug={organization.slug}
+				open={dialogLeaveVisible}
+				onOpenChange={handleToggleLeaveVisibility}
+			/>
 		</>
 	)
 }
