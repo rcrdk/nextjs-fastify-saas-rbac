@@ -4,6 +4,7 @@ import { z } from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
+import { accountProvidersSchema } from '@/schemas/account-providers'
 
 import { BadRequestError } from '../_errors/bad-request-error'
 
@@ -29,7 +30,7 @@ export async function getProfile(app: FastifyInstance) {
 								accounts: z.array(
 									z.object({
 										id: z.string().uuid(),
-										provider: z.enum(['GITHUB']),
+										provider: accountProvidersSchema,
 									}),
 								),
 							}),

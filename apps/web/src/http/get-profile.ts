@@ -1,3 +1,5 @@
+import { AccountProviders } from '@/@types/account-providers'
+
 import { API } from '../lib/api-client'
 
 interface GetProfileResponse {
@@ -9,7 +11,7 @@ interface GetProfileResponse {
 		passwordHash: boolean
 		accounts: {
 			id: string
-			provider: 'GITHUB'
+			provider: AccountProviders
 		}[]
 	}
 }

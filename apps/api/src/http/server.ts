@@ -13,6 +13,7 @@ import {
 
 import { errorHandler } from './error-handler'
 import { getProfile } from './routes/account/get-profile'
+import { removeAccountProvider } from './routes/account/remove-provider'
 import { updateAccount } from './routes/account/update-account'
 import { updatePassword } from './routes/account/update-password'
 import { authenticateWithGitHub } from './routes/auth/authenticate-with-github'
@@ -95,6 +96,7 @@ app.register(resendEmailValidationCode)
 app.register(getProfile)
 app.register(updateAccount)
 app.register(updatePassword)
+app.register(removeAccountProvider)
 
 app.register(creteOrganization)
 app.register(getMemebership)

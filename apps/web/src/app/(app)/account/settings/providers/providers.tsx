@@ -1,7 +1,4 @@
-import { IconBrandGithub } from '@tabler/icons-react'
-
 import { auth } from '@/auth'
-import { Button } from '@/components/ui/button'
 import {
 	Card,
 	CardContent,
@@ -10,11 +7,14 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 
+import { DisconnectGitHubButton } from './disconnect-github-button'
+
 export async function AccountProviders() {
 	const { user } = await auth()
 
-	// eslint-disable-next-line prettier/prettier
-	const gitHubProvider = user.accounts.find((item) => item.provider === 'GITHUB')
+	const gitHubProvider = user.accounts.find(
+		(item) => item.provider === 'GITHUB',
+	)
 
 	const isDisabled =
 		(!user.passwordHash && user.accounts.length === 1) || !user.passwordHash
@@ -46,16 +46,7 @@ export async function AccountProviders() {
 					</div>
 				)}
 
-				{gitHubProvider && (
-					<Button
-						variant="secondary"
-						disabled={isDisabled}
-						className="w-full gap-2"
-					>
-						<IconBrandGithub size={20} />
-						Disconnect from GitHub
-					</Button>
-				)}
+				{gitHubProvider && <DisconnectGitHubButton disabled={isDisabled} />}
 			</CardContent>
 		</Card>
 	)
