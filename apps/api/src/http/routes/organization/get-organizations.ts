@@ -24,7 +24,7 @@ export async function getOrganizations(app: FastifyInstance) {
 									id: z.string().uuid(),
 									name: z.string(),
 									slug: z.string(),
-									avatarUrl: z.string().url().nullable(),
+									avatarUrl: z.string().nullable(),
 									role: rolesSchema,
 								}),
 							),

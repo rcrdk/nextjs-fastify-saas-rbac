@@ -136,3 +136,19 @@ model Project {
     @@unique([organizationId, slug])
     @@map("projects")
 }
+
+enum AvatarReceipient {
+    USER
+    ORGANIZATION
+    PROJECT
+}
+
+model Avatar {
+    id           String            @id @default(uuid())
+    name         String
+    receipient   AvatarReceipient?
+    receipientId String?           @map("receipient_id")
+
+    @@unique([receipient, receipientId])
+    @@map("avatars")
+}

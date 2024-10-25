@@ -15,6 +15,7 @@ interface AccountInformationFormProps {
 	initialData: {
 		name: string | null
 		email: string
+		avatarUrl: string | null
 	}
 }
 
@@ -38,8 +39,8 @@ export function AccountInformationForm({
 	}, [success, message, isPending])
 
 	return (
-		<form onSubmit={handleUpdate} className="flex flex-col space-y-4">
-			<div className="grid grid-cols-1 gap-x-6 gap-y-4 lg:grid-cols-2">
+		<form onSubmit={handleUpdate} className="flex flex-grow flex-col space-y-4">
+			<div className="grid grid-cols-1 gap-x-6 gap-y-4">
 				<div className="space-y-1">
 					<Label>Name:</Label>
 					<Input

@@ -25,7 +25,7 @@ export async function getProfile(app: FastifyInstance) {
 								id: z.string().uuid(),
 								name: z.string().nullable(),
 								email: z.string().email(),
-								avatarUrl: z.string().url().nullable(),
+								avatarUrl: z.string().nullable(),
 								passwordHash: z.boolean(),
 								accounts: z.array(
 									z.object({

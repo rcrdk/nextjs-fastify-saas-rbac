@@ -1,4 +1,4 @@
-import { IconMoodHappy, IconUniverse } from '@tabler/icons-react'
+import { IconUniverse } from '@tabler/icons-react'
 import { cookies } from 'next/headers'
 
 import { auth } from '@/auth'

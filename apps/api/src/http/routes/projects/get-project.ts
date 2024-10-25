@@ -31,7 +31,7 @@ export async function getProject(app: FastifyInstance) {
 								name: z.string(),
 								slug: z.string(),
 								description: z.string(),
-								avatarUrl: z.string().url().nullable(),
+								avatarUrl: z.string().nullable(),
 								organizationId: z.string().uuid(),
 								createdAt: z.date(),
 								updatedAt: z.date(),
@@ -39,7 +39,7 @@ export async function getProject(app: FastifyInstance) {
 									.object({
 										id: z.string().uuid(),
 										name: z.string().nullable(),
-										avatarUrl: z.string().url().nullable(),
+										avatarUrl: z.string().nullable(),
 										email: z.string().email(),
 									})
 									.nullable(),

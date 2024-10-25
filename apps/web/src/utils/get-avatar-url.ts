@@ -1,15 +1,22 @@
 import { createHash } from 'node:crypto'
 
+import { env } from '@saas/env'
+
 /**
  * Get a avatar with a fallback from Gravatar:
  * @param avatarUrl provide a custom avatar url.
- * @param email provide an email to search for an avatar on Gravatar.
+ * @param gravatarEmail provide an email to search for an avatar on Gravatar.
  * @returns an avatar url or a Gravatar fallback.
  */
-export function getAvatarUrl(avatarUrl: string | null, email: string) {
-	if (avatarUrl) return avatarUrl
+export function getAvatarUrl(avatarUrl: string | null, gravatarEmail?: string) {
+	if (avatarUrl)
+		return avatarUrl.replace('{AWS}', env.NEXT_PUBLIC_AWS_PUBLIC_URL)
 
-	const hashedEmail = createHash('md5').update(email).digest('hex')
+	if (gravatarEmail) {
+		const hashedEmail = createHash('md5').update(gravatarEmail).digest('hex')
 
-	return `https://www.gravatar.com/avatar/${hashedEmail}?d=404`
+		return `https://www.gravatar.com/avatar/${hashedEmail}?d=404`
+	}
+
+	return avatarUrl
 }

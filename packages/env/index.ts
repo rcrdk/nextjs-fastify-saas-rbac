@@ -18,6 +18,14 @@ export const env = createEnv({
 		MAIL_SMTP_PORT: z.coerce.number().default(465),
 		MAIL_SMTP_EMAIL: z.string(),
 		MAIL_SMTP_PASSWORD: z.string(),
+
+		CLOUDFLARE_ACCOUNT_ID: z.string(),
+		AWS_ENDPOINT: z.string(),
+		AWS_BUCKET: z.string(),
+		AWS_REGION: z.string().default('auto'),
+		AWS_ACCESS_KEY: z.string(),
+		AWS_SECRET_KEY: z.string(),
+		
 	},
 
 	client: {},
@@ -25,6 +33,7 @@ export const env = createEnv({
 	shared: {
 		NEXT_PUBLIC_URL: z.string().url(),
 		NEXT_PUBLIC_API_URL: z.string().url(),
+		NEXT_PUBLIC_AWS_PUBLIC_URL: z.string(),
 	},
 
 	runtimeEnv: {
@@ -41,6 +50,13 @@ export const env = createEnv({
 		MAIL_SMTP_PORT: process.env.MAIL_SMTP_PORT,
 		MAIL_SMTP_EMAIL: process.env.MAIL_SMTP_EMAIL,
 		MAIL_SMTP_PASSWORD: process.env.MAIL_SMTP_PASSWORD,
+		CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
+		AWS_ENDPOINT: process.env.AWS_ENDPOINT,
+		AWS_BUCKET: process.env.AWS_BUCKET,
+		AWS_REGION: process.env.AWS_REGION,
+		AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
+		AWS_SECRET_KEY: process.env.AWS_SECRET_KEY,
+		NEXT_PUBLIC_AWS_PUBLIC_URL: process.env.NEXT_PUBLIC_AWS_PUBLIC_URL,
 	},
 	emptyStringAsUndefined: true,
 })
