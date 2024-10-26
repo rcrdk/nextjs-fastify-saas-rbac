@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 
@@ -34,9 +35,7 @@ export async function leaveOrganization(app: FastifyInstance) {
 					await request.getCurrentUserMembership(organizationSlug)
 
 				if (userId === organization.ownerId) {
-					throw new BadRequestError(
-						'You are the owner of this organization, to leave it you must transfer the ownership first',
-					)
+					throw new BadRequestError(errors.organizations.entity.CANNOT_LEAVE)
 				}
 
 				await prisma.member.delete({

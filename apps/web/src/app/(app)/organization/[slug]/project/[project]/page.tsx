@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 
 import { getCurrentOrganization } from '@/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { getOrganization } from '@/http/get-organization'
-import { getProject } from '@/http/get-project'
+import { getOrganization } from '@/http/organizations/get-organization'
+import { getProject } from '@/http/projects/get-project'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getFirstName } from '@/utils/get-first-name'
 

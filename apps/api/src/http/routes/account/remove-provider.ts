@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { accountProvidersSchema } from '@/schemas/account-providers'
@@ -40,9 +41,7 @@ export async function removeAccountProvider(app: FastifyInstance) {
 				})
 
 				if (userWithoutPassword && countAccountsAvailable < 2) {
-					throw new BadRequestError(
-						'This provider is the only access method available. Set a password or connect with another provider first.',
-					)
+					throw new BadRequestError(errors.auth.LAST_METHOD_AVAILABLE)
 				}
 
 				const accountExists = await prisma.account.findFirst({
@@ -53,7 +52,7 @@ export async function removeAccountProvider(app: FastifyInstance) {
 				})
 
 				if (!accountExists) {
-					throw new BadRequestError('Account does not exists')
+					throw new BadRequestError(errors.user.ACCOUNT_NOT_FOUND)
 				}
 
 				await prisma.account.delete({

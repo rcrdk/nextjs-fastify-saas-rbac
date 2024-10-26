@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { passwordRecoverEmail } from '@/http/emails/password-recover-email'
 import { prisma } from '@/lib/prisma'
 
@@ -47,9 +48,7 @@ export async function requestPasswordRecover(app: FastifyInstance) {
 					code,
 				})
 			} catch {
-				throw new BadRequestError(
-					'An error occurred while trying to send e-mail',
-				)
+				throw new BadRequestError(errors.services.SEND_EMAIL)
 			}
 
 			return reply.status(201).send()

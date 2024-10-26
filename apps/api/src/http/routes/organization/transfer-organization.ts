@@ -3,6 +3,8 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
+import { transferOrganizationOwnershipEmail } from '@/http/emails/transfer-organization-ownership-email'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
@@ -50,7 +52,7 @@ export async function transferOrganization(app: FastifyInstance) {
 
 				if (cannot('transfer_ownership', authOrganization)) {
 					throw new UnauthorizedError(
-						'You are not allowed to transfer ownership of this organization',
+						errors.organizations.entity.CANNOT_TRANSFER,
 					)
 				}
 
@@ -64,9 +66,7 @@ export async function transferOrganization(app: FastifyInstance) {
 				})
 
 				if (!transferToMembership) {
-					throw new BadRequestError(
-						'Target user is not a member of this organization',
-					)
+					throw new BadRequestError(errors.organizations.entity.NOT_MEMBER)
 				}
 
 				await prisma.$transaction([
@@ -111,6 +111,22 @@ export async function transferOrganization(app: FastifyInstance) {
 								},
 							}),
 				])
+
+				const newOwner = await prisma.user.findUniqueOrThrow({
+					where: {
+						id: transferToUserId,
+					},
+				})
+
+				try {
+					await transferOrganizationOwnershipEmail({
+						organizationName: organization.name,
+						targetName: newOwner.name ?? '',
+						targetEmail: newOwner.email,
+					})
+				} catch {
+					throw new BadRequestError(errors.services.SEND_EMAIL)
+				}
 
 				return reply.status(204).send()
 			},

@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { accountProvidersSchema } from '@/schemas/account-providers'
@@ -59,7 +60,7 @@ export async function getProfile(app: FastifyInstance) {
 				})
 
 				if (!user) {
-					throw new BadRequestError('User not found')
+					throw new BadRequestError(errors.user.NOT_FOUND)
 				}
 
 				return reply.status(200).send({

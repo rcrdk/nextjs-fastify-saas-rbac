@@ -2,8 +2,8 @@
 
 import { revalidateTag } from 'next/cache'
 
-import { acceptInvite } from '@/http/accept-invite'
-import { rejectInvite } from '@/http/reject-invite'
+import { acceptInvite } from '@/http/invites/accept-invite'
+import { rejectInvite } from '@/http/invites/reject-invite'
 
 export async function acceptInviteAction(inviteId: string) {
 	await acceptInvite({ inviteId })

@@ -4,9 +4,9 @@ import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
 
-import { acceptInvite } from '@/http/accept-invite'
-import { resendEmailValidationCode } from '@/http/resend-email-validation-code'
-import { verifyEmailAndSignIn } from '@/http/verify-email-and-sign-in'
+import { resendEmailValidationCode } from '@/http/auth/resend-email-validation-code'
+import { verifyEmailAndSignIn } from '@/http/auth/verify-email-and-sign-in'
+import { acceptInvite } from '@/http/invites/accept-invite'
 
 const verifyEmailSchema = z.object({
 	email: z.string().email('Enter a valid e-mail.'),

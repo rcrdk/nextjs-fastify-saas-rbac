@@ -3,7 +3,7 @@
 import { HTTPError } from 'ky'
 import { z } from 'zod'
 
-import { recoverPassword } from '@/http/recover-password'
+import { recoverPassword } from '@/http/auth/recover-password'
 import { validateStrongPasswordSchema } from '@/schema/helpers/strong-password'
 
 const recoverPasswordSchema = z

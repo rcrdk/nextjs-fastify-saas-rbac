@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
@@ -39,7 +40,9 @@ export async function revokeInvite(app: FastifyInstance) {
 				const { cannot } = getUserPermissions(userId, membership.role)
 
 				if (cannot('delete', 'Invite')) {
-					throw new UnauthorizedError('You are not allowed to revoke an invite')
+					throw new UnauthorizedError(
+						errors.organizations.invites.CANNOT_REVOKE,
+					)
 				}
 
 				const invite = await prisma.invite.findUnique({
@@ -50,7 +53,7 @@ export async function revokeInvite(app: FastifyInstance) {
 				})
 
 				if (!invite) {
-					throw new BadRequestError('Invite not found')
+					throw new BadRequestError(errors.organizations.invites.NOT_FOUND)
 				}
 
 				await prisma.invite.delete({

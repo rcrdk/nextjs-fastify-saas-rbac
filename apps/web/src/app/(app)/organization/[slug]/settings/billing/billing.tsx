@@ -17,7 +17,7 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table'
-import { getOrganizationBilling } from '@/http/get-billing'
+import { getOrganizationBilling } from '@/http/organizations/get-billing'
 
 export async function Billing() {
 	const currentOrganization = await getCurrentOrganization()

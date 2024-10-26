@@ -4,7 +4,7 @@ import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
-import { updateAccount } from '@/http/update-account'
+import { updateAccount } from '@/http/account/update-account'
 
 const updateAccountSchema = z.object({
 	name: z

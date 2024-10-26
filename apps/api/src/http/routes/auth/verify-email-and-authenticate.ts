@@ -4,6 +4,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { prisma } from '@/lib/prisma'
 
 import { BadRequestError } from '../_errors/bad-request-error'
@@ -35,13 +36,11 @@ export async function verifyEmailAndAuthenticate(app: FastifyInstance) {
 			})
 
 			if (!userFromEmail) {
-				throw new BadRequestError('Invalid credentials')
+				throw new BadRequestError(errors.auth.INVALID_CREDENTIALS)
 			}
 
 			if (userFromEmail.passwordHash === null) {
-				throw new BadRequestError(
-					'User does not have a password, use social sign-in',
-				)
+				throw new BadRequestError(errors.auth.NOT_PASSWORD_FOUND)
 			}
 
 			const isPasswordValid = await compare(
@@ -50,11 +49,8 @@ export async function verifyEmailAndAuthenticate(app: FastifyInstance) {
 			)
 
 			if (!isPasswordValid) {
-				throw new BadRequestError('Invalid credentials')
+				throw new BadRequestError(errors.auth.INVALID_CREDENTIALS)
 			}
-
-			// eslint-disable-next-line prettier/prettier
-			const tokenErrorMessage = 'The token provied is not valid. Note: The code is valid for 5 minutes'
 
 			const validationToken = await prisma.token.findFirst({
 				where: {
@@ -65,7 +61,7 @@ export async function verifyEmailAndAuthenticate(app: FastifyInstance) {
 			})
 
 			if (!validationToken) {
-				throw new BadRequestError(tokenErrorMessage)
+				throw new BadRequestError(errors.auth.INVALID_EMAIL_TOKEN)
 			}
 
 			const tokenWasCreatedAt = dayjs(validationToken.createdAt)
@@ -79,7 +75,7 @@ export async function verifyEmailAndAuthenticate(app: FastifyInstance) {
 					},
 				})
 
-				throw new BadRequestError(tokenErrorMessage)
+				throw new BadRequestError(errors.auth.INVALID_EMAIL_TOKEN)
 			}
 
 			await prisma.$transaction([

@@ -19,7 +19,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { GetOrganizationsItemResponse } from '@/http/get-organizations'
+import { GetOrganizationsItemResponse } from '@/http/organizations/get-organizations'
 
 import { LeaveOrganizationDialog } from './leave-dialog'
 

@@ -3,6 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 
@@ -36,12 +37,12 @@ export async function updatePassword(app: FastifyInstance) {
 				})
 
 				if (!user) {
-					throw new BadRequestError('Invalid credentials')
+					throw new BadRequestError(errors.auth.INVALID_CREDENTIALS)
 				}
 
 				if (user.passwordHash) {
 					if (!currentPassword) {
-						throw new BadRequestError('Invalid credentials')
+						throw new BadRequestError(errors.auth.INVALID_CREDENTIALS)
 					}
 
 					const isPasswordValid = await compare(
@@ -50,7 +51,7 @@ export async function updatePassword(app: FastifyInstance) {
 					)
 
 					if (!isPasswordValid) {
-						throw new BadRequestError('Invalid credentials')
+						throw new BadRequestError(errors.auth.INVALID_CREDENTIALS)
 					}
 				}
 

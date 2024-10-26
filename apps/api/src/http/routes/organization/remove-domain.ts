@@ -4,6 +4,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { prisma } from '@/lib/prisma'
 
 import { auth } from '../../middlewares/auth'
@@ -38,7 +39,7 @@ export async function removeDomain(app: FastifyInstance) {
 				})
 
 				if (!organization) {
-					throw new BadRequestError('Organization not found')
+					throw new BadRequestError(errors.organizations.entity.NOT_FOUND)
 				}
 
 				await prisma.organization.update({

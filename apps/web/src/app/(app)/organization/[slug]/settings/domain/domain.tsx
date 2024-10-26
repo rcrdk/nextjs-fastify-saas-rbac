@@ -4,7 +4,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
-import { GetOrganizationItemRequest } from '@/http/get-organization'
+import { GetOrganizationItemRequest } from '@/http/organizations/get-organization'
 
 import { DomainDnsSettings } from './dns-settings'
 import { RemoveDomain } from './domain-remove'

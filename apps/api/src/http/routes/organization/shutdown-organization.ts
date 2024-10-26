@@ -3,6 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { deleteMultipleObjectsR2 } from '@/lib/cloudflare-r2'
 import { prisma } from '@/lib/prisma'
@@ -46,7 +47,7 @@ export async function shutdownOrganization(app: FastifyInstance) {
 
 				if (cannot('delete', authOrganization)) {
 					throw new UnauthorizedError(
-						'You are not allowed to shutdown this organization',
+						errors.organizations.entity.CANNOT_SHUTDOWN,
 					)
 				}
 

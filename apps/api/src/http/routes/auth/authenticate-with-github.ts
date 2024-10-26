@@ -4,6 +4,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { prisma } from '@/lib/prisma'
 
 import { BadRequestError } from '../_errors/bad-request-error'
@@ -76,7 +77,7 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 				.parse(githubUserData)
 
 			if (email === null) {
-				throw new BadRequestError('Your GitHub account does not have an e-mail to authenticate')
+				throw new BadRequestError(errors.auth.GITHUB_EMAIL_NOT_FOUND)
 			}
 
 			let user = await prisma.user.findUnique({

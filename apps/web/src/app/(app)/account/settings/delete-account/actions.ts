@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { deleteAccount } from '@/http/delete-account'
+import { deleteAccount } from '@/http/account/delete-account'
 
 export async function deleteAccountAction() {
 	const cookieStore = await cookies()

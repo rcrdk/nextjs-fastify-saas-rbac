@@ -3,7 +3,7 @@
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 
-import { leaveOrganization } from '@/http/leave-organization'
+import { leaveOrganization } from '@/http/organizations/leave-organization'
 
 export async function leaveOrganizationAction(organizationSlug: string) {
 	try {

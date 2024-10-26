@@ -8,8 +8,8 @@ import { redirect } from 'next/navigation'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { getInvite } from '@/http/get-invite'
-import { rejectInvite } from '@/http/reject-invite'
+import { getInvite } from '@/http/invites/get-invite'
+import { rejectInvite } from '@/http/invites/reject-invite'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 dayjs.extend(relativeTime)

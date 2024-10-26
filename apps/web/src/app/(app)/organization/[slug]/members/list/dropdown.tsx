@@ -16,8 +16,8 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { GetMembersItemResponse } from '@/http/get-members'
-import { GetOrganizationItemRequest } from '@/http/get-organization'
+import { GetMembersItemResponse } from '@/http/members/get-members'
+import { GetOrganizationItemRequest } from '@/http/organizations/get-organization'
 
 import { RemoveMemberDialog } from './remove-member-dialog'
 import { TransferOwnershipDialog } from './transfer-organization-dialog'

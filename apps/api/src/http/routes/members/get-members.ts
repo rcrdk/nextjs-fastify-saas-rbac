@@ -3,6 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
@@ -49,9 +50,7 @@ export async function getMembers(app: FastifyInstance) {
 				const { cannot } = getUserPermissions(userId, membership.role)
 
 				if (cannot('get', 'User')) {
-					throw new UnauthorizedError(
-						'You are not allowed to get organization members',
-					)
+					throw new UnauthorizedError(errors.organizations.members.CANNOT_LIST)
 				}
 
 				const members = await prisma.member.findMany({

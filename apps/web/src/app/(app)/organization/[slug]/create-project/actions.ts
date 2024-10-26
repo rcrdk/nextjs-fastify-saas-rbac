@@ -5,7 +5,7 @@ import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
-import { createProject } from '@/http/create-project'
+import { createProject } from '@/http/projects/create-project'
 
 const projectSchema = z.object({
 	name: z.string().min(4, 'Enter at least 4 characters.'),

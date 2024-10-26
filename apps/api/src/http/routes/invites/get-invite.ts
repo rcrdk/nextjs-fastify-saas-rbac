@@ -3,6 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { prisma } from '@/lib/prisma'
 
 import { BadRequestError } from '../_errors/bad-request-error'
@@ -67,7 +68,7 @@ export async function getInvite(app: FastifyInstance) {
 			})
 
 			if (!invite) {
-				throw new BadRequestError('Invite not found')
+				throw new BadRequestError(errors.organizations.invites.NOT_FOUND)
 			}
 
 			return reply.status(200).send({

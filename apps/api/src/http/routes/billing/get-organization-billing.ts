@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
@@ -50,9 +51,7 @@ export async function getOrganizationBilling(app: FastifyInstance) {
 				const { cannot } = getUserPermissions(userId, membership.role)
 
 				if (cannot('get', 'Billing')) {
-					throw new UnauthorizedError(
-						'You are not allowed to get billing details from this organization',
-					)
+					throw new UnauthorizedError(errors.organizations.billing.CANNOT_LIST)
 				}
 
 				const [amountOfMembers, amountOfProjects] = await Promise.all([

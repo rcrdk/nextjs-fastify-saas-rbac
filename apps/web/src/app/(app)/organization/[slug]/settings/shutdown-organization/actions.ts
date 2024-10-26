@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { getCurrentOrganization } from '@/auth'
-import { shutdownOrganization } from '@/http/shutdown-organization'
+import { shutdownOrganization } from '@/http/organizations/shutdown-organization'
 
 export async function shutdownOrganizationAction() {
 	const currentOrganization = await getCurrentOrganization()

@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { generateSlug } from '@/utils/generate-slug'
@@ -45,9 +46,7 @@ export async function createProject(app: FastifyInstance) {
 				const { cannot } = getUserPermissions(userId, membership.role)
 
 				if (cannot('create', 'Project')) {
-					throw new UnauthorizedError(
-						'You are not allowed to create a new project',
-					)
+					throw new UnauthorizedError(errors.projects.CANNOT_CREATE)
 				}
 
 				const { name, description } = request.body
@@ -65,9 +64,7 @@ export async function createProject(app: FastifyInstance) {
 					})
 
 				if (existsAnotherProjectWithSameSlug) {
-					throw new BadRequestError(
-						'There is another project in this organization using the same project name. Please, choose another one',
-					)
+					throw new BadRequestError(errors.projects.ALREADY_EXISTS)
 				}
 
 				const project = await prisma.project.create({

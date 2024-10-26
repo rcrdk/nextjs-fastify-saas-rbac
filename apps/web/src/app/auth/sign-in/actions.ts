@@ -4,8 +4,8 @@ import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
 
-import { acceptInvite } from '@/http/accept-invite'
-import { signInWithPassword } from '@/http/sign-in-with-password'
+import { signInWithPassword } from '@/http/auth/sign-in-with-password'
+import { acceptInvite } from '@/http/invites/accept-invite'
 
 const signInSchema = z.object({
 	email: z.string().email('Enter a valid e-mail.'),

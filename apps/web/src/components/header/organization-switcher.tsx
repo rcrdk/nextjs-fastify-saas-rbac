@@ -2,7 +2,7 @@ import { IconBuilding, IconCirclePlus, IconSelector } from '@tabler/icons-react'
 import Link from 'next/link'
 
 import { getCurrentOrganization } from '@/auth'
-import { getOrganizations } from '@/http/get-organizations'
+import { getOrganizations } from '@/http/organizations/get-organizations'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'

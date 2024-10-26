@@ -5,6 +5,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { deleteObjectR2, putObjectR2 } from '@/lib/cloudflare-r2'
 import { prisma } from '@/lib/prisma'
@@ -59,7 +60,7 @@ export async function uploadAvatar(app: FastifyInstance) {
 					await putObjectR2(fileName, mimeType, fileBuffer)
 				} catch (error) {
 					console.error(error)
-					throw new BadRequestError('An unexpeted error occoured on during upload')
+					throw new BadRequestError(errors.files.UPLOAD)
 				}
 
 				const entityHasAnAvatar = await prisma.avatar.findUnique({
@@ -86,7 +87,7 @@ export async function uploadAvatar(app: FastifyInstance) {
 						await deleteObjectR2(fileNameToDelete)
 					} catch (error) {
 						console.error(error)
-						throw new BadRequestError('An unexpeted error occoured on during delete file')
+						throw new BadRequestError(errors.files.DELETE)
 					}
 				}
 

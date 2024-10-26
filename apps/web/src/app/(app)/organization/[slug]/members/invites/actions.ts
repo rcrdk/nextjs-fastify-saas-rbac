@@ -6,8 +6,8 @@ import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
-import { createInvite } from '@/http/create-invite'
-import { revokeInvite } from '@/http/revoke-invite'
+import { createInvite } from '@/http/invites/create-invite'
+import { revokeInvite } from '@/http/invites/revoke-invite'
 
 const inviteSchema = z.object({
 	email: z.string().email('Enter a valid e-mail address.'),

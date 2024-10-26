@@ -5,7 +5,7 @@ import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
 import { auth } from '@/auth'
-import { updateAccountPassword } from '@/http/update-account-password'
+import { updateAccountPassword } from '@/http/account/update-account-password'
 import { validateStrongPasswordSchema } from '@/schema/helpers/strong-password'
 
 function updatePasswordSchema(hasCurrentPassword: boolean) {

@@ -3,6 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { createInviteEmail } from '@/http/emails/create-invite-email-email'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
@@ -46,9 +47,7 @@ export async function createInvite(app: FastifyInstance) {
 				const { cannot } = getUserPermissions(userId, membership.role)
 
 				if (cannot('create', 'Invite')) {
-					throw new UnauthorizedError(
-						'You are not allowed to create a new invite',
-					)
+					throw new UnauthorizedError(errors.organizations.invites.CANNOT_SEND)
 				}
 
 				const { email, role } = request.body
@@ -60,7 +59,10 @@ export async function createInvite(app: FastifyInstance) {
 					organization.domain === domain
 				) {
 					throw new BadRequestError(
-						`Users with ${domain} domain will join your organization automatically on sign in`,
+						errors.organizations.invites.AUTOJOIN_DOMAIN.replace(
+							'{domain}',
+							domain,
+						),
 					)
 				}
 
@@ -74,9 +76,7 @@ export async function createInvite(app: FastifyInstance) {
 				})
 
 				if (inviteWithSameEmail) {
-					throw new BadRequestError(
-						`Another invite with same e-mail already exists`,
-					)
+					throw new BadRequestError(errors.organizations.invites.ALREADY_EXISTS)
 				}
 
 				const memberWithSameEmail = await prisma.member.findFirst({
@@ -89,9 +89,7 @@ export async function createInvite(app: FastifyInstance) {
 				})
 
 				if (memberWithSameEmail) {
-					throw new BadRequestError(
-						`A member with this e-mail already belongs to your organization`,
-					)
+					throw new BadRequestError(errors.organizations.invites.ALREADY_MEMBER)
 				}
 
 				const { id } = await prisma.invite.create({
@@ -112,7 +110,7 @@ export async function createInvite(app: FastifyInstance) {
 				})
 
 				if (!invite) {
-					throw new BadRequestError(`Invite not found`)
+					throw new BadRequestError(errors.organizations.invites.NOT_FOUND)
 				}
 
 				try {
@@ -124,9 +122,7 @@ export async function createInvite(app: FastifyInstance) {
 						targetEmail: email,
 					})
 				} catch {
-					throw new BadRequestError(
-						'An error occurred while trying to send e-mail with invitation',
-					)
+					throw new BadRequestError(errors.services.SEND_EMAIL)
 				}
 
 				return reply.status(201).send({

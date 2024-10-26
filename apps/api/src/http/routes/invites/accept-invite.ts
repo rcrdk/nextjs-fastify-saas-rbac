@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 
@@ -35,7 +36,7 @@ export async function acceptInvite(app: FastifyInstance) {
 				})
 
 				if (!invite) {
-					throw new BadRequestError('Invite not found or expired')
+					throw new BadRequestError(errors.organizations.invites.NOT_FOUND)
 				}
 
 				const user = await prisma.user.findUnique({
@@ -45,11 +46,11 @@ export async function acceptInvite(app: FastifyInstance) {
 				})
 
 				if (!user) {
-					throw new BadRequestError('User not found')
+					throw new BadRequestError(errors.user.NOT_FOUND)
 				}
 
 				if (invite.email !== user.email) {
-					throw new BadRequestError('This invite belongs to another user')
+					throw new BadRequestError(errors.organizations.invites.NOT_ALLOWED)
 				}
 
 				await prisma.$transaction([

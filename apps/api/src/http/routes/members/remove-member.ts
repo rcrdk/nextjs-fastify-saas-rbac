@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
@@ -39,7 +40,7 @@ export async function removeMember(app: FastifyInstance) {
 
 				if (cannot('delete', 'User')) {
 					throw new UnauthorizedError(
-						'You are not allowed to delete this organization member',
+						errors.organizations.members.CANNOT_DELETE,
 					)
 				}
 

@@ -2,8 +2,8 @@ import { defineAbilityFor } from '@saas/auth'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { getMembership } from '@/http/get-membership'
-import { getProfile } from '@/http/get-profile'
+import { getMembership } from '@/http/account/get-membership'
+import { getProfile } from '@/http/account/get-profile'
 
 export async function isAuthenticated() {
 	const cookieStore = await cookies()

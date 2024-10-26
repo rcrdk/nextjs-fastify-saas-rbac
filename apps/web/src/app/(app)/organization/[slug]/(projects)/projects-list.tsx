@@ -13,7 +13,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
-import { getProjects } from '@/http/get-projects'
+import { getProjects } from '@/http/projects/get-projects'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getFirstName } from '@/utils/get-first-name'
 

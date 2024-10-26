@@ -5,8 +5,8 @@ import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
-import { createOrganization } from '@/http/create-organization'
-import { updateOrganization } from '@/http/update-organization'
+import { createOrganization } from '@/http/organizations/create-organization'
+import { updateOrganization } from '@/http/organizations/update-organization'
 
 const organizationSchema = z.object({
 	name: z.string().min(4, 'Enter at least 4 characters.'),

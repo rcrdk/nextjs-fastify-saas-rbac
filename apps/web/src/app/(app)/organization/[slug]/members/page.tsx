@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import { ability, getCurrentOrganization } from '@/auth'
-import { getOrganization } from '@/http/get-organization'
+import { getOrganization } from '@/http/organizations/get-organization'
 
 import { Invites } from './invites/invites'
 import { MemberList } from './list/members'

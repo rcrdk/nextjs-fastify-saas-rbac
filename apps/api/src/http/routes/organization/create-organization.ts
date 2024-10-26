@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { generateSlug } from '@/utils/generate-slug'
@@ -44,9 +45,7 @@ export async function creteOrganization(app: FastifyInstance) {
 					})
 
 				if (organizationNameAlreadyExists) {
-					throw new BadRequestError(
-						'There is another organization using the same name. Please, choose another one',
-					)
+					throw new BadRequestError(errors.organizations.entity.ALREADY_EXISTS)
 				}
 
 				const organization = await prisma.organization.create({

@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 
@@ -38,7 +39,7 @@ export async function updateAccount(app: FastifyInstance) {
 				})
 
 				if (userWithSameEmail) {
-					throw new BadRequestError('User with same e-mail already exists')
+					throw new BadRequestError(errors.user.ALREADY_EXISTS)
 				}
 
 				await prisma.user.update({

@@ -5,8 +5,8 @@ import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
-import { authorizeOrganizationDomain } from '@/http/authorize-organization-domain'
-import { removeOrganizationDomain } from '@/http/remove-organization-domain'
+import { authorizeOrganizationDomain } from '@/http/organizations/authorize-organization-domain'
+import { removeOrganizationDomain } from '@/http/organizations/remove-organization-domain'
 
 const organizationDomainSchema = z
 	.object({

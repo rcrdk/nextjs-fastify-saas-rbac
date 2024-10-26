@@ -17,8 +17,8 @@ import { auth, isAuthenticated } from '@/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { acceptInvite } from '@/http/accept-invite'
-import { getInvite } from '@/http/get-invite'
+import { acceptInvite } from '@/http/invites/accept-invite'
+import { getInvite } from '@/http/invites/get-invite'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 dayjs.extend(relativeTime)

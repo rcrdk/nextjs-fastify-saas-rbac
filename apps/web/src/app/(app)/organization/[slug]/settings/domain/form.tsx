@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
+import { FormGrid } from '@/components/form-grid'
 import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { CardContent, CardFooter, CardHelp } from '@/components/ui/card'
@@ -42,41 +43,51 @@ export function DomainForm({ domainValidated, initialData }: DomainFormProps) {
 	return (
 		<form onSubmit={handleUpdate} className="flex flex-col">
 			<CardContent className="flex-grow space-y-5 p-5 lg:pl-7">
-				<FormGroup>
-					<Label htmlFor="domain">
-						{domainValidated ? 'Domain configured:' : 'Domain:'}
-					</Label>
-					<Input
-						name="domain"
-						type="text"
-						id="domain"
-						inputMode="url"
-						placeholder="example.com"
-						spellCheck={false}
-						autoComplete="off"
-						defaultValue={initialData.domain ?? undefined}
-						readOnly={domainValidated}
-					/>
-					<FormError message={errors?.domain} />
-				</FormGroup>
+				<FormGrid
+					className={
+						domainValidated
+							? '!block space-y-4 md:!grid md:space-y-0'
+							: '!block space-y-4'
+					}
+				>
+					<FormGroup>
+						<Label htmlFor="domain">
+							{domainValidated ? 'Domain configured:' : 'Domain:'}
+						</Label>
+						<Input
+							name="domain"
+							type="text"
+							id="domain"
+							inputMode="url"
+							placeholder="example.com"
+							spellCheck={false}
+							autoComplete="off"
+							defaultValue={initialData.domain ?? undefined}
+							readOnly={domainValidated}
+						/>
+						<FormError message={errors?.domain} />
+					</FormGroup>
 
-				<div className="flex select-none items-baseline space-x-2">
-					<Checkbox
-						name="shouldAttachUsersByDomain"
-						id="shouldAttachUsersByDomain"
-						className="translate-y-1"
-						defaultChecked={initialData.shouldAttachUsersByDomain}
-					/>
-					<label htmlFor="shouldAttachUsersByDomain" className="space-y-1">
-						<span className="text-sm font-medium leading-none">
-							Auto-join new member
-						</span>
-						<p className="text-balance text-sm text-muted-foreground">
-							This will automatically invite all memebers with same e-mail
-							domain to this organization.
-						</p>
-					</label>
-				</div>
+					<div
+						className={`flex select-none items-baseline space-x-2 ${domainValidated ? 'self-end lg:col-span-2' : ''}`}
+					>
+						<Checkbox
+							name="shouldAttachUsersByDomain"
+							id="shouldAttachUsersByDomain"
+							className="translate-y-1"
+							defaultChecked={initialData.shouldAttachUsersByDomain}
+						/>
+						<label htmlFor="shouldAttachUsersByDomain" className="space-y-1">
+							<span className="text-sm font-medium leading-none">
+								Auto-join new member
+							</span>
+							<p className="text-balance text-sm text-muted-foreground">
+								This will automatically invite all memebers with same e-mail
+								domain to this organization.
+							</p>
+						</label>
+					</div>
+				</FormGrid>
 			</CardContent>
 
 			<CardFooter className="lg:pl-7">

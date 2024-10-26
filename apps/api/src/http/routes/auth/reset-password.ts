@@ -4,6 +4,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { prisma } from '@/lib/prisma'
 
 import { UnauthorizedError } from '../_errors/unauthorized-error'
@@ -26,9 +27,6 @@ export async function resetPassword(app: FastifyInstance) {
 			},
 		},
 		async (request, reply) => {
-			// eslint-disable-next-line prettier/prettier
-			const errorMessage = 'Unable to reset password. Please ensure your recovery code is valid and try again. Note: The code is valid for 5 minutes'
-
 			const { code, password, email } = request.body
 
 			const emailFromRequest = await prisma.user.findUnique({
@@ -38,7 +36,7 @@ export async function resetPassword(app: FastifyInstance) {
 			})
 
 			if (!emailFromRequest) {
-				throw new UnauthorizedError(errorMessage)
+				throw new UnauthorizedError(errors.auth.INVALID_PASSWORD_TOKEN)
 			}
 
 			const tokenFromCode = await prisma.token.findFirst({
@@ -50,7 +48,7 @@ export async function resetPassword(app: FastifyInstance) {
 			})
 
 			if (!tokenFromCode) {
-				throw new UnauthorizedError(errorMessage)
+				throw new UnauthorizedError(errors.auth.INVALID_PASSWORD_TOKEN)
 			}
 
 			const tokenWasCreatedAt = dayjs(tokenFromCode.createdAt)
@@ -64,7 +62,7 @@ export async function resetPassword(app: FastifyInstance) {
 					},
 				})
 
-				throw new UnauthorizedError(errorMessage)
+				throw new UnauthorizedError(errors.auth.INVALID_PASSWORD_TOKEN)
 			}
 
 			const hashedPassword = await hash(password, 8)

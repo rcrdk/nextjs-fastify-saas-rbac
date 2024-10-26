@@ -8,7 +8,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
-import { getOrganization } from '@/http/get-organization'
+import { getOrganization } from '@/http/organizations/get-organization'
 
 import { Avatar } from './avatar/avatar'
 import { Billing } from './billing/billing'

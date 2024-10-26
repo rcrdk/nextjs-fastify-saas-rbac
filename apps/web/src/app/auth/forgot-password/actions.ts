@@ -3,7 +3,7 @@
 import { HTTPError } from 'ky'
 import { z } from 'zod'
 
-import { requestNewPassword } from '@/http/request-new-password'
+import { requestNewPassword } from '@/http/auth/request-new-password'
 
 const forgotPasswordSchema = z.object({
 	email: z.string().email('Enter a valid e-mail.'),

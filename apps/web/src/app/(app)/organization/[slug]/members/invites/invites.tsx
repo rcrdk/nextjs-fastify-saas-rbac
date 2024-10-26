@@ -9,7 +9,7 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
-import { getInvites } from '@/http/get-invites'
+import { getInvites } from '@/http/invites/get-invites'
 import { getRoleName } from '@/utils/get-role-name'
 
 import { CreateInviteForm } from './form'

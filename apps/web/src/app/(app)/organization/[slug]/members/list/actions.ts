@@ -7,12 +7,12 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { getCurrentOrganization } from '@/auth'
-import { removeMember } from '@/http/remove-member'
+import { removeMember } from '@/http/members/remove-member'
+import { updateMember } from '@/http/members/update-member'
 import {
 	transfererOrganizationOwnership,
 	TransferOwnershipActions,
-} from '@/http/transfer-organization-ownership'
-import { updateMember } from '@/http/update-member'
+} from '@/http/organizations/transfer-organization-ownership'
 
 export async function removeMemberAction(memberId: string) {
 	const currentOrganization = await getCurrentOrganization()

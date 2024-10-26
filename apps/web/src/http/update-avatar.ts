@@ -1,6 +1,5 @@
 import { AvatarReceipient } from '@/@types/avatar-receipient'
-
-import { API } from '../lib/api-client'
+import { API } from '@/lib/api-client'
 
 interface CreateInviteRequest {
 	receipientId: string

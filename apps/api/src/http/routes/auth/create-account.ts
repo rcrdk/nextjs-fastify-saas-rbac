@@ -4,6 +4,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { verifyAccountEmail } from '@/http/emails/verify-account-email'
 import { prisma } from '@/lib/prisma'
 
@@ -33,9 +34,7 @@ export async function createAccount(app: FastifyInstance) {
 			})
 
 			if (userWithSameEmail) {
-				throw new BadRequestError(
-					'User with same e-mail already exists',
-				)
+				throw new BadRequestError(errors.user.ALREADY_EXISTS)
 			}
 
 			const autoJoinOrganization = await prisma.organization.findFirst({
@@ -74,9 +73,7 @@ export async function createAccount(app: FastifyInstance) {
 					code: verificationCode,
 				})
 			} catch {
-				throw new BadRequestError(
-					'An error occurred while trying to send e-mail with e-mail validation',
-				)
+				throw new BadRequestError(errors.services.SEND_EMAIL)
 			}
 
 			reply.status(201).send()

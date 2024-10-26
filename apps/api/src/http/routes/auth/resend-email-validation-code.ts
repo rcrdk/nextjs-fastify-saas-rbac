@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { errors } from '@/errors/messages'
 import { verifyAccountEmail } from '@/http/emails/verify-account-email'
 import { prisma } from '@/lib/prisma'
 
@@ -35,7 +36,7 @@ export async function resendEmailValidationCode(app: FastifyInstance) {
 			})
 
 			if (!userFromEmail) {
-				throw new BadRequestError('Invalid credentials')
+				throw new BadRequestError(errors.auth.INVALID_CREDENTIALS)
 			}
 
 			const { id: validationCode } = await prisma.token.create({
@@ -52,9 +53,7 @@ export async function resendEmailValidationCode(app: FastifyInstance) {
 					code: validationCode,
 				})
 			} catch {
-				throw new BadRequestError(
-					'An error occurred while trying to send e-mail with e-mail validation',
-				)
+				throw new BadRequestError(errors.services.SEND_EMAIL)
 			}
 
 			return reply.status(200).send()

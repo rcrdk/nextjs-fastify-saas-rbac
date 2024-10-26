@@ -3,7 +3,7 @@
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 
-import { removeAccountProvider } from '@/http/remove-account-provider'
+import { removeAccountProvider } from '@/http/account/remove-account-provider'
 
 export async function disconnectGitHubAction() {
 	try {

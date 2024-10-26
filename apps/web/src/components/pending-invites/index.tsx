@@ -15,7 +15,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { getPendingInvites } from '@/http/get-pending-invites'
+import { getPendingInvites } from '@/http/invites/get-pending-invites'
 import { getRoleName } from '@/utils/get-role-name'
 
 import { Button } from '../ui/button'

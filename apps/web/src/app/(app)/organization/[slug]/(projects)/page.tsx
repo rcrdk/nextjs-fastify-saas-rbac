@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { ability, getCurrentOrganization } from '@/auth'
 import { Button } from '@/components/ui/button'
-import { getOrganization } from '@/http/get-organization'
+import { getOrganization } from '@/http/organizations/get-organization'
 
 import { ProjectsList } from './projects-list'
 

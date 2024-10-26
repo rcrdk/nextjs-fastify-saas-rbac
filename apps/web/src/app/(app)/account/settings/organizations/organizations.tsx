@@ -9,7 +9,7 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
-import { getOrganizations } from '@/http/get-organizations'
+import { getOrganizations } from '@/http/organizations/get-organizations'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getRoleName } from '@/utils/get-role-name'
 

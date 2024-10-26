@@ -3,6 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { errors } from '@/errors/messages'
 import { auth } from '@/http/middlewares/auth'
 import { deleteMultipleObjectsR2 } from '@/lib/cloudflare-r2'
 import { prisma } from '@/lib/prisma'
@@ -47,7 +48,7 @@ export async function deleteProject(app: FastifyInstance) {
 				})
 
 				if (!project) {
-					throw new BadRequestError('Project not found')
+					throw new BadRequestError(errors.projects.NOT_FOUND)
 				}
 
 				const authProject = projectSchema.parse(project)
@@ -55,9 +56,7 @@ export async function deleteProject(app: FastifyInstance) {
 				const { cannot } = getUserPermissions(userId, membership.role)
 
 				if (cannot('delete', authProject)) {
-					throw new UnauthorizedError(
-						'You are not allowed to delete this project',
-					)
+					throw new UnauthorizedError(errors.projects.CANNOT_DELETE)
 				}
 
 				// filter uploaded avatars
