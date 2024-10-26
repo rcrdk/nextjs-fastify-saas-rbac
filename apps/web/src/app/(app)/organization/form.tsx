@@ -5,7 +5,10 @@ import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
+import { FormGrid } from '@/components/form-grid'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
+import { CardContent, CardFooter } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState } from '@/hooks/use-form-state'
@@ -19,15 +22,11 @@ import {
 interface OrganizationFormProps {
 	isUpdating?: boolean
 	initialData?: OrganizationSchema
-	submitButtonClass?: string
-	submitButtonVariant?: 'default' | 'secondary'
 }
 
 export function OrganizationForm({
 	isUpdating = false,
 	initialData,
-	submitButtonClass,
-	submitButtonVariant = 'default',
 }: OrganizationFormProps) {
 	const router = useRouter()
 
@@ -56,38 +55,56 @@ export function OrganizationForm({
 		}
 	}, [success, message, isPending])
 
-	const buttonText = isUpdating
-		? {
-				default: 'Save organization',
-				loading: 'Saving organization...',
-			}
-		: {
-				default: 'Create new organization',
-				loading: 'Creating organization...',
-			}
-
 	return (
-		<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-			<div className="space-y-1">
-				<Label htmlFor="name">Organization name</Label>
-				<Input
-					name="name"
-					type="text"
-					id="name"
-					spellCheck="false"
-					defaultValue={initialData?.name}
-				/>
-				<FormError message={errors?.name} />
-			</div>
+		<form
+			onSubmit={handleSubmit}
+			className={isUpdating ? '' : 'flex flex-col space-y-4'}
+		>
+			{!isUpdating && (
+				<>
+					<FormGroup>
+						<Label htmlFor="name">Organization name</Label>
+						<Input
+							name="name"
+							type="text"
+							id="name"
+							spellCheck="false"
+							defaultValue={initialData?.name}
+						/>
+						<FormError message={errors?.name} />
+					</FormGroup>
 
-			<FormSubmitButton
-				loading={isPending}
-				loadingLabel={buttonText.loading}
-				className={submitButtonClass}
-				variant={submitButtonVariant}
-			>
-				{buttonText.default}
-			</FormSubmitButton>
+					<FormSubmitButton loading={isPending}>
+						Create new organization
+					</FormSubmitButton>
+				</>
+			)}
+
+			{isUpdating && (
+				<>
+					<CardContent>
+						<FormGrid>
+							<FormGroup>
+								<Label htmlFor="name">Organization name</Label>
+								<Input
+									name="name"
+									type="text"
+									id="name"
+									spellCheck="false"
+									defaultValue={initialData?.name}
+								/>
+								<FormError message={errors?.name} />
+							</FormGroup>
+						</FormGrid>
+					</CardContent>
+
+					<CardFooter className="justify-end">
+						<FormSubmitButton loading={isPending} size="sm">
+							Save
+						</FormSubmitButton>
+					</CardFooter>
+				</>
+			)}
 		</form>
 	)
 }

@@ -10,11 +10,12 @@ import {
 } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getOrganizations } from '@/http/get-organizations'
+import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getRoleName } from '@/utils/get-role-name'
 
-import { AccountOrganizationsDropdownActions } from './dropdown'
+import { OrganizationsDropdownActions } from './dropdown'
 
-export async function AccountOrganizations() {
+export async function Organizations() {
 	const { organizations } = await getOrganizations()
 
 	return (
@@ -39,7 +40,7 @@ export async function AccountOrganizations() {
 							<TableRow key={item.id}>
 								<TableCell className="py-1.5 pr-0 ps-5">
 									<Avatar className="block h-8 w-8">
-										{item.avatarUrl && <AvatarImage src={item.avatarUrl} />}
+										<AvatarImage src={getAvatarUrl(item.avatarUrl)} />
 										<AvatarFallback className="text-xs font-medium">
 											<IconBriefcase
 												size={20}
@@ -68,7 +69,7 @@ export async function AccountOrganizations() {
 								</TableCell>
 
 								<TableCell className="py-2.5 pe-5">
-									<AccountOrganizationsDropdownActions organization={item} />
+									<OrganizationsDropdownActions organization={item} />
 								</TableCell>
 							</TableRow>
 						))}

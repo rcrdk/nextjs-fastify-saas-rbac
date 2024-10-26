@@ -47,7 +47,6 @@ export function LeaveOrganizationDialog({
 				variant="destructive"
 				className="w-full gap-2"
 				loading={isPending}
-				loadingLabel="Leaving organization..."
 			>
 				Leave organization
 			</FormSubmitButton>

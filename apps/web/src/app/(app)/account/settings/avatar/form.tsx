@@ -7,9 +7,9 @@ import { FormAvatar } from '@/components/form-avatar'
 import { useFormState } from '@/hooks/use-form-state'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 
-import { updateAccountAvatarAction } from './actions'
+import { updateAvatarAction } from './actions'
 
-interface AccountAvatarFormProps {
+interface AvatarFormProps {
 	initialData: {
 		userId: string
 		email: string
@@ -17,9 +17,7 @@ interface AccountAvatarFormProps {
 	}
 }
 
-export function AccountAvatarForm({ initialData }: AccountAvatarFormProps) {
-	const currentAvatar = getAvatarUrl(initialData.avatarUrl, initialData.email)
-
+export function AvatarForm({ initialData }: AvatarFormProps) {
 	const form = useRef<HTMLFormElement>(null)
 
 	const [fileSelected, setFileSelected] = useState<File | null>()
@@ -29,7 +27,7 @@ export function AccountAvatarForm({ initialData }: AccountAvatarFormProps) {
 	}
 
 	const [{ success, message }, handleAvatar, isPending] = useFormState(
-		updateAccountAvatarAction.bind(null, initialData.userId, fileSelected),
+		updateAvatarAction.bind(null, initialData.userId, fileSelected),
 		{
 			resetStateMessage: true,
 			onSuccess() {
@@ -61,7 +59,7 @@ export function AccountAvatarForm({ initialData }: AccountAvatarFormProps) {
 			ref={form}
 		>
 			<FormAvatar
-				currentAvatar={currentAvatar}
+				currentAvatar={getAvatarUrl(initialData.avatarUrl, initialData.email)}
 				loading={isPending}
 				receiver="USER"
 				onSelectFile={onSelectFile}

@@ -11,6 +11,7 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
   - [Prisma ORM](https://www.prisma.io/) + [Docker](https://www.docker.com/) + [PostgreSQL](https://www.postgresql.org/)
   - [Swagger](https://swagger.io/)
   - [Nodemailer](https://nodemailer.com/) + [Gmail](https://nodemailer.com/usage/using-gmail/)
+  - [Cloudflare R2](https://www.cloudflare.com/pt-br/) + [AWS SDK](https://github.com/aws/aws-sdk-js-v3)
 - Web:
   - [React 19 RC](https://react.dev/) + [Next 15](https://nextjs.org/) with App Router + 
   - [Tailwind](https://tailwindcss.com/) with [shadcn-ui](https://ui.shadcn.com/)
@@ -29,6 +30,7 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 <!-- User roles and permissions with CASL -->
 <!-- Pages and navigation of web project -->
 <!-- Emails: password recover, create invites, account e-mail validation -->
+<!-- Avatars with R2 -->
 
 ## ⚙️ Get started
 

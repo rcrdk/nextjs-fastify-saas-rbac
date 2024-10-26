@@ -8,7 +8,7 @@ import { auth } from '@/auth'
 import { updateAccountPassword } from '@/http/update-account-password'
 import { validateStrongPasswordSchema } from '@/schema/helpers/strong-password'
 
-function updateAccountPasswordSchema(hasCurrentPassword: boolean) {
+function updatePasswordSchema(hasCurrentPassword: boolean) {
 	return z
 		.object({
 			current_password: hasCurrentPassword
@@ -24,10 +24,10 @@ function updateAccountPasswordSchema(hasCurrentPassword: boolean) {
 		.superRefine(validateStrongPasswordSchema)
 }
 
-export async function updateAccountPasswordAction(data: FormData) {
+export async function updatePasswordAction(data: FormData) {
 	const { user } = await auth()
 
-	const result = updateAccountPasswordSchema(user.passwordHash).safeParse(
+	const result = updatePasswordSchema(user.passwordHash).safeParse(
 		Object.fromEntries(data),
 	)
 

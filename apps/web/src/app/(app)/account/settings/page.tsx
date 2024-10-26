@@ -3,11 +3,12 @@ import { Metadata } from 'next'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 
-import { AccountDelete } from './delete-account/delete-account'
-import { AccountInformation } from './information/information'
-import { AccountOrganizations } from './organizations/organizations'
-import { AccountPassword } from './password/password'
-import { AccountProviders } from './providers/providers'
+import { Avatar } from './avatar/avatar'
+import { DeleteAccount } from './delete-account/delete-account'
+import { Information } from './information/information'
+import { Organizations } from './organizations/organizations'
+import { Password } from './password/password'
+import { Providers } from './providers/providers'
 
 export const metadata: Metadata = {
 	title: 'Account Settings',
@@ -22,11 +23,12 @@ export default function AccountSettingsPage() {
 				<h1 className="text-2xl font-bold">Account Settings</h1>
 
 				<div className="space-y-5 md:space-y-8">
-					<AccountInformation />
-					<AccountPassword />
-					<AccountProviders />
-					<AccountOrganizations />
-					<AccountDelete />
+					<Avatar />
+					<Information />
+					<Password />
+					<Providers />
+					<Organizations />
+					<DeleteAccount />
 				</div>
 			</main>
 

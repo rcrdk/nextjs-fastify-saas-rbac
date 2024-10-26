@@ -1,12 +1,12 @@
-import { DeleteObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
+/* eslint-disable prettier/prettier */
+
 import fastifyMultipart from '@fastify/multipart'
-import { env } from '@saas/env'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
-import { R2 } from '@/lib/cloudflare-r2'
+import { deleteObjectR2, putObjectR2 } from '@/lib/cloudflare-r2'
 import { prisma } from '@/lib/prisma'
 import { generateAvatar } from '@/utils/generate-avatar'
 
@@ -56,20 +56,10 @@ export async function uploadAvatar(app: FastifyInstance) {
 				)
 
 				try {
-					await R2.send(
-						new PutObjectCommand({
-							Bucket: env.AWS_BUCKET,
-							Key: fileName,
-							ContentType: mimeType,
-							Body: fileBuffer,
-						}),
-					)
+					await putObjectR2(fileName, mimeType, fileBuffer)
 				} catch (error) {
 					console.error(error)
-
-					throw new BadRequestError(
-						'An unexpeted error occoured on during upload',
-					)
+					throw new BadRequestError('An unexpeted error occoured on during upload')
 				}
 
 				const entityHasAnAvatar = await prisma.avatar.findUnique({
@@ -92,29 +82,17 @@ export async function uploadAvatar(app: FastifyInstance) {
 					})
 
 					try {
-						const fileNameToDelete = entityHasAnAvatar.name.replace(
-							'{AWS}/',
-							'',
-						)
-
-						await R2.send(
-							new DeleteObjectCommand({
-								Bucket: env.AWS_BUCKET,
-								Key: fileNameToDelete,
-							}),
-						)
+						const fileNameToDelete = entityHasAnAvatar.name
+						await deleteObjectR2(fileNameToDelete)
 					} catch (error) {
 						console.error(error)
-
-						throw new BadRequestError(
-							'An unexpeted error occoured on during delete file',
-						)
+						throw new BadRequestError('An unexpeted error occoured on during delete file')
 					}
 				}
 
-				const { name: newAvatarName } = await prisma.avatar.create({
+				const { name: newAvatar } = await prisma.avatar.create({
 					data: {
-						name: `{AWS}/${fileName}`,
+						name: fileName,
 						receipient,
 						receipientId,
 					},
@@ -126,7 +104,29 @@ export async function uploadAvatar(app: FastifyInstance) {
 							id: receipientId,
 						},
 						data: {
-							avatarUrl: newAvatarName,
+							avatarUrl: `{AWS}/${newAvatar}`,
+						},
+					})
+				}
+
+				if (receipient === 'ORGANIZATION') {
+					await prisma.organization.update({
+						where: {
+							id: receipientId,
+						},
+						data: {
+							avatarUrl: `{AWS}/${newAvatar}`,
+						},
+					})
+				}
+
+				if (receipient === 'PROJECT') {
+					await prisma.project.update({
+						where: {
+							id: receipientId,
+						},
+						data: {
+							avatarUrl: `{AWS}/${newAvatar}`,
 						},
 					})
 				}

@@ -23,13 +23,13 @@ import { GetOrganizationsItemResponse } from '@/http/get-organizations'
 
 import { LeaveOrganizationDialog } from './leave-dialog'
 
-interface AccountOrganizationsDropdownActionsProps {
+interface OrganizationsDropdownActionsProps {
 	organization: GetOrganizationsItemResponse
 }
 
-export function AccountOrganizationsDropdownActions({
+export function OrganizationsDropdownActions({
 	organization,
-}: AccountOrganizationsDropdownActionsProps) {
+}: OrganizationsDropdownActionsProps) {
 	const [dialogLeaveVisible, setDialogLeaveVisible] = useState(false)
 
 	function handleToggleLeaveVisibility() {
@@ -56,7 +56,7 @@ export function AccountOrganizationsDropdownActions({
 							>
 								<Link href={`/organization/${organization.slug}`}>
 									<IconBriefcase size={20} />
-									Projetos
+									Projects
 								</Link>
 							</DropdownMenuItem>
 
@@ -66,7 +66,7 @@ export function AccountOrganizationsDropdownActions({
 							>
 								<Link href={`/organization/${organization.slug}/members`}>
 									<IconUsers size={20} />
-									Membros
+									Members
 								</Link>
 							</DropdownMenuItem>
 
@@ -76,7 +76,7 @@ export function AccountOrganizationsDropdownActions({
 							>
 								<Link href={`/organization/${organization.slug}/settings`}>
 									<IconSettings size={20} />
-									Configurações
+									Settings
 								</Link>
 							</DropdownMenuItem>
 						</>
@@ -90,7 +90,7 @@ export function AccountOrganizationsDropdownActions({
 							>
 								<Link href={`/organization/${organization.slug}`}>
 									<IconBuilding size={20} />
-									Acessar organização
+									Access organization
 								</Link>
 							</DropdownMenuItem>
 

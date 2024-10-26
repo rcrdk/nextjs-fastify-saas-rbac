@@ -49,7 +49,9 @@ export default async function Project({ params }: { params: Params }) {
 				<p className="text-muted-foreground">{project.description}</p>
 
 				<Avatar className="size-28">
-					{project.avatarUrl && <AvatarImage src={project.avatarUrl} />}
+					{project.avatarUrl && (
+						<AvatarImage src={getAvatarUrl(project.avatarUrl)} />
+					)}
 					<AvatarFallback>
 						<IconBriefcase
 							size={64}
@@ -64,12 +66,9 @@ export default async function Project({ params }: { params: Params }) {
 
 				<div className="flex items-center gap-2">
 					<Avatar className="size-8">
-						{project.owner && (
-							<AvatarImage
-								src={getAvatarUrl(project.owner.avatarUrl, project.owner.email)}
-							/>
-						)}
-
+						<AvatarImage
+							src={getAvatarUrl(project.owner?.avatarUrl, project.owner?.email)}
+						/>
 						<AvatarFallback>
 							<IconUser size={20} className="text-muted-foreground/50" />
 						</AvatarFallback>

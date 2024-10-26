@@ -4,14 +4,17 @@ import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
+import { FormGrid } from '@/components/form-grid'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
+import { CardContent, CardFooter, CardHelp } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState } from '@/hooks/use-form-state'
 
-import { saveAccountInformationsAction } from './actions'
+import { saveInformationsAction } from './actions'
 
-interface AccountInformationFormProps {
+interface InformationFormProps {
 	initialData: {
 		name: string | null
 		email: string
@@ -19,11 +22,9 @@ interface AccountInformationFormProps {
 	}
 }
 
-export function AccountInformationForm({
-	initialData,
-}: AccountInformationFormProps) {
+export function InformationForm({ initialData }: InformationFormProps) {
 	const [{ success, message, errors }, handleUpdate, isPending] = useFormState(
-		saveAccountInformationsAction,
+		saveInformationsAction,
 		{
 			resetStateMessage: true,
 		},
@@ -39,40 +40,43 @@ export function AccountInformationForm({
 	}, [success, message, isPending])
 
 	return (
-		<form onSubmit={handleUpdate} className="flex flex-grow flex-col space-y-4">
-			<div className="grid grid-cols-1 gap-x-6 gap-y-4">
-				<div className="space-y-1">
-					<Label>Name:</Label>
-					<Input
-						name="name"
-						id="name"
-						type="text"
-						defaultValue={initialData.name ?? undefined}
-					/>
-					<FormError message={errors?.name} />
-				</div>
+		<form onSubmit={handleUpdate}>
+			<CardContent>
+				<FormGrid>
+					<FormGroup>
+						<Label>Full name:</Label>
+						<Input
+							name="name"
+							id="name"
+							type="text"
+							defaultValue={initialData.name ?? undefined}
+						/>
+						<FormError message={errors?.name} />
+					</FormGroup>
 
-				<div className="space-y-1">
-					<Label>E-mail:</Label>
-					<Input
-						name="email"
-						id="email"
-						type="email"
-						readOnly
-						defaultValue={initialData.email}
-					/>
-					<FormError message={errors?.email} />
-				</div>
-			</div>
+					<FormGroup>
+						<Label>E-mail:</Label>
+						<Input
+							name="email"
+							id="email"
+							type="email"
+							readOnly
+							defaultValue={initialData.email}
+						/>
+						<FormError message={errors?.email} />
+					</FormGroup>
+				</FormGrid>
+			</CardContent>
 
-			<FormSubmitButton
-				className="sm:min-w-80 sm:self-center"
-				loading={false}
-				loadingLabel="Updating profile..."
-				variant="secondary"
-			>
-				Update profile
-			</FormSubmitButton>
+			<CardFooter>
+				<CardHelp>
+					Changing your e-mail, requires that you validate it again.
+				</CardHelp>
+
+				<FormSubmitButton size="sm" loading={isPending}>
+					Save
+				</FormSubmitButton>
+			</CardFooter>
 		</form>
 	)
 }

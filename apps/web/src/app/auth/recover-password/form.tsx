@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 import { FormError } from '@/components/form-error'
 import { FormErrorPassword } from '@/components/form-error-password'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { HeaderAuth } from '@/components/header/header-auth'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -51,7 +52,7 @@ export function RecoverPasswordForm() {
 					</Alert>
 				)}
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="email">E-mail</Label>
 					<Input
 						name="email"
@@ -60,9 +61,9 @@ export function RecoverPasswordForm() {
 						defaultValue={email ?? undefined}
 					/>
 					<FormError message={errors?.email} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="code">Recovery code</Label>
 					<Input
 						name="code"
@@ -72,9 +73,9 @@ export function RecoverPasswordForm() {
 						defaultValue={code ?? undefined}
 					/>
 					<FormError message={errors?.code} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="password">Password</Label>
 					<div className="relative">
 						<Input
@@ -94,9 +95,9 @@ export function RecoverPasswordForm() {
 						</Button>
 					</div>
 					<FormErrorPassword list={errors?.password} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="password_confirmation">Confirm your password</Label>
 					<Input
 						name="password_confirmation"
@@ -105,9 +106,9 @@ export function RecoverPasswordForm() {
 						autoComplete="off"
 					/>
 					<FormError message={errors?.password_confirmation} />
-				</div>
+				</FormGroup>
 
-				<FormSubmitButton loading={isPending} loadingLabel="Processing...">
+				<FormSubmitButton loading={isPending}>
 					Recover my password
 				</FormSubmitButton>
 

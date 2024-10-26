@@ -4,13 +4,13 @@ import { OrganizationForm } from '@/app/(app)/organization/form'
 import { ability, getCurrentOrganization } from '@/auth'
 import {
 	Card,
-	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
 import { getOrganization } from '@/http/get-organization'
 
+import { Avatar } from './avatar/avatar'
 import { Billing } from './billing/billing'
 import { Domain } from './domain/domain'
 import { ShutdownOrganization } from './shutdown-organization/shutdown-card'
@@ -45,25 +45,25 @@ export default async function OrganizationSettingsPage() {
 
 			<div className="space-y-5 md:space-y-8">
 				{canUpdateOrganization && (
-					<Card>
-						<CardHeader>
-							<CardTitle>Information</CardTitle>
-							<CardDescription>
-								Update details and settings of your organization.
-							</CardDescription>
-						</CardHeader>
+					<>
+						<Avatar />
 
-						<CardContent>
+						<Card>
+							<CardHeader>
+								<CardTitle>About organization</CardTitle>
+								<CardDescription>
+									Update the informations of your organization.
+								</CardDescription>
+							</CardHeader>
+
 							<OrganizationForm
 								isUpdating
 								initialData={{
 									name: organization.name,
 								}}
-								submitButtonClass="sm:min-w-80 sm:self-center"
-								submitButtonVariant="secondary"
 							/>
-						</CardContent>
-					</Card>
+						</Card>
+					</>
 				)}
 
 				{canUpdateOrganization && <Domain organization={organization} />}

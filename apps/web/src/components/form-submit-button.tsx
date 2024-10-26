@@ -5,12 +5,11 @@ import { Button } from './ui/button'
 
 interface FormSubmitButtonProps extends ComponentProps<typeof Button> {
 	loading?: boolean
-	loadingLabel?: string
 }
 
 export function FormSubmitButton({
 	loading = false,
-	loadingLabel = 'Submitting data...',
+
 	...props
 }: FormSubmitButtonProps) {
 	return (
@@ -18,13 +17,10 @@ export function FormSubmitButton({
 			{...props}
 			type="submit"
 			disabled={loading || props.disabled}
-			className={`gap-2 ${props.className}`}
+			className={`w-full min-w-24 gap-2 sm:w-auto ${props.className}`}
 		>
 			{loading ? (
-				<>
-					<IconLoader2 size={20} className="animate-spin duration-1000" />
-					{loadingLabel}
-				</>
+				<IconLoader2 size={20} className="animate-spin duration-1000" />
 			) : (
 				props.children
 			)}

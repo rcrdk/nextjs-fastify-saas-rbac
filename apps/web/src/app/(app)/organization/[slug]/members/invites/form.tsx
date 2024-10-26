@@ -63,7 +63,6 @@ export function CreateInviteForm() {
 
 				<FormSubmitButton
 					loading={isPending}
-					loadingLabel="Sending invite..."
 					className="min-w-48 flex-shrink-0"
 				>
 					<IconSend size={20} />

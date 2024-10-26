@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { FormError } from '@/components/form-error'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { HeaderAuth } from '@/components/header/header-auth'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -43,16 +44,13 @@ export function ForgotPasswordForm() {
 					</Alert>
 				)}
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="email">E-mail</Label>
 					<Input name="email" type="email" id="email" />
 					<FormError message={errors?.email} />
-				</div>
+				</FormGroup>
 
-				<FormSubmitButton
-					loading={isPending}
-					loadingLabel="Requesting recover..."
-				>
+				<FormSubmitButton loading={isPending}>
 					Request password recover
 				</FormSubmitButton>
 

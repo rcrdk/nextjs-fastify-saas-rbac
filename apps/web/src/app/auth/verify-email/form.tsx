@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import { FormError } from '@/components/form-error'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { HeaderAuth } from '@/components/header/header-auth'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -49,7 +50,7 @@ export function VerifyEmailForm() {
 					</Alert>
 				)}
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="email">E-mail</Label>
 					<Input
 						name="email"
@@ -59,9 +60,9 @@ export function VerifyEmailForm() {
 						defaultValue={email}
 					/>
 					<FormError message={errors?.email} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="password">Password</Label>
 					<Input
 						name="password"
@@ -70,9 +71,9 @@ export function VerifyEmailForm() {
 						autoComplete="off"
 					/>
 					<FormError message={errors?.password} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="code">Validation code</Label>
 					<Input
 						name="code"
@@ -83,12 +84,9 @@ export function VerifyEmailForm() {
 						defaultValue={code ?? undefined}
 					/>
 					<FormError message={errors?.code} />
-				</div>
+				</FormGroup>
 
-				<FormSubmitButton
-					loading={isPending}
-					loadingLabel="Verifying account..."
-				>
+				<FormSubmitButton loading={isPending}>
 					Verify and access my account
 				</FormSubmitButton>
 			</form>

@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+import { randomUUID } from 'node:crypto'
+
 import { MultipartFile } from '@fastify/multipart'
 import { FastifyInstance } from 'fastify'
 import sharp from 'sharp'
@@ -25,9 +28,7 @@ export async function generateAvatar(
 
 		console.log(error)
 
-		throw new BadRequestError(
-			'An unexpeted error occoured on processing your file',
-		)
+		throw new BadRequestError('An unexpeted error occoured on processing your file')
 	}
 
 	const fileName = file.filename
@@ -37,7 +38,7 @@ export async function generateAvatar(
 		throw new BadRequestError('The upload file selected is not a valid image')
 	}
 
-	const fileNamePrefix = new Date().getTime()
+	const fileNamePrefix = randomUUID()
 	const uniqueFileName = generateFilename(`${fileNamePrefix}-${fileName}`)
 
 	let transformedBuffer: Buffer
@@ -50,14 +51,12 @@ export async function generateAvatar(
 	} catch (error) {
 		console.log(error)
 
-		throw new BadRequestError(
-			'An unexpeted error occoured on processing your file',
-		)
+		throw new BadRequestError('An unexpeted error occoured on processing your file')
 	}
 
 	return {
 		fileName: uniqueFileName,
-		mimeType: 'image/jpeg', // fileMimeType
+		mimeType: 'image/jpeg', // fileMimeType fixed since its converted
 		fileBuffer: transformedBuffer,
 	}
 }

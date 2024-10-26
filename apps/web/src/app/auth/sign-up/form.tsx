@@ -12,6 +12,7 @@ import { useState } from 'react'
 
 import { FormError } from '@/components/form-error'
 import { FormErrorPassword } from '@/components/form-error-password'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { HeaderAuth } from '@/components/header/header-auth'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -51,19 +52,19 @@ export function SignUpForm() {
 					</Alert>
 				)}
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="name">Name</Label>
 					<Input name="name" type="text" id="name" />
 					<FormError message={errors?.name} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="email">E-mail</Label>
 					<Input name="email" type="email" id="email" />
 					<FormError message={errors?.email} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="password">Password</Label>
 					<div className="relative">
 						<Input
@@ -84,9 +85,9 @@ export function SignUpForm() {
 					</div>
 
 					<FormErrorPassword list={errors?.password} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="password_confirmation">Confirm your password</Label>
 					<Input
 						name="password_confirmation"
@@ -94,14 +95,9 @@ export function SignUpForm() {
 						id="password_confirmation"
 					/>
 					<FormError message={errors?.password_confirmation} />
-				</div>
+				</FormGroup>
 
-				<FormSubmitButton
-					loading={isPending}
-					loadingLabel="Creating account..."
-				>
-					Create account
-				</FormSubmitButton>
+				<FormSubmitButton loading={isPending}>Create account</FormSubmitButton>
 
 				<Button className="gap-2" variant="link" size="sm" asChild>
 					<Link href="/auth/sign-in">I already have an account</Link>

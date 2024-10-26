@@ -50,11 +50,7 @@ export function UpdateMemberRoleDialog({
 
 	const actionForm = (
 		<form onClick={handleUpdate}>
-			<FormSubmitButton
-				className="w-full gap-2"
-				loadingLabel="Updating role..."
-				loading={isPending}
-			>
+			<FormSubmitButton className="w-full gap-2" loading={isPending}>
 				Set new role
 			</FormSubmitButton>
 		</form>

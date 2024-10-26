@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -52,19 +53,9 @@ export function ProjectForm({ isUpdating, initialData }: ProjectFormProps) {
 		}
 	}, [success, message, isPending])
 
-	const buttonText = isUpdating
-		? {
-				default: 'Save project',
-				loading: 'Saving project...',
-			}
-		: {
-				default: 'Create new project',
-				loading: 'Creating project...',
-			}
-
 	return (
 		<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-			<div className="space-y-1">
+			<FormGroup>
 				<Label htmlFor="name">Project name</Label>
 				<Input
 					name="name"
@@ -73,9 +64,9 @@ export function ProjectForm({ isUpdating, initialData }: ProjectFormProps) {
 					defaultValue={initialData?.name}
 				/>
 				<FormError message={errors?.name} />
-			</div>
+			</FormGroup>
 
-			<div className="space-y-1">
+			<FormGroup>
 				<Label htmlFor="domain">Project description</Label>
 				<Textarea
 					name="description"
@@ -84,10 +75,10 @@ export function ProjectForm({ isUpdating, initialData }: ProjectFormProps) {
 					defaultValue={initialData?.description}
 				/>
 				<FormError message={errors?.description} />
-			</div>
+			</FormGroup>
 
-			<FormSubmitButton loading={isPending} loadingLabel={buttonText.loading}>
-				{buttonText.default}
+			<FormSubmitButton loading={isPending}>
+				{isUpdating ? 'Save project' : 'Create new project'}
 			</FormSubmitButton>
 		</form>
 	)

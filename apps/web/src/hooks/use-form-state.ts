@@ -9,8 +9,8 @@ interface FormState {
 
 /**
  *
- * @param action Set a action for the form
- * @param options
+ * @param action set an form action
+ * @param options initialState of form, onSuccess callback, resetFormOnSuccess, resetStateMessage for correct toast display
  * @returns
  */
 export function useFormState(
@@ -37,11 +37,11 @@ export function useFormState(
 		startTransition(async () => {
 			const state = await action(data)
 
-			if (!!state.success && options?.resetFormOnSuccess) {
+			if (state.success && options?.resetFormOnSuccess) {
 				requestFormReset(form)
 			}
 
-			if (!!state.success && options?.onSuccess) {
+			if (state.success && options?.onSuccess) {
 				await options.onSuccess()
 			}
 

@@ -9,7 +9,7 @@ import {
 
 import { DisconnectGitHubButton } from './disconnect-github-button'
 
-export async function AccountProviders() {
+export async function Providers() {
 	const { user } = await auth()
 
 	const gitHubProvider = user.accounts.find(
@@ -22,7 +22,7 @@ export async function AccountProviders() {
 	return (
 		<Card className="flex-wrap items-center justify-between md:flex">
 			<CardHeader>
-				<CardTitle>Providers</CardTitle>
+				<CardTitle>Third-party Authentication</CardTitle>
 				<CardDescription>
 					Update your account authentication providers.
 				</CardDescription>

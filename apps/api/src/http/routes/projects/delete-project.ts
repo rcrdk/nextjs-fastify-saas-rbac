@@ -4,7 +4,9 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
+import { deleteMultipleObjectsR2 } from '@/lib/cloudflare-r2'
 import { prisma } from '@/lib/prisma'
+import { getUploadedAvatarNames } from '@/utils/get-uploaded-avatar-names'
 import { getUserPermissions } from '@/utils/get-user-permissions'
 
 import { BadRequestError } from '../_errors/bad-request-error'
@@ -58,11 +60,35 @@ export async function deleteProject(app: FastifyInstance) {
 					)
 				}
 
+				// filter uploaded avatars
+				const avatars: string[] = []
+
+				if (project?.avatarUrl) {
+					avatars.push(project.avatarUrl)
+				}
+
+				const uploadedAvatars = getUploadedAvatarNames(avatars)
+
+				// delete user related avatars
+				await prisma.avatar.deleteMany({
+					where: {
+						name: {
+							in: uploadedAvatars,
+						},
+					},
+				})
+
+				// delete user related avatars files
+				await deleteMultipleObjectsR2(uploadedAvatars)
+
+				// delete project
 				await prisma.project.delete({
 					where: {
 						id: projectId,
 					},
 				})
+
+				// delete avatar
 
 				return reply.status(204).send()
 			},

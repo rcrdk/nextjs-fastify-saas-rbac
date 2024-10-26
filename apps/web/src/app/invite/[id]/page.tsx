@@ -68,11 +68,9 @@ export default async function InvitePage({ params }: { params: Params }) {
 			<div className="flex w-full max-w-sm flex-col space-y-6">
 				<div className="flex flex-col items-center space-y-4">
 					<Avatar className="size-16">
-						{invite.author && (
-							<AvatarImage
-								src={getAvatarUrl(invite.author.avatarUrl, invite.author.email)}
-							/>
-						)}
+						<AvatarImage
+							src={getAvatarUrl(invite.author?.avatarUrl, invite.author?.email)}
+						/>
 						<AvatarFallback className="text-md font-medium">
 							<IconUser size={32} className="text-muted-foreground/50" />
 						</AvatarFallback>

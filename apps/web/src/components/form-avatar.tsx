@@ -14,7 +14,7 @@ import { AvatarReceipient } from '@/@types/avatar-receipient'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 interface FormAvatarProps {
-	currentAvatar: string | null
+	currentAvatar?: string | null
 	receiver: AvatarReceipient
 	loading: boolean
 	onSelectFile: (file?: File | null) => void
@@ -56,7 +56,7 @@ export function FormAvatar({
 
 	return (
 		<div className="group relative">
-			<Avatar className="z-0 size-56">
+			<Avatar className="z-0 size-24 sm:size-20">
 				<AvatarImage
 					src={preview || currentAvatar || undefined}
 					className="object-cover object-center"
@@ -74,8 +74,8 @@ export function FormAvatar({
 				)}
 
 				{!loading && (
-					<div className="absolute inset-0 z-[1] flex select-none flex-col items-center justify-center gap-1 text-balance rounded-full bg-muted/50 text-center text-sm font-medium opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
-						<IconUpload />
+					<div className="absolute inset-0 z-[1] flex select-none flex-col items-center justify-center gap-1 text-balance rounded-full bg-muted/50 text-center text-xs font-medium leading-none opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+						<IconUpload size={16} />
 						{preview || currentAvatar
 							? 'Change your avatar'
 							: 'Send your avatar'}
@@ -87,7 +87,7 @@ export function FormAvatar({
 				type="file"
 				name="file"
 				id="file"
-				className="z-3 absolute inset-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-default disabled:cursor-wait"
+				className="z-3 absolute inset-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-wait"
 				accept="image/jpeg,image/png"
 				title=""
 				disabled={loading}

@@ -2,14 +2,11 @@
 
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
 import { authorizeOrganizationDomain } from '@/http/authorize-organization-domain'
 import { removeOrganizationDomain } from '@/http/remove-organization-domain'
-import { shutdownOrganization } from '@/http/shutdown-organization'
 
 const organizationDomainSchema = z
 	.object({
@@ -119,24 +116,4 @@ export async function removeOrganizationDomainAction() {
 		message: 'Successfully removed organization domain',
 		errors: null,
 	}
-}
-
-export async function shutdownOrganizationAction() {
-	const currentOrganization = await getCurrentOrganization()
-	const cookieStore = await cookies()
-
-	await shutdownOrganization({ organizationSlug: currentOrganization! })
-
-	cookieStore.set(
-		'@SAAS:deletedOrganization',
-		'Your organization was shutted down',
-		{
-			// eslint-disable-next-line prettier/prettier
-			expires: new Date().getTime() + ((60 * 1000) / 4), // 15s
-		},
-	)
-
-	revalidateTag('organizations')
-
-	redirect('/')
 }

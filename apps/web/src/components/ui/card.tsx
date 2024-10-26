@@ -23,7 +23,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<div
 		ref={ref}
-		className={cn('flex flex-col space-y-1 p-5', className)}
+		className={cn('flex flex-col space-y-2 p-5', className)}
 		{...props}
 	/>
 ))
@@ -63,10 +63,36 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<div
 		ref={ref}
-		className={cn('flex items-center p-5 pt-0', className)}
+		className={cn(
+			'flex flex-col items-center justify-between gap-x-5 gap-y-3 border-t px-5 py-3 sm:flex-row',
+			className,
+		)}
 		{...props}
 	/>
 ))
 CardFooter.displayName = 'CardFooter'
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+const CardHelp = React.forwardRef<
+	HTMLParagraphElement,
+	React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+	<p
+		ref={ref}
+		className={cn(
+			'text-balance text-center text-sm text-muted-foreground opacity-65 sm:text-left',
+			className,
+		)}
+		{...props}
+	/>
+))
+CardHelp.displayName = 'CardHelp'
+
+export {
+	Card,
+	CardHeader,
+	CardFooter,
+	CardTitle,
+	CardDescription,
+	CardContent,
+	CardHelp,
+}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { getCurrentOrganization } from '@/auth'
 import { getOrganizations } from '@/http/get-organizations'
+import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import {
@@ -30,7 +31,9 @@ export async function OrganizationSwitcher() {
 					<>
 						<Avatar className="mr-1 size-5">
 							{currentOrganization.avatarUrl && (
-								<AvatarImage src={currentOrganization.avatarUrl} />
+								<AvatarImage
+									src={getAvatarUrl(currentOrganization.avatarUrl)}
+								/>
 							)}
 							<AvatarFallback>
 								<IconBuilding
@@ -67,7 +70,9 @@ export async function OrganizationSwitcher() {
 								className="cursor-pointer"
 							>
 								<Avatar className="mr-2 size-5">
-									{item.avatarUrl && <AvatarImage src={item.avatarUrl} />}
+									{item.avatarUrl && (
+										<AvatarImage src={getAvatarUrl(item.avatarUrl)} />
+									)}
 									<AvatarFallback>
 										<IconBuilding
 											size={12}

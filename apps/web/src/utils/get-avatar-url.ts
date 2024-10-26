@@ -8,7 +8,10 @@ import { env } from '@saas/env'
  * @param gravatarEmail provide an email to search for an avatar on Gravatar.
  * @returns an avatar url or a Gravatar fallback.
  */
-export function getAvatarUrl(avatarUrl: string | null, gravatarEmail?: string) {
+export function getAvatarUrl(
+	avatarUrl?: string | null,
+	gravatarEmail?: string,
+) {
 	if (avatarUrl)
 		return avatarUrl.replace('{AWS}', env.NEXT_PUBLIC_AWS_PUBLIC_URL)
 
@@ -18,5 +21,5 @@ export function getAvatarUrl(avatarUrl: string | null, gravatarEmail?: string) {
 		return `https://www.gravatar.com/avatar/${hashedEmail}?d=404`
 	}
 
-	return avatarUrl
+	return avatarUrl ?? undefined
 }

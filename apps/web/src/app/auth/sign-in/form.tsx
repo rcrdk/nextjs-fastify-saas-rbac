@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 import { FormError } from '@/components/form-error'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { HeaderAuth } from '@/components/header/header-auth'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -76,7 +77,7 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 					</Alert>
 				)}
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="email">E-mail</Label>
 					<Input
 						name="email"
@@ -85,13 +86,13 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 						defaultValue={searchParams.get('email') ?? ''}
 					/>
 					<FormError message={errors?.email} />
-				</div>
+				</FormGroup>
 
-				<div className="space-y-1">
+				<FormGroup>
 					<Label htmlFor="password">Password</Label>
 					<Input name="password" type="password" id="password" />
 					<FormError message={errors?.password} />
-				</div>
+				</FormGroup>
 
 				<Link
 					href="/auth/forgot-password"
@@ -100,7 +101,7 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 					Forgot your password?
 				</Link>
 
-				<FormSubmitButton loading={isPending} loadingLabel="Signing in...">
+				<FormSubmitButton loading={isPending}>
 					<IconMail size={20} />
 					Sign-in with e-mail
 				</FormSubmitButton>

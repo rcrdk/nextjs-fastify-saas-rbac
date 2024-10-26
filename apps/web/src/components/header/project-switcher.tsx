@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 import { getProjects } from '@/http/get-projects'
+import { getAvatarUrl } from '@/utils/get-avatar-url'
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import {
@@ -49,7 +50,7 @@ export function ProjectSwitcher() {
 					className={!currentProject || isLoading ? 'hidden' : 'mr-1 size-5'}
 				>
 					{currentProject?.avatarUrl && (
-						<AvatarImage src={currentProject.avatarUrl} />
+						<AvatarImage src={getAvatarUrl(currentProject.avatarUrl)} />
 					)}
 					<AvatarFallback>
 						<IconBriefcase size={12} className="text-foreground opacity-50" />
@@ -92,7 +93,9 @@ export function ProjectSwitcher() {
 								className="cursor-pointer"
 							>
 								<Avatar className="mr-2 size-5">
-									{item.avatarUrl && <AvatarImage src={item.avatarUrl} />}
+									{item.avatarUrl && (
+										<AvatarImage src={getAvatarUrl(item.avatarUrl)} />
+									)}
 									<AvatarFallback>
 										<IconBriefcase
 											size={12}

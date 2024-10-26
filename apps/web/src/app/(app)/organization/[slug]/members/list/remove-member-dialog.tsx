@@ -47,7 +47,6 @@ export function RemoveMemberDialog({
 				variant="destructive"
 				className="w-full gap-2"
 				loading={isPending}
-				loadingLabel="Removing member..."
 			>
 				Remove member
 			</FormSubmitButton>

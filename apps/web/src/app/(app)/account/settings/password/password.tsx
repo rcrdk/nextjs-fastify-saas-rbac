@@ -1,27 +1,28 @@
 import { auth } from '@/auth'
 import {
 	Card,
-	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
 
-import { AccountPasswordForm } from './form'
+import { PasswordForm } from './form'
 
-export async function AccountPassword() {
+export async function Password() {
 	const { user } = await auth()
 
 	return (
 		<Card>
 			<CardHeader>
 				<CardTitle>Password</CardTitle>
-				<CardDescription>Update your access credentials.</CardDescription>
+				<CardDescription>
+					{!user.passwordHash
+						? 'You previously signed in using a third-party service, you can set a password for your account.'
+						: 'Change your authentication password.'}
+				</CardDescription>
 			</CardHeader>
 
-			<CardContent>
-				<AccountPasswordForm hasPassword={user.passwordHash} />
-			</CardContent>
+			<PasswordForm hasPassword={user.passwordHash} />
 		</Card>
 	)
 }

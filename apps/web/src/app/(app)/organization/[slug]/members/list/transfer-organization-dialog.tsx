@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { DialogAction } from '@/components/dialog-action'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -52,7 +53,6 @@ export function TransferOwnershipDialog({
 		<form onSubmit={handleTransfer}>
 			<FormSubmitButton
 				className="w-full gap-2"
-				loadingLabel="Tranfering..."
 				disabled={transferInput !== 'TRANSFER'}
 			>
 				Transfer ownership
@@ -68,7 +68,7 @@ export function TransferOwnershipDialog({
 			onOpenChange={onOpenChange}
 			actionForm={actionForm}
 		>
-			<div className="space-y-1">
+			<FormGroup>
 				<Label>After transfer:</Label>
 				<RadioGroup
 					className="rounded border py-2"
@@ -85,9 +85,9 @@ export function TransferOwnershipDialog({
 						<Label htmlFor="LEAVE">Leave organization</Label>
 					</div>
 				</RadioGroup>
-			</div>
+			</FormGroup>
 
-			<div className="space-y-1">
+			<FormGroup>
 				<Label>
 					Enter <span className="font-semibold text-red-500">TRANSFER</span> to
 					confirm:
@@ -96,7 +96,7 @@ export function TransferOwnershipDialog({
 					defaultValue={transferInput}
 					onChange={(e) => setTransferInput(e.target.value)}
 				/>
-			</div>
+			</FormGroup>
 		</DialogAction>
 	)
 }

@@ -4,12 +4,13 @@ import { IconPower } from '@tabler/icons-react'
 import { useState } from 'react'
 
 import { DialogAction } from '@/components/dialog-action'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
-import { shutdownOrganizationAction } from '../actions'
+import { shutdownOrganizationAction } from './actions'
 
 export function ShutdownOrganizationButton() {
 	const [deleteInput, setDeleteInput] = useState('')
@@ -32,9 +33,8 @@ export function ShutdownOrganizationButton() {
 				variant="destructive"
 				className="w-full gap-2"
 				disabled={deleteInput !== 'DELETE'}
-				loadingLabel="Shutting down..."
 			>
-				Shutdown organizations
+				Shutdown organization
 			</FormSubmitButton>
 		</form>
 	)
@@ -48,8 +48,8 @@ export function ShutdownOrganizationButton() {
 			triggerButton={RemoveTriggerButton}
 			actionForm={actionForm}
 		>
-			<div className="space-y-2">
-				<Label className="block text-center sm:text-left">
+			<FormGroup className="text-center sm:text-left">
+				<Label>
 					Enter <span className="font-semibold text-red-500">DELETE</span> to
 					confirm:
 				</Label>
@@ -58,7 +58,7 @@ export function ShutdownOrganizationButton() {
 					className="text-center sm:text-left"
 					onChange={(e) => setDeleteInput(e.target.value)}
 				/>
-			</div>
+			</FormGroup>
 		</DialogAction>
 	)
 }

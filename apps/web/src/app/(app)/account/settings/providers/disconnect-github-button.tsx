@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { DialogAction } from '@/components/dialog-action'
+import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -59,7 +60,6 @@ export function DisconnectGitHubButton({
 				variant="destructive"
 				className="w-full gap-2"
 				disabled={deleteInput !== 'REMOVE'}
-				loadingLabel="Disconnecting..."
 			>
 				Disconnect GitHub
 			</FormSubmitButton>
@@ -80,8 +80,8 @@ export function DisconnectGitHubButton({
 				from this app.
 			</div>
 
-			<div className="space-y-2">
-				<Label className="block text-center sm:text-left">
+			<FormGroup className="text-center sm:text-left">
+				<Label>
 					Enter <span className="font-semibold text-red-500">REMOVE</span> to
 					confirm:
 				</Label>
@@ -90,7 +90,7 @@ export function DisconnectGitHubButton({
 					className="text-center sm:text-left"
 					onChange={(e) => setDeleteInput(e.target.value)}
 				/>
-			</div>
+			</FormGroup>
 		</DialogAction>
 	)
 }

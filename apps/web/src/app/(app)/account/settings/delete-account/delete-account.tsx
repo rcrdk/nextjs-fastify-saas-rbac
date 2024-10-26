@@ -8,7 +8,7 @@ import {
 
 import { DeleteAccountDialog } from './dialog'
 
-export async function AccountDelete() {
+export async function DeleteAccount() {
 	return (
 		<Card className="items-center justify-between md:flex">
 			<CardHeader>
