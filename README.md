@@ -7,13 +7,13 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 - Monorepo: [TurboRepo](https://turbo.build/)
 - Package Manager: [PnPM](https://pnpm.io/)
 - API:
-  - [Node.js](https://nodejs.org/) + [Fastify](https://fastify.dev/) + [Typescript](https://www.typescriptlang.org/) + 
+  - [Node.js](https://nodejs.org/) + [Fastify](https://fastify.dev/) + [Typescript](https://www.typescriptlang.org/) + [Zod](https://zod.dev/)
   - [Prisma ORM](https://www.prisma.io/) + [Docker](https://www.docker.com/) + [PostgreSQL](https://www.postgresql.org/)
   - [Swagger](https://swagger.io/)
   - [Nodemailer](https://nodemailer.com/) + [Gmail](https://nodemailer.com/usage/using-gmail/)
   - [Cloudflare R2](https://www.cloudflare.com/pt-br/) + [AWS SDK](https://github.com/aws/aws-sdk-js-v3)
 - Web:
-  - [React 19 RC](https://react.dev/) + [Next 15](https://nextjs.org/) with App Router
+  - [React 19 RC](https://react.dev/) + [Next 15](https://nextjs.org/) with App Router + [Typescript](https://www.typescriptlang.org/) + [Zod](https://zod.dev/)
   - [Tailwind](https://tailwindcss.com/) with [shadcn-ui](https://ui.shadcn.com/)
   - [KY](https://github.com/sindresorhus/ky) (HTTP client) + [React Query](https://tanstack.com/query/latest)
 - Packages:

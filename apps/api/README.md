@@ -4,10 +4,14 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 [ROOT Docs](https://github.com/rcrdk/nextjs-fastify-saas-rbac) | <u>API Docs</u> | [WEB Docs](https://github.com/rcrdk/nextjs-fastify-saas-rbac/tree/main/apps/web#readme)
 
 ## 🚀 Techs and Tools
-- [Node.js](https://nodejs.org/) + [Fastify](https://fastify.dev/) + [Typescript](https://www.typescriptlang.org/)
+- [Node.js](https://nodejs.org/) + [Fastify](https://fastify.dev/) + [Typescript](https://www.typescriptlang.org/) + [Zod](https://zod.dev/)
 - [Prisma ORM](https://www.prisma.io/) + [Docker](https://www.docker.com/) + [PostgreSQL](https://www.postgresql.org/)
 - [Swagger](https://swagger.io/)
+- [Nodemailer](https://nodemailer.com/) + [Gmail](https://nodemailer.com/usage/using-gmail/)
+- [Cloudflare R2](https://www.cloudflare.com/pt-br/) + [AWS SDK](https://github.com/aws/aws-sdk-js-v3)
 - Authorizations RBAC with [CASL](https://casl.js.org/)
+- Typesafe env with [T3-ENV](https://github.com/t3-oss/t3-env)
+- Config: [ESlint](https://eslint.org/), [Prettier](https://prettier.io/), [Typescript](https://www.typescriptlang.org/)
 
 ## 🖥️ Project
 Checkout details of [this project](https://github.com/rcrdk/nextjs-fastify-saas-rbac).
