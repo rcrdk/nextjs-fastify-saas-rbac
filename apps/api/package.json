@@ -7,7 +7,8 @@
 		"db:deploy": "pnpm env:load prisma migrate deploy",
 		"db:reset": "pnpm env:load prisma migrate reset",
 		"db:studio": "pnpm env:load prisma studio",
-		"env:load": "dotenv -e ../../.env --"
+		"env:load": "dotenv -e ../../.env --",
+		"lint": "eslint src --ext .ts --fix"
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.679.0",

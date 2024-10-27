@@ -12,8 +12,7 @@ export function getAvatarUrl(
 	avatarUrl?: string | null,
 	gravatarEmail?: string,
 ) {
-	if (avatarUrl)
-		return avatarUrl.replace('{AWS}', env.NEXT_PUBLIC_AWS_URL)
+	if (avatarUrl) return avatarUrl.replace('{AWS}', env.NEXT_PUBLIC_AWS_URL)
 
 	if (gravatarEmail) {
 		const hashedEmail = createHash('md5').update(gravatarEmail).digest('hex')

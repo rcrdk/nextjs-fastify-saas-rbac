@@ -85,7 +85,6 @@ app.register(fastifySwaggerUi, {
 app.register(fastifyCors)
 
 app.register(fastifyJwt, {
-	// secret: env.JWT_SECRET,
 	secret: {
 		public: Buffer.from(env.JWT_PUBLIC_KEY, 'base64'),
 		private: Buffer.from(env.JWT_SECRET_KEY, 'base64'),

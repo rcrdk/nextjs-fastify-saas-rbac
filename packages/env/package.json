@@ -4,6 +4,9 @@
 	"private": true,
 	"main": "index.ts",
 	"types": "index.ts",
+	"scripts": {
+		"lint": "eslint index.ts --fix"
+	},
 	"devDependencies": {
 		"@saas/eslint-config": "workspace:*",
 		"@saas/prettier-config": "workspace:*",

@@ -4,8 +4,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
-	"test:ts": "tsc --noEmit"
+    "lint": "turbo lint"
   },
   "devDependencies": {
     "@types/node": "^22.7.5",
