@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { validation } from '@/messages/validation'
+
 export const validateStrongPasswordSchema = (
 	{ password }: Record<'password', string>,
 	checkPassComplexity: z.RefinementCtx,
@@ -11,7 +13,7 @@ export const validateStrongPasswordSchema = (
 			message: JSON.stringify({
 				minLength: {
 					valid: false,
-					message: 'Enter a password.',
+					message: validation.PASSWORD,
 					showIcon: false,
 				},
 			}),
@@ -39,27 +41,27 @@ export const validateStrongPasswordSchema = (
 	let errors = {
 		totalNumber: {
 			valid: true,
-			message: 'Enter one number.',
+			message: validation.PASSWORD_NUMBER,
 			showIcon: true,
 		},
 		upperCase: {
 			valid: true,
-			message: 'Enter one upper case letter.',
+			message: validation.PASSWORD_UPPER,
 			showIcon: true,
 		},
 		lowerCase: {
 			valid: true,
-			message: 'Enter one lower case letter.',
+			message: validation.PASSWORD_LOWER,
 			showIcon: true,
 		},
 		specialCh: {
 			valid: true,
-			message: 'Enter one special character.',
+			message: validation.PASSWORD_SPECIAL,
 			showIcon: true,
 		},
 		minLength: {
 			valid: true,
-			message: 'Enter at least 6 characters.',
+			message: validation.PASSWORD_LENGTH,
 			showIcon: true,
 		},
 	}

@@ -2,49 +2,19 @@
 
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
-import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
 import { authorizeOrganizationDomain } from '@/http/organizations/authorize-organization-domain'
 import { removeOrganizationDomain } from '@/http/organizations/remove-organization-domain'
-
-const organizationDomainSchema = z
-	.object({
-		domain: z.string().refine(
-			(value) => {
-				if (value) {
-					const domainRegex = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-					return domainRegex.test(value)
-				}
-			},
-			{
-				message: 'Enter a valid domain.',
-			},
-		),
-		shouldAttachUsersByDomain: z
-			.union([z.literal('on'), z.literal('off'), z.boolean()])
-			.transform((value) => value === true || value === 'on')
-			.default(false),
-	})
-	.refine(
-		(data) => {
-			if (data.shouldAttachUsersByDomain === true && !data.domain) {
-				return false
-			}
-
-			return true
-		},
-		{
-			message: 'A domain is required when auto-join is enabled.',
-			path: ['domain'],
-		},
-	)
-
-export type OrganizationDomainSchema = z.infer<typeof organizationDomainSchema>
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
+import { authorizeOrganizationDomainSchema } from '@/schema/authorize-organization-domain-schema'
 
 export async function authorizeOrganizationDomainAction(data: FormData) {
 	const currentOrganization = await getCurrentOrganization()
-	const result = organizationDomainSchema.safeParse(Object.fromEntries(data))
+	const result = authorizeOrganizationDomainSchema.safeParse(
+		Object.fromEntries(data),
+	)
 
 	if (!result.success) {
 		const errors = result.error.flatten().fieldErrors
@@ -75,14 +45,14 @@ export async function authorizeOrganizationDomainAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully saved the organization data',
+		message: success.ORGANIZATION_DOMAIN_CREATED,
 		errors: null,
 	}
 }
@@ -106,14 +76,14 @@ export async function removeOrganizationDomainAction() {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully removed organization domain',
+		message: success.ORGANIZATION_DOMAIN_REMOVED,
 		errors: null,
 	}
 }

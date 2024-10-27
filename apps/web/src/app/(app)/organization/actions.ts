@@ -2,20 +2,16 @@
 
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
-import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
 import { createOrganization } from '@/http/organizations/create-organization'
 import { updateOrganization } from '@/http/organizations/update-organization'
-
-const organizationSchema = z.object({
-	name: z.string().min(4, 'Enter at least 4 characters.'),
-})
-
-export type OrganizationSchema = z.infer<typeof organizationSchema>
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
+import { formOrganizationSchema } from '@/schema/form-organization-schema'
 
 export async function createOrganizationAction(data: FormData) {
-	const result = organizationSchema.safeParse(Object.fromEntries(data))
+	const result = formOrganizationSchema.safeParse(Object.fromEntries(data))
 
 	if (!result.success) {
 		const errors = result.error.flatten().fieldErrors
@@ -50,21 +46,21 @@ export async function createOrganizationAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully saved the organization data',
+		message: success.ORGANIZATION_CREATE,
 		errors: null,
 	}
 }
 
 export async function updateOrganizationAction(data: FormData) {
 	const currentOrganization = await getCurrentOrganization()
-	const result = organizationSchema.safeParse(Object.fromEntries(data))
+	const result = formOrganizationSchema.safeParse(Object.fromEntries(data))
 
 	if (!result.success) {
 		const errors = result.error.flatten().fieldErrors
@@ -100,14 +96,14 @@ export async function updateOrganizationAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully saved the organization data',
+		message: success.ORGANIZATION_UPDATE,
 		errors: null,
 	}
 }

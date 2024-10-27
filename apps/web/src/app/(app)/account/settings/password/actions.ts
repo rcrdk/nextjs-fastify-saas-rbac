@@ -2,32 +2,17 @@
 
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
-import { z } from 'zod'
 
 import { auth } from '@/auth'
 import { updateAccountPassword } from '@/http/account/update-account-password'
-import { validateStrongPasswordSchema } from '@/schema/helpers/strong-password'
-
-function updatePasswordSchema(hasCurrentPassword: boolean) {
-	return z
-		.object({
-			current_password: hasCurrentPassword
-				? z.string().min(1, 'Enter your current password.')
-				: z.string().nullish(),
-			password: z.string(),
-			password_confirmation: z.string(),
-		})
-		.refine((data) => data.password === data.password_confirmation, {
-			message: 'Password confirmation does not match.',
-			path: ['password_confirmation'],
-		})
-		.superRefine(validateStrongPasswordSchema)
-}
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
+import { updateAccountPasswordSchema } from '@/schema/update-account-password-schema'
 
 export async function updatePasswordAction(data: FormData) {
 	const { user } = await auth()
 
-	const result = updatePasswordSchema(user.passwordHash).safeParse(
+	const result = updateAccountPasswordSchema(user.passwordHash).safeParse(
 		Object.fromEntries(data),
 	)
 
@@ -56,14 +41,14 @@ export async function updatePasswordAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully changed your account password',
+		message: success.ACCOUNT_PASSWORD,
 		errors: null,
 	}
 }

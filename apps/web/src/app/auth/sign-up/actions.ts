@@ -1,25 +1,10 @@
 'use server'
 
 import { HTTPError } from 'ky'
-import { z } from 'zod'
 
 import { signUp } from '@/http/auth/sign-up'
-import { validateStrongPasswordSchema } from '@/schema/helpers/strong-password'
-
-const signUpSchema = z
-	.object({
-		name: z
-			.string()
-			.refine((value) => value.split(' ').length > 1, 'Enter your full name.'),
-		email: z.string().email('Enter a valid e-mail.'),
-		password: z.string(),
-		password_confirmation: z.string(),
-	})
-	.refine((data) => data.password === data.password_confirmation, {
-		message: 'Password confirmation does not match.',
-		path: ['password_confirmation'],
-	})
-	.superRefine(validateStrongPasswordSchema)
+import { errors } from '@/messages/error'
+import { signUpSchema } from '@/schema/sign-up-schema'
 
 export async function signUpAction(data: FormData) {
 	const result = signUpSchema.safeParse(Object.fromEntries(data))
@@ -57,7 +42,7 @@ export async function signUpAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}

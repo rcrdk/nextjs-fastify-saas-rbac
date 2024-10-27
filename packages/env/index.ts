@@ -7,7 +7,8 @@ export const env = createEnv({
 		DATABASE_URL: z.string(),
 		API_SERVER_PORT: z.coerce.number().default(3333),
 
-		JWT_SECRET: z.string(),
+		JWT_SECRET_KEY: z.string(),
+		JWT_PUBLIC_KEY: z.string(),
 
 		GITHUB_OAUTH_CLIENT_ID: z.string(),
 		GITHUB_OAUTH_CLIENT_SECRET: z.string(),
@@ -33,7 +34,7 @@ export const env = createEnv({
 	shared: {
 		NEXT_PUBLIC_URL: z.string().url(),
 		NEXT_PUBLIC_API_URL: z.string().url(),
-		NEXT_PUBLIC_AWS_PUBLIC_URL: z.string(),
+		NEXT_PUBLIC_AWS_URL: z.string(),
 	},
 
 	runtimeEnv: {
@@ -41,7 +42,8 @@ export const env = createEnv({
 		API_SERVER_PORT: process.env.API_SERVER_PORT,
 		NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
 		NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-		JWT_SECRET: process.env.JWT_SECRET,
+		JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+		JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY,
 		GITHUB_OAUTH_CLIENT_ID: process.env.GITHUB_OAUTH_CLIENT_ID,
 		GITHUB_OAUTH_CLIENT_SECRET: process.env.GITHUB_OAUTH_CLIENT_SECRET,
 		GITHUB_OAUTH_CLIENT_REDIRECT_URI: process.env.GITHUB_OAUTH_CLIENT_REDIRECT_URI,
@@ -56,7 +58,7 @@ export const env = createEnv({
 		AWS_REGION: process.env.AWS_REGION,
 		AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
 		AWS_SECRET_KEY: process.env.AWS_SECRET_KEY,
-		NEXT_PUBLIC_AWS_PUBLIC_URL: process.env.NEXT_PUBLIC_AWS_PUBLIC_URL,
+		NEXT_PUBLIC_AWS_URL: process.env.NEXT_PUBLIC_AWS_URL,
 	},
 	emptyStringAsUndefined: true,
 })

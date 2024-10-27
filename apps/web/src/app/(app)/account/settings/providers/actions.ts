@@ -4,6 +4,8 @@ import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 
 import { removeAccountProvider } from '@/http/account/remove-account-provider'
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
 
 export async function disconnectGitHubAction() {
 	try {
@@ -20,14 +22,14 @@ export async function disconnectGitHubAction() {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully removed GitHub from your account',
+		message: success.ACCOUNT_REMOVED_GITHUB,
 		errors: null,
 	}
 }

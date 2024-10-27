@@ -12,12 +12,13 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useFormState } from '@/hooks/use-form-state'
 import { queryClient } from '@/lib/react-query'
+import { FormProjectSchema } from '@/schema/form-project-schema'
 
-import { createProjectAction, ProjectSchema } from './actions'
+import { createProjectAction } from './actions'
 
 interface ProjectFormProps {
 	isUpdating?: boolean
-	initialData?: ProjectSchema
+	initialData?: FormProjectSchema
 }
 
 export function ProjectForm({ isUpdating, initialData }: ProjectFormProps) {

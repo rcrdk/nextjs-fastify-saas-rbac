@@ -1,18 +1,14 @@
 'use server'
 
-import { rolesSchema } from '@saas/auth'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
-import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
 import { createInvite } from '@/http/invites/create-invite'
 import { revokeInvite } from '@/http/invites/revoke-invite'
-
-const inviteSchema = z.object({
-	email: z.string().email('Enter a valid e-mail address.'),
-	role: rolesSchema,
-})
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
+import { createInviteSchema } from '@/schema/create-invite-schema'
 
 export async function revokeInviteAction(inviteId: string) {
 	const currentOrganization = await getCurrentOrganization()
@@ -26,7 +22,7 @@ export async function revokeInviteAction(inviteId: string) {
 }
 
 export async function createInviteAction(data: FormData) {
-	const result = inviteSchema.safeParse(Object.fromEntries(data))
+	const result = createInviteSchema.safeParse(Object.fromEntries(data))
 
 	if (!result.success) {
 		const errors = result.error.flatten().fieldErrors
@@ -64,14 +60,14 @@ export async function createInviteAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Your invite was sent',
+		message: success.INVITE_SENT,
 		errors: null,
 	}
 }

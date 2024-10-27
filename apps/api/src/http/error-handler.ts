@@ -1,6 +1,8 @@
 import { FastifyInstance } from 'fastify'
 import { hasZodFastifySchemaValidationErrors } from 'fastify-type-provider-zod'
 
+import { errors } from '@/errors/messages'
+
 import { BadRequestError } from './routes/_errors/bad-request-error'
 import { UnauthorizedError } from './routes/_errors/unauthorized-error'
 
@@ -9,7 +11,7 @@ type FastifyErrorHandler = FastifyInstance['errorHandler']
 export const errorHandler: FastifyErrorHandler = (error, _, reply) => {
 	if (hasZodFastifySchemaValidationErrors(error)) {
 		return reply.status(400).send({
-			message: 'Validation error',
+			message: errors.api.VALIDATION_ERROR,
 			errors: error.validation,
 		})
 	}
@@ -30,6 +32,6 @@ export const errorHandler: FastifyErrorHandler = (error, _, reply) => {
 	// send error to some observability plattform`
 
 	return reply.status(500).send({
-		message: 'Internal server error',
+		message: errors.api.SERVER_ERROR,
 	})
 }

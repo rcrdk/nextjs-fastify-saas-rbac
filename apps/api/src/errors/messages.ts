@@ -1,5 +1,9 @@
 /* eslint-disable prettier/prettier */
 export const errors = {
+	api: {
+		VALIDATION_ERROR: 'Validation error',
+		SERVER_ERROR: 'Internal server error',
+	},
 	services: {
 		SEND_EMAIL: 'An error occurred while trying to send the e-mail',
 	},

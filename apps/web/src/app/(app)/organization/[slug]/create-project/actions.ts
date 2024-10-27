@@ -2,20 +2,15 @@
 
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
-import { z } from 'zod'
 
 import { getCurrentOrganization } from '@/auth'
 import { createProject } from '@/http/projects/create-project'
-
-const projectSchema = z.object({
-	name: z.string().min(4, 'Enter at least 4 characters.'),
-	description: z.string().min(1, 'Enter a description.'),
-})
-
-export type ProjectSchema = z.infer<typeof projectSchema>
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
+import { formProjectSchema } from '@/schema/form-project-schema'
 
 export async function createProjectAction(data: FormData) {
-	const result = projectSchema.safeParse(Object.fromEntries(data))
+	const result = formProjectSchema.safeParse(Object.fromEntries(data))
 
 	if (!result.success) {
 		const errors = result.error.flatten().fieldErrors
@@ -54,14 +49,14 @@ export async function createProjectAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully saved the project data',
+		message: success.PROJECT_CREATED,
 		errors: null,
 	}
 }

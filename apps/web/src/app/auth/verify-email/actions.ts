@@ -2,21 +2,14 @@
 
 import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'
-import { z } from 'zod'
 
 import { resendEmailValidationCode } from '@/http/auth/resend-email-validation-code'
 import { verifyEmailAndSignIn } from '@/http/auth/verify-email-and-sign-in'
 import { acceptInvite } from '@/http/invites/accept-invite'
-
-const verifyEmailSchema = z.object({
-	email: z.string().email('Enter a valid e-mail.'),
-	password: z.string(),
-	code: z.string().uuid('Enter a valid verification code.'),
-})
-
-const resendEmailSchema = z.object({
-	email: z.string().email('Enter a valid e-mail.'),
-})
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
+import { resendEmailVerificationSchema } from '@/schema/resend-email-verification-schema'
+import { verifyEmailSchema } from '@/schema/verify-email-schema'
 
 export async function verifyEmailAndAuthenticateAction(data: FormData) {
 	const result = verifyEmailSchema.safeParse(Object.fromEntries(data))
@@ -70,7 +63,7 @@ export async function verifyEmailAndAuthenticateAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
@@ -83,15 +76,17 @@ export async function verifyEmailAndAuthenticateAction(data: FormData) {
 }
 
 export async function resendEmailValidationCodeAction(data: FormData) {
-	const result = resendEmailSchema.safeParse(Object.fromEntries(data))
+	const result = resendEmailVerificationSchema.safeParse(
+		Object.fromEntries(data),
+	)
 
 	if (!result.success) {
-		const errors = result.error.flatten().fieldErrors
+		const errorsParsed = result.error.flatten().fieldErrors
 
 		return {
 			success: false,
-			message: 'Error.',
-			errors,
+			message: errors.app.VALIDATION,
+			errors: errorsParsed,
 		}
 	}
 
@@ -118,14 +113,14 @@ export async function resendEmailValidationCodeAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'OK.',
+		message: success.RESENDED,
 		errors: null,
 	}
 }

@@ -2,15 +2,11 @@
 
 import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'
-import { z } from 'zod'
 
 import { signInWithPassword } from '@/http/auth/sign-in-with-password'
 import { acceptInvite } from '@/http/invites/accept-invite'
-
-const signInSchema = z.object({
-	email: z.string().email('Enter a valid e-mail.'),
-	password: z.string().min(1, 'Enter your password.'),
-})
+import { errors } from '@/messages/error'
+import { signInSchema } from '@/schema/sign-in-schema'
 
 export async function signinWithEmailAndPassword(data: FormData) {
 	const result = signInSchema.safeParse(Object.fromEntries(data))
@@ -36,7 +32,7 @@ export async function signinWithEmailAndPassword(data: FormData) {
 		if (!emailValidatedAt) {
 			return {
 				success: false,
-				message: 'You must have a verified e-mail to access your account',
+				message: errors.auth.UNVERIFIED_EMAIL,
 				errors: null,
 			}
 		}
@@ -71,7 +67,7 @@ export async function signinWithEmailAndPassword(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}

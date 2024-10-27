@@ -4,6 +4,8 @@ import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 
 import { updateAvatar } from '@/http/update-avatar'
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
 
 export async function updateAvatarAction(
 	receipientId: string,
@@ -12,7 +14,7 @@ export async function updateAvatarAction(
 	if (!file) {
 		return {
 			success: false,
-			message: 'There is no file selected',
+			message: errors.files.NOT_FOUND,
 			errors: null,
 		}
 	}
@@ -44,14 +46,14 @@ export async function updateAvatarAction(
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Your profile avatar was changed',
+		message: success.AVATAR_CHANGED,
 		errors: null,
 	}
 }

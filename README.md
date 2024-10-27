@@ -13,7 +13,7 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
   - [Nodemailer](https://nodemailer.com/) + [Gmail](https://nodemailer.com/usage/using-gmail/)
   - [Cloudflare R2](https://www.cloudflare.com/pt-br/) + [AWS SDK](https://github.com/aws/aws-sdk-js-v3)
 - Web:
-  - [React 19 RC](https://react.dev/) + [Next 15](https://nextjs.org/) with App Router + 
+  - [React 19 RC](https://react.dev/) + [Next 15](https://nextjs.org/) with App Router
   - [Tailwind](https://tailwindcss.com/) with [shadcn-ui](https://ui.shadcn.com/)
   - [KY](https://github.com/sindresorhus/ky) (HTTP client) + [React Query](https://tanstack.com/query/latest)
 - Packages:
@@ -23,14 +23,12 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 
 ## 🖥️ Project
 *Soon*
-<!-- Back: API with node  and fastify, nodemailer,  -->
-<!-- Front: React 19 RC and Next 15 RC with App Route, server actions, turborepo, ky client -->
+<!-- Backend: API with node and fastify, prisma with postgresql, nodemailer, AWS SDK + Cloudflare r2  -->
+<!-- Front: React 19 RC and Next 15 with App Route, server actions, turborepo, ky client -->
+<!-- Tailwind shadcn-ui, ky -->
 <!-- GitHub OAuth2 -->
-<!-- Tailwind shadcn-ui, prisma, ky -->
 <!-- User roles and permissions with CASL -->
 <!-- Pages and navigation of web project -->
-<!-- Emails: password recover, create invites, account e-mail validation -->
-<!-- Avatars with R2 -->
 
 ## ⚙️ Get started
 
@@ -38,20 +36,51 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 <details>
 <summary>Display contents</summary>
 	
-- Setup enviroment variables: `cp .env.example .env`
-- Create a [GitHub OAuth](https://docs.github.com/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) app to make social sign-in.
-- Make sure your Google Account have [2FA activeted](https://support.google.com/accounts/answer/185833) and then you must [generate an app password](https://myaccount.google.com/apppasswords) to send e-mails.
-- Make sure you are running Docker.
+1. Generate your .env file: `cp .env.example .env`
+2. Follow the next steps to fill the information.
 </details>
 
-### 2️⃣ Install dependencies and run services:
+### 2️⃣ Setup services:
+<details>
+<summary>Display contents</summary>
+
+**Configure this services and paste all needed information to your .env file:**
+
+1. Create a [GitHub OAuth](https://docs.github.com/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) app to be able to make social sign-in.
+2. Make sure your Google Account have [2FA activeted](https://support.google.com/accounts/answer/185833) and then you must [generate an app password](https://myaccount.google.com/apppasswords) to be able to send transactional and validation e-mails.
+3. Create a [Cloudflare R2](https://www.cloudflare.com/) bucket to upload the app avatars.
+</details>
+
+
+### 3️⃣ Generate JWT keys:
+<details>
+<summary>Display contents</summary>
+	
+```shell
+# Generate RSA256 secret and public keys: (Requires OpenSSL installed)
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+
+# Convert keys to Base64: (MacOS/Linux)
+base64 -i private_key.pem -o private_key.txt
+base64 -i public_key.pem -o public_key.txt
+```
+
+> [!TIP]
+> **Use ChatGPT:**<br />
+> 1) Private and public keys: "How to generate RS256 private and public keys on [YOUR OS]"<br />
+> 2) Convert generated keys to base64: "How to convert file contents to base64 on [YOUR OS]"
+
+</details>
+
+### 4️⃣ Install dependencies and run services:
 <details>
 <summary>Display contents</summary>
 	
 ```shell
 # root:
 pnpm i
-docker compose up -d
+docker compose up -d # make sure you are running docker
 
 # apps/api
 pnpm run db:migrate # seeds will run along

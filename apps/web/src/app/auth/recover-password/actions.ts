@@ -1,23 +1,10 @@
 'use server'
 
 import { HTTPError } from 'ky'
-import { z } from 'zod'
 
 import { recoverPassword } from '@/http/auth/recover-password'
-import { validateStrongPasswordSchema } from '@/schema/helpers/strong-password'
-
-const recoverPasswordSchema = z
-	.object({
-		email: z.string().email('Enter a valid e-mail.'),
-		code: z.string().uuid('Enter a valid validation code.'),
-		password: z.string(),
-		password_confirmation: z.string(),
-	})
-	.refine((data) => data.password === data.password_confirmation, {
-		message: 'Password confirmation does not match.',
-		path: ['password_confirmation'],
-	})
-	.superRefine(validateStrongPasswordSchema)
+import { errors } from '@/messages/error'
+import { recoverPasswordSchema } from '@/schema/recover-password-schema'
 
 export async function recoverPasswordAction(data: FormData) {
 	const result = recoverPasswordSchema.safeParse(Object.fromEntries(data))
@@ -55,7 +42,7 @@ export async function recoverPasswordAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}

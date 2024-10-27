@@ -2,16 +2,11 @@
 
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
-import { z } from 'zod'
 
 import { updateAccount } from '@/http/account/update-account'
-
-const updateAccountSchema = z.object({
-	name: z
-		.string()
-		.refine((value) => value.split(' ').length > 1, 'Enter your full name.'),
-	email: z.string().email('Enter a valid e-mail.'),
-})
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
+import { updateAccountSchema } from '@/schema/update-account-schema'
 
 export async function saveInformationsAction(data: FormData) {
 	const result = updateAccountSchema.safeParse(Object.fromEntries(data))
@@ -40,14 +35,14 @@ export async function saveInformationsAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Successfully saved your account informations',
+		message: success.ACCOUNT_INFORMATION,
 		errors: null,
 	}
 }

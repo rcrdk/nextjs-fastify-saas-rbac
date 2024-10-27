@@ -1,0 +1,17 @@
+export const success = {
+	AVATAR_CHANGED: 'Your profile avatar was changed',
+	ACCOUNT_INFORMATION: 'Successfully saved your account information',
+	ACCOUNT_PASSWORD: 'Successfully changed your account password',
+	ACCOUNT_REMOVED_GITHUB: 'Successfully removed GitHub from your account',
+	ORGANIZATION_CREATE: 'Successfully created a new organization',
+	ORGANIZATION_UPDATE: 'Successfully saved the organization data',
+	ORGANIZATION_LEAVE: 'You just leave the organization',
+	ORGANIZATION_AVATAR: 'Your organization avatar was changed',
+	ORGANIZATION_DOMAIN_CREATED: 'Successfully saved the organization data',
+	ORGANIZATION_DOMAIN_REMOVED: 'Successfully removed organization domain',
+	PROJECT_CREATED: 'Successfully created a new project',
+	INVITE_SENT: 'Your invite was sent',
+	MEMBER_REMOVED: 'Member removed from organization',
+	MEMBER_UPDATED: 'Member role updated',
+	RESENDED: 'Resended',
+}

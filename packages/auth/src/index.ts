@@ -6,6 +6,7 @@ import {
 } from '@casl/ability'
 import { z } from 'zod'
 
+import { errors } from './messages/error'
 import { User } from './models/user'
 import { permissions } from './permissions'
 import { billingSubject } from './subjects/billing'
@@ -37,7 +38,7 @@ export function defineAbilityFor(user: User) {
 	const builder = new AbilityBuilder(createAppAbility)
 
 	if (typeof permissions[user.role] !== 'function') {
-		throw new Error(`Permissions for role ${user.role} not found`)
+		throw new Error(errors.PERMISSIONS_NOT_FOUND.replace('{role}', user.role))
 	}
 
 	permissions[user.role](user, builder)

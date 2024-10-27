@@ -13,6 +13,8 @@ import {
 	transfererOrganizationOwnership,
 	TransferOwnershipActions,
 } from '@/http/organizations/transfer-organization-ownership'
+import { errors } from '@/messages/error'
+import { success } from '@/messages/success'
 
 export async function removeMemberAction(memberId: string) {
 	const currentOrganization = await getCurrentOrganization()
@@ -39,14 +41,14 @@ export async function removeMemberAction(memberId: string) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Member removed from organization',
+		message: success.MEMBER_REMOVED,
 		errors: null,
 	}
 }
@@ -80,7 +82,7 @@ export async function transferOrganizationOwnershipAction(
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
@@ -134,14 +136,14 @@ export async function updateMemberAction(memberId: string, role: Role) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
 
 	return {
 		success: true,
-		message: 'Member role updated',
+		message: success.MEMBER_UPDATED,
 		errors: null,
 	}
 }

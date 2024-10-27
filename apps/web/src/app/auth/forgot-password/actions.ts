@@ -1,13 +1,10 @@
 'use server'
 
 import { HTTPError } from 'ky'
-import { z } from 'zod'
 
 import { requestNewPassword } from '@/http/auth/request-new-password'
-
-const forgotPasswordSchema = z.object({
-	email: z.string().email('Enter a valid e-mail.'),
-})
+import { errors } from '@/messages/error'
+import { forgotPasswordSchema } from '@/schema/forgot-password-schema'
 
 export async function forgotPasswordAction(data: FormData) {
 	const result = forgotPasswordSchema.safeParse(Object.fromEntries(data))
@@ -43,7 +40,7 @@ export async function forgotPasswordAction(data: FormData) {
 
 		return {
 			success: false,
-			message: 'Unexpected error, try again in a few minutes',
+			message: errors.app.UNEXPECTED,
 			errors: null,
 		}
 	}
