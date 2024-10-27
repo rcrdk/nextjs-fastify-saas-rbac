@@ -1,10 +1,13 @@
 'use client'
 
 import { IconBrandGithub } from '@tabler/icons-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { DialogAction } from '@/components/dialog-action'
+import {
+	confirmDialogActionOnPromptEnter,
+	DialogAction,
+} from '@/components/dialog-action'
 import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Button } from '@/components/ui/button'
@@ -21,6 +24,8 @@ interface DisconnectGitHubButtonProps {
 export function DisconnectGitHubButton({
 	disabled,
 }: DisconnectGitHubButtonProps) {
+	const form = useRef<HTMLFormElement>(null)
+
 	const [deleteInput, setDeleteInput] = useState('')
 	const [open, setOpen] = useState(false)
 
@@ -55,11 +60,12 @@ export function DisconnectGitHubButton({
 	)
 
 	const actionForm = (
-		<form onSubmit={handleRemove}>
+		<form onSubmit={handleRemove} ref={form}>
 			<FormSubmitButton
 				variant="destructive"
 				className="w-full gap-2"
 				disabled={deleteInput !== 'REMOVE'}
+				loading={isPending}
 			>
 				Disconnect GitHub
 			</FormSubmitButton>
@@ -89,6 +95,7 @@ export function DisconnectGitHubButton({
 					defaultValue={deleteInput}
 					className="text-center sm:text-left"
 					onChange={(e) => setDeleteInput(e.target.value)}
+					onKeyDown={(e) => confirmDialogActionOnPromptEnter(e, 'REMOVE', form)}
 				/>
 			</FormGroup>
 		</DialogAction>

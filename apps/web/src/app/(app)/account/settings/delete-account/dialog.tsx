@@ -1,9 +1,12 @@
 'use client'
 
 import { IconUserMinus } from '@tabler/icons-react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
-import { DialogAction } from '@/components/dialog-action'
+import {
+	confirmDialogActionOnPromptEnter,
+	DialogAction,
+} from '@/components/dialog-action'
 import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Button } from '@/components/ui/button'
@@ -13,6 +16,8 @@ import { Label } from '@/components/ui/label'
 import { deleteAccountAction } from './actions'
 
 export function DeleteAccountDialog() {
+	const form = useRef<HTMLFormElement>(null)
+
 	const [deleteInput, setDeleteInput] = useState('')
 	const [open, setOpen] = useState(false)
 
@@ -28,7 +33,7 @@ export function DeleteAccountDialog() {
 	)
 
 	const actionForm = (
-		<form action={deleteAccountAction}>
+		<form action={deleteAccountAction} ref={form}>
 			<FormSubmitButton
 				variant="destructive"
 				className="w-full gap-2"
@@ -57,6 +62,7 @@ export function DeleteAccountDialog() {
 					defaultValue={deleteInput}
 					className="text-center sm:text-left"
 					onChange={(e) => setDeleteInput(e.target.value)}
+					onKeyDown={(e) => confirmDialogActionOnPromptEnter(e, 'DELETE', form)}
 				/>
 			</FormGroup>
 		</DialogAction>

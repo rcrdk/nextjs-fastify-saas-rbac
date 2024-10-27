@@ -1,7 +1,7 @@
 'use client'
 
 import { DialogPortal } from '@radix-ui/react-dialog'
-import { ReactNode } from 'react'
+import { ReactNode, RefObject } from 'react'
 
 import { Button } from './ui/button'
 import {
@@ -22,6 +22,19 @@ interface DialogActionProps {
 	actionForm: JSX.Element
 	open: boolean
 	onOpenChange: () => void
+}
+
+export function confirmDialogActionOnPromptEnter(
+	event: React.KeyboardEvent<HTMLInputElement>,
+	confirmation: string,
+	form: RefObject<HTMLFormElement>,
+) {
+	const pressedEnter = event.key === 'Enter'
+	const isConfirmed = event.currentTarget.value === confirmation
+
+	if (pressedEnter && isConfirmed && form) {
+		form.current?.requestSubmit()
+	}
 }
 
 export function DialogAction({

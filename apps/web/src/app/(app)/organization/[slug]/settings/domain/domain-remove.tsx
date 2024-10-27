@@ -1,9 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { DialogAction } from '@/components/dialog-action'
+import {
+	confirmDialogActionOnPromptEnter,
+	DialogAction,
+} from '@/components/dialog-action'
 import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Button } from '@/components/ui/button'
@@ -15,6 +18,8 @@ import { useFormState } from '@/hooks/use-form-state'
 import { removeOrganizationDomainAction } from './actions'
 
 export function RemoveDomain() {
+	const form = useRef<HTMLFormElement>(null)
+
 	const [deleteInput, setDeleteInput] = useState('')
 	const [open, setOpen] = useState(false)
 
@@ -51,7 +56,7 @@ export function RemoveDomain() {
 	)
 
 	const actionForm = (
-		<form onSubmit={handleRemove}>
+		<form onSubmit={handleRemove} ref={form}>
 			<FormSubmitButton
 				variant="destructive"
 				className="w-full gap-2"
@@ -80,6 +85,7 @@ export function RemoveDomain() {
 				<Input
 					defaultValue={deleteInput}
 					onChange={(e) => setDeleteInput(e.target.value)}
+					onKeyDown={(e) => confirmDialogActionOnPromptEnter(e, 'DELETE', form)}
 				/>
 			</FormGroup>
 		</DialogAction>

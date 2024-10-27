@@ -1,9 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { DialogAction } from '@/components/dialog-action'
+import {
+	confirmDialogActionOnPromptEnter,
+	DialogAction,
+} from '@/components/dialog-action'
 import { FormGroup } from '@/components/form-group'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Input } from '@/components/ui/input'
@@ -27,6 +30,8 @@ export function TransferOwnershipDialog({
 	open,
 	onOpenChange,
 }: TransferOwnershipDialogProps) {
+	const form = useRef<HTMLFormElement>(null)
+
 	const [action, setAction] = useState<TransferOwnershipActions>('UPDATE_ROLE')
 	const [transferInput, setTransferInput] = useState('')
 
@@ -50,10 +55,11 @@ export function TransferOwnershipDialog({
 	}, [success, message, isPending])
 
 	const actionForm = (
-		<form onSubmit={handleTransfer}>
+		<form onSubmit={handleTransfer} ref={form}>
 			<FormSubmitButton
 				className="w-full gap-2"
 				disabled={transferInput !== 'TRANSFER'}
+				loading={isPending}
 			>
 				Transfer ownership
 			</FormSubmitButton>
@@ -95,6 +101,9 @@ export function TransferOwnershipDialog({
 				<Input
 					defaultValue={transferInput}
 					onChange={(e) => setTransferInput(e.target.value)}
+					onKeyDown={(e) =>
+						confirmDialogActionOnPromptEnter(e, 'TRANSFER', form)
+					}
 				/>
 			</FormGroup>
 		</DialogAction>
