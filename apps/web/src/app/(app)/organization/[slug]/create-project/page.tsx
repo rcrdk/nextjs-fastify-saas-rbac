@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { ability } from '@/auth'
 
-import { ProjectForm } from './form'
+import { ProjectForm } from '../project/form'
 
 export const metadata: Metadata = {
 	title: 'Create a Project',

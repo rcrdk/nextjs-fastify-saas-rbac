@@ -18,6 +18,7 @@ interface FormAvatarProps {
 	receiver: AvatarReceipient
 	loading: boolean
 	onSelectFile: (file?: File | null) => void
+	className?: string
 }
 
 export function FormAvatar({
@@ -25,6 +26,7 @@ export function FormAvatar({
 	receiver,
 	loading,
 	onSelectFile,
+	className,
 }: FormAvatarProps) {
 	const [preview, setPreview] = useState<string>()
 
@@ -56,7 +58,7 @@ export function FormAvatar({
 
 	return (
 		<div className="group relative">
-			<Avatar className="z-0 size-24 sm:size-20">
+			<Avatar className={`z-0 size-24 sm:size-20 ${className ?? ''}`}>
 				<AvatarImage
 					src={preview || currentAvatar || undefined}
 					className="object-cover object-center"

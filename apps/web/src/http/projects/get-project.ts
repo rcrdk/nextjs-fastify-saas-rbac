@@ -5,23 +5,26 @@ interface GetProjectRequest {
 	projectSlug: string
 }
 
-interface GetProjectResponse {
-	project: {
-		description: string
+export interface GetProjectItemResponse {
+	description: string
+	id: string
+	name: string
+	slug: string
+	avatarUrl: string | null
+	organizationId: string
+	createdAt: string
+	updatedAt: string
+	ownerId: string
+	owner: {
 		id: string
-		name: string
-		slug: string
+		name: string | null
 		avatarUrl: string | null
-		organizationId: string
-		createdAt: string
-		updatedAt: string
-		owner: {
-			id: string
-			name: string | null
-			avatarUrl: string | null
-			email: string
-		} | null
-	}
+		email: string
+	} | null
+}
+
+interface GetProjectResponse {
+	project: GetProjectItemResponse
 }
 
 export async function getProject({

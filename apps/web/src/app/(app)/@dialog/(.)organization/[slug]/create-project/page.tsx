@@ -1,4 +1,4 @@
-import { ProjectForm } from '@/app/(app)/organization/[slug]/create-project/form'
+import { ProjectForm } from '@/app/(app)/organization/[slug]/project/form'
 import { InterceptedDialogContent } from '@/components/intercepted-dialog-content'
 import {
 	Dialog,

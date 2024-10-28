@@ -36,6 +36,7 @@ export async function getProject(app: FastifyInstance) {
 								organizationId: z.string().uuid(),
 								createdAt: z.date(),
 								updatedAt: z.date(),
+								ownerId: z.string().uuid().nullable(),
 								owner: z
 									.object({
 										id: z.string().uuid(),
@@ -78,6 +79,7 @@ export async function getProject(app: FastifyInstance) {
 						organizationId: true,
 						createdAt: true,
 						updatedAt: true,
+						ownerId: true,
 						owner: {
 							select: {
 								id: true,

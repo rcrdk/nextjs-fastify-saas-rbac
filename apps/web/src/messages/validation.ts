@@ -1,6 +1,7 @@
 export const validation = {
 	FULL_NAME: 'Enter your full name.',
 	VALID_EMAIL: 'Enter a valid e-mail address.',
+	VALID_UUID: 'Provide a valid ID.',
 	FOUR_CHARACTERS: 'Enter at least 4 characters.',
 	CURRENT_PASSWORD: 'Enter your current password.',
 	PASSWORD: 'Enter your password.',

@@ -40,6 +40,8 @@ export async function deleteProject(app: FastifyInstance) {
 				const { organization, membership } =
 					await request.getCurrentUserMembership(slug)
 
+				console.log(projectId, organization.id)
+
 				const project = await prisma.project.findUnique({
 					where: {
 						id: projectId,
@@ -68,7 +70,7 @@ export async function deleteProject(app: FastifyInstance) {
 
 				const uploadedAvatars = getUploadedAvatarNames(avatars)
 
-				// delete user related avatars
+				// delete avatars
 				await prisma.avatar.deleteMany({
 					where: {
 						name: {
@@ -77,7 +79,7 @@ export async function deleteProject(app: FastifyInstance) {
 					},
 				})
 
-				// delete user related avatars files
+				// delete avatars files
 				await deleteMultipleObjectsR2(uploadedAvatars)
 
 				// delete project
@@ -86,8 +88,6 @@ export async function deleteProject(app: FastifyInstance) {
 						id: projectId,
 					},
 				})
-
-				// delete avatar
 
 				return reply.status(204).send()
 			},

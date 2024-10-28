@@ -90,6 +90,7 @@ export async function updateProject(app: FastifyInstance) {
 					data: {
 						name,
 						description,
+						slug: newSlug,
 					},
 				})
 

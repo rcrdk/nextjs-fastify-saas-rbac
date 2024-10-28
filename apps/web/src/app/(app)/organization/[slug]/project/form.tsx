@@ -12,22 +12,25 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useFormState } from '@/hooks/use-form-state'
 import { queryClient } from '@/lib/react-query'
-import { FormProjectSchema } from '@/schema/form-project-schema'
+import { UpdateProjectSchema } from '@/schema/update-project-schema'
 
-import { createProjectAction } from './actions'
+import { createProjectAction, updateProjectAction } from './actions'
 
 interface ProjectFormProps {
 	isUpdating?: boolean
-	initialData?: FormProjectSchema
+	initialData?: UpdateProjectSchema
+	onUpdateSuccess?: () => void
 }
 
-export function ProjectForm({ isUpdating, initialData }: ProjectFormProps) {
+export function ProjectForm({
+	isUpdating,
+	initialData,
+	onUpdateSuccess,
+}: ProjectFormProps) {
 	const { slug: organization } = useParams<{ slug: string }>()
 	const router = useRouter()
 
-	const formAction = isUpdating
-		? createProjectAction // updateProjectAction
-		: createProjectAction
+	const formAction = isUpdating ? updateProjectAction : createProjectAction
 
 	const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
 		formAction,
@@ -36,6 +39,10 @@ export function ProjectForm({ isUpdating, initialData }: ProjectFormProps) {
 				queryClient.invalidateQueries({
 					queryKey: [organization, 'projects'],
 				})
+
+				if (onUpdateSuccess) {
+					onUpdateSuccess()
+				}
 
 				if (!isUpdating) {
 					setTimeout(() => router.back(), 300)
@@ -77,6 +84,10 @@ export function ProjectForm({ isUpdating, initialData }: ProjectFormProps) {
 				/>
 				<FormError message={errors?.description} />
 			</FormGroup>
+
+			{isUpdating && (
+				<input type="hidden" name="id" defaultValue={initialData?.id} />
+			)}
 
 			<FormSubmitButton loading={isPending}>
 				{isUpdating ? 'Save project' : 'Create new project'}

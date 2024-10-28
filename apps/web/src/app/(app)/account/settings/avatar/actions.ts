@@ -53,7 +53,7 @@ export async function updateAvatarAction(
 
 	return {
 		success: true,
-		message: success.AVATAR_CHANGED,
+		message: success.ACCOUNT_AVATAR_CHANGED,
 		errors: null,
 	}
 }
