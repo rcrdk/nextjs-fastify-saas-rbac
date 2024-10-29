@@ -3,13 +3,14 @@
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 
+import { AccountProviders } from '@/@types/account-providers'
 import { removeAccountProvider } from '@/http/account/remove-account-provider'
 import { errors } from '@/messages/error'
 import { success } from '@/messages/success'
 
-export async function disconnectGitHubAction() {
+export async function disconnectAction(provider: AccountProviders) {
 	try {
-		await removeAccountProvider({ provider: 'GITHUB' })
+		await removeAccountProvider({ provider })
 
 		revalidateTag('get-profile')
 	} catch (error) {
@@ -29,7 +30,7 @@ export async function disconnectGitHubAction() {
 
 	return {
 		success: true,
-		message: success.ACCOUNT_REMOVED_GITHUB,
+		message: success.ACCOUNT_REMOVED_PROVIDER,
 		errors: null,
 	}
 }

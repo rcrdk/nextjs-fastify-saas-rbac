@@ -1,9 +1,10 @@
 'use client'
 
-import { IconBrandGithub } from '@tabler/icons-react'
+import { IconPlugConnectedX } from '@tabler/icons-react'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 
+import { AccountProviders } from '@/@types/account-providers'
 import {
 	confirmDialogActionOnPromptEnter,
 	DialogAction,
@@ -15,15 +16,17 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState } from '@/hooks/use-form-state'
 
-import { disconnectGitHubAction } from './actions'
+import { disconnectAction } from './actions'
 
-interface DisconnectGitHubButtonProps {
+interface DisconnectButtonProps {
 	disabled: boolean
+	provider: AccountProviders
 }
 
-export function DisconnectGitHubButton({
+export function DisconnectButton({
 	disabled,
-}: DisconnectGitHubButtonProps) {
+	provider,
+}: DisconnectButtonProps) {
 	const form = useRef<HTMLFormElement>(null)
 
 	const [deleteInput, setDeleteInput] = useState('')
@@ -34,7 +37,7 @@ export function DisconnectGitHubButton({
 	}
 
 	const [{ success, message }, handleRemove, isPending] = useFormState(
-		disconnectGitHubAction,
+		disconnectAction.bind(null, provider),
 		{
 			onSuccess() {
 				handleToggleDialogVisibility()
@@ -53,9 +56,9 @@ export function DisconnectGitHubButton({
 	}, [success, message, isPending])
 
 	const RemoveTriggerButton = (
-		<Button variant="secondary" disabled={disabled} className="w-full gap-2">
-			<IconBrandGithub size={20} />
-			Disconnect from GitHub
+		<Button variant="outline" size="sm" className="gap-2" disabled={disabled}>
+			<IconPlugConnectedX size={20} />
+			Disconnect
 		</Button>
 	)
 
@@ -67,7 +70,7 @@ export function DisconnectGitHubButton({
 				disabled={deleteInput !== 'REMOVE'}
 				loading={isPending}
 			>
-				Disconnect GitHub
+				Disconnect
 			</FormSubmitButton>
 		</form>
 	)
@@ -75,15 +78,15 @@ export function DisconnectGitHubButton({
 	return (
 		<DialogAction
 			title="Confirm action:"
-			description="Do you really want to remove the GitHub connection from your account? You connect again if your GitHub account e-mail is the same of your account here."
+			description="Do you really want to remove this connection from your account? You connect again if your account e-mail is the same of your account here."
 			open={open}
 			onOpenChange={handleToggleDialogVisibility}
 			triggerButton={RemoveTriggerButton}
 			actionForm={actionForm}
 		>
 			<div className="text-balance rounded border p-3 text-center text-sm text-muted-foreground sm:text-left">
-				This action does not remove permissions from your GitHub account, only
-				from this app.
+				This action does not remove permissions from your third-party
+				authentication account, only from this app.
 			</div>
 
 			<FormGroup className="text-center sm:text-left">
