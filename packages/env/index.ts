@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+// @ts-expect-error you ugly import
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 
@@ -26,7 +27,6 @@ export const env = createEnv({
 		AWS_REGION: z.string().default('auto'),
 		AWS_ACCESS_KEY: z.string(),
 		AWS_SECRET_KEY: z.string(),
-		
 	},
 
 	client: {},

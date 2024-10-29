@@ -30,12 +30,14 @@ model User {
 enum TokenType {
     PASSWORD_RECOVER
     EMAIL_VALIDATION
+    EMAIL_CHANGE_VALIDATION
 }
 
 model Token {
     id        String    @id @default(uuid())
     type      TokenType
     createdAt DateTime  @default(now()) @map("created_at")
+    payload   String?
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String @map("user_id")

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
 
 import { FormError } from '@/components/form-error'
@@ -15,20 +15,31 @@ import { useFormState } from '@/hooks/use-form-state'
 import { saveInformationsAction } from './actions'
 
 interface InformationFormProps {
+	disableEmail: boolean
 	initialData: {
 		name: string | null
 		email: string
-		avatarUrl: string | null
 	}
 }
 
-export function InformationForm({ initialData }: InformationFormProps) {
+export function InformationForm({
+	disableEmail,
+	initialData,
+}: InformationFormProps) {
+	const form = useRef<HTMLFormElement>(null)
+
 	const [{ success, message, errors }, handleUpdate, isPending] = useFormState(
 		saveInformationsAction,
 		{
 			resetStateMessage: true,
 		},
 	)
+
+	useEffect(() => {
+		if (form.current) {
+			form.current.reset()
+		}
+	}, [form, disableEmail])
 
 	useEffect(() => {
 		if (!success && message) {
@@ -40,7 +51,7 @@ export function InformationForm({ initialData }: InformationFormProps) {
 	}, [success, message, isPending])
 
 	return (
-		<form onSubmit={handleUpdate}>
+		<form onSubmit={handleUpdate} ref={form}>
 			<CardContent>
 				<FormGrid>
 					<FormGroup>
@@ -60,7 +71,7 @@ export function InformationForm({ initialData }: InformationFormProps) {
 							name="email"
 							id="email"
 							type="email"
-							readOnly
+							readOnly={disableEmail}
 							defaultValue={initialData.email}
 						/>
 						<FormError message={errors?.email} />

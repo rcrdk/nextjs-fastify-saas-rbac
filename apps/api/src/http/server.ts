@@ -12,6 +12,9 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'
+import { deleteEmailChangeToken } from './routes/account/cancel-email-change'
+import { checkEmailChange } from './routes/account/check-email-change'
+import { confirmEmailChangeToken } from './routes/account/confirm-email-change'
 import { deleteAccount } from './routes/account/delete-account'
 import { getProfile } from './routes/account/get-profile'
 import { leaveOrganization } from './routes/account/leave-organization'
@@ -108,6 +111,9 @@ app.register(updatePassword)
 app.register(removeAccountProvider)
 app.register(leaveOrganization)
 app.register(deleteAccount)
+app.register(checkEmailChange)
+app.register(deleteEmailChangeToken)
+app.register(confirmEmailChangeToken)
 
 app.register(creteOrganization)
 app.register(getMemebership)

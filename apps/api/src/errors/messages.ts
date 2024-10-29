@@ -11,6 +11,9 @@ export const errors = {
 		ALREADY_EXISTS: 'An user with same e-mail already exists',
 		NOT_FOUND: 'User not found',
 		ACCOUNT_NOT_FOUND: 'Account not found',
+		EMAIL_VALIDATION_NOT_FOUND: 'E-mail change validation not found',
+		EMAIL_VALIDATION_EXPIRED: 'E-mail change validation does not exists or already expired',
+		EMAIL_VALIDATION_INVALID: 'Invalid validation code'
 	},
 	auth: {
 		NOT_PASSWORD_FOUND: 'User does not have a password, use social sign-in',

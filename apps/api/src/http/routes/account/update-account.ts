@@ -3,6 +3,7 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
 import { errors } from '@/errors/messages'
+import { changeAccountEmail } from '@/http/emails/change-account-email'
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 
@@ -27,11 +28,11 @@ export async function updateAccount(app: FastifyInstance) {
 			},
 			async (request, reply) => {
 				const userId = await request.getCurrentUserId()
-				const { email, name } = request.body
+				const { email: newEmail, name } = request.body
 
 				const userWithSameEmail = await prisma.user.findFirst({
 					where: {
-						email,
+						email: newEmail,
 						id: {
 							not: userId,
 						},
@@ -42,13 +43,52 @@ export async function updateAccount(app: FastifyInstance) {
 					throw new BadRequestError(errors.user.ALREADY_EXISTS)
 				}
 
+				const currentUser = await prisma.user.findUnique({
+					where: {
+						id: userId,
+					},
+				})
+
+				if (!currentUser) {
+					throw new BadRequestError(errors.user.NOT_FOUND)
+				}
+
+				const hasAnEmailChangePending = await prisma.token.findFirst({
+					where: {
+						userId,
+						type: 'EMAIL_CHANGE_VALIDATION',
+					},
+				})
+
+				const { email: currentEmail } = currentUser
+
+				if (currentEmail !== newEmail && !hasAnEmailChangePending) {
+					const { id: verificationCode } = await prisma.token.create({
+						data: {
+							userId,
+							type: 'EMAIL_CHANGE_VALIDATION',
+							payload: newEmail,
+						},
+					})
+
+					try {
+						await changeAccountEmail({
+							name,
+							oldEmail: currentEmail,
+							newEmail,
+							code: verificationCode,
+						})
+					} catch {
+						throw new BadRequestError(errors.services.SEND_EMAIL)
+					}
+				}
+
 				await prisma.user.update({
 					where: {
 						id: userId,
 					},
 					data: {
 						name,
-						email,
 					},
 				})
 

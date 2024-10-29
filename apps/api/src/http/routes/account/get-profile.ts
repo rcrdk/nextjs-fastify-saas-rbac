@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
@@ -61,6 +62,27 @@ export async function getProfile(app: FastifyInstance) {
 
 				if (!user) {
 					throw new BadRequestError(errors.user.NOT_FOUND)
+				}
+
+				const hasAnEmailChangePending = await prisma.token.findFirst({
+					where: {
+						userId: user.id,
+						type: 'EMAIL_CHANGE_VALIDATION',
+					},
+				})
+
+				if (hasAnEmailChangePending) {
+					const tokenWasCreatedAt = dayjs(hasAnEmailChangePending.createdAt)
+					const wasTokenCreatedWithin5Minutes =
+						dayjs().diff(tokenWasCreatedAt, 'minutes') <= 5
+
+					if (!wasTokenCreatedWithin5Minutes) {
+						await prisma.token.delete({
+							where: {
+								id: hasAnEmailChangePending.id,
+							},
+						})
+					}
 				}
 
 				return reply.status(200).send({

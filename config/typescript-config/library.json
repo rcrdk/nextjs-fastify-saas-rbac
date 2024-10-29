@@ -8,8 +8,7 @@
 	  "lib": ["ES2020", "DOM", "DOM.Iterable"],
 	  "module": "ESNext",
 	  "skipLibCheck": true,
-  
-	  "moduleResolution": "bundler",
+	  "moduleResolution": "Bundler",
 	  "allowImportingTsExtensions": true,
 	  "resolveJsonModule": true,
 	  "isolatedModules": true,
