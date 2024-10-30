@@ -60,13 +60,23 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 </table>
 
 ## 🖥️ Project
-*Soon*
+This project contains all the necessary boilerplate to setup a multi-tenant SaaS including authentication, RBAC, account settings, organizations management with projects, members, invitations and its settings. There are three roles available: First, the owner (administrator) of organizations who is able manage all data and actions; The regular member who is able to manage their projects; And the billing member who is able to manage, of course, the billing data. You can see the full table below.
+
+**Authentication:** consists into classic e-mail and password sign-in, also it includes the authentication with third-party services from GitHub and Google. The traditional sign-up method requires an e-mail verification by a token valid for five minutes that is sent to the user inbox with instructions. The password recover functionality works in a similar way of e-mail verification by a token.
+
+**Account settings:** the user is able to manage their account: (1) basic information including the avatar, name and e-mail with revalidation; (2) set a password or change an existing one; (3) Connect or disconnect third-party authentication providers; (4) Manage all organizations that they are in and there's a option to leave organization that they doesn't owns; (5) Delete account along with all owned organizations.
+
+**Organization projects:** here the users can make the CRUD of projects, since this app its a boilerplate, it was developed a superficial projects section only with avatar, name, description and author.
+
+**Organization members:** in this section the owner can manage the existing members of organization being able to change their role, remove them or tranfer the ownership of organization to one of them. There is also the option to invite new members for a role by sending an e-mail with the invite link.
+
+**Organization settings:** the owner has control of the entire organization: (1) change the avatar and its unique name; (2) It is possible to configure a unique domain, so new app users after signing up with the e-mal containg the domain could auto-join the organization. To be able to use a domain on organization, the owner must verify the domain ownership by setting a TXT entry on domain DNS records configuration; (3) The billing section, also shown to the billing member, is where the usage stats of organization are; (4) Finally, there it the option to shutdown the organization with all its data.
+	
 <!-- Backend: API with node and fastify, prisma with postgresql, nodemailer, AWS SDK + Cloudflare r2  -->
 <!-- Front: React 19 RC and Next 15 with App Route, server actions, turborepo, ky client -->
 <!-- Tailwind shadcn-ui, ky -->
-<!-- GitHub OAuth2, Google OAuth2 -->
-<!-- User roles and permissions with CASL -->
-<!-- Pages and navigation of web project -->
+<!-- E-mails
+Cloudflare -->
 
 ## ⚙️ Get started
 
@@ -84,10 +94,9 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 
 **Configure this services and paste all needed information to your .env file:**
 
-1. Create a [GitHub OAuth](https://docs.github.com/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) app to be able to make social sign-in.
-2. Create a [Google OAuth](https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow) app to be able to make social sign-in.
-3. Make sure your Google Account have [2FA activeted](https://support.google.com/accounts/answer/185833) and then you must [generate an app password](https://myaccount.google.com/apppasswords) to be able to send transactional and validation e-mails.
-4. Create a [Cloudflare R2](https://www.cloudflare.com/) bucket to upload the app avatars.
+1. Create a [GitHub OAuth](https://docs.github.com/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) and a [Google OAuth](https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow) apps to be able to sign-in with these providers.
+2. Make sure your Google Account have [2FA activeted](https://support.google.com/accounts/answer/185833) and then you must [generate an app password](https://myaccount.google.com/apppasswords) to be able to send transactional and validation e-mails.
+3. Create a [Cloudflare R2](https://www.cloudflare.com/) bucket to upload the app avatars.
 </details>
 
 
@@ -158,7 +167,7 @@ pnpm run db:studio
 | Transfer ownership       | 🟡    | ❌      | ❌      | ❌        |
 | Update member role       | ✅    | ❌      | ❌      | ❌        |
 | Delete member            | ✅    | 🟡      | ❌      | ❌        |
-| List projects            | ✅    | ✅      | ❌      | ❌        |
+| List projects            | ✅    | ✅      | ✅      | ❌        |
 | Create a new project     | ✅    | ✅      | ❌      | ❌        |
 | Update a project         | ✅    | 🟡      | ❌      | ❌        |
 | Delete a project         | ✅    | 🟡      | ❌      | ❌        |
@@ -172,4 +181,6 @@ pnpm run db:studio
 **Conditions:**
 - Only owners are able to transfer organization ownership;
 - Only administrators and project authors are able update/delete a project;
+- Only auth users can update their preferences;
 - Members are able to leave a organization that they are in;
+- Invites can be accepted or rejected by anyone with the link;
