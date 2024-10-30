@@ -1,5 +1,5 @@
 # 🔐 SaaS: Next.js and Fastify + RBAC
-This project was developed for learning case at [Rocketseat](https://www.rocketseat.com.br/). It's a monorepo that contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js and Fastify including authentication and RBAC authorization.
+This project was developed for learning case at [Rocketseat](https://www.rocketseat.com.br/). It's a monorepo managed with TurboRepo that contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js and Fastify including authentication and RBAC authorization.
 
 ## 🚀 Techs and Tools
 
@@ -60,23 +60,23 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 </table>
 
 ## 🖥️ Project
-This project contains all the necessary boilerplate to setup a multi-tenant SaaS including authentication, RBAC, account settings, organizations management with projects, members, invitations and its settings. There are three roles available: First, the owner (administrator) of organizations who is able manage all data and actions; The regular member who is able to manage their projects; And the billing member who is able to manage, of course, the billing data. You can see the full table below.
+This project contains all the necessary boilerplate to setup a multi-tenant SaaS including authentication with RBAC, account settings, organizations management with projects, members, invitations and its settings. It started as a learning case and I end up creating more features and expanding all the project
 
-**Authentication:** consists into classic e-mail and password sign-in, also it includes the authentication with third-party services from GitHub and Google. The traditional sign-up method requires an e-mail verification by a token valid for five minutes that is sent to the user inbox with instructions. The password recover functionality works in a similar way of e-mail verification by a token.
+**Roles:** the owner (administrator) of organizations who is able manage all data and actions; The regular member who is able to manage their projects; And the billing member who is able to manage, of course, the billing data. You can see the full detailed table below.
+
+**Authentication:** consists into classic e-mail and password sign-in, also it includes the authentication with third-party services from GitHub and Google. The traditional sign-up method requires an e-mail verification by a token valid for five minutes that is sent to the user inbox with instructions. The password recovery functionality works in a similar way of e-mail verification by a token.
 
 **Account settings:** the user is able to manage their account: (1) basic information including the avatar, name and e-mail with revalidation; (2) set a password or change an existing one; (3) Connect or disconnect third-party authentication providers; (4) Manage all organizations that they are in and there's a option to leave organization that they doesn't owns; (5) Delete account along with all owned organizations.
 
-**Organization projects:** here the users can make the CRUD of projects, since this app its a boilerplate, it was developed a superficial projects section only with avatar, name, description and author.
+**Organization projects:** here the users can make the CRUD of projects, since this app is a boilerplate, it was developed a superficial projects section only with avatar, name, description and author.
 
-**Organization members:** in this section the owner can manage the existing members of organization being able to change their role, remove them or tranfer the ownership of organization to one of them. There is also the option to invite new members for a role by sending an e-mail with the invite link.
+**Organization members:** in this section the owner can manage the existing members of the organization being able to change their role, remove them or transfer the ownership of the organization to one of them. There is also the option to invite new members for a role by sending an e-mail with the invite link.
 
-**Organization settings:** the owner has control of the entire organization: (1) change the avatar and its unique name; (2) It is possible to configure a unique domain, so new app users after signing up with the e-mal containg the domain could auto-join the organization. To be able to use a domain on organization, the owner must verify the domain ownership by setting a TXT entry on domain DNS records configuration; (3) The billing section, also shown to the billing member, is where the usage stats of organization are; (4) Finally, there it the option to shutdown the organization with all its data.
-	
-<!-- Backend: API with node and fastify, prisma with postgresql, nodemailer, AWS SDK + Cloudflare r2  -->
-<!-- Front: React 19 RC and Next 15 with App Route, server actions, turborepo, ky client -->
-<!-- Tailwind shadcn-ui, ky -->
-<!-- E-mails
-Cloudflare -->
+**Organization settings:** the owner has control of the entire organization: (1) change the avatar and its unique name; (2) It is possible to configure a unique domain, so new app users after signing up with the e-mail containing the domain could auto-join the organization. To be able to use a domain on organization, the owner must verify the domain ownership by setting a TXT entry on domain DNS records configuration; (3) The billing section, also shown to the billing member, is where the usage stats of organization are; (4) Finally, there it the option to shutdown the organization with all its data.
+
+The API was developed using Fastify along with Prisma ORM and PostgreSQL as database; It was configured nodemailer to deal with transactional and validation e-mails; It was created a Cloudflare R2 bucket to store users, organizations and projects avatars using AWS SDK to establish the connection.
+
+The front-end web app was developed using Next.js 15 with App Router with React 19 RC; It was use a not very known API client, KY, to deal with the requests that works very well with Next; It was used React Query to some client side requests; All design and components was written using shadcn/ui with Tailwind.
 
 ## ⚙️ Get started
 
