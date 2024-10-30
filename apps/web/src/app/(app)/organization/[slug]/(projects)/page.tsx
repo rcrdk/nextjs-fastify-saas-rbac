@@ -1,4 +1,4 @@
-import { IconPlus } from '@tabler/icons-react'
+import { IconLockAccess, IconPlus } from '@tabler/icons-react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -45,7 +45,8 @@ export default async function Projects() {
 			{permissions?.can('get', 'Project') ? (
 				<ProjectsList />
 			) : (
-				<div className="rounded border p-5 text-sm text-muted-foreground">
+				<div className="flex flex-col items-center justify-center gap-2 text-balance rounded border px-4 py-8 text-center text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">
+					<IconLockAccess strokeWidth={1} className="size-10" />
 					You are not allowed to see organization projects.
 				</div>
 			)}

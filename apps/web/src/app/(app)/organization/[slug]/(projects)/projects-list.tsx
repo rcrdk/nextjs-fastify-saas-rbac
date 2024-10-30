@@ -78,7 +78,7 @@ export async function ProjectsList() {
 			))}
 
 			{projects.length === 0 && (
-				<div className="flex flex-col items-center justify-center gap-2 text-balance rounded border px-4 py-6 text-center text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">
+				<div className="flex flex-col items-center justify-center gap-2 text-balance rounded border px-4 py-8 text-center text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">
 					<IconBriefcaseOff strokeWidth={1} className="size-10" />
 					There are no projects in this organization.
 				</div>
