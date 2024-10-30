@@ -8,6 +8,7 @@ export const success = {
 	ACCOUNT_EMAIL_CHANGE: 'Your e-mail was changed',
 	ACCOUNT_DELETED: 'Your account was deleted',
 	ACCOUNT_CONNECTED_GITHUB: 'GitHub account successfully connected',
+	ACCOUNT_CONNECTED_GOOGLE: 'Google account successfully connected',
 	ORGANIZATION_CREATE: 'Created a new organization',
 	ORGANIZATION_UPDATE: 'Saved the organization information',
 	ORGANIZATION_LEAVE: 'You just leave the organization',

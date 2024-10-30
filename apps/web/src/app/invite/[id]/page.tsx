@@ -6,8 +6,6 @@ import {
 	IconLogout,
 	IconUser,
 } from '@tabler/icons-react'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
@@ -20,8 +18,7 @@ import { Separator } from '@/components/ui/separator'
 import { acceptInvite } from '@/http/invites/accept-invite'
 import { getInvite } from '@/http/invites/get-invite'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
-
-dayjs.extend(relativeTime)
+import { timeFromNow, timeFullFormated } from '@/utils/time-formated'
 
 type Params = Promise<{ id: string }>
 
@@ -84,7 +81,11 @@ export default async function InvitePage({ params }: { params: Params }) {
 						<span className="font-medium text-foreground">
 							{invite.organization.name}
 						</span>{' '}
-						about {dayjs(invite.createdAt).fromNow()}:
+						about{' '}
+						<span title={timeFullFormated(invite.createdAt)}>
+							{timeFromNow(invite.createdAt)}
+						</span>
+						:
 					</p>
 				</div>
 

@@ -1,7 +1,6 @@
 'use client'
 
 import {
-	IconBrandGithub,
 	IconCircleCheck,
 	IconExclamationCircle,
 	IconMail,
@@ -18,10 +17,9 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
 import { useFormState } from '@/hooks/use-form-state'
 
-import { signInWithGitHub } from '../actions'
+import { AuthProvidersButtons } from '../providers-buttons'
 import { signinWithEmailAndPassword } from './actions'
 
 interface SignInFormProps {
@@ -111,14 +109,7 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 				</Button>
 			</form>
 
-			<Separator />
-
-			<form action={signInWithGitHub}>
-				<Button type="submit" variant="outline" className="w-full gap-2">
-					<IconBrandGithub size={20} />
-					Sign-in with GitHub
-				</Button>
-			</form>
+			<AuthProvidersButtons />
 		</div>
 	)
 }

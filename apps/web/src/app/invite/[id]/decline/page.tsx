@@ -1,6 +1,4 @@
 import { IconCircleCheck, IconCircleX, IconUser } from '@tabler/icons-react'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
@@ -11,8 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { getInvite } from '@/http/invites/get-invite'
 import { rejectInvite } from '@/http/invites/reject-invite'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
-
-dayjs.extend(relativeTime)
+import { timeFromNow, timeFullFormated } from '@/utils/time-formated'
 
 type Params = Promise<{ id: string }>
 
@@ -55,7 +52,11 @@ export default async function RejectInvitePage({ params }: { params: Params }) {
 						<span className="font-medium text-foreground">
 							{invite.organization.name}
 						</span>{' '}
-						about {dayjs(invite.createdAt).fromNow()}:
+						about{' '}
+						<span title={timeFullFormated(invite.createdAt)}>
+							{timeFromNow(invite.createdAt)}
+						</span>
+						:
 					</p>
 				</div>
 

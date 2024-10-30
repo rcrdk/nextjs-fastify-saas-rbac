@@ -78,9 +78,7 @@ export function FormAvatar({
 				{!loading && (
 					<div className="absolute inset-0 z-[1] flex select-none flex-col items-center justify-center gap-1 text-balance rounded-full bg-muted/50 text-center text-xs font-medium leading-none opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
 						<IconUpload size={16} />
-						{preview || currentAvatar
-							? 'Change your avatar'
-							: 'Send your avatar'}
+						{preview || currentAvatar ? 'Change avatar' : 'Send avatar'}
 					</div>
 				)}
 			</Avatar>

@@ -29,6 +29,9 @@ export async function connectGitHub(app: FastifyInstance) {
 
 			const { code } = request.body
 
+			/**
+			* Authorize
+			*/
 			const githubOAuthURL = new URL('https://github.com/login/oauth/access_token')
 
 			githubOAuthURL.searchParams.set('client_id', env.GITHUB_OAUTH_CLIENT_ID)
@@ -52,7 +55,10 @@ export async function connectGitHub(app: FastifyInstance) {
 					scope: z.string(),
 				})
 				.parse(githubAccessTokenData)
-
+			
+			/**
+			* Fetch
+			*/
 			const githubUserResponse = await fetch('https://api.github.com/user', {
 				method: 'GET',
 				headers: {
@@ -67,7 +73,11 @@ export async function connectGitHub(app: FastifyInstance) {
 					id: z.coerce.number().int().transform(String),
 				})
 				.parse(githubUserData)
+			
 
+			/**
+			* Actions
+			*/
 			const providerAlreadyInUseByUser = await prisma.account.findUnique({
 				where: {
 					provider_userId: {

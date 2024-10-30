@@ -1,1 +1,1 @@
-export type AccountProviders = 'GITHUB'
+export type AccountProviders = 'GITHUB' | 'GOOGLE'

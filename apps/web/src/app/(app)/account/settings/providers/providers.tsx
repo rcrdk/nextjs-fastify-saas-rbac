@@ -1,6 +1,4 @@
-import { IconBrandGithub } from '@tabler/icons-react'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
+import { IconBrandGithub, IconBrandGoogleFilled } from '@tabler/icons-react'
 
 import { AccountProviders } from '@/@types/account-providers'
 import { auth } from '@/auth'
@@ -12,11 +10,10 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
+import { timeFromNow, timeFullFormated } from '@/utils/time-formated'
 
-import { authorizeGithubAction } from './actions'
+import { authorizeGithubAction, authorizeGoogleAction } from './actions'
 import { DisconnectButton } from './disconnect-button'
-
-dayjs.extend(relativeTime)
 
 export async function Providers() {
 	const { user } = await auth()
@@ -34,6 +31,11 @@ export async function Providers() {
 				return {
 					name: 'GitHub',
 					icon: <IconBrandGithub className="shrink-0" size={24} />,
+				}
+			case 'GOOGLE':
+				return {
+					name: 'Google',
+					icon: <IconBrandGoogleFilled className="shrink-0" size={24} />,
 				}
 		}
 	}
@@ -54,12 +56,21 @@ export async function Providers() {
 				</CardDescription>
 			</CardHeader>
 
-			<CardContent className="empty:hidden">
+			<CardContent className="flex flex-col gap-2 empty:hidden sm:flex-row sm:flex-wrap">
 				{showProviderConnect('GITHUB') && (
 					<form action={authorizeGithubAction}>
-						<Button type="submit" variant="outline" className="gap-2">
+						<Button type="submit" variant="secondary" className="w-full gap-2">
 							<IconBrandGithub size={20} />
-							GitHub
+							Connect with GitHub
+						</Button>
+					</form>
+				)}
+
+				{showProviderConnect('GOOGLE') && (
+					<form action={authorizeGoogleAction}>
+						<Button type="submit" variant="secondary" className="w-full gap-2">
+							<IconBrandGoogleFilled size={20} />
+							Connect with Google
 						</Button>
 					</form>
 				)}
@@ -83,8 +94,11 @@ export async function Providers() {
 						{item.icon}
 						<div className="flex flex-grow flex-col">
 							<span className="font-medium">{item.name}</span>
-							<span className="text-xs text-muted-foreground">
-								Connected {dayjs(item.createdAt).fromNow()}
+							<span
+								className="text-xs text-muted-foreground"
+								title={timeFullFormated(item.createdAt)}
+							>
+								Connected {timeFromNow(item.createdAt)}
 							</span>
 						</div>
 						<DisconnectButton

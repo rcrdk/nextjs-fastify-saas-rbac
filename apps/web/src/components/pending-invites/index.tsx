@@ -10,20 +10,17 @@ import {
 	IconUserPlus,
 } from '@tabler/icons-react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { getPendingInvites } from '@/http/invites/get-pending-invites'
 import { getRoleName } from '@/utils/get-role-name'
+import { timeFromNow, timeFullFormated } from '@/utils/time-formated'
 
 import { Button } from '../ui/button'
 import { Popover, PopoverTrigger } from '../ui/popover'
 import { Skeleton } from '../ui/skeleton'
 import { acceptInviteAction, rejectInviteAction } from './action'
-
-dayjs.extend(relativeTime)
 
 export function PendingInvites() {
 	const queryClient = useQueryClient()
@@ -101,7 +98,11 @@ export function PendingInvites() {
 							<span className="font-medium lowercase text-foreground">
 								{getRoleName(invite.role)}
 							</span>{' '}
-							about {dayjs(invite.createdAt).fromNow()}.
+							about{' '}
+							<span title={timeFullFormated(invite.createdAt)}>
+								{timeFromNow(invite.createdAt)}
+							</span>
+							.
 						</p>
 
 						<div className="flex gap-2">

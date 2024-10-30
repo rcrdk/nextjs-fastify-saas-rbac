@@ -77,8 +77,8 @@ export function DisconnectButton({
 
 	return (
 		<DialogAction
-			title="Confirm action:"
-			description="Do you really want to remove this connection from your account? You connect again if your account e-mail is the same of your account here."
+			title="Confirm your action:"
+			description="Do you really want to disconnect this authentication provider from your account?"
 			open={open}
 			onOpenChange={handleToggleDialogVisibility}
 			triggerButton={RemoveTriggerButton}

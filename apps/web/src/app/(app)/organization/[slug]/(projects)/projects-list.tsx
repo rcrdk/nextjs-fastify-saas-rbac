@@ -1,6 +1,4 @@
 import { IconArrowRight, IconBriefcaseOff, IconUser } from '@tabler/icons-react'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'next/link'
 
 import { getCurrentOrganization } from '@/auth'
@@ -16,8 +14,7 @@ import {
 import { getProjects } from '@/http/projects/get-projects'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getFirstName } from '@/utils/get-first-name'
-
-dayjs.extend(relativeTime)
+import { timeFromNow, timeFullFormated } from '@/utils/time-formated'
 
 export async function ProjectsList() {
 	const currentOrganization = await getCurrentOrganization()
@@ -53,11 +50,14 @@ export async function ProjectsList() {
 							</AvatarFallback>
 						</Avatar>
 
-						<span className="text-balance text-xs text-muted-foreground">
+						<span
+							className="text-balance text-xs text-muted-foreground"
+							title={`Created on ${timeFullFormated(project.createdAt)}. Last updated on ${timeFullFormated(project.updatedAt)}.`}
+						>
 							<span className="font-medium text-foreground">
 								{getFirstName(project.owner?.name, 'Someone')}
 							</span>{' '}
-							{dayjs(project.createdAt).fromNow()}
+							{timeFromNow(project.createdAt)}
 						</span>
 
 						<Button

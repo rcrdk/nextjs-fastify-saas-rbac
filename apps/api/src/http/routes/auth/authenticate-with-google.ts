@@ -4,18 +4,16 @@ import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
-import { errors } from '@/errors/messages'
 import { prisma } from '@/lib/prisma'
 
-import { BadRequestError } from '../_errors/bad-request-error'
 
-export async function authenticateWithGitHub(app: FastifyInstance) {
+export async function authenticateWithGoogle(app: FastifyInstance) {
 	app.withTypeProvider<ZodTypeProvider>().post(
-		'/sessions/github',
+		'/sessions/google',
 		{
 			schema: {
 				tags: ['Auth'],
-				summary: 'Authenticate with GitHub.',
+				summary: 'Authenticate with Google.',
 				body: z.object({
 					code: z.string(),
 				}),
@@ -32,70 +30,72 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 			/**
 			 * Authorize
 			 */
-			const githubOAuthURL = new URL('https://github.com/login/oauth/access_token')
+			const googleOAuthURL = new URL('token', 'https://oauth2.googleapis.com')
 
-			githubOAuthURL.searchParams.set('client_id', env.GITHUB_OAUTH_CLIENT_ID)
-			githubOAuthURL.searchParams.set('client_secret', env.GITHUB_OAUTH_CLIENT_SECRET)
-			githubOAuthURL.searchParams.set('redirect_uri', env.GITHUB_OAUTH_CLIENT_REDIRECT_URI)
-			githubOAuthURL.searchParams.set('code', code)
+			googleOAuthURL.searchParams.set('code', code)
+			googleOAuthURL.searchParams.set('client_id', env.GOOGLE_OAUTH_CLIENT_ID)
+			googleOAuthURL.searchParams.set('client_secret', env.GOOGLE_OAUTH_CLIENT_SECRET)
+			googleOAuthURL.searchParams.set('redirect_uri', env.GOOGLE_OAUTH_CLIENT_REDIRECT_URI)
+			googleOAuthURL.searchParams.set('grant_type', 'authorization_code') 
 
-			const githubAccessTokenResponse = await fetch(githubOAuthURL, {
+			const googleAccessTokenResponse = await fetch(googleOAuthURL, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',
 				},
 			})
 
-			const githubAccessTokenData = await githubAccessTokenResponse.json()
+			const googleAccessTokenData = await googleAccessTokenResponse.json()
 
-			const { access_token: GitHubAccessToken } = z
+			const { access_token: GoogleAccessToken } = z
 				.object({
 					access_token: z.string(),
-					token_type: z.literal('bearer'),
+					expires_in: z.coerce.number().int(),
+					refresh_token: z.string(),
 					scope: z.string(),
+					token_type: z.literal('Bearer'),
+					id_token: z.string(),
 				})
-				.parse(githubAccessTokenData)
+				.parse(googleAccessTokenData)
 			
 			/**
-			* Fetch
-			*/
-			const githubUserResponse = await fetch('https://api.github.com/user', {
+			 * Fetch
+			 */
+			const googleUserInfoURL = new URL('oauth2/v3/userinfo', 'https://www.googleapis.com')
+			googleUserInfoURL.searchParams.set('access_token', GoogleAccessToken)
+			
+			const githubUserResponse = await fetch(googleUserInfoURL, {
 				method: 'GET',
-				headers: {
-					Authorization: `Bearer ${GitHubAccessToken}`,
-				},
 			})
 
 			const githubUserData = await githubUserResponse.json()
 
 			const {
-				id: githubId,
+				sub: googleId,
 				name,
 				email,
-				avatar_url: avatarUrl,
+				picture: avatarUrl,
 			} = z
 				.object({
-					id: z.coerce.number().int().transform(String),
-					avatar_url: z.string().url(),
-					name: z.string().nullable(),
-					email: z.string().email().nullable(),
+					sub: z.string(),
+					name: z.string(),
+					given_name: z.string(),
+					picture: z.string(),
+					email: z.string().email(),
+					email_verified: z.boolean(),
 				})
 				.parse(githubUserData)
 
 			/**
 			 * Actions
 			 */
-			if (email === null) {
-				throw new BadRequestError(errors.auth.GITHUB_EMAIL_NOT_FOUND)
-			}
-
 			let token: string
 
 			let account = await prisma.account.findUnique({
 				where: {
 					provider_providerAccountId: {
-						provider: 'GITHUB',
-						providerAccountId: githubId,
+						provider: 'GOOGLE',
+						providerAccountId: googleId,
 					},
 				},
 			})
@@ -137,7 +137,7 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 			account = await prisma.account.findUnique({
 				where: {
 					provider_userId: {
-						provider: 'GITHUB',
+						provider: 'GOOGLE',
 						userId: user.id,
 					},
 				},
@@ -146,8 +146,8 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 			if (!account) {
 				account = await prisma.account.create({
 					data: {
-						provider: 'GITHUB',
-						providerAccountId: githubId,
+						provider: 'GOOGLE',
+						providerAccountId: googleId,
 						userId: user.id,
 					},
 				})

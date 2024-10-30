@@ -19,10 +19,12 @@ import { deleteAccount } from './routes/account/delete-account'
 import { getProfile } from './routes/account/get-profile'
 import { leaveOrganization } from './routes/account/leave-organization'
 import { connectGitHub } from './routes/account/providers/connect-github'
+import { connectGoogle } from './routes/account/providers/connect-google'
 import { removeAccountProvider } from './routes/account/remove-provider'
 import { updateAccount } from './routes/account/update-account'
 import { updatePassword } from './routes/account/update-password'
 import { authenticateWithGitHub } from './routes/auth/authenticate-with-github'
+import { authenticateWithGoogle } from './routes/auth/authenticate-with-google'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 import { createAccount } from './routes/auth/create-account'
 import { requestPasswordRecover } from './routes/auth/request-password-recover'
@@ -101,6 +103,7 @@ app.register(fastifyJwt, {
 app.register(createAccount)
 app.register(authenticateWithPassword)
 app.register(authenticateWithGitHub)
+app.register(authenticateWithGoogle)
 app.register(requestPasswordRecover)
 app.register(resetPassword)
 app.register(verifyEmailAndAuthenticate)
@@ -117,6 +120,7 @@ app.register(deleteEmailChangeToken)
 app.register(confirmEmailChangeToken)
 
 app.register(connectGitHub)
+app.register(connectGoogle)
 
 app.register(creteOrganization)
 app.register(getMemebership)

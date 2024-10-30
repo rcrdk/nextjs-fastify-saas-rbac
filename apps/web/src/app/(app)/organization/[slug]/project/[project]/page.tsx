@@ -1,7 +1,5 @@
 import { projectSchema } from '@saas/auth'
 import { IconBriefcase, IconUser } from '@tabler/icons-react'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
@@ -11,11 +9,10 @@ import { getOrganization } from '@/http/organizations/get-organization'
 import { getProject, GetProjectItemResponse } from '@/http/projects/get-project'
 import { getAvatarUrl } from '@/utils/get-avatar-url'
 import { getFirstName } from '@/utils/get-first-name'
+import { timeFromNow, timeFullFormated } from '@/utils/time-formated'
 
 import { ProjectDropdownSettings } from './dropdown'
 import { AvatarForm } from './update-avatar'
-
-dayjs.extend(relativeTime)
 
 type Params = Promise<{ project: string }>
 
@@ -66,6 +63,8 @@ export default async function Project({ params }: { params: Params }) {
 	const canUpdateProject = !!permissions?.can('update', authProject)
 	const canDeleteProject = !!permissions?.can('delete', authProject)
 
+	const projectTimestampsTitle = `Created on ${timeFullFormated(project.createdAt)}. Last updated on ${timeFullFormated(project.updatedAt)}.`
+
 	return (
 		<div className="w-full space-y-6 self-start sm:space-y-8">
 			<div className="flex gap-5 sm:gap-7">
@@ -101,7 +100,10 @@ export default async function Project({ params }: { params: Params }) {
 						{project.description}
 					</p>
 
-					<div className="hidden items-center gap-2 pt-3 sm:flex">
+					<div
+						className="hidden items-center gap-2 pt-3 sm:flex"
+						title={projectTimestampsTitle}
+					>
 						<Avatar className="size-7">
 							<AvatarImage
 								src={getAvatarUrl(
@@ -117,7 +119,7 @@ export default async function Project({ params }: { params: Params }) {
 							{getFirstName(project.owner?.name, 'Someone')}
 						</span>
 						<p className="text-xs text-muted-foreground">
-							{dayjs(project.createdAt).fromNow()}
+							{timeFromNow(project.createdAt)}
 						</p>
 					</div>
 				</div>
@@ -139,7 +141,10 @@ export default async function Project({ params }: { params: Params }) {
 					{project.description}
 				</p>
 
-				<div className="flex items-center gap-2 pt-3">
+				<div
+					className="flex items-center gap-2 pt-3"
+					title={projectTimestampsTitle}
+				>
 					<Avatar className="size-7">
 						<AvatarImage
 							src={getAvatarUrl(project.owner?.avatarUrl, project.owner?.email)}
@@ -152,7 +157,7 @@ export default async function Project({ params }: { params: Params }) {
 						{getFirstName(project.owner?.name, 'Someone')}
 					</span>
 					<p className="text-xs text-muted-foreground">
-						{dayjs(project.createdAt).fromNow()}
+						{timeFromNow(project.createdAt)}
 					</p>
 				</div>
 			</div>

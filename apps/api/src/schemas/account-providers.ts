@@ -1,3 +1,3 @@
 import z from 'zod'
 
-export const accountProvidersSchema = z.enum(['GITHUB'])
+export const accountProvidersSchema = z.enum(['GITHUB', 'GOOGLE'])
