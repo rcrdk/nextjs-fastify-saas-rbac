@@ -147,30 +147,29 @@ pnpm run db:studio
 - WEB: http://localhost:3000/
 
 ## 🧑🏼‍💻 RBAC: Roles and Permissions
-Owner/Administrator, Member, Billing (one per organization) and Anonymous.
 
-| Description              | Administrator | Member | Billing | Anonymous |
-| ------------------------ | ------------- | ------ | ------- | --------- |
-| Update organization      | ✅            | ❌     | ❌       | ❌        |
-| Delete organization      | ✅            | ❌     | ❌       | ❌        |
-| Invite a member          | ✅            | ❌     | ❌       | ❌        |
-| Revoke an invite         | ✅            | ❌     | ❌       | ❌        |
-| List members             | ✅            | ✅     | ✅       | ❌        |
-| Transfer ownership       | 🟡            | ❌     | ❌       | ❌        |
-| Update member role       | ✅            | ❌     | ❌       | ❌        |
-| Delete member            | ✅            | 🟡     | ❌       | ❌        |
-| List projects            | ✅            | ✅     | ✅       | ❌        |
-| Create a new project     | ✅            | ✅     | ❌       | ❌        |
-| Update a project         | ✅            | 🟡     | ❌       | ❌        |
-| Delete a project         | ✅            | 🟡     | ❌       | ❌        |
-| Get billing details      | ✅            | ❌     | ✅       | ❌        |
-| Export billing details   | ✅            | ❌     | ✅       | ❌        |
+| Description              | Owner | Member | Billing | Anonymous |
+| ------------------------ | ----- | ------ | ------- | --------- |
+| Update organization      | ✅    | ❌      | ❌      | ❌        |
+| Delete organization      | ✅    | ❌      | ❌      | ❌        |
+| Invite a member          | ✅    | ❌      | ❌      | ❌        |
+| Revoke an invite         | ✅    | ❌      | ❌      | ❌        |
+| List members             | ✅    | ✅      | ✅      | ❌        |
+| Transfer ownership       | 🟡    | ❌      | ❌      | ❌        |
+| Update member role       | ✅    | ❌      | ❌      | ❌        |
+| Delete member            | ✅    | 🟡      | ❌      | ❌        |
+| List projects            | ✅    | ✅      | ❌      | ❌        |
+| Create a new project     | ✅    | ✅      | ❌      | ❌        |
+| Update a project         | ✅    | 🟡      | ❌      | ❌        |
+| Delete a project         | ✅    | 🟡      | ❌      | ❌        |
+| Get billing details      | ✅    | ❌      | ✅      | ❌        |
+| Export billing details   | ✅    | ❌      | ✅      | ❌        |
 
 > ✅ allowed | 
 > ❌ not allowed | 
 > 🟡 allowed with conditions
 
 **Conditions:**
-- Only owners may transfer organization ownership;
-- Only administrators and project authors may update/delete a project;
-- Members can leave their own organizations;
+- Only owners are able to transfer organization ownership;
+- Only administrators and project authors are able update/delete a project;
+- Members are able to leave a organization that they are in;
