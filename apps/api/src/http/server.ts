@@ -18,6 +18,7 @@ import { confirmEmailChangeToken } from './routes/account/confirm-email-change'
 import { deleteAccount } from './routes/account/delete-account'
 import { getProfile } from './routes/account/get-profile'
 import { leaveOrganization } from './routes/account/leave-organization'
+import { connectGitHub } from './routes/account/providers/connect-github'
 import { removeAccountProvider } from './routes/account/remove-provider'
 import { updateAccount } from './routes/account/update-account'
 import { updatePassword } from './routes/account/update-password'
@@ -114,6 +115,8 @@ app.register(deleteAccount)
 app.register(checkEmailChange)
 app.register(deleteEmailChangeToken)
 app.register(confirmEmailChangeToken)
+
+app.register(connectGitHub)
 
 app.register(creteOrganization)
 app.register(getMemebership)

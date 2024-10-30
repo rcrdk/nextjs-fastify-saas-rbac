@@ -33,6 +33,7 @@ export async function getProfile(app: FastifyInstance) {
 									z.object({
 										id: z.string().uuid(),
 										provider: accountProvidersSchema,
+										createdAt: z.date(),
 									}),
 								),
 							}),
@@ -55,6 +56,7 @@ export async function getProfile(app: FastifyInstance) {
 							select: {
 								id: true,
 								provider: true,
+								createdAt: true,
 							},
 						},
 					},

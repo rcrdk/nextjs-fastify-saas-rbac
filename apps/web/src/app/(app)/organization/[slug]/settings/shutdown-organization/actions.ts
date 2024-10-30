@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 
 import { getCurrentOrganization } from '@/auth'
 import { shutdownOrganization } from '@/http/organizations/shutdown-organization'
+import { success } from '@/messages/success'
 
 export async function shutdownOrganizationAction() {
 	const currentOrganization = await getCurrentOrganization()
@@ -13,14 +14,9 @@ export async function shutdownOrganizationAction() {
 
 	await shutdownOrganization({ organizationSlug: currentOrganization! })
 
-	cookieStore.set(
-		'@SAAS:deletedOrganization',
-		'Your organization was shutted down',
-		{
-			// eslint-disable-next-line prettier/prettier
-			expires: new Date().getTime() + ((60 * 1000) / 4), // 15s
-		},
-	)
+	cookieStore.set('@SAAS:deletedOrganization', success.ORGANIZATION_SHUTDOWN, {
+		expires: new Date().getTime() + (60 * 1000) / 6, // 10s
+	})
 
 	revalidateTag('organizations')
 

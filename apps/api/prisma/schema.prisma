@@ -53,11 +53,13 @@ model Account {
     id                String          @id @default(uuid())
     provider          AccountProvider
     providerAccountId String          @map("provider_account_id")
+    createdAt         DateTime        @default(now()) @map("created_at")
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String @map("user_id")
 
     @@unique([provider, userId])
+    @@unique([provider, providerAccountId])
     @@map("accounts")
 }
 

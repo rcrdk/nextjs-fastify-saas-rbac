@@ -11,6 +11,7 @@ interface GetProfileResponse {
 		accounts: {
 			id: string
 			provider: AccountProviders
+			createdAt: string
 		}[]
 	}
 }

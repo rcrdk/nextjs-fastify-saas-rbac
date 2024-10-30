@@ -1,7 +1,10 @@
 import { IconBrandGithub } from '@tabler/icons-react'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 import { AccountProviders } from '@/@types/account-providers'
 import { auth } from '@/auth'
+import { Button } from '@/components/ui/button'
 import {
 	Card,
 	CardContent,
@@ -10,10 +13,20 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 
+import { authorizeGithubAction } from './actions'
 import { DisconnectButton } from './disconnect-button'
+
+dayjs.extend(relativeTime)
 
 export async function Providers() {
 	const { user } = await auth()
+
+	const accounts = user.accounts.map((item) => {
+		return {
+			...item,
+			...setProviderData(item.provider),
+		}
+	})
 
 	function setProviderData(provider: AccountProviders) {
 		switch (provider) {
@@ -25,12 +38,9 @@ export async function Providers() {
 		}
 	}
 
-	const accounts = user.accounts.map((item) => {
-		return {
-			...item,
-			...setProviderData(item.provider),
-		}
-	})
+	function showProviderConnect(provider: AccountProviders) {
+		return !accounts.find((item) => item.provider === provider)
+	}
 
 	const cannotDisconnect =
 		(!user.passwordHash && user.accounts.length === 1) || !user.passwordHash
@@ -44,31 +54,39 @@ export async function Providers() {
 				</CardDescription>
 			</CardHeader>
 
-			<CardContent className="w-full empty:hidden">
-				{!user.accounts.length && (
-					<div className="text-balance rounded border p-4 text-sm text-muted-foreground">
-						You don't have any third-party authentication connected to your
-						account. You can sign out and then sign in with a available provider
-						where your account has the email {user.email}
-					</div>
+			<CardContent className="empty:hidden">
+				{showProviderConnect('GITHUB') && (
+					<form action={authorizeGithubAction}>
+						<Button type="submit" variant="outline" className="gap-2">
+							<IconBrandGithub size={20} />
+							GitHub
+						</Button>
+					</form>
 				)}
+			</CardContent>
 
-				{cannotDisconnect && (
+			{cannotDisconnect && (
+				<CardContent>
 					<div className="text-balance rounded border p-4 text-sm text-muted-foreground">
 						You cannot disconnect from providers if you don't have a password or
 						another provider configured in your account.
 					</div>
-				)}
-			</CardContent>
+				</CardContent>
+			)}
 
 			<CardContent className="p-0">
 				{accounts.map((item) => (
 					<div
 						className="flex items-center gap-3 border-t px-5 py-3 hover:bg-muted/50"
-						key={item.id}
+						key={item.provider}
 					>
 						{item.icon}
-						<span className="flex-grow font-medium">{item.name}</span>
+						<div className="flex flex-grow flex-col">
+							<span className="font-medium">{item.name}</span>
+							<span className="text-xs text-muted-foreground">
+								Connected {dayjs(item.createdAt).fromNow()}
+							</span>
+						</div>
 						<DisconnectButton
 							disabled={cannotDisconnect}
 							provider={item.provider}

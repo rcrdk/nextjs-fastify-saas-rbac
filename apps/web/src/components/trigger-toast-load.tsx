@@ -12,14 +12,20 @@ interface TriggerToastLoadProps {
 
 export function TriggerToastLoad({ message, type }: TriggerToastLoadProps) {
 	useEffect(() => {
-		if (type === 'success') {
-			toast.success(message, { id: generateSlug(message) })
-		}
+		const timeout = setTimeout(() => {
+			if (type === 'success') {
+				console.log(type, message)
+				toast.success(message, { id: generateSlug(message) })
+			}
 
-		if (type === 'error') {
-			toast.error(message, { id: generateSlug(message) })
-		}
+			if (type === 'error') {
+				console.log(type, message)
+				toast.error(message, { id: generateSlug(message) })
+			}
+		}, 0)
+
+		return () => clearTimeout(timeout)
 	}, [])
 
-	return null
+	return <></>
 }

@@ -92,10 +92,9 @@ export async function transferOrganizationOwnershipAction(
 
 		cookieStore.set(
 			'@SAAS:transferedOrganization',
-			'The membership transfer is completed and you leave the organization.',
+			success.ORGANIZATION_TRANSFER_LEAVE,
 			{
-				// eslint-disable-next-line prettier/prettier
-				expires: new Date().getTime() + ((60 * 1000) / 4), // 15s
+				expires: new Date().getTime() + (60 * 1000) / 6, // 10s
 			},
 		)
 
@@ -104,8 +103,7 @@ export async function transferOrganizationOwnershipAction(
 
 	return {
 		success: true,
-		message:
-			'The transfer organization is completed and your membership was changed to regular member.',
+		message: success.ORGANIZATION_TRANSFER_NOT_LEAVE,
 		errors: null,
 	}
 }

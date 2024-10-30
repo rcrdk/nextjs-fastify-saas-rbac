@@ -80,6 +80,36 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 				throw new BadRequestError(errors.auth.GITHUB_EMAIL_NOT_FOUND)
 			}
 
+			let token: string
+
+			let account = await prisma.account.findUnique({
+				where: {
+					provider_providerAccountId: {
+						provider: 'GITHUB',
+						providerAccountId: githubId,
+					},
+				},
+			})
+
+			/**
+			 * If account already connected, sign-in
+			 */
+			if (account) {
+				token = await reply.jwtSign(
+					{
+						sub: account.userId,
+					},
+					{
+						expiresIn: '7d',
+					},
+				)
+
+				return reply.status(201).send({ token })
+			}
+
+			/**
+			 * If account not connected, sign-in
+			 */
 			let user = await prisma.user.findUnique({
 				where: { email },
 			})
@@ -95,7 +125,7 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 				})
 			}
 
-			let account = await prisma.account.findUnique({
+			account = await prisma.account.findUnique({
 				where: {
 					provider_userId: {
 						provider: 'GITHUB',
@@ -114,7 +144,7 @@ export async function authenticateWithGitHub(app: FastifyInstance) {
 				})
 			}
 
-			const token = await reply.jwtSign(
+			token = await reply.jwtSign(
 				{
 					sub: user.id,
 				},

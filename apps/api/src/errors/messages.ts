@@ -6,6 +6,8 @@ export const errors = {
 	},
 	services: {
 		SEND_EMAIL: 'An error occurred while trying to send the e-mail',
+		GITHUB_ALREADY_CONNECTED: 'You already have a GitHub account connected',
+		GITHUB_ALREADY_CONNECTED_SOMEONE_ELSE: 'This Github account is already connected on another account',
 	},
 	user: {
 		ALREADY_EXISTS: 'An user with same e-mail already exists',

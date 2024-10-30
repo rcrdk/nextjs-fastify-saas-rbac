@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
+import { cookies } from 'next/headers'
 
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
+import { TriggerToastLoad } from '@/components/trigger-toast-load'
 
 import { Avatar } from './avatar/avatar'
 import { DeleteAccount } from './delete-account/delete-account'
@@ -14,7 +16,12 @@ export const metadata: Metadata = {
 	title: 'Account Settings',
 }
 
-export default function AccountSettingsPage() {
+export default async function AccountSettingsPage() {
+	const cookieStore = await cookies()
+
+	const providerConnectedMessage = cookieStore.get('@SAAS:providerConnected')
+	const providerErrorMessage = cookieStore.get('@SAAS:providerError')
+
 	return (
 		<div className="flex min-h-screen flex-col px-5 py-3 sm:py-4 md:px-8">
 			<Header />
@@ -30,6 +37,17 @@ export default function AccountSettingsPage() {
 					<Organizations />
 					<DeleteAccount />
 				</div>
+
+				{providerConnectedMessage && (
+					<TriggerToastLoad
+						message={providerConnectedMessage.value}
+						type="success"
+					/>
+				)}
+
+				{providerErrorMessage && (
+					<TriggerToastLoad message={providerErrorMessage.value} type="error" />
+				)}
 			</main>
 
 			<Footer />
