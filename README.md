@@ -1,7 +1,5 @@
 # 🔐 SaaS: Next.js and Fastify + RBAC
-This project was developed for learning case at [Rocketseat](https://www.rocketseat.com.br/). It's a monorepo that contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js including authentication and RBAC authorization.
-
-<u>ROOT Docs</u> | [API Docs](https://github.com/rcrdk/nextjs-fastify-saas-rbac/tree/main/apps/api#readme) | [WEB Docs](https://github.com/rcrdk/nextjs-fastify-saas-rbac/tree/main/apps/web#readme)
+This project was developed for learning case at [Rocketseat](https://www.rocketseat.com.br/). It's a monorepo that contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js and Fastify including authentication and RBAC authorization.
 
 ## 🚀 Techs and Tools
 
@@ -147,3 +145,32 @@ pnpm run db:studio
 - API: http://localhost:3333
 - API Docs: http://localhost:3333/docs
 - WEB: http://localhost:3000/
+
+## 🧑🏼‍💻 RBAC: Roles and Permissions
+Owner/Administrator, Member, Billing (one per organization) and Anonymous.
+
+| Description              | Administrator | Member | Billing | Anonymous |
+| ------------------------ | ------------- | ------ | ------- | --------- |
+| Update organization      | ✅            | ❌     | ❌       | ❌        |
+| Delete organization      | ✅            | ❌     | ❌       | ❌        |
+| Invite a member          | ✅            | ❌     | ❌       | ❌        |
+| Revoke an invite         | ✅            | ❌     | ❌       | ❌        |
+| List members             | ✅            | ✅     | ✅       | ❌        |
+| Transfer ownership       | 🟡            | ❌     | ❌       | ❌        |
+| Update member role       | ✅            | ❌     | ❌       | ❌        |
+| Delete member            | ✅            | 🟡     | ❌       | ❌        |
+| List projects            | ✅            | ✅     | ✅       | ❌        |
+| Create a new project     | ✅            | ✅     | ❌       | ❌        |
+| Update a project         | ✅            | 🟡     | ❌       | ❌        |
+| Delete a project         | ✅            | 🟡     | ❌       | ❌        |
+| Get billing details      | ✅            | ❌     | ✅       | ❌        |
+| Export billing details   | ✅            | ❌     | ✅       | ❌        |
+
+> ✅ allowed | 
+> ❌ not allowed | 
+> 🟡 allowed with conditions
+
+**Conditions:**
+- Only owners may transfer organization ownership;
+- Only administrators and project authors may update/delete a project;
+- Members can leave their own organizations;
