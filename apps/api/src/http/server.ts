@@ -156,6 +156,6 @@ app.register(uploadAvatar)
 
 app
 	.listen({
-		port: env.API_SERVER_PORT,
+		port: env.PORT,
 	})
 	.then(() => console.log('✅ HTTP server is running.'))
