@@ -32,7 +32,7 @@ export const env = createEnv({
 		AWS_BUCKET: z.string(),
 		AWS_REGION: z.string().default('auto'),
 		AWS_ACCESS_KEY: z.string(),
-		AWS_SECRET_KEY: z.string(),
+		AWS_SECRET_ACCESS_KEY: z.string(),
 	},
 
 	client: {},
@@ -68,7 +68,7 @@ export const env = createEnv({
 		AWS_BUCKET: process.env.AWS_BUCKET,
 		AWS_REGION: process.env.AWS_REGION,
 		AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
-		AWS_SECRET_KEY: process.env.AWS_SECRET_KEY,
+		AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
 		NEXT_PUBLIC_AWS_URL: process.env.NEXT_PUBLIC_AWS_URL,
 	},
 	emptyStringAsUndefined: true,
