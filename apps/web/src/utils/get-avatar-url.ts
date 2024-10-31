@@ -1,6 +1,6 @@
-import { createHash } from 'node:crypto'
-
+// import { createHash } from 'node:crypto'
 import { env } from '@saas/env'
+import { MD5 } from 'crypto-js'
 
 /**
  * Get a avatar with a fallback from Gravatar:
@@ -16,7 +16,8 @@ export function getAvatarUrl(
 		return avatarUrl.replace('{AWS}', env.NEXT_PUBLIC_CLOUDFLARE_URL)
 
 	if (gravatarEmail) {
-		const hashedEmail = createHash('md5').update(gravatarEmail).digest('hex')
+		// const hashedEmail = createHash('md5').update(gravatarEmail).digest('hex')
+		const hashedEmail = MD5(gravatarEmail).toString()
 
 		return `https://www.gravatar.com/avatar/${hashedEmail}?d=404`
 	}
