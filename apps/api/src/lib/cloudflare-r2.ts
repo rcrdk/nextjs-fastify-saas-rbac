@@ -7,11 +7,11 @@ import {
 import { env } from '@saas/env'
 
 export const R2 = new S3Client({
-	endpoint: env.AWS_ENDPOINT,
-	region: env.AWS_REGION,
+	endpoint: env.CLOUDFLARE_ENDPOINT,
+	region: env.CLOUDFLARE_REGION,
 	credentials: {
-		accessKeyId: env.AWS_ACCESS_KEY,
-		secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+		accessKeyId: env.CLOUDFLARE_ACCESS_KEY,
+		secretAccessKey: env.CLOUDFLARE_SECRET_KEY,
 	},
 })
 
@@ -22,7 +22,7 @@ export async function putObjectR2(
 ) {
 	await R2.send(
 		new PutObjectCommand({
-			Bucket: env.AWS_BUCKET,
+			Bucket: env.CLOUDFLARE_BUCKET,
 			Key: fileName,
 			ContentType: contentType,
 			Body: fileBuffer,
@@ -33,7 +33,7 @@ export async function putObjectR2(
 export async function deleteObjectR2(fileName: string) {
 	await R2.send(
 		new DeleteObjectCommand({
-			Bucket: env.AWS_BUCKET,
+			Bucket: env.CLOUDFLARE_BUCKET,
 			Key: fileName,
 		}),
 	)
@@ -43,7 +43,7 @@ export async function deleteMultipleObjectsR2(filenames: string[]) {
 	if (filenames.length) {
 		await R2.send(
 			new DeleteObjectsCommand({
-				Bucket: env.AWS_BUCKET,
+				Bucket: env.CLOUDFLARE_BUCKET,
 				Delete: {
 					Objects: filenames.map((fileName) => {
 						return { Key: fileName }

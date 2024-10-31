@@ -28,11 +28,11 @@ export const env = createEnv({
 		MAIL_SMTP_PASSWORD: z.string(),
 
 		CLOUDFLARE_ACCOUNT_ID: z.string(),
-		AWS_ENDPOINT: z.string(),
-		AWS_BUCKET: z.string(),
-		AWS_REGION: z.string().default('auto'),
-		AWS_ACCESS_KEY: z.string(),
-		AWS_SECRET_ACCESS_KEY: z.string(),
+		CLOUDFLARE_ENDPOINT: z.string(),
+		CLOUDFLARE_BUCKET: z.string(),
+		CLOUDFLARE_REGION: z.string().default('auto'),
+		CLOUDFLARE_ACCESS_KEY: z.string(),
+		CLOUDFLARE_SECRET_KEY: z.string(),
 	},
 
 	client: {},
@@ -40,7 +40,7 @@ export const env = createEnv({
 	shared: {
 		NEXT_PUBLIC_URL: z.string().url(),
 		NEXT_PUBLIC_API_URL: z.string().url(),
-		NEXT_PUBLIC_AWS_URL: z.string(),
+		NEXT_PUBLIC_CLOUDFLARE_URL: z.string(),
 	},
 
 	runtimeEnv: {
@@ -64,12 +64,12 @@ export const env = createEnv({
 		MAIL_SMTP_EMAIL: process.env.MAIL_SMTP_EMAIL,
 		MAIL_SMTP_PASSWORD: process.env.MAIL_SMTP_PASSWORD,
 		CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
-		AWS_ENDPOINT: process.env.AWS_ENDPOINT,
-		AWS_BUCKET: process.env.AWS_BUCKET,
-		AWS_REGION: process.env.AWS_REGION,
-		AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
-		AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-		NEXT_PUBLIC_AWS_URL: process.env.NEXT_PUBLIC_AWS_URL,
+		CLOUDFLARE_ENDPOINT: process.env.CLOUDFLARE_ENDPOINT,
+		CLOUDFLARE_BUCKET: process.env.CLOUDFLARE_BUCKET,
+		CLOUDFLARE_REGION: process.env.CLOUDFLARE_REGION,
+		CLOUDFLARE_ACCESS_KEY: process.env.CLOUDFLARE_ACCESS_KEY,
+		CLOUDFLARE_SECRET_KEY: process.env.CLOUDFLARE_SECRET_KEY,
+		NEXT_PUBLIC_CLOUDFLARE_URL: process.env.NEXT_PUBLIC_CLOUDFLARE_URL,
 	},
 	emptyStringAsUndefined: true,
 })
