@@ -2,6 +2,8 @@
 	"name": "@saas/api",
 	"version": "1.0.0",
 	"scripts": {
+		"start": "node dist/http/server.js",
+		"build": "tsup",
 		"dev": "pnpm env:load tsx watch src/http/server.ts",
 		"db:migrate": "pnpm env:load prisma migrate dev",
 		"db:deploy": "pnpm env:load prisma migrate deploy",
