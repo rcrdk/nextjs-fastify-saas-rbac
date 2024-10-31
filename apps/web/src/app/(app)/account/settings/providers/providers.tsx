@@ -79,8 +79,8 @@ export async function Providers() {
 			{cannotDisconnect && (
 				<CardContent>
 					<div className="text-balance rounded border p-4 text-sm text-muted-foreground">
-						You cannot disconnect from providers if you don't have a password or
-						another provider configured in your account.
+						You cannot disconnect from providers if you don&apos;t have a
+						password or another provider configured in your account.
 					</div>
 				</CardContent>
 			)}

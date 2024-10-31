@@ -25,7 +25,7 @@ export function ResendEmailValidationCode({
 		if (errors || success || (!success && message)) {
 			setRetry(false)
 		}
-	}, [isPending])
+	}, [errors, isPending, message, success])
 
 	return (
 		<form onSubmit={handleSubmit}>

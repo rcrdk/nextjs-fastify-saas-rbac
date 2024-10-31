@@ -42,7 +42,7 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 		if (!success && message && message.includes('verified e-mail')) {
 			router.push('/auth/verify-email')
 		}
-	}, [success, message])
+	}, [success, message, router])
 
 	return (
 		<div className="space-y-4">

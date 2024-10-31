@@ -25,7 +25,7 @@ export function TriggerToastLoad({ message, type }: TriggerToastLoadProps) {
 		}, 0)
 
 		return () => clearTimeout(timeout)
-	}, [])
+	}, [message, type])
 
 	return <></>
 }

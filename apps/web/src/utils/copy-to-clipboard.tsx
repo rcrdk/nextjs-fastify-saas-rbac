@@ -8,8 +8,8 @@ export async function copyTextToClipboard(text: string, toastLabel?: string) {
 
 		toast.success(
 			<span>
-				<b className="font-semibold">"{toastLabel ?? text}"</b> was copied to
-				your clipboard
+				<b className="font-semibold">&quot;{toastLabel ?? text}&quot;</b> was
+				copied to your clipboard
 			</span>,
 		)
 	} catch (error) {

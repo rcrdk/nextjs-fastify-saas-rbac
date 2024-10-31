@@ -163,7 +163,7 @@ export default async function Project({ params }: { params: Params }) {
 			</div>
 
 			<div className="rounded border p-5 text-center text-sm text-muted-foreground">
-				I don't know what a project exactly is. Do you?
+				I don&apos;t know what a project exactly is. Do you?
 			</div>
 		</div>
 	)

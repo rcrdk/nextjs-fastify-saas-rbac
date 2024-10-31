@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-// @ts-expect-error you ugly import
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 
