@@ -70,23 +70,27 @@ This project was developed for learning case at [Rocketseat](https://www.rockets
 </table>
 
 ## 🖥️ Project
-This project contains all the necessary boilerplate to setup a multi-tenant SaaS including authentication with RBAC, account settings, organizations management with projects, members, invitations and its settings. It started as a learning case and I end up creating more features and expanding all the project
+This project contains all the necessary boilerplate to setup a multi-tenant SaaS including authentication with RBAC, account settings, organizations management with projects, members, invitations and its settings. It started as a learning case and I end up creating more features and expanding all the project. Check it out:
 
-**Roles:** the owner (administrator) of organizations who is able manage all data and actions; The regular member who is able to manage their projects; And the billing member who is able to manage, of course, the billing data. You can see the full detailed table below.
+**Roles:** the owner (administrator) of organizations who is able manage all data and actions; The regular member who is able to manage their projects; And the billing member who is able to manage, of course, the billing data. You can see the full detailed table below with the authorizations.
 
-**Authentication:** consists into classic e-mail and password sign-in, also it includes the authentication with third-party services from GitHub and Google. The traditional sign-up method requires an e-mail verification by a token valid for five minutes that is sent to the user inbox with instructions. The password recovery functionality works in a similar way of e-mail verification by a token.
+**Authentication:** consists into classic e-mail and password sign-in, also it includes the oAuth with third-party services from GitHub and Google. The traditional sign-up method requires an e-mail verification by a token valid for five minutes that is sent to the user inbox with instructions. The password recovery functionality works in a similar way of e-mail verification by a token sent to user e-mail.
 
-**Account settings:** the user is able to manage their account: (1) basic information including the avatar, name and e-mail with revalidation; (2) set a password or change an existing one; (3) Connect or disconnect third-party authentication providers; (4) Manage all organizations that they are in and there's a option to leave organization that they doesn't owns; (5) Delete account along with all owned organizations.
+**Account settings:** the user is able to manage their account: (1) basic information including the avatar, name and e-mail (to effectly change the e-mail, a revalidation is required); (2) set a password in case of social sign-in or change an existing one; (3) Connect or disconnect third-party authentication providers; (4) Manage all organizations that they are in and there's a option to leave organization from that they doesn't owns; (5) Delete account along with all owned organizations.
 
 **Organization projects:** here the users can make the CRUD of projects, since this app is a boilerplate, it was developed a superficial projects section only with avatar, name, description and author.
 
-**Organization members:** in this section the owner can manage the existing members of the organization being able to change their role, remove them or transfer the ownership of the organization to one of them. There is also the option to invite new members for a role by sending an e-mail with the invite link.
+**Organization members:** in this section the owner can manage the existing members of the organization being able to change their roles, remove them or transfer the ownership of the organization to one of them. There is also the option to invite new members for a specific role by sending an e-mail with the invitation link.
 
-**Organization settings:** the owner has control of the entire organization: (1) change the avatar and its unique name; (2) It is possible to configure a unique domain, so new app users after signing up with the e-mail containing the domain could auto-join the organization. To be able to use a domain on organization, the owner must verify the domain ownership by setting a TXT entry on domain DNS records configuration; (3) The billing section, also shown to the billing member, is where the usage stats of organization are; (4) Finally, there it the option to shutdown the organization with all its data.
+**Organization settings:** the owner has control of the entire organization: (1) change the avatar and its unique name; (2) It is possible to configure a unique domain, so new app users after signing up with the e-mail containing the domain could auto-join the organization. To be able to use a domain on organization, the owner must verify the domain ownership by setting a TXT entry on domain DNS records configuration of their domain; (3) The billing section, also shown to the billing member, is where the usage stats of organization are; (4) Finally, there it the option to shutdown the organization with all its data.
 
 The API was developed using Fastify along with Prisma ORM and PostgreSQL as database; It was configured nodemailer to deal with transactional and validation e-mails; It was created a Cloudflare R2 bucket to store users, organizations and projects avatars using AWS SDK to establish the connection.
 
-The front-end web app was developed using Next.js 15 with App Router with React 19 RC; It was use a not very known API client, KY, to deal with the requests that works very well with Next; It was used React Query to some client side requests; All design and components was written using shadcn/ui with Tailwind.
+The front-end web app was developed using Next.js 15 with App Router with React 19 RC; It was used a not very known API client, KY, to deal with the requests that works very well with Next; It was used React Query to some client side requests; All design and components was written using shadcn/ui with Tailwind.
+
+This project was prepared for deploy usign these three services: (1) Neon for hosting the PostgreSQL database; (2) Render to host the API; (3) Vercel to host the wep app. The API and Web apps were configured with my subdomain.
+
+There are some pending stuff to do in here, so I'll be commiting in the near future.
 
 ## ⚙️ Get started
 
