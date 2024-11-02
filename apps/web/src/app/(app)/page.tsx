@@ -1,4 +1,3 @@
-import { IconUniverse } from '@tabler/icons-react'
 import { cookies } from 'next/headers'
 
 import { auth } from '@/auth'
@@ -38,7 +37,6 @@ export default async function Home() {
 
 			<main className="mx-auto flex w-full max-w-[1200px] flex-grow items-center py-6 sm:py-8">
 				<div className="w-full space-y-4 text-center">
-					<IconUniverse strokeWidth={0.75} className="mx-auto size-20" />
 					<h1 className="text-4xl font-bold">
 						Hello, {getFirstName(user.name, 'human')}!
 					</h1>
