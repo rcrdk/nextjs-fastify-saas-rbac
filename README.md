@@ -1,7 +1,7 @@
 # 🔐 SaaS: Next.js and Fastify + RBAC
 This project was developed for learning case at [Rocketseat](https://www.rocketseat.com.br/). It's a monorepo managed with TurboRepo that contains all the necessary boilerplate to setup a multi-tenant SaaS with Next.js and Fastify including authentication and RBAC authorization.
 
-[![YouTube](http://i.ytimg.com/vi/CorOVA9LM9A/hqdefault.jpg)](https://www.youtube.com/watch?v=CorOVA9LM9A)
+[![YouTube](https://github.com/rcrdk/nextjs-fastify-saas-rbac/blob/main/apps/web/public/acme-inc-2.png?raw=true)](https://www.youtube.com/watch?v=CorOVA9LM9A)
 <!-- <img src="https://github.com/rcrdk/nextjs-fastify-saas-rbac/blob/main/apps/web/public/acme-inc.png?raw=true" /> -->
 
 ## 🚀 Techs and Tools
