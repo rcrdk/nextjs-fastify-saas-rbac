@@ -18,7 +18,7 @@ export default async function Home() {
 	)
 
 	return (
-		<div className="flex min-h-screen flex-col px-5 py-3 sm:py-4 md:px-8">
+		<div className="flex min-h-svh flex-col px-5 py-3 sm:py-4 md:px-8">
 			<Header />
 
 			{deletedOrganizationMessage && (

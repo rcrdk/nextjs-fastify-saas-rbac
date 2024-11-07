@@ -23,7 +23,7 @@ export default async function AccountSettingsPage() {
 	const providerErrorMessage = cookieStore.get('@SAAS:providerError')
 
 	return (
-		<div className="flex min-h-screen flex-col px-5 py-3 sm:py-4 md:px-8">
+		<div className="flex min-h-svh flex-col px-5 py-3 sm:py-4 md:px-8">
 			<Header />
 
 			<main className="mx-auto w-full max-w-[1200px] flex-grow space-y-6 py-6 sm:space-y-8 sm:py-8">

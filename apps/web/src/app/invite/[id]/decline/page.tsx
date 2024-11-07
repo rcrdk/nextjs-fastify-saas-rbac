@@ -31,7 +31,7 @@ export default async function RejectInvitePage({ params }: { params: Params }) {
 	}
 
 	return (
-		<div className="flex min-h-screen flex-col items-center justify-center px-4 py-6">
+		<div className="flex min-h-svh flex-col items-center justify-center px-4 py-6">
 			<div className="flex w-full max-w-sm flex-col space-y-6">
 				<div className="flex flex-col items-center space-y-4">
 					<Avatar className="size-16">

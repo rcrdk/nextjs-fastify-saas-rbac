@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function CreateOrganization() {
 	return (
-		<div className="flex min-h-screen flex-col px-5 py-3 sm:py-4 md:px-8">
+		<div className="flex min-h-svh flex-col px-5 py-3 sm:py-4 md:px-8">
 			<Header />
 
 			<main className="mx-auto flex w-full max-w-[1200px] flex-grow items-center py-6 sm:py-8">
