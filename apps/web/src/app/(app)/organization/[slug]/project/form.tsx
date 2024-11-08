@@ -69,6 +69,7 @@ export function ProjectForm({
 					name="name"
 					type="text"
 					id="name"
+					autoComplete="organization"
 					defaultValue={initialData?.name}
 				/>
 				<FormError message={errors?.name} />

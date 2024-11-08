@@ -69,6 +69,7 @@ export function RecoverPasswordForm() {
 						name="code"
 						type="text"
 						id="code"
+						autoComplete="one-time-code"
 						spellCheck={false}
 						defaultValue={code ?? undefined}
 					/>
@@ -82,7 +83,7 @@ export function RecoverPasswordForm() {
 							name="password"
 							type={showPassword ? 'text' : 'password'}
 							id="password"
-							autoComplete="off"
+							autoComplete="new-password"
 						/>
 						<Button
 							type="button"
@@ -103,7 +104,7 @@ export function RecoverPasswordForm() {
 						name="password_confirmation"
 						type="password"
 						id="password_confirmation"
-						autoComplete="off"
+						autoComplete="new-password"
 					/>
 					<FormError message={errors?.password_confirmation} />
 				</FormGroup>

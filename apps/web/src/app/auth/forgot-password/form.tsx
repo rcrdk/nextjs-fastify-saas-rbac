@@ -46,7 +46,7 @@ export function ForgotPasswordForm() {
 
 				<FormGroup>
 					<Label htmlFor="email">E-mail</Label>
-					<Input name="email" type="email" id="email" />
+					<Input name="email" type="email" id="email" autoComplete="email" />
 					<FormError message={errors?.email} />
 				</FormGroup>
 
