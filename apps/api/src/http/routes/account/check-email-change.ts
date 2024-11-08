@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
-import { tokensSchema } from '@/schemas/tokens'
+import { tokensSchema } from '@/schemas/tokens-schema'
 
 export async function checkEmailChange(app: FastifyInstance) {
 	app

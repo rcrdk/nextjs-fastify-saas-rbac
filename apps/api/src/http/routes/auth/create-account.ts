@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { hash } from 'bcryptjs'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
@@ -7,6 +6,7 @@ import { z } from 'zod'
 import { errors } from '@/errors/messages'
 import { verifyAccountEmail } from '@/http/emails/verify-account-email'
 import { prisma } from '@/lib/prisma'
+import { validateStrongPasswordSchema } from '@/schemas/validate-strong-password-schema'
 
 import { BadRequestError } from '../_errors/bad-request-error'
 
@@ -17,11 +17,13 @@ export async function createAccount(app: FastifyInstance) {
 			schema: {
 				tags: ['Auth'],
 				summary: 'Create a new account.',
-				body: z.object({
-					name: z.string(),
-					email: z.string().email(),
-					password: z.string().min(6),
-				}),
+				body: z
+					.object({
+						name: z.string(),
+						email: z.string().email(),
+						password: z.string(),
+					})
+					.superRefine(validateStrongPasswordSchema),
 			},
 		},
 		async (request, reply) => {
@@ -51,11 +53,13 @@ export async function createAccount(app: FastifyInstance) {
 					name,
 					email,
 					passwordHash: hashedPassword,
-					memberOn: autoJoinOrganization ? {
-						create: {
-							organizationId: autoJoinOrganization.id,
-						},
-					} : undefined,
+					memberOn: autoJoinOrganization
+						? {
+								create: {
+									organizationId: autoJoinOrganization.id,
+								},
+							}
+						: undefined,
 				},
 			})
 
@@ -63,7 +67,7 @@ export async function createAccount(app: FastifyInstance) {
 				data: {
 					userId,
 					type: 'EMAIL_VALIDATION',
-				}
+				},
 			})
 
 			try {
