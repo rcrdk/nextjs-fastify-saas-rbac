@@ -81,6 +81,7 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 						name="email"
 						type="email"
 						id="email"
+						autoComplete="email"
 						defaultValue={searchParams.get('email') ?? ''}
 					/>
 					<FormError message={errors?.email} />
@@ -88,7 +89,12 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 
 				<FormGroup>
 					<Label htmlFor="password">Password</Label>
-					<Input name="password" type="password" id="password" />
+					<Input
+						name="password"
+						type="password"
+						id="password"
+						autoComplete="current-password"
+					/>
 					<FormError message={errors?.password} />
 				</FormGroup>
 

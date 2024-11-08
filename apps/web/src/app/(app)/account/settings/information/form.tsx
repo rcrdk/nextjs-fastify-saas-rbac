@@ -71,6 +71,7 @@ export function InformationForm({
 							name="email"
 							id="email"
 							type="email"
+							autoComplete="email"
 							readOnly={disableEmail}
 							defaultValue={initialData.email}
 						/>

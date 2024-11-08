@@ -69,8 +69,8 @@ export function ConfirmEmailChangeButton() {
 						<Input
 							name="code"
 							id="code"
-							spellCheck="false"
-							autoComplete="off"
+							spellCheck={false}
+							autoComplete="one-time-code"
 						/>
 						<FormError message={errors?.code} />
 					</FormGroup>
