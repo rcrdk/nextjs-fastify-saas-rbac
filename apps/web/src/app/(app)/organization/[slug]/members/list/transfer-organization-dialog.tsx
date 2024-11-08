@@ -104,6 +104,7 @@ export function TransferOwnershipDialog({
 					onKeyDown={(e) =>
 						confirmDialogActionOnPromptEnter(e, 'TRANSFER', form)
 					}
+					enterKeyHint="send"
 				/>
 			</FormGroup>
 		</DialogAction>

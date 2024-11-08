@@ -25,7 +25,12 @@ export function DomainDnsSettings({ code }: DomainDnsSettingsProps) {
 			<div className="grid grid-cols-2 gap-4">
 				<div className="relative space-y-1">
 					<Label>Name:</Label>
-					<Input defaultValue="_saas" className="pr-10" readOnly />
+					<Input
+						defaultValue="_saas"
+						className="pr-10"
+						readOnly
+						spellCheck="false"
+					/>
 					<Button
 						type="button"
 						size="iconInput"
@@ -39,7 +44,12 @@ export function DomainDnsSettings({ code }: DomainDnsSettingsProps) {
 
 				<div className="relative space-y-1">
 					<Label>Type:</Label>
-					<Input defaultValue="TXT" className="pr-10" readOnly />
+					<Input
+						defaultValue="TXT"
+						className="pr-10"
+						readOnly
+						spellCheck="false"
+					/>
 					<Button
 						type="button"
 						size="iconInput"
@@ -57,6 +67,7 @@ export function DomainDnsSettings({ code }: DomainDnsSettingsProps) {
 						defaultValue={`saas-domain-verification=${code}`}
 						className="pr-10"
 						readOnly
+						spellCheck="false"
 					/>
 					<Button
 						type="button"

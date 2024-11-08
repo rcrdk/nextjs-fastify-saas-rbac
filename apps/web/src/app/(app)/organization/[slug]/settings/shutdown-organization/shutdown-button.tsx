@@ -63,6 +63,7 @@ export function ShutdownOrganizationButton() {
 					className="text-center sm:text-left"
 					onChange={(e) => setDeleteInput(e.target.value)}
 					onKeyDown={(e) => confirmDialogActionOnPromptEnter(e, 'DELETE', form)}
+					enterKeyHint="send"
 				/>
 			</FormGroup>
 		</DialogAction>

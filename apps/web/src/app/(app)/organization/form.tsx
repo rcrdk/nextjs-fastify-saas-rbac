@@ -67,6 +67,8 @@ export function OrganizationForm({
 							id="name"
 							spellCheck="false"
 							defaultValue={initialData?.name}
+							autoComplete="organization"
+							enterKeyHint="send"
 						/>
 						<FormError message={errors?.name} />
 					</FormGroup>
@@ -89,6 +91,8 @@ export function OrganizationForm({
 									id="name"
 									spellCheck="false"
 									defaultValue={initialData?.name}
+									autoComplete="organization"
+									enterKeyHint="send"
 								/>
 								<FormError message={errors?.name} />
 							</FormGroup>

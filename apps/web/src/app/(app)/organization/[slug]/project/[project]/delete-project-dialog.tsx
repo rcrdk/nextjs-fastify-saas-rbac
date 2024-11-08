@@ -85,6 +85,7 @@ export function DeleteProjectDialog({
 					defaultValue={deleteInput}
 					onChange={(e) => setDeleteInput(e.target.value)}
 					onKeyDown={(e) => confirmDialogActionOnPromptEnter(e, 'DELETE', form)}
+					enterKeyHint="send"
 				/>
 			</FormGroup>
 		</DialogAction>

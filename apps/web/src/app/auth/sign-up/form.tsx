@@ -48,13 +48,19 @@ export function SignUpForm() {
 
 				<FormGroup>
 					<Label htmlFor="name">Name</Label>
-					<Input name="name" type="text" id="name" />
+					<Input name="name" type="text" id="name" enterKeyHint="next" />
 					<FormError message={errors?.name} />
 				</FormGroup>
 
 				<FormGroup>
 					<Label htmlFor="email">E-mail</Label>
-					<Input name="email" type="email" id="email" autoComplete="email" />
+					<Input
+						name="email"
+						type="email"
+						id="email"
+						autoComplete="email"
+						enterKeyHint="next"
+					/>
 					<FormError message={errors?.email} />
 				</FormGroup>
 
@@ -66,6 +72,7 @@ export function SignUpForm() {
 							type={showPassword ? 'text' : 'password'}
 							id="password"
 							autoComplete="new-password"
+							enterKeyHint="next"
 						/>
 						<Button
 							type="button"
@@ -88,6 +95,7 @@ export function SignUpForm() {
 						type="password"
 						id="password_confirmation"
 						autoComplete="new-password"
+						enterKeyHint="send"
 					/>
 					<FormError message={errors?.password_confirmation} />
 				</FormGroup>

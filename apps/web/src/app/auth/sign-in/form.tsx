@@ -83,6 +83,7 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 						id="email"
 						autoComplete="email"
 						defaultValue={searchParams.get('email') ?? ''}
+						enterKeyHint="next"
 					/>
 					<FormError message={errors?.email} />
 				</FormGroup>
@@ -94,6 +95,7 @@ export function SignInForm({ accountDeleted }: SignInFormProps) {
 						type="password"
 						id="password"
 						autoComplete="current-password"
+						enterKeyHint="send"
 					/>
 					<FormError message={errors?.password} />
 				</FormGroup>

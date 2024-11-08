@@ -59,6 +59,7 @@ export function VerifyEmailForm() {
 						autoComplete="email"
 						onChange={(e) => setEmail(e.target.value)}
 						defaultValue={email}
+						enterKeyHint="next"
 					/>
 					<FormError message={errors?.email} />
 				</FormGroup>
@@ -70,6 +71,7 @@ export function VerifyEmailForm() {
 						type="password"
 						id="password"
 						autoComplete="current-password"
+						enterKeyHint="next"
 					/>
 					<FormError message={errors?.password} />
 				</FormGroup>
@@ -80,9 +82,10 @@ export function VerifyEmailForm() {
 						name="code"
 						type="text"
 						id="code"
-						spellCheck={false}
+						spellCheck="false"
 						autoComplete="one-time-code"
 						defaultValue={code ?? undefined}
+						enterKeyHint="send"
 					/>
 					<FormError message={errors?.code} />
 				</FormGroup>

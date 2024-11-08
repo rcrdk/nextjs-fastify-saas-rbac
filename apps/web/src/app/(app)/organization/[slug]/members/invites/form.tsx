@@ -46,6 +46,7 @@ export function CreateInviteForm() {
 						id="email"
 						autoComplete="email"
 						placeholder="Invite member by e-mail"
+						enterKeyHint="send"
 					/>
 					<FormError message={errors?.email} />
 				</div>

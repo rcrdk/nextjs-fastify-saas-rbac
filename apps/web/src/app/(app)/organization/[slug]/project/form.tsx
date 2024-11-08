@@ -69,8 +69,8 @@ export function ProjectForm({
 					name="name"
 					type="text"
 					id="name"
-					autoComplete="organization"
 					defaultValue={initialData?.name}
+					enterKeyHint="next"
 				/>
 				<FormError message={errors?.name} />
 			</FormGroup>
@@ -82,6 +82,7 @@ export function ProjectForm({
 					id="description"
 					rows={3}
 					defaultValue={initialData?.description}
+					enterKeyHint="enter"
 				/>
 				<FormError message={errors?.description} />
 			</FormGroup>
