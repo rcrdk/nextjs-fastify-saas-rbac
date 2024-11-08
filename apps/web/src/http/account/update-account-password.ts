@@ -12,6 +12,6 @@ export async function updateAccountPassword({
 	newPassword,
 }: updateAccountPasswordRequest): Promise<updateAccountPasswordResponse> {
 	await API.patch('users/passwords', {
-		json: { currentPassword, newPassword },
+		json: { currentPassword, password: newPassword },
 	})
 }

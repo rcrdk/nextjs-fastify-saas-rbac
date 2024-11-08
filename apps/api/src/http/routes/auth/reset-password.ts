@@ -6,6 +6,7 @@ import { z } from 'zod'
 
 import { errors } from '@/errors/messages'
 import { prisma } from '@/lib/prisma'
+import { validateStrongPasswordSchema } from '@/schemas/validate-strong-password-schema'
 
 import { UnauthorizedError } from '../_errors/unauthorized-error'
 
@@ -16,11 +17,13 @@ export async function resetPassword(app: FastifyInstance) {
 			schema: {
 				tags: ['Auth'],
 				summary: 'Reset user password.',
-				body: z.object({
-					code: z.string().uuid(),
-					email: z.string().email(),
-					password: z.string().min(6),
-				}),
+				body: z
+					.object({
+						code: z.string().uuid(),
+						email: z.string().email(),
+						password: z.string(),
+					})
+					.superRefine(validateStrongPasswordSchema),
 				response: {
 					204: z.null(),
 				},

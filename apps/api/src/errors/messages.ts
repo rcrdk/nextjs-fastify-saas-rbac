@@ -27,6 +27,11 @@ export const errors = {
 		INVALID_PASSWORD_TOKEN: 'Unable to reset password. Ensure your recovery code is valid and try again. Note: The code is valid for 5 minutes',
 		LAST_METHOD_AVAILABLE: 'This service is the only access method available. Set a password or connect with another provider first',
 		GITHUB_EMAIL_NOT_FOUND: 'Your GitHub account does not have an e-mail to authenticate',
+		PASSWORD_NUMBER: 'Enter one number.',
+		PASSWORD_UPPER: 'Enter one upper case letter.',
+		PASSWORD_LOWER: 'Enter one lower case letter.',
+		PASSWORD_SPECIAL: 'Enter one special character.',
+		PASSWORD_LENGTH: 'Enter at least 6 characters.',
 	},
 	organizations: {
 		entity: {
