@@ -99,6 +99,7 @@ export function DisconnectButton({
 					className="text-center sm:text-left"
 					onChange={(e) => setDeleteInput(e.target.value)}
 					onKeyDown={(e) => confirmDialogActionOnPromptEnter(e, 'REMOVE', form)}
+					enterKeyHint="send"
 				/>
 			</FormGroup>
 		</DialogAction>

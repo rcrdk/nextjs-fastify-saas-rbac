@@ -54,6 +54,7 @@ export function PasswordForm({ hasPassword }: PasswordFormProps) {
 									name="current_password"
 									id="current_password"
 									autoComplete="current-password"
+									enterKeyHint="next"
 								/>
 								<FormError message={errors?.current_password} />
 							</FormGroup>
@@ -70,6 +71,7 @@ export function PasswordForm({ hasPassword }: PasswordFormProps) {
 								id="password"
 								name="password"
 								autoComplete="new-password"
+								enterKeyHint="next"
 							/>
 							<Button
 								type="button"
@@ -95,6 +97,7 @@ export function PasswordForm({ hasPassword }: PasswordFormProps) {
 							name="password_confirmation"
 							id="password_confirmation"
 							autoComplete="new-password"
+							enterKeyHint="send"
 						/>
 						<FormError message={errors?.password_confirmation} />
 					</FormGroup>

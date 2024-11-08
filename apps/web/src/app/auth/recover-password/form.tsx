@@ -59,6 +59,7 @@ export function RecoverPasswordForm() {
 						type="email"
 						id="email"
 						defaultValue={email ?? undefined}
+						enterKeyHint="next"
 					/>
 					<FormError message={errors?.email} />
 				</FormGroup>
@@ -70,8 +71,9 @@ export function RecoverPasswordForm() {
 						type="text"
 						id="code"
 						autoComplete="one-time-code"
-						spellCheck={false}
+						spellCheck="false"
 						defaultValue={code ?? undefined}
+						enterKeyHint="next"
 					/>
 					<FormError message={errors?.code} />
 				</FormGroup>
@@ -84,6 +86,7 @@ export function RecoverPasswordForm() {
 							type={showPassword ? 'text' : 'password'}
 							id="password"
 							autoComplete="new-password"
+							enterKeyHint="next"
 						/>
 						<Button
 							type="button"
@@ -105,6 +108,7 @@ export function RecoverPasswordForm() {
 						type="password"
 						id="password_confirmation"
 						autoComplete="new-password"
+						enterKeyHint="send"
 					/>
 					<FormError message={errors?.password_confirmation} />
 				</FormGroup>

@@ -60,10 +60,11 @@ export function DomainForm({ domainValidated, initialData }: DomainFormProps) {
 							id="domain"
 							inputMode="url"
 							placeholder="example.com"
-							spellCheck={false}
+							spellCheck="false"
 							autoComplete="off"
 							defaultValue={initialData.domain ?? undefined}
 							readOnly={domainValidated}
+							enterKeyHint={domainValidated ? 'done' : 'send'}
 						/>
 						<FormError message={errors?.domain} />
 					</FormGroup>

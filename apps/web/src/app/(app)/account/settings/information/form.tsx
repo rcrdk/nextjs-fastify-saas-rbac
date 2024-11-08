@@ -61,6 +61,7 @@ export function InformationForm({
 							id="name"
 							type="text"
 							defaultValue={initialData.name ?? undefined}
+							enterKeyHint="next"
 						/>
 						<FormError message={errors?.name} />
 					</FormGroup>
@@ -74,6 +75,7 @@ export function InformationForm({
 							autoComplete="email"
 							readOnly={disableEmail}
 							defaultValue={initialData.email}
+							enterKeyHint="send"
 						/>
 						<FormError message={errors?.email} />
 					</FormGroup>
