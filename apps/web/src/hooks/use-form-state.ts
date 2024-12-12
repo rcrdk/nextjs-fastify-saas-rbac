@@ -1,4 +1,9 @@
-import { FormEvent, useState, useTransition } from 'react'
+import {
+	FormEvent,
+	startTransition as startTransitionFn,
+	useState,
+	useTransition,
+} from 'react'
 import { requestFormReset } from 'react-dom'
 
 interface FormState {
@@ -38,7 +43,9 @@ export function useFormState(
 			const state = await action(data)
 
 			if (state.success && options?.resetFormOnSuccess) {
-				requestFormReset(form)
+				startTransitionFn(() => {
+					requestFormReset(form)
+				})
 			}
 
 			if (state.success && options?.onSuccess) {
