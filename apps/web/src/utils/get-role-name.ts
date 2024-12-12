@@ -1,4 +1,4 @@
-import { Role } from '@saas/auth'
+import type { Role } from '@saas/auth'
 
 export function getRoleName(role: Role) {
 	switch (role) {

@@ -1,4 +1,4 @@
-import { AvatarReceipient } from '@/@types/avatar-receipient'
+import type { AvatarReceipient } from '@/@types/avatar-receipient'
 import { API } from '@/lib/api-client'
 
 interface CreateInviteRequest {

@@ -1,5 +1,5 @@
 import { IconCircleCheck, IconCircleX, IconUser } from '@tabler/icons-react'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 

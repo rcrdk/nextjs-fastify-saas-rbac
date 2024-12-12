@@ -1,4 +1,4 @@
-import { Role } from '@saas/auth'
+import type { Role } from '@saas/auth'
 import { redirect } from 'next/navigation'
 
 import { API } from '@/lib/api-client'

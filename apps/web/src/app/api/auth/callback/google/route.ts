@@ -1,6 +1,7 @@
 import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
 import { connectGoogle } from '@/http/account/providers/connect-google'
 import { signInWithGoogle } from '@/http/auth/sign-in-with-google'

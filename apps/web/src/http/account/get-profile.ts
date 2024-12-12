@@ -1,4 +1,4 @@
-import { AccountProviders } from '@/@types/account-providers'
+import type { AccountProviders } from '@/@types/account-providers'
 import { API } from '@/lib/api-client'
 
 interface GetProfileResponse {

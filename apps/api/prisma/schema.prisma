@@ -1,159 +1,159 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id               String    @id @default(uuid())
-    name             String?
-    email            String    @unique
-    emailValidatedAt DateTime? @map("email_validated_at")
-    passwordHash     String?   @map("password_hash")
-    avatarUrl        String?   @map("avatar_url")
-    createdAt        DateTime  @default(now()) @map("created_at")
-    updatedAt        DateTime  @updatedAt @map("updated_at")
+  id               String    @id @default(uuid())
+  name             String?
+  email            String    @unique
+  emailValidatedAt DateTime? @map("email_validated_at")
+  passwordHash     String?   @map("password_hash")
+  avatarUrl        String?   @map("avatar_url")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
 
-    tokens            Token[]
-    accounts          Account[]
-    invites           Invite[]
-    memberOn          Member[]
-    ownsOrganizations Organization[]
-    ownsProjects      Project[]
+  tokens            Token[]
+  accounts          Account[]
+  invites           Invite[]
+  memberOn          Member[]
+  ownsOrganizations Organization[]
+  ownsProjects      Project[]
 
-    @@map("users")
+  @@map("users")
 }
 
 enum TokenType {
-    PASSWORD_RECOVER
-    EMAIL_VALIDATION
-    EMAIL_CHANGE_VALIDATION
+  PASSWORD_RECOVER
+  EMAIL_VALIDATION
+  EMAIL_CHANGE_VALIDATION
 }
 
 model Token {
-    id        String    @id @default(uuid())
-    type      TokenType
-    createdAt DateTime  @default(now()) @map("created_at")
-    payload   String?
+  id        String    @id @default(uuid())
+  type      TokenType
+  createdAt DateTime  @default(now()) @map("created_at")
+  payload   String?
 
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
 
-    @@map("tokens")
+  @@map("tokens")
 }
 
 enum AccountProvider {
-    GITHUB
-    GOOGLE
+  GITHUB
+  GOOGLE
 }
 
 model Account {
-    id                String          @id @default(uuid())
-    provider          AccountProvider
-    providerAccountId String          @map("provider_account_id")
-    createdAt         DateTime        @default(now()) @map("created_at")
+  id                String          @id @default(uuid())
+  provider          AccountProvider
+  providerAccountId String          @map("provider_account_id")
+  createdAt         DateTime        @default(now()) @map("created_at")
 
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
 
-    @@unique([provider, userId])
-    @@unique([provider, providerAccountId])
-    @@map("accounts")
+  @@unique([provider, userId])
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 enum Role {
-    ADMIN
-    MEMBER
-    BILLING
+  ADMIN
+  MEMBER
+  BILLING
 }
 
 model Invite {
-    id        String   @id @default(uuid())
-    email     String
-    role      Role
-    createdAt DateTime @default(now()) @map("created_at")
+  id        String   @id @default(uuid())
+  email     String
+  role      Role
+  createdAt DateTime @default(now()) @map("created_at")
 
-    author   User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
-    authorId String? @map("user_id")
+  author   User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId String? @map("user_id")
 
-    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-    organizationId String       @map("organization_id")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String       @map("organization_id")
 
-    @@unique([email, organizationId])
-    @@index([email])
-    @@map("invites")
+  @@unique([email, organizationId])
+  @@index([email])
+  @@map("invites")
 }
 
 model Member {
-    id   String @id @default(uuid())
-    role Role   @default(MEMBER)
+  id   String @id @default(uuid())
+  role Role   @default(MEMBER)
 
-    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-    organizationId String       @map("organization_id")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String       @map("organization_id")
 
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
 
-    @@unique([organizationId, userId])
-    @@map("members")
+  @@unique([organizationId, userId])
+  @@map("members")
 }
 
 model Organization {
-    id                        String    @id @default(uuid())
-    name                      String
-    slug                      String    @unique
-    domain                    String?   @unique
-    domainValidationId        String?   @default(uuid()) @map("domain_validation_id")
-    domainValidatedAt         DateTime? @map("domain_validated_at")
-    shouldAttachUsersByDomain Boolean   @default(false) @map("should_attach_users_by_domain")
-    avatarUrl                 String?   @map("avatar_url")
-    createdAt                 DateTime  @default(now()) @map("created_at")
-    updatedAt                 DateTime  @updatedAt @map("updated_at")
+  id                        String    @id @default(uuid())
+  name                      String
+  slug                      String    @unique
+  domain                    String?   @unique
+  domainValidationId        String?   @default(uuid()) @map("domain_validation_id")
+  domainValidatedAt         DateTime? @map("domain_validated_at")
+  shouldAttachUsersByDomain Boolean   @default(false) @map("should_attach_users_by_domain")
+  avatarUrl                 String?   @map("avatar_url")
+  createdAt                 DateTime  @default(now()) @map("created_at")
+  updatedAt                 DateTime  @updatedAt @map("updated_at")
 
-    owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-    ownerId String @map("owner_id")
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId String @map("owner_id")
 
-    invites  Invite[]
-    members  Member[]
-    projects Project[]
+  invites  Invite[]
+  members  Member[]
+  projects Project[]
 
-    @@map("organizations")
+  @@map("organizations")
 }
 
 model Project {
-    id          String   @id @default(uuid())
-    name        String
-    description String
-    slug        String
-    avatarUrl   String?  @map("avatar_url")
-    createdAt   DateTime @default(now()) @map("created_at")
-    updatedAt   DateTime @updatedAt @map("updated_at")
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  slug        String
+  avatarUrl   String?  @map("avatar_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
-    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-    organizationId String       @map("organization_id")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String       @map("organization_id")
 
-    owner   User?   @relation(fields: [ownerId], references: [id], onDelete: SetNull)
-    ownerId String? @map("owner_id")
+  owner   User?   @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId String? @map("owner_id")
 
-    @@unique([organizationId, slug])
-    @@map("projects")
+  @@unique([organizationId, slug])
+  @@map("projects")
 }
 
 enum AvatarReceipient {
-    USER
-    ORGANIZATION
-    PROJECT
+  USER
+  ORGANIZATION
+  PROJECT
 }
 
 model Avatar {
-    id           String            @id @default(uuid())
-    name         String
-    receipient   AvatarReceipient?
-    receipientId String?           @map("receipient_id")
+  id           String            @id @default(uuid())
+  name         String
+  receipient   AvatarReceipient?
+  receipientId String?           @map("receipient_id")
 
-    @@unique([receipient, receipientId])
-    @@map("avatars")
+  @@unique([receipient, receipientId])
+  @@map("avatars")
 }

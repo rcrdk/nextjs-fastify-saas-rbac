@@ -7,9 +7,10 @@ import {
 	IconUpload,
 	IconUser,
 } from '@tabler/icons-react'
-import { ChangeEvent, useState } from 'react'
+import type { ChangeEvent } from 'react'
+import { useState } from 'react'
 
-import { AvatarReceipient } from '@/@types/avatar-receipient'
+import type { AvatarReceipient } from '@/@types/avatar-receipient'
 
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 

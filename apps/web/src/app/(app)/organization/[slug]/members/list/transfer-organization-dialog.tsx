@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useFormState } from '@/hooks/use-form-state'
-import { TransferOwnershipActions } from '@/http/organizations/transfer-organization-ownership'
+import type { TransferOwnershipActions } from '@/http/organizations/transfer-organization-ownership'
 
 import { transferOrganizationOwnershipAction } from './actions'
 

@@ -6,7 +6,7 @@ import {
 	IconLogout,
 	IconUser,
 } from '@tabler/icons-react'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'

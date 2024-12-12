@@ -1,7 +1,7 @@
 'use client'
 
 import { DialogPortal } from '@radix-ui/react-dialog'
-import { ReactNode, RefObject } from 'react'
+import type { ReactNode, RefObject } from 'react'
 
 import { Button } from './ui/button'
 import {

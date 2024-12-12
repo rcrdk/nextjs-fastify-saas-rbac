@@ -1,6 +1,6 @@
-import { Role } from '@saas/auth'
+import type { Role } from '@saas/auth'
 import { env } from '@saas/env'
-import Mail from 'nodemailer/lib/mailer'
+import type Mail from 'nodemailer/lib/mailer'
 
 import { emailService } from '@/lib/mail'
 

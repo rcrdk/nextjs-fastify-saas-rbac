@@ -1,6 +1,7 @@
 import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
 import { connectGithub } from '@/http/account/providers/connect-github'
 import { signInWithGithub } from '@/http/auth/sign-in-with-github'

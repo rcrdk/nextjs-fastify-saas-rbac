@@ -14,7 +14,7 @@
 	},
 	"dependencies": {
 		"@t3-oss/env-nextjs": "^0.11.1",
-		"zod": "^3.23.8"
+		"zod": "^3.24.1"
 	},
 	"prettier": "@saas/prettier-config",
 	"eslintConfig": {

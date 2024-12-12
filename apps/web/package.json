@@ -22,23 +22,23 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@saas/auth": "workspace:*",
     "@saas/env": "workspace:*",
-    "@tabler/icons-react": "^3.19.0",
-    "@tanstack/react-query": "^5.59.13",
+    "@tabler/icons-react": "^3.24.0",
+    "@tanstack/react-query": "^5.62.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "cookies-next": "^4.3.0",
+    "cookies-next": "^5.0.2",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
-    "ky": "^1.7.2",
-    "lucide-react": "^0.451.0",
+    "ky": "^1.7.3",
+    "lucide-react": "^0.468.0",
     "next": "15.1.0",
-    "next-themes": "^0.3.0",
+    "next-themes": "^0.4.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-hot-toast": "^2.4.1",
-    "tailwind-merge": "^2.5.3",
+    "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@saas/eslint-config": "workspace:*",
@@ -46,16 +46,17 @@
     "@saas/tsconfig": "workspace:*",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "dotenv-cli": "^7.4.2",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16",
     "typescript": "^5"
   },
   "prettier": "@saas/prettier-config",
   "eslintConfig": {
     "extends": [
+			"next/babel",
       "@saas/eslint-config/next"
     ]
   }

@@ -7,7 +7,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog'
-import { GetProjectItemResponse } from '@/http/projects/get-project'
+import type { GetProjectItemResponse } from '@/http/projects/get-project'
 
 import { ProjectForm } from '../form'
 

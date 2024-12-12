@@ -4,5 +4,11 @@ module.exports = {
 	plugins: ['simple-import-sort'],
 	rules: {
 		'simple-import-sort/imports': 'error',
+		'@typescript-eslint/consistent-type-imports': [
+			'error',
+			{
+				prefer: 'type-imports',
+			},
+		],
 	},
 }

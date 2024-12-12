@@ -6,7 +6,7 @@ import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { AccountProviders } from '@/@types/account-providers'
+import type { AccountProviders } from '@/@types/account-providers'
 import { removeAccountProvider } from '@/http/account/remove-account-provider'
 import { errors } from '@/messages/error'
 import { success } from '@/messages/success'

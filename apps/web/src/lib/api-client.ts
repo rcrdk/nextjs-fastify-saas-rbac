@@ -2,7 +2,7 @@ import { env } from '@saas/env'
 import { getCookie } from 'cookies-next'
 import type { CookieValueTypes } from 'cookies-next/lib/types'
 import ky from 'ky'
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
+import type { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 
 export const API = ky.create({
 	prefixUrl: env.NEXT_PUBLIC_API_URL,

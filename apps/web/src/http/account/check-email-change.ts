@@ -1,4 +1,4 @@
-import { Token } from '@/@types/tokens'
+import type { Token } from '@/@types/tokens'
 import { API } from '@/lib/api-client'
 
 interface CheckEmailChangeResponse {

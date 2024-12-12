@@ -1,5 +1,5 @@
+import type { FormEvent } from 'react'
 import {
-	FormEvent,
 	startTransition as startTransitionFn,
 	useState,
 	useTransition,

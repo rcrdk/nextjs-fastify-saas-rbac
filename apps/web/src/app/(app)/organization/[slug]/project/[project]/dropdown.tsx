@@ -11,7 +11,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { GetProjectItemResponse } from '@/http/projects/get-project'
+import type { GetProjectItemResponse } from '@/http/projects/get-project'
 
 import { DeleteProjectDialog } from './delete-project-dialog'
 import { UpdateProjectDialog } from './update-project-dialog'

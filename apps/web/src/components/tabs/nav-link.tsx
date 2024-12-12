@@ -3,7 +3,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
 interface NavLinkProps extends ComponentProps<typeof Link> {
 	current?: string | string[]

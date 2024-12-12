@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { randomUUID } from 'node:crypto'
 
-import { MultipartFile } from '@fastify/multipart'
-import { FastifyInstance } from 'fastify'
+import type { MultipartFile } from '@fastify/multipart'
+import type { FastifyInstance } from 'fastify'
 import sharp from 'sharp'
 
 import { errors } from '@/errors/messages'

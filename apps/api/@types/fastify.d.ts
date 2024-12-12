@@ -1,6 +1,6 @@
 import 'fastify'
 
-import { Member, Organization } from '@prisma/client'
+import type { Member, Organization } from '@prisma/client'
 
 interface GetCurrentUserMembership {
 	organization: Organization

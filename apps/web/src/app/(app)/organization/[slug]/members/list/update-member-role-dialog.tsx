@@ -1,6 +1,6 @@
 'use client'
 
-import { Role } from '@saas/auth'
+import type { Role } from '@saas/auth'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 

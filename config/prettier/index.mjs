@@ -3,8 +3,8 @@
 /** @type PrettierConfig */
 const config  = {
 	plugins: ['prettier-plugin-tailwindcss'],
-	printWidth: 50,
-	tabWidth: 4,
+	printWidth: 80,
+	tabWidth: 2,
 	useTabs: true,
 	semi: false,
 	singleQuote: true,

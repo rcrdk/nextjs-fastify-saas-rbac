@@ -1,6 +1,6 @@
 'use server'
 
-import { Role } from '@saas/auth'
+import type { Role } from '@saas/auth'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
@@ -9,10 +9,8 @@ import { redirect } from 'next/navigation'
 import { getCurrentOrganization } from '@/auth'
 import { removeMember } from '@/http/members/remove-member'
 import { updateMember } from '@/http/members/update-member'
-import {
-	transfererOrganizationOwnership,
-	TransferOwnershipActions,
-} from '@/http/organizations/transfer-organization-ownership'
+import type { TransferOwnershipActions } from '@/http/organizations/transfer-organization-ownership'
+import { transfererOrganizationOwnership } from '@/http/organizations/transfer-organization-ownership'
 import { errors } from '@/messages/error'
 import { success } from '@/messages/success'
 

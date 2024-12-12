@@ -4,7 +4,7 @@ import { IconPlugConnectedX } from '@tabler/icons-react'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { AccountProviders } from '@/@types/account-providers'
+import type { AccountProviders } from '@/@types/account-providers'
 import {
 	confirmDialogActionOnPromptEnter,
 	DialogAction,

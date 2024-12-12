@@ -1,5 +1,5 @@
 import { env } from '@saas/env'
-import Mail from 'nodemailer/lib/mailer'
+import type Mail from 'nodemailer/lib/mailer'
 
 import { emailService } from '@/lib/mail'
 

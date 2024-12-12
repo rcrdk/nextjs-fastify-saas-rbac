@@ -4,11 +4,11 @@ import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
 import { env } from '@saas/env'
 import { fastify } from 'fastify'
+import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import {
 	jsonSchemaTransform,
 	serializerCompiler,
 	validatorCompiler,
-	ZodTypeProvider,
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'

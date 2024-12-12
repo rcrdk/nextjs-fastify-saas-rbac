@@ -1,5 +1,5 @@
 import { IconLockAccess, IconPlus } from '@tabler/icons-react'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { ability, getCurrentOrganization } from '@/auth'

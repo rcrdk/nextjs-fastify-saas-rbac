@@ -1,5 +1,5 @@
 import { IconLoader2 } from '@tabler/icons-react'
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
 import { Button } from './ui/button'
 

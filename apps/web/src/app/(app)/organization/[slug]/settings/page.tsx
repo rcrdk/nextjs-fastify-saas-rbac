@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 import { OrganizationForm } from '@/app/(app)/organization/form'
 import { ability, getCurrentOrganization } from '@/auth'

@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 
 import fastifyMultipart from '@fastify/multipart'
-import { FastifyInstance } from 'fastify'
-import { ZodTypeProvider } from 'fastify-type-provider-zod'
+import type { FastifyInstance } from 'fastify'
+import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { errors } from '@/errors/messages'

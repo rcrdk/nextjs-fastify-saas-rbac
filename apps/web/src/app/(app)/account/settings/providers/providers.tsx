@@ -1,6 +1,6 @@
 import { IconBrandGithub, IconBrandGoogleFilled } from '@tabler/icons-react'
 
-import { AccountProviders } from '@/@types/account-providers'
+import type { AccountProviders } from '@/@types/account-providers'
 import { auth } from '@/auth'
 import { Button } from '@/components/ui/button'
 import {

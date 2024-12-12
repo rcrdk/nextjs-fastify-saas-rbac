@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs'
 import dayjs from 'dayjs'
-import { FastifyInstance } from 'fastify'
-import { ZodTypeProvider } from 'fastify-type-provider-zod'
+import type { FastifyInstance } from 'fastify'
+import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
 import { errors } from '@/errors/messages'

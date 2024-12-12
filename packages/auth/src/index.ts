@@ -1,13 +1,9 @@
-import {
-	AbilityBuilder,
-	CreateAbility,
-	createMongoAbility,
-	MongoAbility,
-} from '@casl/ability'
+import type { CreateAbility, MongoAbility } from '@casl/ability'
+import { AbilityBuilder, createMongoAbility } from '@casl/ability'
 import { z } from 'zod'
 
 import { errors } from './messages/error'
-import { User } from './models/user'
+import type { User } from './models/user'
 import { permissions } from './permissions'
 import { billingSubject } from './subjects/billing'
 import { inviteSubject } from './subjects/invite'

@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useFormState } from '@/hooks/use-form-state'
 import { queryClient } from '@/lib/react-query'
-import { UpdateProjectSchema } from '@/schema/update-project-schema'
+import type { UpdateProjectSchema } from '@/schema/update-project-schema'
 
 import { createProjectAction, updateProjectAction } from './actions'
 

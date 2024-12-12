@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 import { ability, getCurrentOrganization } from '@/auth'
 import { getOrganization } from '@/http/organizations/get-organization'
