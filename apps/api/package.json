@@ -30,7 +30,7 @@
 		"fastify-type-provider-zod": "^4.0.2",
 		"nodemailer": "^6.9.16",
 		"sharp": "^0.33.5",
-		"zod": "^3.24.1"
+		"zod": "3.24.1"
 	},
 	"devDependencies": {
 		"@prisma/client": "6.4.1",

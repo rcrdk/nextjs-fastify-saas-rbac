@@ -1,6 +1,6 @@
 import { env } from '@saas/env'
+import type { CookieValueTypes } from 'cookies-next'
 import { getCookie } from 'cookies-next'
-import type { CookieValueTypes } from 'cookies-next/lib/types'
 import ky from 'ky'
 import type { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 
@@ -18,7 +18,7 @@ export const API = ky.create({
 				}
 
 				if (typeof window !== 'undefined') {
-					token = getCookie('@SAAS:token')
+					token = await getCookie('@SAAS:token')
 				}
 
 				if (token) {
