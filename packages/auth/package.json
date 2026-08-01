@@ -19,7 +19,7 @@
 		]
 	},
 	"dependencies": {
-		"@casl/ability": "^6.7.2",
+		"@casl/ability": "^6.7.5",
 		"zod": "3.24.1"
 	}
 }
