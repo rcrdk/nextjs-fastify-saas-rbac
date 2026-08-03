@@ -26,7 +26,7 @@ overrides:
   find-my-way: '>=9.7.0'
   '@fastify/static': '>=9.1.1'
   sharp: '>=0.35.0'
-  nodemailer: '>=8.0.4'
+  nodemailer: '>=9.0.1'
   '@eslint/eslintrc': '>=3.3.6'
 
 importers:
@@ -88,7 +88,7 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2(fastify@5.11.0)(zod@3.24.1)
       nodemailer:
-        specifier: '>=8.0.4'
+        specifier: '>=9.0.1'
         version: 9.0.3
       sharp:
         specifier: '>=0.35.0'
